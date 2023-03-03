@@ -7,15 +7,7 @@
   </LoginForm>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import LoginForm from '@/components/LoginForm.vue'
 
-export default {
-  name: "AdminLogin",
-  
-  components: {
-      LoginForm
-  },
-
-}
 </script>
