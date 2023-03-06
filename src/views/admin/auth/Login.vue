@@ -35,33 +35,33 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
-import ErrorMessage from '@/components/ErrorMessage.vue';
+import ErrorMessage from '@/components/message/ErrorMessage.vue';
 import { useAdminStore } from '@/stores/admin';
 import { adminLoginConfig } from '@/common/config/axiox.config';
 import type  { AxiosError } from 'axios';
 
 const adminStore = useAdminStore();
-const router = useRouter()
+const router = useRouter();
 const form = reactive({
     error: null as null | AxiosError,
     loading: false as boolean,
-})
+});
 
 const loginData = reactive({
     phoneNumber: null as string | null,
     password: null as string | null,
-})
+});
 
 const login = async() => {
-    form.loading = true
-    form.error = null
+    form.loading = true;
+    form.error = null;
     try {
         const config = adminLoginConfig(loginData);
-        await adminStore.login(config)
-        router.push({ name: 'home' })
+        await adminStore.login(config);
+        router.push({ name: 'Admin/Dashboard' })
     } catch (error: any) {
-        form.error = error.response?.data
+        form.error = error.response?.data;
     }
-    form.loading = false
+    form.loading = false;
 }
 </script>

@@ -1,6 +1,5 @@
 import axios from 'axios'
 import type { AxiosRequestConfig } from 'axios'
-import type { AdminData } from "@/typings/adminData.typings";
-export const sendRequest = async (config: AxiosRequestConfig): Promise<AdminData> => {
+export const sendRequest = async (config: AxiosRequestConfig) => {
     return (await axios(config)).data;
 }
