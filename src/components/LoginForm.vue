@@ -35,7 +35,7 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
-import ErrorMessage from '../components/ErrorMessage.vue';
+import ErrorMessage from '@/components/message/ErrorMessage.vue';
 import { useAdminStore } from '@/stores/admin';
 import { adminLoginConfig } from '@/common/config/axiox.config';
 import type  { AxiosError } from 'axios';

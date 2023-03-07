@@ -38,18 +38,19 @@ import { useRouter } from 'vue-router';
 import ErrorMessage from '@/components/message/ErrorMessage.vue';
 import { useAdminStore } from '@/stores/admin';
 import { adminLoginConfig } from '@/common/config/axiox.config';
-import type  { AxiosError } from 'axios';
+import type { Form } from '@/typings/form.typing';
+import type { AdminLoginData } from '@/typings/adminLoginData.typings';
 
 const adminStore = useAdminStore();
 const router = useRouter();
-const form = reactive({
-    error: null as null | AxiosError,
-    loading: false as boolean,
+const form = reactive<Form>({
+    error: null,
+    loading: false,
 });
 
-const loginData = reactive({
-    phoneNumber: null as string | null,
-    password: null as string | null,
+const loginData = reactive<AdminLoginData>({
+    phoneNumber: null,
+    password: null,
 });
 
 const login = async() => {

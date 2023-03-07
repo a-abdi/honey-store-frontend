@@ -21,15 +21,16 @@
 <script setup lang="ts">
     import { createCategoryConfig } from '@/common/config/axiox.config';
     import type { Category } from '@/typings/category.typings';
-    import type { AxiosError } from 'axios';
     import { reactive } from 'vue';
     import ErrorMessage from '@/components/ErrorMessage.vue';
     import SuccessMessage from '@/components/SuccessMessage.vue';
     import { useCategoryStore } from '@/stores/category';
-        const form = reactive({
-            loading: false as boolean,
-            error: null as null | AxiosError,
-            success: null as null | object,
+    import type { Form } from '@/typings/form.typing';
+
+        const form = reactive<Form>({
+            loading: false,
+            error: null,
+            success: null,
         })
 
         const categoryStore = useCategoryStore();
@@ -45,8 +46,9 @@
 
             try {
                 const config = createCategoryConfig(category);
-                await categoryStore.createCategory(config)
-
+                await categoryStore.createCategory(config);
+                console.log(categoryStore.newCategory);
+                
             } catch (error: any) {
                 form.error = error.response.data
             }

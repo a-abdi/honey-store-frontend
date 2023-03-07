@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "@/views/HomeView.vue";
-
+import AdminDashboard from "@/views/admin/Dashboard.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -41,6 +41,100 @@ const router = createRouter({
         requiresAuthUser: false,
         requiresAuthAdmin: false,
       }
+    },
+    {
+      path: "/admin/dashboard",
+      name: "Admin/Dashboard",
+      component: AdminDashboard,
+      meta: {
+        layout: "AppLayoutAdmin",
+        requiresAuthUser: false,
+        requiresAuthAdmin: true,
+      },
+      children: [
+        {
+          path: "users",
+          name: "Admin/Dashboard/Users/Index",
+          component: () => import("@/views/Admin/Dashboard/Users/Index.vue"),
+           
+          children: [
+            {
+              path: "",
+              name: "Admin/Dashboard/Users/Home",
+              component: () => import("@/views/Admin/Dashboard/Users/Home.vue"),
+            },
+  
+            {
+              path: ":userId(\\d+)",
+              name: "Admin/Dashboard/Users/Show",
+              component: () => import("@/views/Admin/Dashboard/Users/Show.vue"),
+            },
+          ]
+          
+        },
+  
+        {
+          path: "products",
+          name: "Admin/Dashboard/Products/Index",
+          component: () => import("@/views/Admin/Dashboard/Products/Index.vue"),
+          children: [
+            {
+              path: "",
+              name: "Admin/Dashboard/Products/Home",
+              component: () => import("@/views/Admin/Dashboard/Products/Home.vue"),
+            },
+  
+            {
+              path: "create",
+              name: "Admin/Dashboard/Products/Create",
+              component: () => import("@/views/Admin/Dashboard/Products/Create.vue"),
+            },
+  
+            {
+              path: ":productId(\\d+)/edit",
+              name: "Admin/Dashboard/Products/Edit",
+              component: () => import("@/views/Admin/Dashboard/Products/Edit.vue"),
+            },
+  
+            {
+              path: ":productId(\\d+)",
+              name: "Admin/Dashboard/Products/Show",
+              component: () => import("@/views/Admin/Dashboard/Products/Show.vue"),
+            },
+          ]
+        },
+  
+        {
+          path: "categories",
+          name: "Admin/Dashboard/Categories/Index",
+          component: () => import("@/views/Admin/Dashboard/Categories/Index.vue"),
+          children: [
+            {
+              path: "",
+              name: "Admin/Dashboard/Categories/Home",
+              component: () => import("@/views/Admin/Dashboard/Categories/Home.vue"),
+            },
+  
+            {
+              path: "create",
+              name: "Admin/Dashboard/Categories/Create",
+              component: () => import("@/views/Admin/Dashboard/Categories/Create.vue"),
+            },
+  
+            {
+              path: ":categoryId(\\d+)/edit",
+              name: "Admin/Dashboard/Categories/Edit",
+              component: () => import("@/views/Admin/Dashboard/Categories/Edit.vue"),
+            },
+          ]
+        },
+  
+        {
+          path: "carts",
+          name: "Admin/Dashboard/Carts",
+          component: () => import("@/views/Admin/Dashboard/Carts.vue"),
+        },
+      ]
     },
   ],
 });
