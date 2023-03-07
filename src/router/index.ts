@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "@/views/HomeView.vue";
-import AdminDashboard from "@/views/admin/Dashboard.vue";
+import AdminDashboard from "@/views/admin/dashboard/Index.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -35,7 +35,7 @@ const router = createRouter({
     {
       path: "/admin/dashborad",
       name: "Admin/Dashboard",
-      component: () => import("@/views/admin/Dashboard.vue"),
+      component: () => import("@/views/admin/dashboard/Dashboard.vue"),
       meta: {
         layout: "AppLayoutAdmin",
         requiresAuthUser: false,
@@ -106,13 +106,13 @@ const router = createRouter({
   
         {
           path: "categories",
-          name: "Admin/Dashboard/Categories/Index",
-          component: () => import("@/views/Admin/Dashboard/Categories/Index.vue"),
+          name: "admin/dashboard/categories/Index",
+          component: () => import("@/views/admin/dashboard/categories/Index.vue"),
           children: [
             {
               path: "",
-              name: "Admin/Dashboard/Categories/Home",
-              component: () => import("@/views/Admin/Dashboard/Categories/Home.vue"),
+              name: "admin/dashboard/categories/Home",
+              component: () => import("@/views/admin/dashboard/categories/Home.vue"),
             },
   
             {
