@@ -20,10 +20,10 @@
 
 <script setup lang="ts">
     import { createCategoryConfig } from '@/common/config/axiox.config';
-    import type { Category } from '@/typings/category.typings';
+    import type { CategoryData } from '@/typings/categoryData.typings';
     import { reactive } from 'vue';
-    import ErrorMessage from '@/components/ErrorMessage.vue';
-    import SuccessMessage from '@/components/SuccessMessage.vue';
+    import ErrorMessage from '@/components/message/ErrorMessage.vue';
+    import SuccessMessage from '@/components/message/SuccessMessage.vue';
     import { useCategoryStore } from '@/stores/category';
     import type { Form } from '@/typings/form.typing';
 
@@ -34,7 +34,7 @@
         })
 
         const categoryStore = useCategoryStore();
-        const category: Category = {
+        const category: CategoryData = {
             name: "",
             description: "",
         }
@@ -47,7 +47,7 @@
             try {
                 const config = createCategoryConfig(category);
                 await categoryStore.createCategory(config);
-                console.log(categoryStore.newCategory);
+                console.log(categoryStore.category);
                 
             } catch (error: any) {
                 form.error = error.response.data

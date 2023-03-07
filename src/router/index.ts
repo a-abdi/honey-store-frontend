@@ -118,7 +118,7 @@ const router = createRouter({
             {
               path: "create",
               name: "Admin/Dashboard/Categories/Create",
-              component: () => import("@/views/Admin/Dashboard/Categories/Create.vue"),
+              component: () => import("@/views/admin/dashboard/categories/Create.vue"),
             },
   
             {
