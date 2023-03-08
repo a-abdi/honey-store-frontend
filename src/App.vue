@@ -12,16 +12,18 @@
 
 <script setup lang="ts">
   import AppLayout from '@/layouts/AppLayout.vue';
-  const userData = localStorage.getItem('user')
-  const cartData = localStorage.getItem('cart')
-  const adminData = localStorage.getItem('admin')
+  import { useAdminStore } from '@/stores/admin';
 
+  const userData = localStorage.getItem('user');
+  const cartData = localStorage.getItem('cart');
+  const adminStore = useAdminStore();
+  const adminAccessToken = localStorage.getItem('adminAccessToken');
   if (userData) {
     // store.commit('userAuth/setUserData', JSON.parse(userData))
   }
 
-  if (adminData) {
-    // store.commit('adminAuth/setAdminData', JSON.parse(adminData))
+  if (adminAccessToken) {
+    adminStore.adminData = { access_token: adminAccessToken };
   }
 
   if (cartData) {

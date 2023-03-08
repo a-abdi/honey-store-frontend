@@ -12,11 +12,11 @@ export const adminLoginConfig = (data: AdminLoginData): AxiosRequestConfig => ({
 
 export const createCategoryConfig = (data: CategoryData): AxiosRequestConfig => ({
     method: 'post',
-    url: `${BASE_URL}category`,
-    data
+    url: `${BASE_URL}categories`,
+    data,
 });
 
 export const getCategoryListConfig = (): AxiosRequestConfig => ({
-    method: 'post',
-    url: `${BASE_URL}category`,
+    method: 'get',
+    url: `${BASE_URL}categories`,
 });

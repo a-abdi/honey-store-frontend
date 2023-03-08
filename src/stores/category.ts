@@ -19,7 +19,7 @@ export const useCategoryStore = defineStore("category", {
     },
 
     async getCategoryList(config: AxiosRequestConfig) {
-      this.category = await sendRequest(config);
+      this.categoryList = await sendRequest(config);
     }
   }
 });

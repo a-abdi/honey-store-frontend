@@ -4,7 +4,7 @@
             <!-- Mobile menu, show/hide based on menu state. -->
         <div v-show="mainMenu"  class="sm:hidden" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <router-link to="/admin/dashboard" class="bg-gray-50 text-gray-900 block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Dashboard</router-link>
+                <router-link to="/admin/dashboard" class="bg-gray-50 text-gray-900 block px-3 py-2 rounded-md text-base font-medium" aria-current="page">داشبورد</router-link>
             </div>
         </div>
             <div class="relative flex items-center justify-between h-14">
@@ -75,8 +75,8 @@
                 <div class="flex-r flex items-center justify-center sm:items-stretch sm:justify-start">
                     <div class="hidden sm:block sm:ml-6">
                         <div class="flex space-x-4">
-                            <router-link to="/admin/dashboard" class="bg-gray-50 text-gray-900 px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Dashboard</router-link>
-                            <router-link to="/" class="text-gray-600 hover:bg-gray-50 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium"> Home </router-link>
+                            <router-link to="/admin/dashboard" class="bg-gray-50 text-gray-900 px-3 py-2 rounded-md text-sm font-medium" aria-current="page">داشبورد</router-link>
+                            <router-link to="/" class="text-gray-600 hover:bg-gray-50 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium"> خانه </router-link>
                         </div>
                     </div>
                 </div>

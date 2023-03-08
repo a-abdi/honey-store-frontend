@@ -1,22 +1,18 @@
 <template>
     <div class="">
-        <table class="table-auto w-full border-separate border border-green-800">
+        <table class="table-auto w-full tracking-wider">
             <thead>
                 <tr class="">
-                    <th class="table-tr">ID</th>
-                    <th class="table-tr">Name</th>
-                    <th class="table-tr" v-if="showDetails" >Description</th>
-                    <th class="table-tr">Details</th>
-                    <th class="table-tr">Edit</th>
+                    <th class="table-tr">ویرایش</th>
+                    <th class="table-tr">توضیحات</th>
+                    <th class="table-tr">نام</th>
                 </tr>
             </thead>
-            <tbody v-if="true">
-                <tr v-for="( category, index ) in categories.data" :key="category.id" :class="{'bg-green-200': (index + 1) % 2 }">
-                    <td class="table-td"> {{ category.id }} </td>
+            <tbody v-if="categoryList.length >= 0">
+                <tr v-for="( category, index ) in categoryList" :key="category._id" :class="{'bg-neutral-100': (index + 1) % 2 }">
+                    <td class="table-td">  <router-link :to="`/admin/dashboard/categories/${category._id}/edit`" class="btn-yellow"> ویرایش </router-link> </td>
+                    <td class="table-td"> {{ category.description }} </td>
                     <td class="table-td"> {{ category.name }} </td>
-                    <td class="table-td" v-if="showDetails"> {{ category.description }} </td>
-                    <td class="table-td"> <button class="btn-blue" @click="showDetails = !showDetails"><span v-if="!showDetails">Show</span> <span v-if="showDetails">Hide</span> </button> </td>
-                    <td class="table-td">  <router-link :to="`/admin/dashboard/categories/${category.id}/edit`" class="btn-yellow"> Edit </router-link> </td>
                 </tr>
             </tbody>
         </table>
@@ -24,6 +20,22 @@
 </template>
 
 <script setup lang="ts">
-    import { computed, ref } from 'vue';
-    const showDetails = ref(false)
+    import { onMounted, ref } from 'vue';
+    import { useCategoryStore } from '@/stores/category';
+    import { getCategoryListConfig } from '@/common/config/axiox.config';
+    import { storeToRefs } from 'pinia';
+
+    const categoryStore = useCategoryStore();
+    const config = getCategoryListConfig();
+    
+    try {
+        onMounted(async () => {
+            await categoryStore.getCategoryList(config);
+        });
+    } catch (error) {
+        console.log(error);
+    }
+    const { categoryList } = storeToRefs(categoryStore);
+    
+    const showDetails = ref(false);
 </script>
