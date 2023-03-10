@@ -1,16 +1,15 @@
 import type { AxiosRequestConfig } from 'axios';
-import type { AdminLoginData } from '@/typings/adminLoginData.typings';
-import type { CategoryData } from '@/typings/categoryData.typings';
+import type { AdminLoginData, NewCategory } from '../typings';
 
 const BASE_URL = 'http://localhost:3000/';
 
 export const adminLoginConfig = (data: AdminLoginData): AxiosRequestConfig => ({
     method: 'post',
-    url: `${BASE_URL}auth-admin1/login`,
+    url: `${BASE_URL}auth-admin/login`,
     data
 });
 
-export const createCategoryConfig = (data: CategoryData): AxiosRequestConfig => ({
+export const createCategoryConfig = (data: NewCategory): AxiosRequestConfig => ({
     method: 'post',
     url: `${BASE_URL}categories`,
     data,

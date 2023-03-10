@@ -38,8 +38,7 @@ import { useRouter } from 'vue-router';
 import ErrorMessage from '@/components/message/ErrorMessage.vue';
 import { useAdminStore } from '@/stores/admin';
 import { adminLoginConfig } from '@/common/config/axiox.config';
-import type { Form } from '@/typings/form.typing';
-import type { AdminLoginData } from '@/typings/adminLoginData.typings';
+import type { AdminLoginData, Form } from '@/common/typings';
 
 const adminStore = useAdminStore();
 const router = useRouter();

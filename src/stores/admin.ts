@@ -1,8 +1,7 @@
 import { defineStore } from "pinia";
 import { sendRequest } from "@/common/helpers";
-import type { Admin } from "@/typings/admin.typings";
-import type { AdminData } from "@/typings/adminData.typings";
 import type { AxiosRequestConfig } from 'axios';
+import type { Admin, AdminData } from "@/common/typings";
 
 export const useAdminStore = defineStore("admin", {
   state: () => {

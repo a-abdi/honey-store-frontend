@@ -20,39 +20,36 @@
 
 <script setup lang="ts">
     import { createCategoryConfig } from '@/common/config/axiox.config';
-    import type { CategoryData } from '@/typings/categoryData.typings';
     import { reactive } from 'vue';
     import ErrorMessage from '@/components/message/ErrorMessage.vue';
     import SuccessMessage from '@/components/message/SuccessMessage.vue';
     import { useCategoryStore } from '@/stores/category';
-    import type { Form } from '@/typings/form.typing';
+    import type { Form, NewCategory } from '@/common/typings';
 
         const form = reactive<Form>({
             loading: false,
             error: null,
             success: null,
-        })
+        });
 
         const categoryStore = useCategoryStore();
-        const category: CategoryData = {
+        const category: NewCategory = {
             name: "",
             description: "",
-        }
+        };
 
         const createCategory = async () => {
-            form.loading = true
-            form.error = null
-            form.success = null
+            form.loading = true;
+            form.error = null;
+            form.success = null;
 
             try {
                 const config = createCategoryConfig(category);
                 await categoryStore.createCategory(config);
-                console.log(categoryStore.category);
-                
             } catch (error: any) {
-                form.error = error.response.data
+                form.error = error.response.data;
             }
-            form.loading = false
-        }
+            form.loading = false;
+        };
 
 </script>

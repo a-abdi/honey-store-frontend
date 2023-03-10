@@ -1,15 +1,13 @@
 import { defineStore } from "pinia";
 import { sendRequest } from "@/common/helpers";
 import type { AxiosRequestConfig } from 'axios';
-import type { CategoryData } from "@/typings/categoryData.typings";
-import type { Category } from "@/typings/category.typing";
+import type { CategoryData, CategoryListData } from "@/common/typings";
 
 export const useCategoryStore = defineStore("category", {
   state: () => {
     return {
-      categoryData: null as CategoryData | null,
-      categoryList: [] as Category[],
-      category: null as Category | null,
+      categoryListData: {} as CategoryListData,
+      category: {} as CategoryData | {},
     }
   },
 
@@ -19,7 +17,9 @@ export const useCategoryStore = defineStore("category", {
     },
 
     async getCategoryList(config: AxiosRequestConfig) {
-      this.categoryList = await sendRequest(config);
+      this.categoryListData = await sendRequest(config);
+      console.log(this.categoryListData);
+      
     }
   }
 });
