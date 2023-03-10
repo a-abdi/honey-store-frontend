@@ -12,42 +12,53 @@
                     Create Category
                 </button>
             </div> 
-            <ErrorMessage v-if="form.error" :error="form.error" />
-            <SuccessMessage v-if="form.success" :success="form.success" />
+            <Message class="absolute bottom-8 right-8 bg-gray-300" 
+                :message="form.message"
+                :showMessage="showMessage"
+                :typeMessage="form.typeMessage"
+                @fadeMessage="showMessage = false" 
+            />
         </div>
     </form>
 </template>
 
 <script setup lang="ts">
     import { createCategoryConfig } from '@/common/config/axiox.config';
-    import { reactive } from 'vue';
-    import ErrorMessage from '@/components/message/ErrorMessage.vue';
-    import SuccessMessage from '@/components/message/SuccessMessage.vue';
+    import { reactive, ref } from 'vue';
     import { useCategoryStore } from '@/stores/category';
     import type { Form, NewCategory } from '@/common/typings';
+    import { TypeMessage } from '@/common/typings';
+    import { storeToRefs } from 'pinia';
+    import Message from '@/components/message/Message.vue';
 
         const form = reactive<Form>({
             loading: false,
-            error: null,
-            success: null,
+            message: '',
+            typeMessage: TypeMessage.Success
         });
-
+        const showMessage = ref(false);
         const categoryStore = useCategoryStore();
         const category: NewCategory = {
             name: "",
             description: "",
         };
-
+        
         const createCategory = async () => {
             form.loading = true;
-            form.error = null;
-            form.success = null;
-
+            form.errorMessage = null;
+            form.successMessage = null;
+            
             try {
                 const config = createCategoryConfig(category);
+                showMessage.value = true;
                 await categoryStore.createCategory(config);
+                const { categoryData } = storeToRefs(categoryStore);
+                form.message = categoryData.value?.message;
+                form.typeMessage = TypeMessage.Success;
             } catch (error: any) {
-                form.error = error.response.data;
+                console.log(error.response.data.message);
+                form.typeMessage = TypeMessage.Danger;
+                form.message = error.response.data.message[0];
             }
             form.loading = false;
         };

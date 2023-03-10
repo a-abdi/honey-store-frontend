@@ -6,20 +6,18 @@ import type { CategoryData, CategoryListData } from "@/common/typings";
 export const useCategoryStore = defineStore("category", {
   state: () => {
     return {
-      categoryListData: {} as CategoryListData,
-      category: {} as CategoryData | {},
+      categoryListData: null as CategoryListData | null,
+      categoryData: null as CategoryData | null,
     }
   },
 
   actions: {
     async createCategory(config: AxiosRequestConfig) {
-      this.category = await sendRequest(config);
+      this.categoryData = await sendRequest(config);
     },
 
     async getCategoryList(config: AxiosRequestConfig) {
       this.categoryListData = await sendRequest(config);
-      console.log(this.categoryListData);
-      
     }
   }
 });

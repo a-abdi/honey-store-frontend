@@ -8,7 +8,7 @@
                     <th class="table-tr">نام</th>
                 </tr>
             </thead>
-            <tbody v-if="categoryListData?.data?.length >= 0">
+            <tbody v-if="categoryListData?.data?.length">
                 <tr v-for="( category, index ) in categoryListData.data" :key="category._id" :class="{'bg-neutral-100': (index + 1) % 2 }">
                     <td class="table-td">  <router-link :to="`/admin/dashboard/categories/${category._id}/edit`" class="btn-yellow"> ویرایش </router-link> </td>
                     <td class="table-td"> {{ category.description }} </td>

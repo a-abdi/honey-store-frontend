@@ -44,6 +44,14 @@ export interface NewCategory {
 
 export interface Form {
     loading?: boolean;
-    error?:  null | AxiosError;
-    success?: null | object;
+    errorMessage?:  null | string;
+    successMessage?: null | string;
+    message?: string;
+    typeMessage?: TypeMessage;
+};
+
+export enum TypeMessage {
+    Success = 'success',
+    Danger = 'danger',
+    Warning = 'warning',
 };
