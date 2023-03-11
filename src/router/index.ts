@@ -75,31 +75,31 @@ const router = createRouter({
   
         {
           path: "products",
-          name: "Admin/Dashboard/Products/Index",
-          component: () => import("@/views/Admin/Dashboard/Products/Index.vue"),
+          name: "admin/dashboard/products/Index",
+          component: () => import("@/views/admin/dashboard/products/Index.vue"),
           children: [
             {
               path: "",
-              name: "Admin/Dashboard/Products/Home",
-              component: () => import("@/views/Admin/Dashboard/Products/Home.vue"),
+              name: "admin/dashboard/products/Home",
+              component: () => import("@/views/admin/dashboard/products/Home.vue"),
             },
   
             {
               path: "create",
-              name: "Admin/Dashboard/Products/Create",
-              component: () => import("@/views/Admin/Dashboard/Products/Create.vue"),
+              name: "admin/dashboard/products/Create",
+              component: () => import("@/views/admin/dashboard/products/Create.vue"),
             },
   
             {
-              path: ":productId(\\d+)/edit",
-              name: "Admin/Dashboard/Products/Edit",
-              component: () => import("@/views/Admin/Dashboard/Products/Edit.vue"),
+              path: ":productId/edit",
+              name: "admin/dashboard/products/Edit",
+              component: () => import("@/views/admin/dashboard/products/Edit.vue"),
             },
   
             {
               path: ":productId(\\d+)",
-              name: "Admin/Dashboard/Products/Show",
-              component: () => import("@/views/Admin/Dashboard/Products/Show.vue"),
+              name: "admin/dashboard/products/Show",
+              component: () => import("@/views/admin/dashboard/products/Show.vue"),
             },
           ]
         },
