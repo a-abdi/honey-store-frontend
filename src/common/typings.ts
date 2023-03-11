@@ -48,6 +48,12 @@ export interface Form {
     successMessage?: null | string;
     message?: string;
     typeMessage?: TypeMessage;
+    showMessage?: boolean;
+};
+
+export interface EditCategory {
+    id: string,
+    newData: Partial<NewCategory>
 };
 
 export enum TypeMessage {

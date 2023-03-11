@@ -117,14 +117,14 @@ const router = createRouter({
   
             {
               path: "create",
-              name: "Admin/Dashboard/Categories/Create",
+              name: "admin/dashboard/categories/Create",
               component: () => import("@/views/admin/dashboard/categories/Create.vue"),
             },
   
             {
-              path: ":categoryId(\\d+)/edit",
-              name: "Admin/Dashboard/Categories/Edit",
-              component: () => import("@/views/Admin/Dashboard/Categories/Edit.vue"),
+              path: `:categoryId/edit`,
+              name: "admin/dashboard/categories/Edit",
+              component: () => import("@/views/admin/dashboard/categories/Edit.vue"),
             },
           ]
         },

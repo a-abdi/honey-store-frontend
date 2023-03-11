@@ -12,7 +12,7 @@
                     Create Category
                 </button>
             </div> 
-            <Message class="absolute bottom-8 right-8 bg-gray-300" 
+            <Message class="absolute bottom-4 right-4 bg-gray-300" 
                 :message="form.message"
                 :showMessage="showMessage"
                 :typeMessage="form.typeMessage"
@@ -30,6 +30,8 @@
     import { TypeMessage } from '@/common/typings';
     import { storeToRefs } from 'pinia';
     import Message from '@/components/message/Message.vue';
+import axios from 'axios';
+import { getAxiosErrorMessage } from '@/common/helpers';
 
         const form = reactive<Form>({
             loading: false,
@@ -38,10 +40,10 @@
         });
         const showMessage = ref(false);
         const categoryStore = useCategoryStore();
-        const category: NewCategory = {
+        const category = reactive<NewCategory>({
             name: "",
             description: "",
-        };
+        });
         
         const createCategory = async () => {
             form.loading = true;
@@ -53,12 +55,15 @@
                 showMessage.value = true;
                 await categoryStore.createCategory(config);
                 const { categoryData } = storeToRefs(categoryStore);
-                form.message = categoryData.value?.message;
                 form.typeMessage = TypeMessage.Success;
+                form.message = categoryData.value?.message;
             } catch (error: any) {
-                console.log(error.response.data.message);
                 form.typeMessage = TypeMessage.Danger;
-                form.message = error.response.data.message[0];
+                if (axios.isAxiosError(error)) {
+                form.message = getAxiosErrorMessage(error);
+                } else {
+                    console.log(error);
+                }
             }
             form.loading = false;
         };

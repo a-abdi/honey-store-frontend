@@ -1,5 +1,5 @@
 import type { AxiosRequestConfig } from 'axios';
-import type { AdminLoginData, NewCategory } from '../typings';
+import type { AdminLoginData, EditCategory, NewCategory } from '../typings';
 
 const BASE_URL = 'http://localhost:3000/';
 
@@ -15,7 +15,18 @@ export const createCategoryConfig = (data: NewCategory): AxiosRequestConfig => (
     data,
 });
 
+export const getCategoryConfig = (id: string): AxiosRequestConfig => ({
+    method: 'get',
+    url: `${BASE_URL}categories/${id}`,
+});
+
 export const getCategoryListConfig = (): AxiosRequestConfig => ({
     method: 'get',
     url: `${BASE_URL}categories`,
+});
+
+export const editCategoryListConfig = (category: EditCategory): AxiosRequestConfig => ({
+    method: 'patch',
+    url: `${BASE_URL}categories/${category.id}`,
+    data: category.newData
 });

@@ -1,0 +1,1 @@
+export const REGEX_MONGO_DB_ID = /^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i;
