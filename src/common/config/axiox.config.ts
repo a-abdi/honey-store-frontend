@@ -30,3 +30,8 @@ export const editCategoryListConfig = (category: EditCategory): AxiosRequestConf
     url: `${BASE_URL}categories/${category.id}`,
     data: category.newData
 });
+
+export const getProductListConfig = (): AxiosRequestConfig => ({
+    method: 'get',
+    url: `${BASE_URL}products`,
+});

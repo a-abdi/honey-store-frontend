@@ -1,5 +1,3 @@
-import type { AxiosError } from "axios";
-
 export interface Admin {
     firstName: string;
     lastName: string;
@@ -16,25 +14,26 @@ export interface AdminLoginData {
     password: string | null;
 };
 
-export interface Category {
-    name: string;
-    description: string;
+export interface CommonResponseData {
     _id: string;
     createdAt: string;
     updatedAt: string;
     __v: number;
 };
 
-export interface CategoryData {
-    data: Category;
+export interface CommonResponseDataOptional {
     message?: string;
     metaData?: object; 
 };
 
-export interface CategoryListData {
+export interface Category extends CommonResponseData, NewCategory {};
+
+export interface CategoryData extends CommonResponseDataOptional {
+    data: Category | null;
+};
+
+export interface CategoryListData extends CommonResponseDataOptional {
     data: Category[];
-    message?: string;
-    metaData?: object; 
 };
 
 export interface NewCategory {
@@ -44,7 +43,7 @@ export interface NewCategory {
 
 export interface Form {
     loading?: boolean;
-    errorMessage?:  null | string;
+    errorMessage?: null | string;
     successMessage?: null | string;
     message?: string;
     typeMessage?: TypeMessage;
@@ -60,4 +59,26 @@ export enum TypeMessage {
     Success = 'success',
     Danger = 'danger',
     Warning = 'warning',
+};
+
+export interface NewProduct {
+    name: string;
+    price: number;
+    quantity: number;
+    description?: string;
+    code: string;
+    discount?: number;
+    category: string;
+};
+
+export interface Product extends Omit<NewProduct, 'category'>, CommonResponseData {
+    category: string | Category;
+};
+
+export interface ProductData extends CommonResponseDataOptional {
+    data: Product | null;
+};
+
+export interface ProductListData extends CommonResponseDataOptional {
+    data: Product[];
 };
