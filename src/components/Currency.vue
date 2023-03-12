@@ -1,19 +1,21 @@
 <template>
     <div>
-        {{ currency }}
+        {{ convertToPersian(currency) }}
     </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import { convertToPersian } from '@/common/helpers';
+
     const props = defineProps({
         money: Number
     });
     const money = props.money || 0;
     const currency = computed( () => (
             (money/1)
-            .toFixed(2)
+            .toFixed()
             .replace('.', ',')
-        ).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+        ).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     );
 </script>

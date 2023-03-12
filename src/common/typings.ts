@@ -73,6 +73,7 @@ export interface NewProduct {
 
 export interface Product extends Omit<NewProduct, 'category'>, CommonResponseData {
     category: string | Category;
+    imageSrc: string;
 };
 
 export interface ProductData extends CommonResponseDataOptional {

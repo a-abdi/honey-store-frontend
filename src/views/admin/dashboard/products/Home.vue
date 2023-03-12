@@ -15,10 +15,19 @@
                 <tr v-for="( product, index ) in productListData.data" :key="product._id" :class="{'bg-neutral-100': (index + 1) % 2 }">
                     <td class="table-td"> <button @click="deleteProduct(product._id)" class="btn-red"> حذف </button> </td>
                     <td class="table-td"> <router-link :to="`/admin/dashboard/products/${product._id}/edit`" class="btn-yellow"> ویرایش </router-link> </td>
-                    <td class="table-td"> {{ product.quantity }} </td>
+                    <td class="table-td"> <Currency :money="product.quantity" /> </td>
                     <td class="table-td"> <Currency :money="product.discount" /> </td>
                     <td class="table-td"> <Currency :money="product.price" /> </td>
-                    <td class="table-td"> {{ product.name }} </td>
+                    <td class="table-td">
+                        <div class="flex items-center float-right pr-2">
+                            <div class="pr-1">
+                                {{ product.name }} 
+                            </div>
+                            <div class="">
+                                <img class="object-cover h-8 w-8 rounded-md " :src="product.imageSrc" alt="">
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -29,7 +38,7 @@
 import { getProductListConfig } from '@/common/config/axiox.config';
 import { useProductStore } from '@/stores/product';
 import { storeToRefs } from 'pinia';
-import { computed, onMounted } from 'vue';
+import { onMounted } from 'vue';
 import Currency from '../../../../components/Currency.vue';
     const productStore = useProductStore();
 
@@ -39,7 +48,6 @@ import Currency from '../../../../components/Currency.vue';
     };
     onMounted(getProductList);
     const { productListData } = storeToRefs(productStore);
-
     const deleteProduct = async (productId: string) => {
         const answer = window.confirm(
             'Do you really want to delete product?'

@@ -6,6 +6,9 @@
     './src/**/*.{js,jsx,ts,tsx,vue}',
   ],
    theme: {
+    fontFamily: { 
+      'sans': ['Helvetica', 'Arial', 'sans-serif', 'iranyekan'],
+    },
      extend: {},
    },
   

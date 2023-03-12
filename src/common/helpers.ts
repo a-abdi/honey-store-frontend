@@ -18,4 +18,16 @@ export const getAxiosErrorMessage = (error: any): string => {
         return error.response?.data.message;
     }
     return 'خطایی رخ داده'
-}
+};
+
+const PERSIAN_NUMBER = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+export const convertToPersian = (str: string ) =>
+{
+    for(let i=0; i<10; i++)
+    {
+        const strNumber: string = `${i}`;
+        str = str?.replaceAll(strNumber, PERSIAN_NUMBER[i]);
+    }
+    
+    return str;
+};
