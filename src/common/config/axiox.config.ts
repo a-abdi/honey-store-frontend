@@ -35,3 +35,8 @@ export const getProductListConfig = (): AxiosRequestConfig => ({
     method: 'get',
     url: `${BASE_URL}products`,
 });
+
+export const getProductConfig = (id: string): AxiosRequestConfig => ({
+    method: 'get',
+    url: `${BASE_URL}products/${id}`,
+});
