@@ -19,13 +19,15 @@
                     <td class="table-td"> <Currency :money="product.discount" /> </td>
                     <td class="table-td"> <Currency :money="product.price" /> </td>
                     <td class="table-td">
-                        <div class="flex items-center float-right pr-2">
-                            <div class="pr-1">
-                                {{ product.name }} 
-                            </div>
-                            <div class="">
-                                <img class="object-cover h-8 w-8 rounded-md " :src="product.imageSrc" alt="">
-                            </div>
+                        <div class="">
+                            <router-link class="flex items-center float-right pr-2" :to="`/admin/dashboard/products/${product._id}`">
+                                <div class="pr-1">
+                                    {{ product.name }} 
+                                </div>
+                                <div>
+                                    <img class="object-cover h-8 w-8 rounded-md " :src="product.imageSrc" alt="">
+                                </div>
+                            </router-link>
                         </div>
                     </td>
                 </tr>

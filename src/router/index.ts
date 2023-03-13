@@ -97,7 +97,7 @@ const router = createRouter({
             },
   
             {
-              path: ":productId(\\d+)",
+              path: ":productId",
               name: "admin/dashboard/products/Show",
               component: () => import("@/views/admin/dashboard/products/Show.vue"),
             },
