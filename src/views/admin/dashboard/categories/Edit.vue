@@ -52,8 +52,8 @@ import axios from 'axios';
     const getCategory = async () => {
         const config = getCategoryConfig(categoryId);
         await categoryStore.getCategory(config);
-        newCategory.name = categoryData.value?.data.name;
-        newCategory.description = categoryData.value?.data.description;
+        newCategory.name = categoryData.value?.data?.name;
+        newCategory.description = categoryData.value?.data?.description;
     }
 
     onMounted(getCategory);

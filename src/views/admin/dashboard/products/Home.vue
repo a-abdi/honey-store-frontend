@@ -1,5 +1,10 @@
 <template>
     <div class="">
+        <ConfirmDialog :showDialog="showDialog" @cancel=" showDialog = false">
+            <div class="text-right my-4 text-purple-600">
+               <p>محصول مورد نظر حذف شود؟</p>
+            </div>
+        </ConfirmDialog>
         <table class="table-auto w-full tracking-wider">
             <thead>
                 <tr class="">
@@ -14,7 +19,7 @@
             <tbody v-if="productListData?.data?.length">
                 <tr v-for="( product, index ) in productListData.data" :key="product._id" :class="{'bg-neutral-100': (index + 1) % 2 }">
                     <td class="table-td"> 
-                        <DeleteElement/> 
+                        <DeleteElement @delete="showDialog=true"/> 
                     </td>
                     <td class="table-td"> 
                         <router-link :to="`/admin/dashboard/products/${product._id}/edit`">
@@ -46,13 +51,14 @@
 import { getProductListConfig } from '@/common/config/axiox.config';
 import { useProductStore } from '@/stores/product';
 import { storeToRefs } from 'pinia';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import Currency from '../../../../components/Currency.vue';
 import EditElement from '@/components/element/EditElement.vue';
 import DeleteElement from '@/components/element/DeleteElement.vue';
+import ConfirmDialog from '@/components/dialog/ConfirmDialog.vue';
 
     const productStore = useProductStore();
-
+    const showDialog = ref(false);
     const getProductList = async () => {
         const config = getProductListConfig();
         productStore.getProductList(config)
