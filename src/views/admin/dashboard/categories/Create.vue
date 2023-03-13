@@ -23,13 +23,13 @@
 </template>
 
 <script setup lang="ts">
-    import { createCategoryConfig } from '@/common/config/axiox.config';
-    import { reactive, ref } from 'vue';
-    import { useCategoryStore } from '@/stores/category';
-    import type { Form, NewCategory } from '@/common/typings';
-    import { TypeMessage } from '@/common/typings';
-    import { storeToRefs } from 'pinia';
-    import Message from '@/components/message/Message.vue';
+import { createCategoryConfig } from '@/common/config/axiox.config';
+import { reactive, ref } from 'vue';
+import { useCategoryStore } from '@/stores/category';
+import type { Form, NewCategory } from '@/common/typings';
+import { TypeMessage } from '@/common/typings';
+import { storeToRefs } from 'pinia';
+import Message from '@/components/message/Message.vue';
 import axios from 'axios';
 import { getAxiosErrorMessage } from '@/common/helpers';
 

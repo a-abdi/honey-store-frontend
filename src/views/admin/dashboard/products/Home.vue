@@ -1,10 +1,16 @@
 <template>
     <div class="">
-        <ConfirmDialog :showDialog="showDialog" @cancel=" showDialog = false">
+        <ConfirmDialog :showDialog="showDialog" @yes="deleteProduct"  @cancel=" showDialog = false">
             <div class="text-right my-4 text-purple-600">
                <p>محصول مورد نظر حذف شود؟</p>
             </div>
         </ConfirmDialog>
+        <Message class="absolute bottom-4 right-4 bg-gray-300" 
+                :message="form.message"
+                :showMessage="form.showMessage"
+                :typeMessage="form.typeMessage"
+                @fadeMessage="form.showMessage = false" 
+            />
         <table class="table-auto w-full tracking-wider">
             <thead>
                 <tr class="">
@@ -19,7 +25,7 @@
             <tbody v-if="productListData?.data?.length">
                 <tr v-for="( product, index ) in productListData.data" :key="product._id" :class="{'bg-neutral-100': (index + 1) % 2 }">
                     <td class="table-td"> 
-                        <DeleteElement @delete="showDialog=true"/> 
+                        <DeleteElement @delete="showDialog = true, productId= product._id"/> 
                     </td>
                     <td class="table-td"> 
                         <router-link :to="`/admin/dashboard/products/${product._id}/edit`">
@@ -48,34 +54,44 @@
 </template>
 
 <script setup lang="ts">
-import { getProductListConfig } from '@/common/config/axiox.config';
+import { deleteProductConfig, getProductListConfig } from '@/common/config/axiox.config';
 import { useProductStore } from '@/stores/product';
 import { storeToRefs } from 'pinia';
-import { onMounted, ref } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 import Currency from '../../../../components/Currency.vue';
 import EditElement from '@/components/element/EditElement.vue';
 import DeleteElement from '@/components/element/DeleteElement.vue';
 import ConfirmDialog from '@/components/dialog/ConfirmDialog.vue';
+import Message from '@/components/message/Message.vue';
+import { TypeMessage, type Form } from '@/common/typings';
 
     const productStore = useProductStore();
     const showDialog = ref(false);
+    const productId = ref('');
     const getProductList = async () => {
         const config = getProductListConfig();
         productStore.getProductList(config)
     };
+    const form = reactive<Form>({
+        message: '',
+        typeMessage: TypeMessage.Success,
+        showMessage: false,
+    });
+    const { productData } = storeToRefs(productStore);
     onMounted(getProductList);
     const { productListData } = storeToRefs(productStore);
-    const deleteProduct = async (productId: string) => {
-        const answer = window.confirm(
-            'Do you really want to delete product?'
-        )
+    const deleteProduct = async () => {
         try {
-            if(answer) {
-                // await store.dispatch('adminProducts/deleteProduct', productId)
-                // store.dispatch('adminProducts/getProducts')
-            } 
+            const config = deleteProductConfig(productId.value);
+            form.showMessage = true;
+            showDialog.value = false;
+            await productStore.deleteProduct(config);
+            form.typeMessage = TypeMessage.Success;
+            form.message = productData.value?.message;
+            getProductList();
         } catch (error) {
-            
+            form.typeMessage = TypeMessage.Danger;
+            form.message = productData.value?.message;
         }
     }
 </script>

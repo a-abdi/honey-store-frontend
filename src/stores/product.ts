@@ -19,5 +19,9 @@ export const useProductStore = defineStore("product", {
     async getProduct(config: AxiosRequestConfig) {
       this.productData = await sendRequest(config);
     },
+
+    async deleteProduct(config: AxiosRequestConfig) {
+      this.productData = await sendRequest(config);
+    },
   }
 });

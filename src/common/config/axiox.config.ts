@@ -40,3 +40,8 @@ export const getProductConfig = (id: string): AxiosRequestConfig => ({
     method: 'get',
     url: `${BASE_URL}products/${id}`,
 });
+
+export const deleteProductConfig = (id: string): AxiosRequestConfig => ({
+    method: 'delete',
+    url: `${BASE_URL}products/${id}`,
+});
