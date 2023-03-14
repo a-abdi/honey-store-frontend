@@ -37,12 +37,12 @@
                     <td class="table-td"> <Currency :money="product.price" /> </td>
                     <td class="table-td">
                         <div class="">
-                            <router-link class="flex items-center justify-center" :to="`/admin/dashboard/products/${product._id}`">
-                                <div class="pr-1">
-                                    {{ product.name }} 
-                                </div>
+                            <router-link class="flex items-center flex-row-reverse mr-2" :to="`/admin/dashboard/products/${product._id}`">
                                 <div>
                                     <img class="object-cover h-8 w-8 rounded-md " :src="product.imageSrc" alt="">
+                                </div>
+                                <div class="pr-1">
+                                    {{ product.name }} 
                                 </div>
                             </router-link>
                         </div>
@@ -63,7 +63,7 @@ import EditElement from '@/components/element/EditElement.vue';
 import DeleteElement from '@/components/element/DeleteElement.vue';
 import ConfirmDialog from '@/components/dialog/ConfirmDialog.vue';
 import Message from '@/components/message/Message.vue';
-import { TypeMessage, type Form } from '@/common/typings';
+import { TypeMessage, type Page } from '@/common/typings';
 
     const productStore = useProductStore();
     const showDialog = ref(false);
@@ -72,7 +72,7 @@ import { TypeMessage, type Form } from '@/common/typings';
         const config = getProductListConfig();
         productStore.getProductList(config)
     };
-    const form = reactive<Form>({
+    const form = reactive<Page>({
         message: '',
         typeMessage: TypeMessage.Success,
         showMessage: false,

@@ -35,7 +35,7 @@
                         </div>
                     </div>
                     <div class="flex flex-row-reverse w-full my-2">
-                        <p class="text-gray-600 p-1 leading-loose tracking-wide">
+                        <p class="text-gray-600 p-1 text-right leading-loose tracking-wide">
                             {{ productData.data.description }}
                         </p>
                     </div>

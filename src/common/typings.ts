@@ -41,7 +41,7 @@ export interface NewCategory {
     description: string;
 };
 
-export interface Form {
+export interface Page {
     loading?: boolean;
     errorMessage?: null | string;
     successMessage?: null | string;

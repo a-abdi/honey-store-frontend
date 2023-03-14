@@ -31,12 +31,12 @@ import { storeToRefs } from 'pinia';
 import { onMounted, reactive, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import Message from '@/components/message/Message.vue';
-import type { Form, NewCategory, EditCategory } from '@/common/typings';
+import type { Page, NewCategory, EditCategory } from '@/common/typings';
 import axios from 'axios';
 
     const route = useRoute();
     const categoryId = route.params.categoryId as string;
-    const form = reactive<Form>({
+    const form = reactive<Page>({
         loading: false,
         message: '',
         typeMessage: TypeMessage.Success,
