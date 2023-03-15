@@ -3,19 +3,20 @@
         <table class="table-auto w-full tracking-wider">
             <thead>
                 <tr class="">
-                    <th class="table-tr">ویرایش</th>
-                    <th class="table-tr">توضیحات</th>
                     <th class="table-tr">نام</th>
+                    <th class="table-tr">توضیحات</th>
+                    <th class="table-tr">ویرایش</th>
                 </tr>
             </thead>
-            <tbody v-if="categoryListData?.data?.length">
+            <tbody  v-if="categoryListData?.data?.length">
                 <tr v-for="( category, index ) in categoryListData.data" :key="category._id" :class="{'bg-neutral-100': (index + 1) % 2 }">
+                    <td class="table-td"> {{ category.name }} </td>
+                    <td class="table-td"> {{ category.description }} </td>
                     <td class="table-td">  
                         <router-link :to="`/admin/dashboard/categories/${category._id}/edit`">
                             <EditElement/>
-                        </router-link> </td>
-                    <td class="table-td"> {{ category.description }} </td>
-                    <td class="table-td"> {{ category.name }} </td>
+                        </router-link> 
+                    </td>
                 </tr>
             </tbody>
         </table>

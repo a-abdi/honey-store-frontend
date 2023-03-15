@@ -14,30 +14,19 @@
         <table class="table-auto w-full tracking-wider">
             <thead>
                 <tr class="">
-                    <th class="table-tr">حذف</th>
-                    <th class="table-tr">ویرایش</th>
-                    <th class="table-tr">تعداد</th>
-                    <th class="table-tr">تخفیف</th>
-                    <th class="table-tr">قیمت</th>
                     <th class="table-tr">نام</th>
+                    <th class="table-tr">قیمت</th>
+                    <th class="table-tr">تخفیف</th>
+                    <th class="table-tr">تعداد</th>
+                    <th class="table-tr">ویرایش</th>
+                    <th class="table-tr">حذف</th>
                 </tr>
             </thead>
             <tbody v-if="productListData?.data?.length">
                 <tr v-for="( product, index ) in productListData.data" :key="product._id" :class="{'bg-neutral-100': (index + 1) % 2 }">
-                    <td class="table-td"> 
-                        <DeleteElement @delete="showDialog = true, productId= product._id"/> 
-                    </td>
-                    <td class="table-td"> 
-                        <router-link :to="`/admin/dashboard/products/${product._id}/edit`">
-                            <EditElement/>
-                        </router-link> 
-                    </td>
-                    <td class="table-td"> <Currency :money="product.quantity" /> </td>
-                    <td class="table-td"> <Currency :money="product.discount" /> </td>
-                    <td class="table-td"> <Currency :money="product.price" /> </td>
                     <td class="table-td">
                         <div class="">
-                            <router-link class="flex items-center flex-row-reverse mr-2" :to="`/admin/dashboard/products/${product._id}`">
+                            <router-link class="flex items-center flex mr-2" :to="`/admin/dashboard/products/${product._id}`">
                                 <div>
                                     <img class="object-cover h-8 w-8 rounded-md " :src="product.imageSrc" alt="">
                                 </div>
@@ -46,6 +35,17 @@
                                 </div>
                             </router-link>
                         </div>
+                    </td>
+                    <td class="table-td"> <Currency :money="product.price" /> </td>
+                    <td class="table-td"> <Currency :money="product.discount" /> </td>
+                    <td class="table-td"> <Currency :money="product.quantity" /> </td>
+                    <td class="table-td"> 
+                        <router-link :to="`/admin/dashboard/products/${product._id}/edit`">
+                            <EditElement/>
+                        </router-link> 
+                    </td>
+                    <td class="table-td"> 
+                        <DeleteElement @delete="showDialog = true, productId= product._id"/> 
                     </td>
                 </tr>
             </tbody>
