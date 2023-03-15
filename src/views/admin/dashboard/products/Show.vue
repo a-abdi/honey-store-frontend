@@ -6,36 +6,36 @@
                     <div class=" w-full text-center p-2 text-lg my-2">
                         {{ productData.data.name }}
                     </div>
-                    <div class="w-full flex flex-row-reverse my-2">
+                    <div class="w-full flex flex my-2">
                         <div class="p-1 text-gray-600">
-                            <label for="price">:قیمت</label>
+                            <label for="price">قیمت:</label>
                         </div>
                         <Currency id="price" :money="productData.data.price" class="text-red-600 p-1" />
                     </div>
-                    <div class="w-full flex flex-row-reverse my-2">
+                    <div class="w-full flex flex my-2">
                         <div class="p-1 text-gray-600">
-                            <label for="discount">:تخفیف</label>
+                            <label for="discount">تخفیف:</label>
                         </div>
                         <Currency id="discount" :money="productData.data.discount" class="text-red-600 p-1" />
                     </div>
-                    <div class="w-full flex flex-row-reverse my-2">
+                    <div class="w-full flex flex my-2">
                         <div class="p-1 text-gray-600">
-                            <label for="quantity">:تعداد</label>
+                            <label for="quantity">تعداد:</label>
                         </div>
                         <div id="quantity" class="p-1 text-red-600">
                             <Currency :money="productData.data.quantity"/>
                         </div>
                     </div>
-                    <div class="w-full flex flex-row-reverse my-2">
+                    <div class="w-full flex flex my-2">
                         <div class="p-1 text-gray-600">
-                            <label for="category">:دسته</label>
+                            <label for="category">دسته:</label>
                         </div>
                         <div v-if="typeof productData.data.category == 'object'" id="category" class="text-red-600 p-1">
                             {{ productData.data.category.name }}
                         </div>
                     </div>
-                    <div class="flex flex-row-reverse w-full my-2">
-                        <p class="text-gray-600 p-1 text-right leading-loose tracking-wide">
+                    <div class="flex flex w-full my-2">
+                        <p class="text-gray-600 p-1 leading-loose tracking-wide">
                             {{ productData.data.description }}
                         </p>
                     </div>

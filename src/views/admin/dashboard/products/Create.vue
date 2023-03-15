@@ -1,11 +1,6 @@
 <template>
     <form @submit.prevent="addProduct">
         <div class="sm:flex w-full">
-            <div class="sm:w-1/3 w-full">
-                <div class="sm:p-4 p-0.5 sm:m-0 mt-2">
-                    <img :src="imageUrl" alt="" class="object-cover w-auto h-auto min-w-full max-w-64 max-h-96 mx-auto">
-                </div>
-            </div>
             <div class="w-full sm:w-2/3 border border-gray-200 rounded-md p-2 sm:m-4">
                 <div class="my-2 md:my-6">
                     <input v-model="newProduct.name" id="name" type="text" placeholder="نام" class="w-full form-input text-right">
@@ -25,7 +20,7 @@
                     </select>
                     <label class="block w-full md:w-1/4 my-2 md:my-0">
                         <span class="sr-only">انتخاب عکس محصول</span>
-                        <input type="file" class="block w-full text-sm text-slate-500
+                        <input @change="onFileChange" type="file" class="block w-full text-sm text-slate-500
                         file:mr-4 file:py-2 file:px-4
                         file:rounded-full file:border-0
                         file:text-sm file:font-semibold
@@ -44,6 +39,11 @@
                     :typeMessage="page.typeMessage"
                     @fadeMessage="page.showMessage = false" 
                 />
+            </div>
+            <div class="sm:w-1/3 w-full">
+                <div class="sm:p-4 p-0.5 sm:m-0 mt-2">
+                    <img :src="imageUrl" alt="" class="object-cover w-auto h-auto min-w-full max-w-64 max-h-96 mx-auto">
+                </div>
             </div>
         </div>
     </form>
