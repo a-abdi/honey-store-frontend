@@ -17,13 +17,23 @@
                 </div>
                 <div class="md:flex md:justify-between my-2 md:my-6">
                     <button :disabled="page.loading" :class="{'cursor-wait': page.loading}" type="submit" class="w-full md:w-1/4 my-2 md:my-0 btn-blue">
-                        <slot> اضافه کردن محصول </slot>
+                        اضافه کردن محصول 
                     </button>
                     <select v-model="newProduct.category" v-if="categoryListData?.data" name="category" autofocus="true" id="category" aria-placeholder="select category" class="w-full md:w-1/4 my-2 md:my-0 appearance-none bg-white text-gray-600 form-input text-right">
                         <option value="" disabled selected>دسته</option>
                         <option v-for="category in categoryListData.data" :key="category._id" :value="category._id">{{ category.name }}</option>
                     </select>
-                    <input @change="onFileChange" type="file" class="w-full md:w-1/4 my-2 md:my-0 text-gray-600 form-input text-right">
+                    <label class="block w-full md:w-1/4 my-2 md:my-0">
+                        <span class="sr-only">انتخاب عکس محصول</span>
+                        <input type="file" class="block w-full text-sm text-slate-500
+                        file:mr-4 file:py-2 file:px-4
+                        file:rounded-full file:border-0
+                        file:text-sm file:font-semibold
+                        file:bg-violet-50 file:text-violet-700
+                        hover:file:bg-violet-100
+                        "/>
+                    </label>
+                    <!-- <input @change="onFileChange" type="file" class="w-full md:w-1/4 my-2 md:my-0 text-gray-600 form-input text-right"> -->
                 </div> 
                 <div class="mt-6 mb-3 w-full">
                     <textarea v-model="newProduct.description" placeholder="توضیحات" class="p-2 text-gray-600 resize-y border rounded-md w-full h-16 sm:h-24 md:h-32 xl:h-40 focus:outline-none focus:ring-2 focus:ring-blue-200 text-right"></textarea>
