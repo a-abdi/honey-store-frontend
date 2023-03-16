@@ -26,12 +26,12 @@
 import { createCategoryConfig } from '@/common/config/axiox.config';
 import { reactive, ref } from 'vue';
 import { useCategoryStore } from '@/stores/category';
-import type { Page, NewCategory } from '@/common/typings';
-import { TypeMessage } from '@/common/typings';
 import { storeToRefs } from 'pinia';
 import Message from '@/components/message/Message.vue';
 import axios from 'axios';
 import { getAxiosErrorMessage } from '@/common/helpers';
+import { TypeMessage, type Page } from '@/common/typings/common.typings';
+import type { NewCategory } from '@/common/typings/category.typings';
 
         const form = reactive<Page>({
             loading: false,

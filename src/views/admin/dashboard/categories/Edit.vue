@@ -25,14 +25,14 @@
 <script setup lang="ts">
 import { getCategoryConfig, editCategoryListConfig } from '@/common/config/axiox.config';
 import { getAxiosErrorMessage } from '@/common/helpers';
-import { TypeMessage } from '@/common/typings';
 import { useCategoryStore } from '@/stores/category';
 import { storeToRefs } from 'pinia';
 import { onMounted, reactive, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import Message from '@/components/message/Message.vue';
-import type { Page, NewCategory, EditCategory } from '@/common/typings';
 import axios from 'axios';
+import { TypeMessage, type Page } from '@/common/typings/common.typings';
+import type { EditCategory, NewCategory } from '@/common/typings/category.typings';
 
     const route = useRoute();
     const categoryId = route.params.categoryId as string;

@@ -1,5 +1,6 @@
 import type { AxiosRequestConfig } from 'axios';
-import type { AdminLoginData, EditCategory, NewCategory } from '../typings';
+import type { AdminLoginData } from '../typings/admin.typings';
+import type { EditCategory, NewCategory } from '../typings/category.typings';
 
 const BASE_URL = 'http://localhost:3000/';
 

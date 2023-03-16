@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { sendRequest } from "@/common/helpers";
 import type { AxiosRequestConfig } from 'axios';
-import type { ProductData, ProductListData } from "@/common/typings";
+import type { ProductData, ProductListData } from "@/common/typings/product.typings";
 
 export const useProductStore = defineStore("product", {
   state: () => {

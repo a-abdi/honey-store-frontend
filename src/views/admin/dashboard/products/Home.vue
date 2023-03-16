@@ -63,7 +63,7 @@ import EditElement from '@/components/element/EditElement.vue';
 import DeleteElement from '@/components/element/DeleteElement.vue';
 import ConfirmDialog from '@/components/dialog/ConfirmDialog.vue';
 import Message from '@/components/message/Message.vue';
-import { TypeMessage, type Page } from '@/common/typings';
+import { TypeMessage, type Page } from '@/common/typings/common.typings';
 
     const productStore = useProductStore();
     const showDialog = ref(false);

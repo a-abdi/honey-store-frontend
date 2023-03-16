@@ -54,11 +54,12 @@ import { ref, reactive, type Ref } from 'vue';
 import { useCategoryStore } from '@/stores/category';
 import { getCategoryListConfig, createProductConfig } from '@/common/config/axiox.config';
 import { storeToRefs } from 'pinia';
-import { TypeMessage, type NewProduct, type Page } from '@/common/typings';
 import { useProductStore } from '@/stores/product';
 import Message from '@/components/message/Message.vue';
 import axios from 'axios';
 import { getAxiosErrorMessage } from '@/common/helpers';
+import type { NewProduct } from '@/common/typings/product.typings';
+import { TypeMessage, type Page } from '@/common/typings/common.typings';
 
     const imageUrl = ref('');
     const categoryStore = useCategoryStore();

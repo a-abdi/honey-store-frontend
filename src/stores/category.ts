@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { sendRequest } from "@/common/helpers";
 import type { AxiosRequestConfig } from 'axios';
-import type { CategoryData, CategoryListData } from "@/common/typings";
+import type { CategoryData, CategoryListData } from "@/common/typings/category.typings";
 
 export const useCategoryStore = defineStore("category", {
   state: () => {
