@@ -1,4 +1,3 @@
-
 export interface CommonResponseData {
     _id: string;
     createdAt: string;
@@ -11,8 +10,6 @@ export interface CommonResponseDataOptional {
     metaData?: object; 
 };
 
-
-
 export interface Page {
     loading?: boolean;
     errorMessage?: null | string;
@@ -22,11 +19,8 @@ export interface Page {
     showMessage?: boolean;
 };
 
-
-
 export enum TypeMessage {
     Success = 'success',
     Danger = 'danger',
     Warning = 'warning',
 };
-

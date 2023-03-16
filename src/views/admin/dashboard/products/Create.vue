@@ -6,14 +6,11 @@
                     <input v-model="newProduct.name" id="name" type="text" placeholder="نام" class="w-full form-input text-right">
                 </div>
                 <div class="md:flex md:justify-between my-2">
-                    <input v-model="newProduct.quantity" id="quantity" type="number" min="1" placeholder="تعداد" class="w-full md:w-1/4 my-2 md:my-0 form-input text-right">
-                    <input v-model="newProduct.discount" id="discount" type="number" min="0" placeholder="تخفیف" class="w-full md:w-1/4 my-2 md:my-0 form-input text-right">
                     <input v-model="newProduct.price"    id="price"    type="number" min="1" placeholder="قیمت"    class="w-full md:w-1/4 my-2 md:my-0 form-input text-right">
+                    <input v-model="newProduct.discount" id="discount" type="number" min="0" placeholder="تخفیف" class="w-full md:w-1/4 my-2 md:my-0 form-input text-right">
+                    <input v-model="newProduct.quantity" id="quantity" type="number" min="1" placeholder="تعداد" class="w-full md:w-1/4 my-2 md:my-0 form-input text-right">
                 </div>
                 <div class="md:flex md:justify-between my-2 md:my-6">
-                    <button :disabled="page.loading" :class="{'cursor-wait': page.loading}" type="submit" class="w-full md:w-1/4 my-2 md:my-0 btn-blue">
-                        اضافه کردن محصول 
-                    </button>
                     <select v-model="newProduct.category" v-if="categoryListData?.data" name="category" autofocus="true" id="category" aria-placeholder="select category" class="w-full md:w-1/4 my-2 md:my-0 appearance-none bg-white text-gray-600 form-input text-right">
                         <option value="" disabled selected>دسته</option>
                         <option v-for="category in categoryListData.data" :key="category._id" :value="category._id">{{ category.name }}</option>
@@ -28,7 +25,9 @@
                         hover:file:bg-violet-100
                         "/>
                     </label>
-                    <!-- <input @change="onFileChange" type="file" class="w-full md:w-1/4 my-2 md:my-0 text-gray-600 form-input text-right"> -->
+                    <button :disabled="page.loading" :class="{'cursor-wait': page.loading}" type="submit" class="w-full md:w-1/4 my-2 md:my-0 btn-blue">
+                        اضافه کردن محصول 
+                    </button>
                 </div> 
                 <div class="mt-6 mb-3 w-full">
                     <textarea v-model="newProduct.description" placeholder="توضیحات" class="p-2 text-gray-600 resize-y border rounded-md w-full h-16 sm:h-24 md:h-32 xl:h-40 focus:outline-none focus:ring-2 focus:ring-blue-200 text-right"></textarea>
@@ -58,9 +57,8 @@ import { useProductStore } from '@/stores/product';
 import Message from '@/components/message/Message.vue';
 import axios from 'axios';
 import { getAxiosErrorMessage } from '@/common/helpers';
-import type { NewProduct } from '@/common/typings/product.typings';
 import { TypeMessage, type Page } from '@/common/typings/common.typings';
-
+import type { NewProduct } from '@/common/typings/product.typings'
     const imageUrl = ref('');
     const categoryStore = useCategoryStore();
     const productStore = useProductStore();
@@ -70,12 +68,11 @@ import { TypeMessage, type Page } from '@/common/typings/common.typings';
     categoryStore.getCategoryList(config);
     const newProduct = reactive<NewProduct>({
         name: '',
-        price: 1,
-        discount: 0,
-        quantity: 1,
+        price: null,
+        discount: null,
+        quantity: null,
         description: '',
         category: '',
-        code: ''
     });
     const page = reactive<Page>({
         loading: false,
@@ -93,26 +90,26 @@ import { TypeMessage, type Page } from '@/common/typings/common.typings';
             imageUrl.value = URL.createObjectURL(imageFile.value);
         }
     };
-    
+
     const addProduct = async () => {
         try {
             page.loading = true;
-            const code = (Math.random() + 1).toString(36).substring(2);
             const formData = new FormData();
+            !newProduct.discount && ( newProduct.discount = 0 );
             formData.append('name', newProduct.name);
             formData.append('price', `${newProduct.price}`);
             formData.append('discount', `${newProduct.discount}`);
             formData.append('quantity', `${newProduct.quantity}`);
             formData.append('file', imageFile.value!);
             formData.append('category', newProduct.category);
-            formData.append('code', code);
-            formData.append('description', `${newProduct.description}`);
+            formData.append('description', newProduct.description!);
             const config = createProductConfig(formData);
-            page.showMessage = true;
             await productStore.createProduct(config);
+            page.showMessage = true;
             page.typeMessage = TypeMessage.Success;
             page.message = productData.value?.message;
         } catch (error) {
+            page.showMessage = true;
             page.typeMessage = TypeMessage.Danger;
             if (axios.isAxiosError(error)) {
                page.message = getAxiosErrorMessage(error);

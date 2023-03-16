@@ -11,8 +11,8 @@
                            <slot>Content</slot>
                        </div>
                        <div class="absolute bottom-4 left-4 text-xs md:text-sm">
-                            <button @click="emit('cancel')" class="btn-blue mr-4">خیر</button>
-                            <button @click="emit('yes')" class="btn-red">بله</button>
+                           <button @click="emit('cancel')" class="btn-blue ml-4">خیر</button>
+                           <button @click="emit('yes')" class="btn-red">بله</button>
                        </div>
                     </div>
                 </div>

@@ -1,6 +1,7 @@
 import type { AxiosRequestConfig } from 'axios';
 import type { AdminLoginData } from '../typings/admin.typings';
 import type { EditCategory, NewCategory } from '../typings/category.typings';
+import type { EditProduct } from '../typings/product.typings';
 
 const BASE_URL = 'http://localhost:3000/';
 
@@ -51,4 +52,10 @@ export const getProductConfig = (id: string): AxiosRequestConfig => ({
 export const deleteProductConfig = (id: string): AxiosRequestConfig => ({
     method: 'delete',
     url: `${BASE_URL}products/${id}`,
+});
+
+export const editProductConfig = (productId: string, data: FormData): AxiosRequestConfig => ({
+    method: 'patch',
+    url: `${BASE_URL}products/${productId}`,
+    data
 });

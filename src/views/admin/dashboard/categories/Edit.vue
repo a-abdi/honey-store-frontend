@@ -27,7 +27,7 @@ import { getCategoryConfig, editCategoryListConfig } from '@/common/config/axiox
 import { getAxiosErrorMessage } from '@/common/helpers';
 import { useCategoryStore } from '@/stores/category';
 import { storeToRefs } from 'pinia';
-import { onMounted, reactive, ref } from 'vue';
+import { onMounted, reactive } from 'vue';
 import { useRoute } from 'vue-router';
 import Message from '@/components/message/Message.vue';
 import axios from 'axios';
