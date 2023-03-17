@@ -1,0 +1,31 @@
+<template>
+    <div class="" v-if="discount != 0 && discount">
+        <div class="flex items-center justify-between py-2">
+            <div class="bg-red-500 text-xs text-white inline-flex rounded-full p-1">
+                {{ convertToPersian(percentage) }}
+            </div>
+            <div>
+                <Currency :money="totalPrice" />
+            </div>
+        </div>
+        <div class="pr-4 line-through text-gray-400 flex flex-row-reverse">
+            <Currency :money="price" />
+        </div> 
+    </div>
+    <div v-else class="flex flex-row-reverse pt-2 pb-8">
+        <Currency :money="price" />
+    </div>
+</template>
+
+<script setup lang="ts">
+import { convertToPersian } from '@/common/helpers';
+import { computed } from 'vue';
+import Currency from './Currency.vue';
+    const props = defineProps({
+        price: Number,
+        discount: Number,
+    });
+    
+    const totalPrice = computed( () => props.price!  - props.discount!);
+    const percentage = computed( () => `${(Math.round((props.discount! / props.price!) * 1000) / 10)}%` );
+</script>

@@ -9,7 +9,7 @@ const router = createRouter({
       name: "Home",
       component: HomeView,
       meta: {
-        layout: "AppLayoutUser",
+        layout: "AppLayoutAdmin",
         requiresAuthUser: false,
         requiresAuthAdmin: false,
       }

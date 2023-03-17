@@ -3,24 +3,24 @@
         <div class="form-design">
            <form @submit.prevent="login">
                 <div class="form-title">
-                    <slot></slot>
+                    ورود ادمین
                 </div>
                 <div class="form-label">
-                    <label for="email" class="">email</label>
+                    <label for="email" class="">تلفن</label>
                 </div>
                 <div class="mb-2 px-2 text-gray-600">
-                    <input v-model="loginData.phoneNumber" name="email" id="email" class="form-input">
+                    <input v-model="loginData.phoneNumber" name="phoneNumber" id="phoneNumber" class="form-input">
                 </div>
                 <div class="form-label">
-                    <label for="password" class="">password</label>
+                    <label for="password" class="">پسورود</label>
                 </div>
                 <div class="mb-2 px-2 text-gray-600">
                     <input v-model="loginData.password" name="password" id="password" type="password" class="form-input">
                 </div>
-                <div class="p-2 sm:flex">
+                <div class="p-2 flex flex-row-reverse">
                     <div class="">
                         <button :disabled="page.loading" :class="{'cursor-wait': page.loading}" type="submit" class="btn-blue">
-                            Login
+                            ورود
                         </button>
                     </div>
                 </div>
