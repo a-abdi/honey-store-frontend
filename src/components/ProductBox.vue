@@ -1,6 +1,6 @@
 <template>
-    <div class="max-w-xs px-3 py-4">
-        <div class="m-2">
+    <div class="sm:w-full mx-auto px-3 py-4">
+        <div class="my-2 sm:mx-4">
             <img :src="product?.imageSrc" alt="product" class="object-cover h-64 w-full">
         </div>
 

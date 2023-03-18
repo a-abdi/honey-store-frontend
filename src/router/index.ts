@@ -33,6 +33,16 @@ const router = createRouter({
       }
     },
     {
+      path: "/products/:productId",
+      name: "product/Show",
+      component: () => import("@/views/products/Show.vue"),
+      meta: {
+        layout: "AppLayoutAdmin",
+        requiresAuthUser: false,
+        requiresAuthAdmin: false,
+      }
+    },
+    {
       path: "/admin/dashborad",
       name: "Admin/Dashboard",
       component: () => import("@/views/admin/dashboard/Dashboard.vue"),

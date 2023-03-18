@@ -69,7 +69,7 @@ import Message from '@/components/message/Message.vue';
 import axios from 'axios';
 import { getAxiosErrorMessage } from '@/common/helpers';
 import { useRoute } from 'vue-router';
-import type { EditProduct, NewProduct } from '@/common/typings/product.typings';
+import type { NewProduct } from '@/common/typings/product.typings';
 import { TypeMessage, type Page } from '@/common/typings/common.typings';
 
     const route = useRoute();
