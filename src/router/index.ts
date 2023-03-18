@@ -9,7 +9,7 @@ const router = createRouter({
       name: "Home",
       component: HomeView,
       meta: {
-        layout: "AppLayoutAdmin",
+        layout: "AppLayoutUser",
         requiresAuthUser: false,
         requiresAuthAdmin: false,
       }
@@ -17,9 +17,6 @@ const router = createRouter({
     {
       path: "/about",
       name: "About",
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import("@/views/AboutView.vue"),
     },
     {
@@ -37,7 +34,7 @@ const router = createRouter({
       name: "product/Show",
       component: () => import("@/views/products/Show.vue"),
       meta: {
-        layout: "AppLayoutAdmin",
+        layout: "AppLayoutUser",
         requiresAuthUser: false,
         requiresAuthAdmin: false,
       }

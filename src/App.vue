@@ -4,20 +4,17 @@
   </AppLayout> 
 </template>
 
-<script lang="ts">
-  export default {
-    name: 'App',
-  }
-</script>
-
 <script setup lang="ts">
-  import AppLayout from '@/layouts/AppLayout.vue';
-  import { useAdminStore } from '@/stores/admin';
+import AppLayout from '@/layouts/AppLayout.vue';
+import { useAdminStore } from '@/stores/admin';
+import { useCartStore } from '@/stores/cart';
+import type { ListProductsCart } from '@/common/typings/cart.typings';
 
   const userData = localStorage.getItem('user');
-  const cartData = localStorage.getItem('cart');
   const adminStore = useAdminStore();
+  const cartStore = useCartStore();
   const adminAccessToken = localStorage.getItem('adminAccessToken');
+  const cart: ListProductsCart = JSON.parse(localStorage.getItem('carts')!);
   if (userData) {
     // store.commit('userAuth/setUserData', JSON.parse(userData))
   }
@@ -26,7 +23,7 @@
     adminStore.adminData = { access_token: adminAccessToken };
   }
 
-  if (cartData) {
-    // store.commit('userCart/setCartData', JSON.parse(cartData))
+  if (cart) {
+    cartStore.listProductsCart = cart;
   }
   </script>

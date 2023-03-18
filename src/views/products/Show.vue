@@ -34,8 +34,8 @@
               {{ convertToPersian(`${totalPrice}`) }}
             </div>
           </div>
-          <div  class="m-2">
-            <button class="btn-violet w-full"> افزودن به سبد خرید </button>
+          <div class="m-2">
+            <button @click="addToCart" class="btn-violet w-full"> افزودن به سبد خرید </button>
           </div>
         </div>
       </div>
@@ -50,6 +50,7 @@ import { getProductConfig } from '@/common/config/axiox.config';
 import { storeToRefs } from 'pinia';
 import { computed } from '@vue/reactivity';
 import { convertToPersian } from '@/common/helpers';
+import { useCartStore } from '@/stores/cart';
 
   const route = useRoute();
   const productId = route.params.productId as string;
@@ -57,6 +58,28 @@ import { convertToPersian } from '@/common/helpers';
   const config = getProductConfig(productId);
   productStore.getProduct(config);
   const { productData } = storeToRefs(productStore);
-  const totalPrice = computed( () => productData.value?.data?.price!  - productData.value?.data?.discount!);
+  const totalPrice = computed( () => productData.value?.data?.price! - productData.value?.data?.discount!);
   const percentage = computed( () => `${(Math.round((productData.value?.data?.discount! / productData.value?.data?.price!) * 1000) / 10)}%` );
+  const addToCart = () => {
+    const cartStore = useCartStore();
+    if (
+      productData.value?.data?.name &&
+      productData.value?.data?.price &&
+      productData.value?.data?.discount &&
+      productData.value?.data?.imageSrc &&
+      productData.value?.data?.quantity &&
+      productData.value?.data?._id
+    ) {
+      const product = {
+          name: productData.value?.data?.name!,
+          price: productData.value?.data?.price!,
+          discount: productData.value?.data?.discount,
+          imageSrc: productData.value?.data?.imageSrc!,
+          quantity: productData.value?.data?.quantity!,
+          _id: productData.value?.data?._id!
+      };
+      cartStore.setListProductCart(product);
+      cartStore.setCartLocalStorage();
+    }
+  };
 </script>

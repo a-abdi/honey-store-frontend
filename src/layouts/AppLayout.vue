@@ -4,32 +4,22 @@
     </component>
 </template>
 
-<script lang="ts">
-    import AppLayoutDefault from './AppLayoutList/AppLayoutDefault.vue'
-    import { watch, ref } from 'vue'
-    import { useRoute } from 'vue-router'
+<script setup lang="ts">
+    import AppLayoutDefault from './AppLayoutList/AppLayoutDefault.vue';
+    import { watch, ref } from 'vue';
+    import { useRoute } from 'vue-router';
+        const layout = ref();
+        const route = useRoute();
 
-    export default {
-        name: 'AppLayout',
-
-        setup () {
-            const layout = ref()
-            const route = useRoute()
-
-            watch (
-                () => route.meta,
-                async meta => {
-                   try {
-                        const component = await import(`./AppLayoutList/${meta.layout}.vue`)
-                        // const component = await import('../layouts/User/AppLayoutUser.vue')
-                        layout.value = component?.default || AppLayoutDefault
-                    } catch (error) {
-                        layout.value = AppLayoutDefault
-                    }
-                },
-            ) 
-
-            return { layout }
-        }
-    }
+        watch (
+            () => route.meta,
+            async meta => {
+                try {
+                    const component = await import(`./AppLayoutList/${meta.layout}.vue`);
+                    layout.value = component?.default || AppLayoutDefault;
+                } catch (error) {
+                    layout.value = AppLayoutDefault;
+                }
+            },
+        );
 </script>
