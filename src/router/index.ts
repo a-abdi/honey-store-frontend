@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "@/views/HomeView.vue";
 import AdminDashboard from "@/views/admin/dashboard/Index.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,7 +6,7 @@ const router = createRouter({
     {
       path: "/",
       name: "Home",
-      component: HomeView,
+      component: () => import("@/views/HomeView.vue"),
       meta: {
         layout: "AppLayoutUser",
         requiresAuthUser: false,
@@ -21,10 +20,30 @@ const router = createRouter({
     },
     {
       path: "/admin/login",
-      name: "Admin/Auth/Login",
+      name: "admin/auth/Login",
       component: () => import("@/views/admin/auth/Login.vue"),
       meta: {
         layout: "AppLayoutAdmin",
+        requiresAuthUser: false,
+        requiresAuthAdmin: false,
+      }
+    },
+    {
+      path: "/login",
+      name: "user/auth/Login",
+      component: () => import("@/views/user/auth/Login.vue"),
+      meta: {
+        layout: "AppLayoutUser",
+        requiresAuthUser: false,
+        requiresAuthAdmin: false,
+      }
+    },
+    {
+      path: "/signup",
+      name: "user/auth/Signup",
+      component: () => import("@/views/user/auth/Signup.vue"),
+      meta: {
+        layout: "AppLayoutUser",
         requiresAuthUser: false,
         requiresAuthAdmin: false,
       }
