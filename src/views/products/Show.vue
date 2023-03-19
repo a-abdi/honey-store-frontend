@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="sm:w-2/3 w-full text-right mt-4">
-      <div class="w-full mr-2 font-bold text-indigo-900 text-lg py-2">
+      <div class="w-full font-bold text-indigo-900 text-lg py-2">
         {{ productData?.data?.name }}
       </div>
       <div class="w-full sm:flex">
@@ -35,7 +35,10 @@
             </div>
           </div>
           <div class="m-2">
-            <button @click="addToCart" class="btn-violet w-full"> افزودن به سبد خرید </button>
+            <div v-if="!cartStore.productCartExist(productId)">
+              <button @click="addToCart" class="btn-violet w-full"> افزودن به سبد خرید </button>
+            </div>
+            <ProductCartQuantity v-else :productId="productId"/>
           </div>
         </div>
       </div>
@@ -51,6 +54,8 @@ import { storeToRefs } from 'pinia';
 import { computed } from '@vue/reactivity';
 import { convertToPersian } from '@/common/helpers';
 import { useCartStore } from '@/stores/cart';
+import ProductCartQuantity from '@/components/ProductCartQuantity.vue';
+
 
   const route = useRoute();
   const productId = route.params.productId as string;
@@ -60,23 +65,22 @@ import { useCartStore } from '@/stores/cart';
   const { productData } = storeToRefs(productStore);
   const totalPrice = computed( () => productData.value?.data?.price! - productData.value?.data?.discount!);
   const percentage = computed( () => `${(Math.round((productData.value?.data?.discount! / productData.value?.data?.price!) * 1000) / 10)}%` );
+  const cartStore = useCartStore();
   const addToCart = () => {
-    const cartStore = useCartStore();
     if (
       productData.value?.data?.name &&
       productData.value?.data?.price &&
-      productData.value?.data?.discount &&
       productData.value?.data?.imageSrc &&
       productData.value?.data?.quantity &&
       productData.value?.data?._id
     ) {
       const product = {
-          name: productData.value?.data?.name!,
-          price: productData.value?.data?.price!,
-          discount: productData.value?.data?.discount,
-          imageSrc: productData.value?.data?.imageSrc!,
-          quantity: productData.value?.data?.quantity!,
-          _id: productData.value?.data?._id!
+        name: productData.value?.data?.name!,
+        price: productData.value?.data?.price!,
+        discount: productData.value?.data?.discount,
+        quantity: 1,
+        imageSrc: productData.value?.data?.imageSrc!,
+        _id: productData.value?.data?._id!
       };
       cartStore.setListProductCart(product);
       cartStore.setCartLocalStorage();

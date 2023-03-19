@@ -9,7 +9,16 @@
     fontFamily: { 
       'sans': ['Helvetica', 'Arial', 'sans-serif', 'iranyekan'],
     },
-     extend: {},
+     extend: {
+      spacing: {
+        '100': '25rem',
+        '128': '32rem',
+        '144': '36rem',
+      },
+      fontSize: {
+        vs: '0.6rem',
+      }
+    },
    },
   
    plugins: [],

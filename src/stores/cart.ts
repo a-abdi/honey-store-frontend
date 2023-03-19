@@ -24,14 +24,68 @@ export const useCartStore = defineStore("cart", {
         };
       }
     },
+
     setCartLocalStorage() {
       localStorage.setItem('carts', JSON.stringify(this.listProductsCart));
     }
   },
 
   getters: {
-    productCartCount(): number | undefined {
-      return this.listProductsCart?.products.length;
+    existCart(state) {
+      if (state.listProductsCart?.products) {
+        return true;
+      }
+      return false;
+    },
+    productCartCount(state): number {
+      let cartCount = 0;
+      if (state.listProductsCart?.products) {
+        for (let index = 0; index < state.listProductsCart?.products.length; index++) {
+          const product = state.listProductsCart?.products[index];
+          cartCount += product.quantity;
+        }
+      }
+      return cartCount;
+    },
+    productCartExist(state) {
+      const products = state.listProductsCart?.products;
+      return (productId: string) => {
+        if (products) {
+          return products.some((product) => product._id === productId);
+        }
+        return false;
+      };
+    },
+    getCartByProductId: (state) => {
+      const products = state.listProductsCart?.products;
+      return (productId: string) => {
+        if (products) {
+          return state.listProductsCart?.products.find((product) => product._id === productId);
+        }
+        return null;
+      };
+    },
+    getQuantityProduct() {
+      return (productId: string) => {
+        let quantity = 0;
+        const product = this.getCartByProductId(productId);
+        if(product) {
+          quantity = product.quantity;
+        }
+        return quantity;
+      }
+    },
+
+    getTotalPrice(state) {
+      let totalPrice = 0;
+      const products = state.listProductsCart?.products;
+      if (products) {
+        for (let index = 0; index < products.length; index++) {
+          const product = products[index];
+          totalPrice += (product.price - (product.discount || 0)) * product.quantity;
+        }
+      }
+      return totalPrice;
     }
   }
 });
