@@ -58,7 +58,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn-violet">
+                            <button class="btn-violet h-10">
                                 ثبت سفارش
                             </button>
                         </div>
