@@ -3,7 +3,7 @@
         <div class="form-design bg-slate-100">
            <form @submit.prevent="">
                 <div class="flex justify-evenly text-xs lg:text-sm px-4 pt-12 pb-6 mb-6">
-                    <div class="flex items-center justify-center rounded-md bg-slate-100 py-3 w-36 cursor-pointer">
+                    <div class="flex items-center justify-center rounded-md bg-slate-100 py-3 w-36">
                         <div  @click="goToSignup" class="text-violet-600 cursor-pointer">
                             ثبت نام
                         </div>
