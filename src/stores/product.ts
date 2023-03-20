@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { sendRequest } from "@/common/helpers";
 import type { AxiosRequestConfig } from 'axios';
 import type { ProductData, ProductListData } from "@/common/typings/product.typings";
+import { SetToken } from "@/common/typings/common.typings";
 
 export const useProductStore = defineStore("product", {
   state: () => {
@@ -13,7 +14,7 @@ export const useProductStore = defineStore("product", {
 
   actions: {
     async createProduct(config: AxiosRequestConfig<FormData>) {
-      this.productData = await sendRequest(config);
+      this.productData = await sendRequest(config, SetToken.Admin);
     },
 
     async getProductList(config: AxiosRequestConfig) {
@@ -25,11 +26,11 @@ export const useProductStore = defineStore("product", {
     },
 
     async deleteProduct(config: AxiosRequestConfig) {
-      this.productData = await sendRequest(config);
+      this.productData = await sendRequest(config, SetToken.Admin);
     },
 
     async editProduct(config: AxiosRequestConfig) {
-      this.productData = await sendRequest(config);
+      this.productData = await sendRequest(config, SetToken.Admin);
     },
   }
 });

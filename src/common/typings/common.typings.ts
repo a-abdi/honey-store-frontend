@@ -24,3 +24,9 @@ export enum TypeMessage {
     Danger = 'danger',
     Warning = 'warning',
 };
+
+export enum SetToken {
+    Default = 'noToken',
+    Admin = 'admin',
+    User = 'user'
+};

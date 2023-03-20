@@ -64,6 +64,8 @@ import DeleteElement from '@/components/element/DeleteElement.vue';
 import ConfirmDialog from '@/components/dialog/ConfirmDialog.vue';
 import Message from '@/components/message/Message.vue';
 import { TypeMessage, type Page } from '@/common/typings/common.typings';
+import axios from 'axios';
+import { getAxiosErrorMessage } from '@/common/helpers';
 
     const productStore = useProductStore();
     const showDialog = ref(false);
@@ -83,15 +85,20 @@ import { TypeMessage, type Page } from '@/common/typings/common.typings';
     const deleteProduct = async () => {
         try {
             const config = deleteProductConfig(productId.value);
-            form.showMessage = true;
             showDialog.value = false;
             await productStore.deleteProduct(config);
+            form.showMessage = true;
             form.typeMessage = TypeMessage.Success;
             form.message = productData.value?.message;
             getProductList();
         } catch (error) {
+            form.showMessage = true;
             form.typeMessage = TypeMessage.Danger;
-            form.message = productData.value?.message;
+            if (axios.isAxiosError(error)) {
+               form.message = getAxiosErrorMessage(error);
+            } else {
+                console.log(error);
+            }
         }
     }
 </script>
