@@ -64,3 +64,9 @@ export const userSignup = <T>(data: T): AxiosRequestConfig<T> => ({
     url: `${BASE_URL}users`,
     data
 });
+
+export const userLogin = <T>(data: T): AxiosRequestConfig<T> => ({
+    method: 'post',
+    url: `${BASE_URL}auth/login`,
+    data
+});

@@ -56,11 +56,11 @@
                 </div>
             </form>
             <Message class="absolute bottom-8 right-8 bg-gray-300" 
-                    :message="page.message"
-                    :showMessage="page.showMessage"
-                    :typeMessage="page.typeMessage"
-                    @fadeMessage="page.showMessage = false" 
-                />
+                :message="page.message"
+                :showMessage="page.showMessage"
+                :typeMessage="page.typeMessage"
+                @fadeMessage="page.showMessage = false" 
+            />
         </div>
     </div>
 </template>

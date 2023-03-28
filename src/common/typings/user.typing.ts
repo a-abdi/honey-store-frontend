@@ -17,6 +17,11 @@ export interface UserData extends CommonResponseDataOptional {
     data: User | null;
 };
 
+export interface UserLogin {
+    phoneNumber: string | null;
+    password: string | null;
+};
+
 export interface UserLoginData {
     access_token: string;
 };
