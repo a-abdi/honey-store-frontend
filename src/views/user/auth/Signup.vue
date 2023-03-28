@@ -25,7 +25,7 @@
                         <Phone class="w-5 h-5 fill-violet-400 mx-1" />
                     </div>
                     <div class="w-full">
-                        <input name="phoneNumber" id="phoneNumber" class="form-input placeholder-violet-500" placeholder="تلفن">
+                        <input v-model="newUser.phoneNumber" name="phoneNumber" id="phoneNumber" class="form-input placeholder-violet-500" placeholder="تلفن">
                     </div>
                 </div>
                 <div class="flex items-center py-1 bg-white my-10 mx-6 text-gray-600 rounded-md shadow shadow-violet-200/50">
@@ -33,7 +33,7 @@
                         <Password class="w-5 h-5 fill-violet-500 mx-1" />
                     </div>
                     <div class="w-full">
-                        <input name="password" id="password" type="password" class="form-input placeholder-violet-500" placeholder="پسورد">
+                        <input v-model="newUser.password" name="password" id="password" type="password" class="form-input placeholder-violet-500" placeholder="پسورد">
                     </div>
                 </div>
                 <div class="flex items-center py-1 bg-white my-10 mx-6 text-gray-600 rounded-md shadow shadow-violet-200/50">
@@ -41,10 +41,10 @@
                         <Confirm class="w-5 h-5 fill-violet-500 mx-1" />
                     </div>
                     <div class="w-full">
-                        <input name="password" id="password" type="password" class="form-input placeholder-violet-500" placeholder="تایید پسورد">
+                        <input v-model="newUser.passwordConfirm" name="password" id="password" type="password" class="form-input placeholder-violet-500" placeholder="تایید پسورد">
                     </div>
                 </div>
-                <div class="my-6 px-6 ">
+                <div @click="signup" class="my-6 px-6 ">
                     <div class="flex items-center justify-center rounded-md bg-violet-600 py-3 w-full cursor-pointer">
                         <div class="text-white">
                             ثبت نام
@@ -60,15 +60,26 @@
 </template>
 
 <script setup lang="ts">
+import type { NewUser } from '@/common/typings/user.typing';
 import AddUser from '@/components/icons/AddUser.vue';
 import Confirm from '@/components/icons/Confirm.vue';
 import Password from '@/components/icons/Password.vue';
 import Phone from '@/components/icons/Phone.vue';
 import SimpleUser from '@/components/icons/SimpleUser.vue';
 import router from '@/router';
+import { reactive } from 'vue';
 
 const goToLogin = () => {
     router.push('/login');
 };
+const newUser = reactive<NewUser>({
+    phoneNumber: '',
+    password: '',
+    passwordConfirm: ''
+});
+
+const signup = () => {
+    
+}
 
 </script>
