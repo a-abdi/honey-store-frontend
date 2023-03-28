@@ -55,11 +55,18 @@
                     </div>
                 </div>
             </form>
+            <Message class="absolute bottom-8 right-8 bg-gray-300" 
+                    :message="page.message"
+                    :showMessage="page.showMessage"
+                    :typeMessage="page.typeMessage"
+                    @fadeMessage="page.showMessage = false" 
+                />
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
+import { userSignup } from '@/common/config/axiox.config';
 import type { NewUser } from '@/common/typings/user.typing';
 import AddUser from '@/components/icons/AddUser.vue';
 import Confirm from '@/components/icons/Confirm.vue';
@@ -68,18 +75,44 @@ import Phone from '@/components/icons/Phone.vue';
 import SimpleUser from '@/components/icons/SimpleUser.vue';
 import router from '@/router';
 import { reactive } from 'vue';
+import { useUserStore } from '@/stores/user';
+import { TypeMessage, type Page } from '@/common/typings/common.typings';
+import axios from 'axios';
+import { getAxiosErrorMessage } from '@/common/helpers';
+import { storeToRefs } from 'pinia';
+import Message from '@/components/message/Message.vue';
 
+const userStore = useUserStore();
+const { userData } = storeToRefs(userStore);
+const page = reactive<Page>({});
 const goToLogin = () => {
     router.push('/login');
 };
+
 const newUser = reactive<NewUser>({
     phoneNumber: '',
     password: '',
     passwordConfirm: ''
 });
 
-const signup = () => {
-    
+const signup = async () => {
+    try {
+        const config = userSignup(newUser);
+        await userStore.signup(config);
+        newUser.phoneNumber = '';
+        newUser.password = '';
+        newUser.passwordConfirm = '';
+        page.showMessage = true;
+        page.typeMessage = TypeMessage.Success;
+        page.message = userData.value?.message;
+    } catch (error) {
+        page.showMessage = true;
+        page.typeMessage = TypeMessage.Danger;
+        if (axios.isAxiosError(error)) {
+            page.message = getAxiosErrorMessage(error);
+        } else {
+            console.log(error);
+        }
+    }
 }
-
 </script>
