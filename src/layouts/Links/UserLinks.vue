@@ -75,6 +75,6 @@ import Currency from '@/components/Currency.vue';
 import ProductCartQuantity from '@/components/ProductCartQuantity.vue';
 import { useCartStore } from '@/stores/cart';
 import { ref } from 'vue';
-    const cartStore = useCartStore();
-    const showCart = ref(false);
+const cartStore = useCartStore();
+const showCart = ref(false);
 </script>

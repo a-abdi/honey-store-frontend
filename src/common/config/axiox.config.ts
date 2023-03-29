@@ -59,14 +59,20 @@ export const editProductConfig = (productId: string, data: FormData): AxiosReque
     data
 });
 
-export const userSignup = <T>(data: T): AxiosRequestConfig<T> => ({
+export const userSignupConfig = <T>(data: T): AxiosRequestConfig<T> => ({
     method: 'post',
     url: `${BASE_URL}users`,
     data
 });
 
-export const userLogin = <T>(data: T): AxiosRequestConfig<T> => ({
+export const userLoginConfig = <T>(data: T): AxiosRequestConfig<T> => ({
     method: 'post',
     url: `${BASE_URL}auth/login`,
+    data
+});
+
+export const addToCartConfig = <T>(data: T): AxiosRequestConfig<T> => ({
+    method: 'post',
+    url: `${BASE_URL}carts/products`,
     data
 });

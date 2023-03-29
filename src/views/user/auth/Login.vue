@@ -70,9 +70,12 @@ import axios from 'axios';
 import { getAxiosErrorMessage } from '@/common/helpers';
 import Message from '@/components/message/Message.vue';
 import type { UserLogin } from '@/common/typings/user.typing';
-import { userLogin } from '@/common/config/axiox.config';
+import { userLoginConfig, addToCartConfig } from '@/common/config/axiox.config';
+import { useCartStore } from '@/stores/cart';
+import { storeToRefs } from 'pinia';
 
 const userStore = useUserStore();
+const cartStore = useCartStore();
 const page = reactive<Page>({
     message: '',
     typeMessage: TypeMessage.Success,
@@ -90,9 +93,15 @@ const goToSignup = () => {
 
 const login =  async () => {
     try {
-        const config = userLogin(loginForm);
-        await userStore.login(config);
-        router.push('/')
+        const userLoginConfigAxios = userLoginConfig(loginForm);
+        await userStore.login(userLoginConfigAxios);
+        const productCartCount = cartStore.productCartCount;
+        if( productCartCount > 0 ) {
+            const { listProductsCart } = storeToRefs(cartStore);
+            const addToCartConfigAxios = addToCartConfig(listProductsCart.value);
+            await cartStore.addToCart(addToCartConfigAxios);
+        }
+        router.push('/');
     } catch (error) {
         page.showMessage = true;
         page.typeMessage = TypeMessage.Danger;

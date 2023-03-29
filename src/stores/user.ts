@@ -14,7 +14,7 @@ export const useUserStore = defineStore("user", {
 
   actions: {
     async login(config: AxiosRequestConfig) {
-      this.userLoginData = await sendRequest(config, SetToken.User);
+      this.userLoginData = await sendRequest(config);
       localStorage.removeItem('userAccessToken');      
       localStorage.setItem('userAccessToken', this.userLoginData.data.access_token);
     },

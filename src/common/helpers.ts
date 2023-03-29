@@ -2,17 +2,21 @@ import axios from 'axios';
 import type { AxiosRequestConfig } from 'axios';
 import { useAdminStore } from '@/stores/admin';
 import { SetToken } from './typings/common.typings';
+import { useUserStore } from '@/stores/user';
 
 export const sendRequest = async (config: AxiosRequestConfig, setToken: SetToken = SetToken.Default) => {
     switch (setToken) {
         case 'admin':
             const adminStore = useAdminStore();
-            if (adminStore.adminData?.access_token) {
-                axios.defaults.headers.common['Authorization'] = `Bearer ${adminStore.adminData.access_token}`;
+            if (adminStore.adminData?.data?.access_token) {
+                axios.defaults.headers.common['Authorization'] = `Bearer ${adminStore.adminData.data.access_token}`;
             }
             break;
         case 'user':
-           
+            const userStore = useUserStore();
+            if (userStore.userLoginData?.data?.access_token) {
+                axios.defaults.headers.common['Authorization'] = `Bearer ${userStore.userLoginData.data.access_token}`;
+            }
             break;
         default:
             break;

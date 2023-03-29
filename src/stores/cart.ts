@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { sendRequest } from "@/common/helpers";
 import type { AxiosRequestConfig } from 'axios';
 import type { CartData, ListProductsCart, ProductCart } from "@/common/typings/cart.typings";
+import { SetToken } from "@/common/typings/common.typings";
 
 export const useCartStore = defineStore("cart", {
   state: () => {
@@ -15,6 +16,11 @@ export const useCartStore = defineStore("cart", {
     async getCart(config: AxiosRequestConfig) {
       this.cartData = await sendRequest(config);
     },
+
+    async addToCart(config: AxiosRequestConfig) {
+      await sendRequest(config, SetToken.User);
+    },
+
     setListProductCart(productCart: ProductCart) {
       if( this.listProductsCart?.products ) {
         this.listProductsCart.products.push(productCart);

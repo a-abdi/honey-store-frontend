@@ -66,7 +66,7 @@
 </template>
 
 <script setup lang="ts">
-import { userSignup } from '@/common/config/axiox.config';
+import { userSignupConfig } from '@/common/config/axiox.config';
 import type { NewUser } from '@/common/typings/user.typing';
 import AddUser from '@/components/icons/AddUser.vue';
 import Confirm from '@/components/icons/Confirm.vue';
@@ -97,7 +97,7 @@ const newUser = reactive<NewUser>({
 
 const signup = async () => {
     try {
-        const config = userSignup(newUser);
+        const config = userSignupConfig(newUser);
         await userStore.signup(config);
         newUser.phoneNumber = '';
         newUser.password = '';
