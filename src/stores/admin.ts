@@ -14,7 +14,8 @@ export const useAdminStore = defineStore("admin", {
   actions: {
     async login(config: AxiosRequestConfig) {
       this.adminData = await sendRequest(config, SetToken.Admin);
-      localStorage.setItem('adminAccessToken', this.adminData.access_token)
+      localStorage.removeItem('adminAccessToken');  
+      localStorage.setItem('adminAccessToken', this.adminData.data.access_token)
     }
   }
 });

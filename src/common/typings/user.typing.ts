@@ -23,7 +23,9 @@ export interface UserLogin {
 };
 
 export interface UserLoginData {
-    access_token: string;
+    data: {
+        access_token: string
+    };
 };
 
 

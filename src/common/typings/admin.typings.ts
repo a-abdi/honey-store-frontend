@@ -6,7 +6,9 @@ export interface Admin {
 };
 
 export interface AdminData {
-    access_token: string;
+    data: { 
+        access_token: string
+    };
 };
 
 export interface AdminLoginData {
