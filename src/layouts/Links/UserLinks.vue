@@ -17,7 +17,7 @@
                             </span>
                         </div>
                     </router-link>
-                    <div v-if="showCart" class="absolute top-7 left-0 border border-gray-300 rounded-md shadow-lg bg-white h-auto overflow-auto max-h-128 w-100">
+                    <div v-if="showCart && cartStore.productCartCount > 0" class="absolute top-7 left-0 border border-gray-300 rounded-md shadow-lg bg-white h-auto overflow-auto max-h-128 w-100">
                         <div v-for="product in cartStore.listProductsCart?.products" class="w-full h-48 flex pb-4 border-b border-gray-200">
                             <div class="w-1/3">
                                 <img class="object-cover p-2 max-h-44" :src="product.imageSrc" alt="">

@@ -14,10 +14,19 @@ export const useCartStore = defineStore("cart", {
 
   actions: {
     async getCart(config: AxiosRequestConfig) {
-      this.cartData = await sendRequest(config);
+      this.cartData = await sendRequest(config, SetToken.User);
+      this.listProductsCart = this.cartData?.data!;
     },
 
     async addToCart(config: AxiosRequestConfig) {
+      await sendRequest(config, SetToken.User);
+    },
+
+    async updateCart(config: AxiosRequestConfig) {
+      await sendRequest(config, SetToken.User);
+    },
+
+    async removeFromCart(config: AxiosRequestConfig) {
       await sendRequest(config, SetToken.User);
     },
 

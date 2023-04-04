@@ -22,5 +22,15 @@ export const useUserStore = defineStore("user", {
     async signup(config: AxiosRequestConfig) {
       this.userData = await sendRequest(config);
     }
+  },
+
+  getters: {
+    userLogged() {
+      if( this.userLoginData?.data?.access_token ) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   }
 });

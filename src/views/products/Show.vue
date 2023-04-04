@@ -41,6 +41,12 @@
             <ProductCartQuantity v-else :productId="productId"/>
           </div>
         </div>
+        <Message class="absolute bottom-8 right-8 bg-gray-300" 
+          :message="page.message"
+          :showMessage="page.showMessage"
+          :typeMessage="page.typeMessage"
+          @fadeMessage="page.showMessage = false" 
+        />
       </div>
     </div>
   </div>
@@ -49,24 +55,35 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
 import { useProductStore } from '@/stores/product';
-import { getProductConfig } from '@/common/config/axiox.config';
+import { addToCartConfig, getProductConfig, getCartConfig } from '@/common/config/axiox.config';
 import { storeToRefs } from 'pinia';
 import { computed } from '@vue/reactivity';
-import { convertToPersian } from '@/common/helpers';
+import { convertToPersian, getAxiosErrorMessage } from '@/common/helpers';
 import { useCartStore } from '@/stores/cart';
 import ProductCartQuantity from '@/components/ProductCartQuantity.vue';
+import { useUserStore } from '@/stores/user';
+import { reactive } from 'vue';
+import { TypeMessage, type Page } from '@/common/typings/common.typings';
+import axios from 'axios';
+import Message from '@/components/message/Message.vue';
 
 
   const route = useRoute();
   const productId = route.params.productId as string;
   const productStore = useProductStore();
+  const userStore = useUserStore();
+  const cartStore = useCartStore();
   const config = getProductConfig(productId);
   productStore.getProduct(config);
   const { productData } = storeToRefs(productStore);
   const totalPrice = computed( () => productData.value?.data?.price! - productData.value?.data?.discount!);
   const percentage = computed( () => `${(Math.round((productData.value?.data?.discount! / productData.value?.data?.price!) * 1000) / 10)}%` );
-  const cartStore = useCartStore();
-  const addToCart = () => {
+  const page = reactive<Page>({
+    message: '',
+    typeMessage: TypeMessage.Danger,
+    showMessage: false,
+  });
+  const addToCart = async () => {
     if (
       productData.value?.data?.name &&
       productData.value?.data?.price &&
@@ -82,7 +99,26 @@ import ProductCartQuantity from '@/components/ProductCartQuantity.vue';
         imageSrc: productData.value?.data?.imageSrc!,
         _id: productData.value?.data?._id!
       };
-      cartStore.setListProductCart(product);
+      if (userStore.userLogged) {
+        try {
+          const products = [];
+          products.push(product);
+          const addToCartConfigAxios = addToCartConfig({products});
+          await cartStore.addToCart(addToCartConfigAxios);
+          const getCartConfigAxios = getCartConfig();
+          await cartStore.getCart(getCartConfigAxios);
+        } catch (error) {
+          page.showMessage = true;
+          page.typeMessage = TypeMessage.Danger;
+          if (axios.isAxiosError(error)) {
+              page.message = getAxiosErrorMessage(error);
+          } else {
+              console.log(error);
+          }
+        }
+      } else {
+        cartStore.setListProductCart(product);
+      }
       cartStore.setCartLocalStorage();
     }
   };
