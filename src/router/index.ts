@@ -59,6 +59,16 @@ const router = createRouter({
       }
     },
     {
+      path: "/cart",
+      name: "cart/UserCart",
+      component: () => import("@/views/cart/UserCart.vue"),
+      meta: {
+        layout: "AppLayoutUser",
+        requiresAuthUser: false,
+        requiresAuthAdmin: false,
+      }
+    },
+    {
       path: "/admin/dashborad",
       name: "Admin/Dashboard",
       component: () => import("@/views/admin/dashboard/Dashboard.vue"),
@@ -154,7 +164,6 @@ const router = createRouter({
             },
           ]
         },
-  
         {
           path: "carts",
           name: "Admin/Dashboard/Carts",

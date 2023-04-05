@@ -101,6 +101,35 @@ export const useCartStore = defineStore("cart", {
         }
       }
       return totalPrice;
+    },
+
+    getSumAllPrice(state) {
+      let price = 0;
+      const products = state.listProductsCart?.products;
+      if (products) {
+        for (let index = 0; index < products.length; index++) {
+          const product = products[index];
+          price += product.price * product.quantity;
+        }
+      }
+      return price;
+    },
+
+    getSumAllDiscount(state) {
+      let discount = 0;
+      const products = state.listProductsCart?.products;
+      if (products) {
+        for (let index = 0; index < products.length; index++) {
+          const product = products[index];
+          discount += (product.discount || 0) * product.quantity;
+        }
+      }
+      return discount;
+    },
+
+    getPercentage() {
+      const percentage: number = Math.round((this.getSumAllDiscount / this.getSumAllPrice) * 1000) / 10;
+      return percentage
     }
   }
 });
