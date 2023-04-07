@@ -64,7 +64,6 @@
                         سود شما{{ convertToPersian(`(%${cartStore.getPercentage})`) }}
                     </div>
                     <div class="flex items-center">
-                        
                         <Currency :money="cartStore.getSumAllDiscount"/>
                         <div class="text-xs pr-1">
                             تومان
@@ -72,7 +71,8 @@
                     </div>
                 </div>
                 <div class="my-4">
-                    <button class="w-full btn-violet"> ثبت سفارش</button>
+                    <button v-if="userStore.userLogged" class="w-full btn-violet"> ثبت سفارش</button>
+                    <button @click="gotToUserLogin" v-else="userStore.userLogged" class="w-full btn-violet"> ورود و ثبت سفارش </button>
                 </div>
             </div>
         </div>
@@ -83,9 +83,12 @@
 import { convertToPersian } from '@/common/helpers';
 import Currency from '@/components/Currency.vue';
 import ProductCartQuantity from '@/components/ProductCartQuantity.vue';
+import router from '@/router';
 import { useCartStore } from '@/stores/cart';
+import { useUserStore } from '@/stores/user';
 import { storeToRefs } from 'pinia';
 const cartStore = useCartStore();
+const userStore = useUserStore();
 const { listProductsCart } = storeToRefs(cartStore);
-
+const gotToUserLogin = () => router.push('/login');
 </script>

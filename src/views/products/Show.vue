@@ -66,8 +66,6 @@ import { reactive } from 'vue';
 import { TypeMessage, type Page } from '@/common/typings/common.typings';
 import axios from 'axios';
 import Message from '@/components/message/Message.vue';
-
-
   const route = useRoute();
   const productId = route.params.productId as string;
   const productStore = useProductStore();

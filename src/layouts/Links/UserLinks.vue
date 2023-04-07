@@ -58,9 +58,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn-violet h-10">
-                                ثبت سفارش
-                            </button>
+                            <button v-if="userStore.userLogged" class="btn-violet h-10">ثبت سفارش</button>
+                            <button @click="gotToUserLogin" v-else="userStore.userLogged" class="btn-violet h-10"> ورود و ثبت سفارش </button>
                         </div>
                     </div>
                 </div>
@@ -75,8 +74,12 @@ import { useRoute } from 'vue-router';
 import Currency from '@/components/Currency.vue';
 import ProductCartQuantity from '@/components/ProductCartQuantity.vue';
 import { useCartStore } from '@/stores/cart';
+import { useUserStore } from '@/stores/user';
 import { ref } from 'vue';
+import router from '@/router';
 const cartStore = useCartStore();
+const userStore = useUserStore();
 const showCart = ref(false);
 const route = useRoute();
+const gotToUserLogin = () => router.push('/login');
 </script>
