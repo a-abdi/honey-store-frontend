@@ -69,6 +69,16 @@ const router = createRouter({
       }
     },
     {
+      path: "/shipping",
+      name: "shipping/UserAddress",
+      component: () => import("@/views/shipping/UserAddress.vue"),
+      meta: {
+        layout: "AppLayoutUser",
+        requiresAuthUser: false,
+        requiresAuthAdmin: false,
+      }
+    },
+    {
       path: "/admin/dashborad",
       name: "Admin/Dashboard",
       component: () => import("@/views/admin/dashboard/Dashboard.vue"),

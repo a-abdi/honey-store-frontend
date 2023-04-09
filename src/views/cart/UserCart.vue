@@ -71,7 +71,7 @@
                     </div>
                 </div>
                 <div class="my-4">
-                    <button v-if="userStore.userLogged" class="w-full btn-violet"> ثبت سفارش</button>
+                    <button @click="gotToShipping" v-if="userStore.userLogged" class="w-full btn-violet"> ثبت سفارش</button>
                     <button @click="gotToUserLogin" v-else="userStore.userLogged" class="w-full btn-violet"> ورود و ثبت سفارش </button>
                 </div>
             </div>
@@ -91,4 +91,5 @@ const cartStore = useCartStore();
 const userStore = useUserStore();
 const { listProductsCart } = storeToRefs(cartStore);
 const gotToUserLogin = () => router.push('/login');
+const gotToShipping = () => router.push('/shipping');
 </script>
