@@ -21,6 +21,14 @@ export const useUserStore = defineStore("user", {
 
     async signup(config: AxiosRequestConfig) {
       this.userData = await sendRequest(config);
+    },
+
+    async update(config: AxiosRequestConfig) {
+      this.userData = await sendRequest(config, SetToken.User);
+    },
+
+    async getOneUser(config: AxiosRequestConfig) {
+      this.userData = await sendRequest(config, SetToken.User);
     }
   },
 

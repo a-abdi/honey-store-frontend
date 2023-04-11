@@ -4,14 +4,32 @@ export interface NewUser {
     phoneNumber: string;
     password: string;
     passwordConfirm: string;
-    firstName?: string;
-    lastName?: string;
-    address?: string;
-    postalCode?: string;
-    city?: string;
 };
 
-export interface User extends Omit<NewUser, 'password' | 'passwordConfirm'>, CommonResponseData {};
+export interface UserProfile {
+    firstName: string;
+    LastName: string;
+};
+
+export interface UserAddress {
+    province: string;
+    city: string;
+    plaque: string;
+    postalAddress: string;
+    recipient: UserRecipient;
+    postalCode: string;
+    selected: boolean;
+};
+
+export interface UserRecipient {
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+};
+
+export interface User extends UserProfile, Omit<NewUser, 'password' | 'passwordConfirm'>, CommonResponseData {
+    address: UserAddress[] | null
+};
 
 export interface UserData extends CommonResponseDataOptional {
     data: User | null;
