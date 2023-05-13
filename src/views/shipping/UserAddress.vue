@@ -166,7 +166,7 @@ const updateAddress = async () => {
     try {
         const config = updateUserAddressConfig({address: newAddress});
         await userStore.update(config);
-        // router.push('/');
+        router.push('/payment');
     } catch (error) {
         page.showMessage = true;
         page.typeMessage = TypeMessage.Danger;

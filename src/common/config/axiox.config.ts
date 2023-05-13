@@ -104,3 +104,9 @@ export const getUserConfig = (): AxiosRequestConfig => ({
     url: `${BASE_URL}users/info`,
 });
 
+export const paymentConfig = (): AxiosRequestConfig => ({
+    method: 'get',
+    url: `${BASE_URL}checkout/payment`,
+});
+
+

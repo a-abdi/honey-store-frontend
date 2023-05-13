@@ -79,6 +79,16 @@ const router = createRouter({
       }
     },
     {
+      path: "/payment",
+      name: "order/Payment",
+      component: () => import("@/views/order/Payment.vue"),
+      meta: {
+        layout: "AppLayoutUser",
+        requiresAuthUser: false,
+        requiresAuthAdmin: false,
+      }
+    },
+    {
       path: "/admin/dashborad",
       name: "Admin/Dashboard",
       component: () => import("@/views/admin/dashboard/Dashboard.vue"),

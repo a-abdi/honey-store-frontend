@@ -108,11 +108,7 @@ export const useCartStore = defineStore("cart", {
       const productsCart = state.listProductsCart?.products;
       if (productsCart) {
         for (let index = 0; index < productsCart.length; index++) {
-          console.log(productsCart);
-          
           const { product } = productsCart[index];
-          console.log(product);
-          
           price += product.price * productsCart[index].quantity;
         }
       }
@@ -132,7 +128,7 @@ export const useCartStore = defineStore("cart", {
     },
 
     getPercentage() {
-      const percentage: number = Math.round((this.getSumAllDiscount / this.getSumAllPrice) * 1000) / 10;
+      const percentage: number = Math.round(((this.getSumAllDiscount || 0) / (this.getSumAllPrice || 1)) * 1000) / 10;
       return percentage
     }
   }
