@@ -63,10 +63,10 @@ export const useCartStore = defineStore("cart", {
       return cartCount;
     },
     productCartExist(state) {
-      const products = state.listProductsCart?.products;
+      const productsCart = state.listProductsCart?.products;
       return (productId: string) => {
-        if (products) {
-          return products.some((product) => product._id === productId);
+        if (productsCart) {
+          return productsCart.some((productCart) => productCart.product._id === productId);
         }
         return false;
       };
@@ -75,7 +75,7 @@ export const useCartStore = defineStore("cart", {
       const products = state.listProductsCart?.products;
       return (productId: string) => {
         if (products) {
-          return state.listProductsCart?.products.find((product) => product._id === productId);
+          return state.listProductsCart?.products.find((cartProduct) => cartProduct.product._id === productId);
         }
         return null;
       };
@@ -93,11 +93,11 @@ export const useCartStore = defineStore("cart", {
 
     getTotalPrice(state) {
       let totalPrice = 0;
-      const products = state.listProductsCart?.products;
-      if (products) {
-        for (let index = 0; index < products.length; index++) {
-          const product = products[index];
-          totalPrice += (product.price - (product.discount || 0)) * product.quantity;
+      const productsCart = state.listProductsCart?.products;
+      if (productsCart) {
+        for (let index = 0; index < productsCart.length; index++) {
+          const { product } = productsCart[index];
+          totalPrice += (product.price - (product.discount || 0)) * productsCart[index].quantity;
         }
       }
       return totalPrice;
@@ -105,11 +105,15 @@ export const useCartStore = defineStore("cart", {
 
     getSumAllPrice(state) {
       let price = 0;
-      const products = state.listProductsCart?.products;
-      if (products) {
-        for (let index = 0; index < products.length; index++) {
-          const product = products[index];
-          price += product.price * product.quantity;
+      const productsCart = state.listProductsCart?.products;
+      if (productsCart) {
+        for (let index = 0; index < productsCart.length; index++) {
+          console.log(productsCart);
+          
+          const { product } = productsCart[index];
+          console.log(product);
+          
+          price += product.price * productsCart[index].quantity;
         }
       }
       return price;
@@ -117,11 +121,11 @@ export const useCartStore = defineStore("cart", {
 
     getSumAllDiscount(state) {
       let discount = 0;
-      const products = state.listProductsCart?.products;
-      if (products) {
-        for (let index = 0; index < products.length; index++) {
-          const product = products[index];
-          discount += (product.discount || 0) * product.quantity;
+      const productsCart = state.listProductsCart?.products;
+      if (productsCart) {
+        for (let index = 0; index < productsCart.length; index++) {
+          const { product } = productsCart[index];
+          discount += (product.discount || 0) * productsCart[index].quantity;
         }
       }
       return discount;

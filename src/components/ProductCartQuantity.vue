@@ -67,7 +67,7 @@ import Message from './message/Message.vue';
                 }
             }
         } else {
-            const objIndex = cartStore.listProductsCart?.products.findIndex((product => product._id == prop.productId)) as number;
+            const objIndex = cartStore.listProductsCart?.products.findIndex((productCart => productCart.product._id == prop.productId)) as number;
             if (cartStore.listProductsCart?.products[objIndex].quantity) {
                 cartStore.listProductsCart.products[objIndex].quantity += value;
             }
@@ -92,7 +92,7 @@ import Message from './message/Message.vue';
                 }
             }
         } else {
-            const objIndex = cartStore.listProductsCart?.products.findIndex((product => product._id == prop.productId)) as number;
+            const objIndex = cartStore.listProductsCart?.products.findIndex((productCart => productCart.product._id == prop.productId)) as number;
             if (cartStore.listProductsCart?.products[objIndex].quantity) {
                 cartStore.listProductsCart.products.splice(objIndex, 1);
             }

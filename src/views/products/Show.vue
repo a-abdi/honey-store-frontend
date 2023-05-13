@@ -17,7 +17,7 @@
             </p>
           </div>
         </div>
-        <div class="sm:w-5/12 w-full border border-gray-300 shadow-md rounded-md sm:mx-2 py-4 text-left">
+        <div  class="sm:w-5/12 w-full border border-gray-300 shadow-md rounded-md sm:mx-2 py-4 text-left">
           <div v-if="productData?.data?.discount" class="flex items-center text-xs flex-row-reverse my-2 w-full">
             <div class="ml-2 bg-violet-500 text-white rounded-full p-1">
               {{ convertToPersian(percentage) }}
@@ -36,7 +36,8 @@
           </div>
           <div class="m-2">
             <div v-if="!cartStore.productCartExist(productId)">
-              <button @click="addToCart" class="btn-violet w-full"> افزودن به سبد خرید </button>
+              <button v-if="productData?.data?.quantity" @click="addToCart" class="btn-violet w-full"> افزودن به سبد خرید </button>
+              <button v-if="!productData?.data?.quantity" disabled="true" class="btn-violet w-full"> این کالا موجود نمی باشد</button>
             </div>
             <ProductCartQuantity v-else :productId="productId"/>
           </div>
@@ -66,6 +67,7 @@ import { reactive } from 'vue';
 import { TypeMessage, type Page } from '@/common/typings/common.typings';
 import axios from 'axios';
 import Message from '@/components/message/Message.vue';
+import type { NewProductCart } from '@/common/typings/cart.typings';
   const route = useRoute();
   const productId = route.params.productId as string;
   const productStore = useProductStore();
@@ -89,16 +91,12 @@ import Message from '@/components/message/Message.vue';
       productData.value?.data?.quantity &&
       productData.value?.data?._id
     ) {
-      const product = {
-        name: productData.value?.data?.name!,
-        price: productData.value?.data?.price!,
-        discount: productData.value?.data?.discount,
-        quantity: 1,
-        imageSrc: productData.value?.data?.imageSrc!,
-        _id: productData.value?.data?._id!
-      };
       if (userStore.userLogged) {
         try {
+          const product: NewProductCart = {
+            quantity: 1,
+            _id: productData.value?.data?._id
+          };
           const products = [];
           products.push(product);
           const addToCartConfigAxios = addToCartConfig({products});
@@ -115,7 +113,16 @@ import Message from '@/components/message/Message.vue';
           }
         }
       } else {
-        cartStore.setListProductCart(product);
+        // const product = {
+        //   name: productData.value?.data?.name!,
+        //   price: productData.value?.data?.price!,
+        //   discount: productData.value?.data?.discount,
+        //   quantity: 1,
+        //   imageSrc: productData.value?.data?.imageSrc!,
+        //   _id: productData.value?.data?._id!
+        // };
+        const product = productData.value?.data;
+        cartStore.setListProductCart({ product, quantity: 1 });
       }
       cartStore.setCartLocalStorage();
     }

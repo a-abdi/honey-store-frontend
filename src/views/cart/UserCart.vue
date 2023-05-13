@@ -1,23 +1,23 @@
 <template>
     <div class="px-8 lg:flex">
         <div class="lg:w-3/4 w-full">
-            <div v-for="product in listProductsCart?.products" class="flex pt-4 pb-12 border-b border-gray-200">
+            <div v-for="productCart in listProductsCart?.products" class="flex pt-4 pb-12 border-b border-gray-200">
                 <div class="pl-4">
                     <div>
-                        <img class="object-cover max-w-32 max-h-48" :src="product.imageSrc" alt="">
+                        <img class="object-cover max-w-32 max-h-48" :src="productCart.product.imageSrc" alt="">
                     </div>
                     <div class="mt-4">
-                        <ProductCartQuantity v-if="typeof product._id == 'string'" class="my-3" :productId="product._id"/>
+                        <ProductCartQuantity v-if="typeof productCart.product._id == 'string'" class="my-3" :productId="productCart.product._id"/>
                     </div>
                 </div>
                 <div class="">
                     <div class="text-violet-600">
-                        {{ product.name }}
+                        {{ productCart.product.name }}
                     </div>
                     <div class="mt-8">
-                        <div v-if="product.discount" class="mb-4 text-red-600 flex items-center">
+                        <div v-if="productCart.product.discount" class="mb-4 text-red-600 flex items-center">
                             <div class="text-xs">
-                                {{ convertToPersian(`${product.discount}`) }}
+                                {{ convertToPersian(`${productCart.product.discount}`) }}
                             </div>
                             <div class="text-vs pr-1">
                                 تومان
@@ -25,7 +25,7 @@
                         </div>
                         <div class="flex items-center">
                             <div class="text-lg">
-                                {{ convertToPersian(`${product.price - (product.discount || 0)}`) }}
+                                {{ convertToPersian(`${productCart.product.price - (productCart.product.discount || 0)}`) }}
                             </div>
                             <div class="text-xs pr-2">
                                 تومان
