@@ -85,8 +85,6 @@ import { storeToRefs } from 'pinia';
         }
     }
     const createProperty = async () => {
-        console.log(formSubmit.value);
-        
         page.loading = true;
         page.errorMessage = null;
         page.successMessage = null;
@@ -105,6 +103,10 @@ import { storeToRefs } from 'pinia';
                 console.log(error);
             }
         }
+        property.category = [];
+        property.label = "";
+        property.type = "";
+        property.unit = [];
         page.loading = false;
     };
 

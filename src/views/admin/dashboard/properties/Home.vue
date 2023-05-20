@@ -27,7 +27,7 @@
                     <td class="table-td"> {{ property.type }} </td>
                     <td class="table-td"> <div v-if="property.unit?.length">{{ property.unit }}</div></td>
                     <td class="table-td">  
-                        <router-link :to="`/admin/dashboard/categories/${property._id}/edit`">
+                        <router-link :to="`/admin/dashboard/properties/${property._id}/edit`">
                             <EditElement/>
                         </router-link> 
                     </td>

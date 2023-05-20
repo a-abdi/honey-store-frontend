@@ -202,7 +202,7 @@ const router = createRouter({
             },
   
             {
-              path: `:properties/edit`,
+              path: `:propertyId/edit`,
               name: "admin/dashboard/properties/Edit",
               component: () => import("@/views/admin/dashboard/properties/Edit.vue"),
             },
