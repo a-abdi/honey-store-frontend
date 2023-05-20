@@ -4,7 +4,7 @@ import type { CommonResponseData, CommonResponseDataOptional } from "./common.ty
 export interface newProperty {
     label: string;
     type: string;
-    unit?: string[];
+    unit: string[];
     category?: string[];
 };
 
@@ -14,4 +14,8 @@ export interface Property extends Omit<newProperty, 'category'>, CommonResponseD
 
 export interface PropertyData extends CommonResponseDataOptional {
     data: Property | null;
+};
+
+export interface PropertyListData extends CommonResponseDataOptional {
+    data: Property[] | [];
 };

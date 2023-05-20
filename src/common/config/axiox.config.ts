@@ -109,4 +109,20 @@ export const paymentConfig = (): AxiosRequestConfig => ({
     url: `${BASE_URL}checkout/payment`,
 });
 
+export const getProperyListConfig = (): AxiosRequestConfig => ({
+    method: 'get',
+    url: `${BASE_URL}property`,
+});
+
+export const deletePropertyConfig = (propertyId: string): AxiosRequestConfig => ({
+    method: 'delete',
+    url: `${BASE_URL}property/${propertyId}`,
+});
+
+export const createPropertyAxiosConfig = <T>(data: T): AxiosRequestConfig<T> => ({
+    method: 'post',
+    url: `${BASE_URL}property`,
+    data
+});
+
 

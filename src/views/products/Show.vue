@@ -113,14 +113,6 @@ import type { NewProductCart } from '@/common/typings/cart.typings';
           }
         }
       } else {
-        // const product = {
-        //   name: productData.value?.data?.name!,
-        //   price: productData.value?.data?.price!,
-        //   discount: productData.value?.data?.discount,
-        //   quantity: 1,
-        //   imageSrc: productData.value?.data?.imageSrc!,
-        //   _id: productData.value?.data?._id!
-        // };
         const product = productData.value?.data;
         cartStore.setListProductCart({ product, quantity: 1 });
       }

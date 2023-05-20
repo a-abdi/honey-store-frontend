@@ -185,6 +185,30 @@ const router = createRouter({
           ]
         },
         {
+          path: "properties",
+          name: "admin/dashboard/properties/Index",
+          component: () => import("@/views/admin/dashboard/properties/Index.vue"),
+          children: [
+            {
+              path: "",
+              name: "admin/dashboard/properties/Home",
+              component: () => import("@/views/admin/dashboard/properties/Home.vue"),
+            },
+  
+            {
+              path: "create",
+              name: "admin/dashboard/properties/Create",
+              component: () => import("@/views/admin/dashboard/properties/Create.vue"),
+            },
+  
+            {
+              path: `:properties/edit`,
+              name: "admin/dashboard/properties/Edit",
+              component: () => import("@/views/admin/dashboard/properties/Edit.vue"),
+            },
+          ]
+        },
+        {
           path: "carts",
           name: "Admin/Dashboard/Carts",
           component: () => import("@/views/Admin/Dashboard/Carts.vue"),

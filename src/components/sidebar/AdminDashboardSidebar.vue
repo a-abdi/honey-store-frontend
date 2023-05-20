@@ -4,6 +4,7 @@
         <button class="btn-link" @click="goTo('/admin/dashboard/products')">محصولات</button>
         <button class="btn-link" @click="goTo('/admin/dashboard/categories')">دسته ها</button>
         <button class="btn-link" @click="goTo('/admin/dashboard/carts')">سبد خرید</button>
+        <button class="btn-link" @click="goTo('/admin/dashboard/properties')">خصوصیات</button>
     </div>
 </template>
 
