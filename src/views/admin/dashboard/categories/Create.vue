@@ -1,14 +1,14 @@
 <template>
     <form @submit.prevent="createCategory" >
-        <div class="px-1 sm:p-4 my-6 mx-auto w-11/12 md:w-10/12 lg:w-8/12 xl:w-6/12 border border-gray-200 rounded-md">
+        <div class="px-1 my-6 mx-auto w-11/12 border border-gray-200 rounded-md">
             <div class="w-full my-4">
-                <input v-model="category.name" id="name" type="text" placeholder="نام" class="form-input">
+                <input v-model="category.name" id="name" type="text" placeholder="نام" class="placeholder-violet-400 form-input">
             </div>
             <div class="w-full my-4">
-                <textarea v-model="category.description" placeholder="توضیخات" class="p-2 text-gray-600 resize-y border rounded-md w-full h-16 sm:h-24 md:h-32 xl:h-40 focus:outline-none focus:ring-2 focus:ring-blue-200"></textarea>
+                <textarea v-model="category.description" placeholder="توضیخات" class="placeholder-violet-400 p-2 text-gray-600 resize-y border rounded-md w-full h-16 sm:h-24 md:h-32 xl:h-40 focus:outline-none focus:ring-2 focus:ring-blue-200"></textarea>
             </div>
             <div class="w-full my-4 flex flex-row-reverse">
-                <button :disabled="form.loading" :class="{'cursor-wait': form.loading}" type="submit" class="btn-blue">
+                <button :disabled="form.loading" :class="{'cursor-wait': form.loading}" type="submit" class="btn-violet">
                     دسته جدید
                 </button>
             </div> 
@@ -19,11 +19,37 @@
                 @fadeMessage="showMessage = false" 
             />
         </div>
+        <table class="table-auto w-full tracking-wider">
+            <thead>
+                <tr class="">
+                    <th class="table-tr">برچسب</th>
+                    <th class="table-tr">نوع</th>
+                    <th class="table-tr">واحد</th>
+                    <th class="table-tr">اضافه کردن</th>
+                </tr>
+            </thead>
+            <tbody class="text-violet-600" v-if="propertyListData?.data?.length">
+                <tr v-for="( property, index ) in propertyListData.data" :key="property._id" :class="{'bg-neutral-100': (index + 1) % 2 }">
+                    <td class="table-td"> {{ property.label }} </td>
+                    <td class="table-td"> {{ property.type }} </td>
+                    <td class="table-td"> 
+                        <div class="flex w-full" v-if="property.unit?.length">
+                            <div class="w-full" v-for="unit of property.unit">
+                                {{ unit }}
+                            </div>
+                        </div>
+                    </td>
+                    <td class="table-td">  
+                        <input v-model="category.properties" :id="property._id" :value="property._id" type="checkbox" class="accent-violet-600">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </form>
 </template>
 
 <script setup lang="ts">
-import { createCategoryConfig } from '@/common/config/axiox.config';
+import { createCategoryConfig, getProperyListConfig } from '@/common/config/axiox.config';
 import { reactive, ref } from 'vue';
 import { useCategoryStore } from '@/stores/category';
 import { storeToRefs } from 'pinia';
@@ -32,6 +58,7 @@ import axios from 'axios';
 import { getAxiosErrorMessage } from '@/common/helpers';
 import { TypeMessage, type Page } from '@/common/typings/common.typings';
 import type { NewCategory } from '@/common/typings/category.typings';
+import { usePropertyStore } from '@/stores/property';
 
         const form = reactive<Page>({
             loading: false,
@@ -40,16 +67,20 @@ import type { NewCategory } from '@/common/typings/category.typings';
         });
         const showMessage = ref(false);
         const categoryStore = useCategoryStore();
+        const propertyStore = usePropertyStore();
+        const getPropertyConfig = getProperyListConfig();
+        propertyStore.getPropertyList(getPropertyConfig);
+        const { propertyListData } = storeToRefs(propertyStore);
         const category = reactive<NewCategory>({
             name: "",
             description: "",
+            properties: []
         });
         
         const createCategory = async () => {
             form.loading = true;
             form.errorMessage = null;
             form.successMessage = null;
-            
             try {
                 const config = createCategoryConfig(category);
                 showMessage.value = true;

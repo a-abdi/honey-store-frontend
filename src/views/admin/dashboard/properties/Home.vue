@@ -25,7 +25,13 @@
                 <tr v-for="( property, index ) in propertyListData.data" :key="property._id" :class="{'bg-neutral-100': (index + 1) % 2 }">
                     <td class="table-td"> {{ property.label }} </td>
                     <td class="table-td"> {{ property.type }} </td>
-                    <td class="table-td"> <div v-if="property.unit?.length">{{ property.unit }}</div></td>
+                    <td class="table-td"> 
+                        <div v-if="property.unit?.length">
+                            <div class="" v-for="unit of property.unit">
+                                {{ unit }}
+                            </div>
+                        </div>
+                    </td>
                     <td class="table-td">  
                         <router-link :to="`/admin/dashboard/properties/${property._id}/edit`">
                             <EditElement/>

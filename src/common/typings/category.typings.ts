@@ -3,6 +3,7 @@ import type { CommonResponseData, CommonResponseDataOptional } from "./common.ty
 export interface NewCategory {
     name: string;
     description: string;
+    properties: string[];
 };
 
 export interface Category extends CommonResponseData, NewCategory {};
@@ -12,7 +13,7 @@ export interface CategoryData extends CommonResponseDataOptional {
 };
 
 export interface CategoryListData extends CommonResponseDataOptional {
-    data: Category[];
+    data: Category[] | [];
 };
 
 

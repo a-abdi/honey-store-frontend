@@ -24,7 +24,7 @@
                 </div>
                 <div class="w-full sm:my-4 my-8">
                     <div @click="createProperty" class="text-center cursor-pointer w-full h-8 btn-violet">
-                        ایجاد خصوصیت
+                        ویرایش خصوصیت
                     </div>
                 </div> 
             </div>
