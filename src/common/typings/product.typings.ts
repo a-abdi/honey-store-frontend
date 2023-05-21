@@ -2,6 +2,14 @@ import type { Category } from "./category.typings";
 import type { CommonResponseData, CommonResponseDataOptional } from "./common.typings";
 import type { NoUndefinedField } from "./helper.typings";
 
+export interface ProductProperty {
+    label: string;
+    type: string;
+    unit: string[];
+    value: string;
+    code: string;
+}
+
 export interface NewProduct {
     name: string;
     price: number | null;
@@ -9,11 +17,13 @@ export interface NewProduct {
     quantity: number | null;
     description?: string;
     category: string;
+    customProperty?: ProductProperty[];
 };
 
-export interface Product extends Omit<NoUndefinedField<NewProduct>, 'category' | 'file'>, CommonResponseData {
+export interface Product extends Omit<NoUndefinedField<NewProduct>, 'category'>, CommonResponseData {
     category: string | Category;
-    imageSrc: string;
+    productImagesSrc: string[];
+    additionalsImageSrc: string[];
 };
 
 export interface ProductData extends CommonResponseDataOptional {

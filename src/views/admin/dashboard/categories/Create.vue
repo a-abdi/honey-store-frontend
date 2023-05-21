@@ -33,8 +33,8 @@
                     <td class="table-td"> {{ property.label }} </td>
                     <td class="table-td"> {{ property.type }} </td>
                     <td class="table-td"> 
-                        <div class="flex w-full" v-if="property.unit?.length">
-                            <div class="w-full" v-for="unit of property.unit">
+                        <div class="" v-if="property.unit?.length">
+                            <div class="" v-for="unit of property.unit">
                                 {{ unit }}
                             </div>
                         </div>

@@ -2,35 +2,40 @@
     <form @submit.prevent="addProduct">
         <div class="sm:flex w-full">
             <div class="w-full sm:w-2/3 border border-gray-200 rounded-md p-2 sm:m-4">
-                <div class="my-2 md:my-6">
-                    <input v-model="newProduct.name" id="name" type="text" placeholder="نام" class="w-full form-input text-right">
-                </div>
-                <div class="md:flex md:justify-between my-2">
-                    <input v-model="newProduct.price"    id="price"    type="number" min="1" placeholder="قیمت"    class="w-full md:w-1/4 my-2 md:my-0 form-input text-right">
-                    <input v-model="newProduct.discount" id="discount" type="number" min="0" placeholder="تخفیف" class="w-full md:w-1/4 my-2 md:my-0 form-input text-right">
-                    <input v-model="newProduct.quantity" id="quantity" type="number" min="1" placeholder="تعداد" class="w-full md:w-1/4 my-2 md:my-0 form-input text-right">
-                </div>
                 <div class="md:flex md:justify-between my-2 md:my-6">
-                    <select v-model="newProduct.category" v-if="categoryListData?.data" name="category" autofocus="true" id="category" aria-placeholder="select category" class="w-full md:w-1/4 my-2 md:my-0 appearance-none bg-white text-gray-600 form-input text-right">
+                    <input v-model="newProduct.name" id="name" type="text" placeholder="نام" class=" md:w-5/12 my-2 md:my-0 form-input text-right">
+                    <input v-model="newProduct.quantity" id="quantity" type="number" min="1" placeholder="تعداد" class=" md:w-5/12 my-2 md:my-0 form-input text-right">
+                </div>
+                <div class="md:flex md:justify-between md:items-center my-2">
+                    <input v-model="newProduct.price"    id="price"    type="number" min="1" placeholder="قیمت"  class="w-full md:w-4/12 my-2 md:my-0 form-input text-right">
+                    <div class="block w-full md:w-4/12 my-2 md:my-0 text-center">
+                        <label for="productImage" class="btn-violet cursor-pointer p-2 border border-gray-200"> تصویر محصول</label>
+                        <input id="productImage" hidden @change="onProductImageChange" type="file"/>
+                    </div>
+                    <input v-model="newProduct.discount" id="discount" type="number" min="0" placeholder="تخفیف" class="w-full md:w-4/12 my-2 md:my-0 form-input text-right">
+                </div>
+                <div class="md:flex md:items-center md:justify-between my-2 md:my-6">
+                    <select v-model="newProduct.category" v-if="categoryListData?.data" name="category" autofocus="true" id="category" aria-placeholder="select category" class="w-full md:w-4/12 my-2 md:my-0 appearance-none bg-white text-gray-600 form-input text-right">
                         <option value="" disabled selected>دسته</option>
                         <option v-for="category in categoryListData.data" :key="category._id" :value="category._id">{{ category.name }}</option>
                     </select>
-                    <label class="block w-full md:w-1/4 my-2 md:my-0">
-                        <span class="sr-only">انتخاب عکس محصول</span>
-                        <input @change="onFileChange" type="file" class="block w-full text-sm text-slate-500
-                        file:mr-4 file:py-2 file:px-4
-                        file:rounded-full file:border-0
-                        file:text-sm file:font-semibold
-                        file:bg-violet-50 file:text-violet-700
-                        hover:file:bg-violet-100
-                        "/>
-                    </label>
-                    <button :disabled="page.loading" :class="{'cursor-wait': page.loading}" type="submit" class="w-full md:w-1/4 my-2 md:my-0 btn-blue">
+                    
+                    <div class="block w-full md:w-4/12 my-2 md:my-0 text-center">
+                        <label for="addintionalFile" class="btn-violet cursor-pointer p-2 border border-gray-200">تصویر بیشتر</label>
+                        <input hidden id="addintionalFile" @change="onAddintionalFileChange" type="file" multiple="true" />
+                    </div>
+                    <button :disabled="page.loading" :class="{'cursor-wait': page.loading}" type="submit" class="w-full md:w-4/12 my-2 md:my-0 btn-blue">
                         اضافه کردن محصول 
                     </button>
                 </div> 
                 <div class="mt-6 mb-3 w-full">
                     <textarea v-model="newProduct.description" placeholder="توضیحات" class="p-2 text-gray-600 resize-y border rounded-md w-full h-16 sm:h-24 md:h-32 xl:h-40 focus:outline-none focus:ring-2 focus:ring-blue-200 text-right"></textarea>
+                </div>
+                <div class="flex items-center mt-6 mb-3 w-full">
+                    
+                    <div v-for="additionalImageUrl of additionalsImageUrl" class="px-2">
+                        <img :src="additionalImageUrl" alt="" class="object-cover w-auto h-auto min-w-full max-w-12 max-h-16 mx-auto">
+                    </div>
                 </div>
                 <Message class="absolute bottom-8 right-8 bg-gray-300" 
                     :message="page.message"
@@ -81,14 +86,31 @@ import type { NewProduct } from '@/common/typings/product.typings'
         showMessage: false,
     });
     
-    const imageFile = ref(null) as Ref<File | null | undefined>
-    const onFileChange = (evt: Event) => {
+    const productFile = ref(null) as Ref<File | null | undefined>
+    const onProductImageChange = (evt: Event) => {
         const target = evt.target as HTMLInputElement;
-	    imageFile.value = target.files?.item(0);
-        
-        if (imageFile.value) {
-            imageUrl.value = URL.createObjectURL(imageFile.value);
+	    productFile.value = target.files?.item(0);
+        if (productFile.value) {
+            imageUrl.value = URL.createObjectURL(productFile.value);
         }
+    };
+
+    const additionalsFile = ref() as Ref<File[] | undefined>
+    const additionalsImageUrl = ref(['']);
+    const onAddintionalFileChange = (evt: Event) => {
+        const target = evt.target as HTMLInputElement;
+        if (target.files) {
+            additionalsFile.value = [];
+            for (const file of target.files) {
+                additionalsFile.value?.push(file);
+                additionalsImageUrl.value.push(URL.createObjectURL(file));
+            }
+        }
+	    // productFile.value = target.files?.item(0);
+        
+        // if (productFile.value) {
+        //     imageUrl.value = URL.createObjectURL(productFile.value);
+        // }
     };
 
     const addProduct = async () => {
@@ -100,7 +122,7 @@ import type { NewProduct } from '@/common/typings/product.typings'
             formData.append('price', `${newProduct.price}`);
             formData.append('discount', `${newProduct.discount}`);
             formData.append('quantity', `${newProduct.quantity}`);
-            formData.append('file', imageFile.value!);
+            formData.append('product', productFile.value!);
             formData.append('category', newProduct.category);
             formData.append('description', newProduct.description!);
             const config = createProductConfig(formData);

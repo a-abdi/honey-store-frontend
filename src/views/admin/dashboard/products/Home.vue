@@ -28,7 +28,7 @@
                         <div class="">
                             <router-link class="flex items-center flex mr-2" :to="`/admin/dashboard/products/${product._id}`">
                                 <div>
-                                    <img class="object-cover h-8 w-8 rounded-md " :src="product.imageSrc" alt="">
+                                    <img class="object-cover h-8 w-8 rounded-md " :src="product.productImagesSrc[0]" alt="">
                                 </div>
                                 <div class="pr-1">
                                     {{ product.name }} 

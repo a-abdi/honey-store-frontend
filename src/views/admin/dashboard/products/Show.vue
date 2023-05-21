@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="w-full sm:w-1/3 lg:p-6 md:px-4 sm:px-1 sm:py-6 p-0.5">
-                <img :src="productData.data.imageSrc" alt="" class="object-cover w-auto h-auto">
+                <img :src="productData.data.productImagesSrc[0]" alt="" class="object-cover w-auto h-auto">
             </div>
         </div>
     </div>
