@@ -1,4 +1,5 @@
 import type { CommonResponseData, CommonResponseDataOptional } from "./common.typings";
+import type { Property } from "./property.typing";
 
 export interface NewCategory {
     name: string;
@@ -6,7 +7,9 @@ export interface NewCategory {
     properties: string[];
 };
 
-export interface Category extends CommonResponseData, NewCategory {};
+export interface Category extends CommonResponseData, Omit<NewCategory, 'properties'> {
+    properties: Property[];
+};
 
 export interface CategoryData extends CommonResponseDataOptional {
     data: Category | null;

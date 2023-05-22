@@ -50,8 +50,9 @@ import { usePropertyStore } from '@/stores/property';
 import { storeToRefs } from 'pinia';
 
     const typeList = [
-        "input",
-        "image",
+        "file",
+        "text",
+        "number",
     ];
     const propertyStore = usePropertyStore();
     const unitInput = ref('');
