@@ -5,9 +5,9 @@ import type { NoUndefinedField } from "./helper.typings";
 export interface ProductProperty {
     label: string;
     type: string;
-    unit: string[];
-    value: string;
-    code: string;
+    unit?: string[];
+    value?: string;
+    code?: string;
 }
 
 export interface NewProduct {

@@ -4,22 +4,18 @@
             <div class="w-full sm:w-2/3 border border-gray-200 rounded-md p-2 sm:m-4">
                 <div class="md:flex md:justify-between my-2 md:my-6">
                     <div class="px-2 w-full ">
-                        <input v-model="newProduct.name" id="name" type="text" placeholder="نام"
-                            class="w-full my-2 md:my-0 form-input text-right">
+                        <input v-model="newProduct.name" id="name" type="text" placeholder="نام" class="w-full my-2 md:my-0 form-input text-right">
                     </div>
                     <div class="px-2 w-full ">
-                        <input v-model="newProduct.quantity" id="quantity" type="number" min="1" placeholder="تعداد"
-                            class="w-full my-2 md:my-0 form-input text-right">
+                        <input v-model="newProduct.quantity" id="quantity" type="number" min="1" placeholder="تعداد" class="w-full my-2 md:my-0 form-input text-right">
                     </div>
                 </div>
                 <div class="md:flex md:justify-between md:items-center my-2">
                     <div class="px-2 w-full">
-                        <input v-model="newProduct.price" id="price" type="number" min="1" placeholder="قیمت"
-                            class="w-full  my-2 md:my-0 form-input text-right">
+                        <input v-model="newProduct.price" id="price" type="number" min="1" placeholder="قیمت" class="w-full  my-2 md:my-0 form-input text-right">
                     </div>
                     <div class="px-2 w-full">
-                        <input v-model="newProduct.discount" id="discount" type="number" min="0" placeholder="تخفیف"
-                            class="w-full  my-2 md:my-0 form-input text-right">
+                        <input v-model="newProduct.discount" id="discount" type="number" min="0" placeholder="تخفیف" class="w-full  my-2 md:my-0 form-input text-right">
                     </div>
                 </div>
                 <div class="md:flex md:items-center md:justify-between my-2 md:my-6">
@@ -128,7 +124,7 @@ import Message from '@/components/message/Message.vue';
 import axios from 'axios';
 import { getAxiosErrorMessage } from '@/common/helpers';
 import { TypeMessage, type Page, type Image } from '@/common/typings/common.typings';
-import type { NewProduct } from '@/common/typings/product.typings'
+import type { NewProduct, ProductProperty } from '@/common/typings/product.typings'
 import { usePropertyStore } from '@/stores/property';
 const categoryStore = useCategoryStore();
 const productStore = useProductStore();
@@ -216,13 +212,51 @@ const addProduct = async () => {
         if (!productImage[0]?.file) {
             throw new TypeError("تصویر محصول باید وارد شود");
         }
-
         const formData = new FormData();
+        const productProperties = propertyListData.value?.data.filter(property =>  
+            propertyListId.value.includes(property._id)
+        );
+
+        if (productProperties) {
+            for (let index = 0; index < productProperties.length; index++) {
+                const property = productProperties[index];
+                const productProperty: ProductProperty = {
+                    label: property.label,
+                    type: property.type,
+                    unit: property.unit ? property.unit : [],
+                }
+                if (property.type == 'file' && attachImage.length > 0) {
+                    const image = attachImage.find(attach => attach.id == property._id);
+                    productProperty.value = image?.file?.name;
+                } else {
+                    productProperty.value = propertyListValue[property._id];
+                }
+                formData.append('customProperty['+ index +'][label]', property.label);
+                formData.append('customProperty['+ index +'][type]', property.type);
+                if (productProperty.unit) {
+                    for (let i = 0; i < productProperty.unit.length; i++) {
+                        const unit = productProperty.unit[i];
+                        formData.append('customProperty['+ index +'][unit]['+ i +']', unit);
+                    }
+                }
+                productProperty.value && formData.append('customProperty['+ index +'][value]', productProperty.value);
+                newProduct.customProperty?.push(productProperty);
+            }
+        }
+
+      
         for (let index = 0; index < additionalsImage.length; index++) {
             if (additionalsImage[index]?.file) {
                 formData.append('additionals', additionalsImage[index].file!);
             }
         }
+
+        for (let index = 0; index < attachImage.length; index++) {
+            if (attachImage[index]?.file) {
+                formData.append('attach', attachImage[index].file!);
+            }
+        }
+        
 
         page.loading = true;
         !newProduct.discount && (newProduct.discount = 0);
@@ -234,6 +268,8 @@ const addProduct = async () => {
         formData.append('category', newProduct.category);
         formData.append('description', newProduct.description!);
         const config = createProductConfig(formData);
+        console.log(formData.getAll('customProperty'), "KKKKKKKKKKKKKKKKKk");
+        
         await productStore.createProduct(config);
         page.showMessage = true;
         page.typeMessage = TypeMessage.Success;
