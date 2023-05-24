@@ -37,3 +37,9 @@ export enum SetToken {
     Admin = 'admin',
     User = 'user'
 };
+
+export interface Image {
+    url?: string;
+    file?: File;
+    id?: string;
+}
