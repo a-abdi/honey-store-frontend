@@ -123,24 +123,14 @@ import { useProductStore } from '@/stores/product';
 import Message from '@/components/message/Message.vue';
 import axios from 'axios';
 import { getAxiosErrorMessage } from '@/common/helpers';
-import { TypeMessage, type Page, type Image } from '@/common/typings/common.typings';
+import { TypeMessage, type Page, type Image, type StringObject } from '@/common/typings/common.typings';
 import type { NewProduct, ProductProperty } from '@/common/typings/product.typings'
 import { usePropertyStore } from '@/stores/property';
 const categoryStore = useCategoryStore();
 const productStore = useProductStore();
 const propertyStore = usePropertyStore();
 const propertyListId = ref([]) as Ref<string[]>;
-
-
-interface MyType {
-    [name: string]: string;
-}
-
-var t: MyType = {};
-
-
-
-const propertyListValue = reactive<MyType>({});
+const propertyListValue = reactive<StringObject>({});
 const { categoryListData } = storeToRefs(categoryStore);
 const { propertyListData } = storeToRefs(propertyStore);
 const { productData } = storeToRefs(productStore);
@@ -158,10 +148,8 @@ const newProduct = reactive<NewProduct>({
     quantity: null,
     description: '',
     category: '',
-    customProperty: []
 });
 const page = reactive<Page>({
-    loading: false,
     message: '',
     typeMessage: TypeMessage.Success,
     showMessage: false,
@@ -183,6 +171,7 @@ const showProperties = () => {
 const onFileChange = (event: Event, images: Image[]) => {
     const target = event.target as HTMLInputElement;
     const id = target.id;
+    // delete old image in images
     for (let index = 0; index < images.length; index++) {
         const image = images[index];
         if (image?.id == id) {
@@ -203,73 +192,74 @@ const onFileChange = (event: Event, images: Image[]) => {
                 url: URL.createObjectURL(file),
                 id,
             };
-            images.push(image)
+            images.push(image);
         }
     }
 };
+
+const fillProductProperty = (property: any ) => {
+    const productProperty: ProductProperty = {
+        label: property.label,
+        type: property.type,
+        unit: property.unit ? property.unit : [],
+    }
+    if (property.type == 'file' && attachImage.length > 0) {
+        const image = attachImage.find(attach => attach.id == property._id);
+        productProperty.value = image?.file?.name;
+    } else {
+        productProperty.value = propertyListValue[property._id];
+    }
+    return productProperty
+};
+
+const fillFormDataProperty = (formData: FormData, productProperty: ProductProperty, index: number) => {
+    formData.append('customProperty['+ index +'][label]', productProperty.label);
+    formData.append('customProperty['+ index +'][type]', productProperty.type);
+    if (productProperty.unit) {
+        for (let i = 0; i < productProperty.unit.length; i++) {
+            const unit = productProperty.unit[i];
+            formData.append('customProperty['+ index +'][unit]['+ i +']', unit);
+        }
+    }
+    productProperty.value && formData.append('customProperty['+ index +'][value]', productProperty.value);
+};
+
+const fillFileInFormdata = (formData: FormData, files: Image[], fileName: string) => {
+    for (let index = 0; index < files.length; index++) {
+        if (files[index]?.file) {
+            formData.append(fileName, files[index].file!);
+        }
+    }
+};
+
 const addProduct = async () => {
     try {
         if (!productImage[0]?.file) {
             throw new TypeError("تصویر محصول باید وارد شود");
         }
         const formData = new FormData();
+        // get all property which user selected
         const productProperties = propertyListData.value?.data.filter(property =>  
             propertyListId.value.includes(property._id)
         );
-
         if (productProperties) {
             for (let index = 0; index < productProperties.length; index++) {
                 const property = productProperties[index];
-                const productProperty: ProductProperty = {
-                    label: property.label,
-                    type: property.type,
-                    unit: property.unit ? property.unit : [],
-                }
-                if (property.type == 'file' && attachImage.length > 0) {
-                    const image = attachImage.find(attach => attach.id == property._id);
-                    productProperty.value = image?.file?.name;
-                } else {
-                    productProperty.value = propertyListValue[property._id];
-                }
-                formData.append('customProperty['+ index +'][label]', property.label);
-                formData.append('customProperty['+ index +'][type]', property.type);
-                if (productProperty.unit) {
-                    for (let i = 0; i < productProperty.unit.length; i++) {
-                        const unit = productProperty.unit[i];
-                        formData.append('customProperty['+ index +'][unit]['+ i +']', unit);
-                    }
-                }
-                productProperty.value && formData.append('customProperty['+ index +'][value]', productProperty.value);
-                newProduct.customProperty?.push(productProperty);
+                const productProperty: ProductProperty = fillProductProperty(property);
+                fillFormDataProperty(formData, productProperty, index)
             }
         }
-
-      
-        for (let index = 0; index < additionalsImage.length; index++) {
-            if (additionalsImage[index]?.file) {
-                formData.append('additionals', additionalsImage[index].file!);
-            }
-        }
-
-        for (let index = 0; index < attachImage.length; index++) {
-            if (attachImage[index]?.file) {
-                formData.append('attach', attachImage[index].file!);
-            }
-        }
-        
-
-        page.loading = true;
+        fillFileInFormdata(formData, additionalsImage, 'additionals');
+        fillFileInFormdata(formData, attachImage, 'attach');
+        fillFileInFormdata(formData, productImage, 'product');
         !newProduct.discount && (newProduct.discount = 0);
         formData.append('name', newProduct.name);
         formData.append('price', `${newProduct.price}`);
         formData.append('discount', `${newProduct.discount}`);
         formData.append('quantity', `${newProduct.quantity}`);
-        formData.append('product', productImage[0].file);
         formData.append('category', newProduct.category);
         formData.append('description', newProduct.description!);
         const config = createProductConfig(formData);
-        console.log(formData.getAll('customProperty'), "KKKKKKKKKKKKKKKKKk");
-        
         await productStore.createProduct(config);
         page.showMessage = true;
         page.typeMessage = TypeMessage.Success;
@@ -284,6 +274,5 @@ const addProduct = async () => {
             console.log(error);
         }
     }
-    page.loading = false;
 }
 </script>

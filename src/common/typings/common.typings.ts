@@ -43,3 +43,7 @@ export interface Image {
     file?: File;
     id?: string;
 }
+
+export interface StringObject {
+    [name: string]: string;
+}
