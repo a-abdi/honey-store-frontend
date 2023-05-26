@@ -47,3 +47,7 @@ export interface Image {
 export interface StringObject {
     [name: string]: string;
 }
+
+export interface StringBoolean {
+    [name: string]: boolean;
+}

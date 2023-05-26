@@ -1,7 +1,7 @@
 <template>
     <div class="w-full mx-auto px-3 py-4">
         <div class="my-2 sm:mx-4">
-            <img :src="product?.imageSrc" alt="product" class="object-cover h-64 w-full">
+            <img :src="product?.productImagesSrc[0]" alt="product" class="object-cover h-64 w-full">
         </div>
 
         <div class="tracking-wide font-medium px-2 py-2">
@@ -21,8 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import TotalPrice from './TotalPrice.vue'
-
+import TotalPrice from './TotalPrice.vue';
     const props = defineProps({
         product: Object
     });

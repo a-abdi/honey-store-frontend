@@ -89,16 +89,6 @@ const router = createRouter({
       }
     },
     {
-      path: "/admin/dashborad",
-      name: "Admin/Dashboard",
-      component: () => import("@/views/admin/dashboard/Dashboard.vue"),
-      meta: {
-        layout: "AppLayoutAdmin",
-        requiresAuthUser: false,
-        requiresAuthAdmin: false,
-      }
-    },
-    {
       path: "/admin/dashboard",
       name: "Admin/Dashboard",
       component: AdminDashboard,
@@ -108,27 +98,6 @@ const router = createRouter({
         requiresAuthAdmin: true,
       },
       children: [
-        {
-          path: "users",
-          name: "Admin/Dashboard/Users/Index",
-          component: () => import("@/views/Admin/Dashboard/Users/Index.vue"),
-           
-          children: [
-            {
-              path: "",
-              name: "Admin/Dashboard/Users/Home",
-              component: () => import("@/views/Admin/Dashboard/Users/Home.vue"),
-            },
-  
-            {
-              path: ":userId(\\d+)",
-              name: "Admin/Dashboard/Users/Show",
-              component: () => import("@/views/Admin/Dashboard/Users/Show.vue"),
-            },
-          ]
-          
-        },
-  
         {
           path: "products",
           name: "admin/dashboard/products/Index",
@@ -207,11 +176,6 @@ const router = createRouter({
               component: () => import("@/views/admin/dashboard/properties/Edit.vue"),
             },
           ]
-        },
-        {
-          path: "carts",
-          name: "Admin/Dashboard/Carts",
-          component: () => import("@/views/Admin/Dashboard/Carts.vue"),
         },
       ]
     },

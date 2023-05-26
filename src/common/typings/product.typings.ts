@@ -5,9 +5,8 @@ import type { NoUndefinedField } from "./helper.typings";
 export interface ProductProperty {
     label: string;
     type: string;
-    unit?: string[];
-    value?: string;
-    code?: string;
+    unit?: string;
+    value?: any;
 }
 
 export interface NewProduct {
@@ -31,7 +30,7 @@ export interface ProductData extends CommonResponseDataOptional {
 };
 
 export interface ProductListData extends CommonResponseDataOptional {
-    data: Product[];
+    data: Product[] | [];
 };
 
 export interface EditProduct {

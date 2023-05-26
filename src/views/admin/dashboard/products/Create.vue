@@ -24,8 +24,9 @@
                             name="category" autofocus="true" id="category" aria-placeholder="select category"
                             class="w-full  my-2 md:my-0 appearance-none bg-white text-gray-600 form-input text-right">
                             <option value="" disabled selected>دسته</option>
-                            <option v-for="category in categoryListData.data" :key="category._id" :value="category._id">{{
-                                category.name }}</option>
+                            <option v-for="category in categoryListData.data" :key="category._id" :value="category._id">
+                                {{ category.name }}
+                            </option>
                         </select>
                     </div>
                     <div class="px-2 w-full ">
@@ -91,7 +92,7 @@
                             v-if="property.type == 'file'" @change="onFileChange($event, attachImage)" type="file"
                             class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100">
                         <input :id="property._id" :disabled="!propertyListId.includes(property._id)"
-                            v-if="property.type == 'input'" v-model="propertyListValue[property._id]" type="text"
+                            v-if="property.type == 'text'" v-model="propertyListValue[property._id]" type="text"
                             class="form-input">
                         <input :id="property._id" :disabled="!propertyListId.includes(property._id)"
                             v-if="property.type == 'number'" v-model="propertyListValue[property._id]" type="number"
@@ -100,9 +101,14 @@
                     <td class="table-td"> {{ property.type }} </td>
                     <td class="table-td">
                         <div v-if="property.unit?.length">
-                            <div class="" v-for="unit of property.unit">
-                                {{ unit }}
-                            </div>
+                            <select v-model="propertyListUnit[property._id]"
+                                autofocus="true" :id="property._id"
+                                class="w-full my-2 md:my-0 bg-white text-gray-600 form-input text-right">
+                                <option value="" disabled selected="true">واحد</option>
+                                <option v-for="unit in property.unit" :key="unit" :value="unit">
+                                    {{ unit }}
+                                </option>
+                            </select>
                         </div>
                     </td>
                     <td class="table-td">
@@ -131,6 +137,7 @@ const productStore = useProductStore();
 const propertyStore = usePropertyStore();
 const propertyListId = ref([]) as Ref<string[]>;
 const propertyListValue = reactive<StringObject>({});
+const propertyListUnit = reactive<StringObject>({});
 const { categoryListData } = storeToRefs(categoryStore);
 const { propertyListData } = storeToRefs(propertyStore);
 const { productData } = storeToRefs(productStore);
@@ -201,11 +208,13 @@ const fillProductProperty = (property: any ) => {
     const productProperty: ProductProperty = {
         label: property.label,
         type: property.type,
-        unit: property.unit ? property.unit : [],
+    }
+    if (propertyListUnit[property._id]) {
+        productProperty.unit = propertyListUnit[property._id];
     }
     if (property.type == 'file' && attachImage.length > 0) {
         const image = attachImage.find(attach => attach.id == property._id);
-        productProperty.value = image?.file?.name;
+        productProperty.value = image?.file?.size;
     } else {
         productProperty.value = propertyListValue[property._id];
     }
@@ -215,12 +224,7 @@ const fillProductProperty = (property: any ) => {
 const fillFormDataProperty = (formData: FormData, productProperty: ProductProperty, index: number) => {
     formData.append('customProperty['+ index +'][label]', productProperty.label);
     formData.append('customProperty['+ index +'][type]', productProperty.type);
-    if (productProperty.unit) {
-        for (let i = 0; i < productProperty.unit.length; i++) {
-            const unit = productProperty.unit[i];
-            formData.append('customProperty['+ index +'][unit]['+ i +']', unit);
-        }
-    }
+    productProperty.unit && formData.append('customProperty['+ index +'][unit]', productProperty.unit);
     productProperty.value && formData.append('customProperty['+ index +'][value]', productProperty.value);
 };
 
