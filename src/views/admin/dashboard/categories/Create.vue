@@ -22,24 +22,24 @@
         <table class="table-auto w-full tracking-wider">
             <thead>
                 <tr class="">
-                    <th class="table-tr">برچسب</th>
-                    <th class="table-tr">نوع</th>
-                    <th class="table-tr">واحد</th>
-                    <th class="table-tr">اضافه کردن</th>
+                    <th class="table-tr text-indigo-900 font-bold">برچسب</th>
+                    <th class="table-tr text-indigo-900 font-bold">نوع</th>
+                    <th class="table-tr text-indigo-900 font-bold">واحد</th>
+                    <th class="table-tr text-indigo-900 font-bold">اضافه کردن</th>
                 </tr>
             </thead>
             <tbody class="text-violet-600" v-if="propertyListData?.data?.length">
                 <tr v-for="( property, index ) in propertyListData.data" :key="property._id" :class="{'bg-neutral-100': (index + 1) % 2 }">
-                    <td class="table-td"> {{ property.label }} </td>
-                    <td class="table-td"> {{ property.type }} </td>
-                    <td class="table-td"> 
+                    <td class="table-td text-xs"> {{ property.label }} </td>
+                    <td class="table-td text-xs"> {{ property.type }} </td>
+                    <td class="table-td text-xs"> 
                         <div class="" v-if="property.unit?.length">
                             <div class="" v-for="unit of property.unit">
                                 {{ unit }}
                             </div>
                         </div>
                     </td>
-                    <td class="table-td">  
+                    <td class="table-td text-xs">  
                         <input v-model="category.properties" :id="property._id" :value="property._id" type="checkbox" class="accent-violet-600">
                     </td>
                 </tr>
@@ -59,7 +59,6 @@ import { getAxiosErrorMessage } from '@/common/helpers';
 import { TypeMessage, type Page } from '@/common/typings/common.typings';
 import type { NewCategory } from '@/common/typings/category.typings';
 import { usePropertyStore } from '@/stores/property';
-
         const form = reactive<Page>({
             loading: false,
             message: '',
@@ -75,8 +74,7 @@ import { usePropertyStore } from '@/stores/property';
             name: "",
             description: "",
             properties: []
-        });
-        
+        });        
         const createCategory = async () => {
             form.loading = true;
             form.errorMessage = null;
@@ -98,5 +96,4 @@ import { usePropertyStore } from '@/stores/property';
             }
             form.loading = false;
         };
-
 </script>

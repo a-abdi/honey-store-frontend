@@ -1,6 +1,6 @@
 <template>
     <div class="min-w-min">
-       <div class="flex justify-between w-full h-10 bg-blue-300">
+       <div class="flex justify-between w-full h-10 bg-violet-400">
            <div class="flex justify-items-center mr-4">
                <slot name="create"> </slot>
            </div>

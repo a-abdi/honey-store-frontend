@@ -112,7 +112,7 @@
                         </div>
                     </td>
                     <td class="table-td">
-                        <input type="checkbox" @change="" v-model="propertyListId" :id="property._id" :value="property._id" class="accent-violet-600">
+                        <input type="checkbox" v-model="propertyListId" :id="property._id" :value="property._id" class="accent-violet-600">
                     </td>
                 </tr>
             </tbody>
