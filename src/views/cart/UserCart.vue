@@ -2,30 +2,31 @@
     <div class="px-8 lg:flex">
         <div class="lg:w-3/4 w-full">
             <div v-for="productCart in listProductsCart?.products" class="flex pt-4 pb-12 border-b border-gray-200">
-                <div class="pl-4">
+                <div class="pl-4 mt-12">
                     <div>
-                        <img class="object-cover max-w-32 max-h-48" :src="productCart.product.imageSrc" alt="">
+                        <img class="object-cover max-w-32 max-h-48" :src="productCart.product.productImagesSrc[0]" alt="">
                     </div>
                     <div class="mt-4">
                         <ProductCartQuantity v-if="typeof productCart.product._id == 'string'" class="my-3" :productId="productCart.product._id"/>
                     </div>
                 </div>
-                <div class="">
-                    <div class="text-violet-600">
+                <div class="pr-2">
+                    <div class="w-full font-bold text-indigo-900 underline underline-offset-8 decoration-violet-600 decoration-2 mb-4 text-bold text-base text-lg py-2">
                         {{ productCart.product.name }}
                     </div>
                     <div class="mt-8">
-                        <div v-if="productCart.product.discount" class="mb-4 text-red-600 flex items-center">
+                        <ShowProperties v-if="productCart.product.customProperty" :custom-properties="productCart.product.customProperty"/>
+                        <div v-if="productCart.product.discount" class="mb-2 text-red-600 flex items-center">
                             <div class="text-xs">
-                                {{ convertToPersian(`${productCart.product.discount}`) }}
+                                <Currency :money="productCart.product.discount"/>
                             </div>
                             <div class="text-vs pr-1">
-                                تومان
+                                تومان تخفیف
                             </div>
                         </div>
                         <div class="flex items-center">
                             <div class="text-lg">
-                                {{ convertToPersian(`${productCart.product.price - (productCart.product.discount || 0)}`) }}
+                                <Currency :money="productCart.product.price - (productCart.product.discount || 0)"/>
                             </div>
                             <div class="text-xs pr-2">
                                 تومان
@@ -83,6 +84,7 @@
 import { convertToPersian } from '@/common/helpers';
 import Currency from '@/components/Currency.vue';
 import ProductCartQuantity from '@/components/ProductCartQuantity.vue';
+import ShowProperties from '@/components/ShowProperties.vue';
 import router from '@/router';
 import { useCartStore } from '@/stores/cart';
 import { useUserStore } from '@/stores/user';

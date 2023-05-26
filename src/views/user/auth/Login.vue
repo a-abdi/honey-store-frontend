@@ -70,7 +70,7 @@ import axios from 'axios';
 import { getAxiosErrorMessage } from '@/common/helpers';
 import Message from '@/components/message/Message.vue';
 import type { UserLogin } from '@/common/typings/user.typing';
-import { userLoginConfig, addToCartConfig } from '@/common/config/axiox.config';
+import { userLoginConfig, addToCartConfig, getCartConfig } from '@/common/config/axiox.config';
 import { useCartStore } from '@/stores/cart';
 import { storeToRefs } from 'pinia';
 
@@ -98,8 +98,21 @@ const login =  async () => {
         const productCartCount = cartStore.productCartCount;
         if( productCartCount > 0 ) {
             const { listProductsCart } = storeToRefs(cartStore);
-            const addToCartConfigAxios = addToCartConfig(listProductsCart.value);
+            const products = [];
+            if (listProductsCart?.value?.products) {
+                for (let index = 0; index < listProductsCart?.value?.products.length; index++) {
+                    const cartProduct =  listProductsCart?.value?.products[index];
+                    products.push({
+                        _id: cartProduct.product._id,
+                        quantity: cartProduct.quantity
+                    });
+                }
+            }
+            const addToCartConfigAxios = addToCartConfig({ products });
             await cartStore.addToCart(addToCartConfigAxios);
+            const getCartConfigAxios = getCartConfig();
+            await cartStore.getCart(getCartConfigAxios);
+            cartStore.setCartLocalStorage();
         }
         router.push('/');
     } catch (error) {

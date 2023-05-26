@@ -28,28 +28,7 @@
       </div>
       <div class="w-full md:flex">
         <div class="md:w-7/12 w-full py-4 border-t border-gray-300">
-          <div v-for="property in productData?.data?.customProperty" class="text-sm">
-            <div class="flex my-8">
-              <div class="ml-2">
-                {{ property.label }}:
-              </div>
-              <div v-if="property.type == 'file' && typeof property.value == 'string'">
-                <DocumenPicture @click="showAttachImage[property.label] = true" class="w-6 h-6 cursor-pointer"/>
-                <ImageDialog :show-dialog="showAttachImage[property.label]" @cancel="showAttachImage[property.label] = false"> 
-                  <img :src="property.value" class="object-cover w-100 h-144 mx-auto" alt=""> 
-                </ImageDialog>
-              </div>
-              <div v-if="property.type == 'number'" class=" text-violet-600">
-                {{ property.value }}
-              </div>
-              <div v-if="property.type == 'text'" class=" text-violet-600">
-                {{ property.value }}
-              </div>
-              <div class="mr-1 text-violet-600">
-                {{ property.unit }}
-              </div>
-            </div>
-          </div>
+          <ShowProperties v-if="productData?.data?.customProperty" :show-file="true" :custom-properties="productData?.data?.customProperty"/>
         </div>
         <div class="md:w-5/12 w-full text-left">
           <div class="border border-gray-300 shadow-md rounded-md md:mx-2 py-4">
@@ -58,7 +37,7 @@
                 {{ convertToPersian(percentage) }}
               </div>
               <div class="pl-2 line-through text-gray-400">
-                {{ convertToPersian(`${productData?.data?.price}`) }}
+                <Currency :money="productData?.data?.price"/>
               </div>
             </div>
             <div class="flex items-center flex-row-reverse pl-4 my-2 ">
@@ -66,7 +45,7 @@
                 تومان
               </div>
               <div class="text-xl">
-                {{ convertToPersian(`${totalPrice}`) }}
+                <Currency :money="totalPrice"/>
               </div>
             </div>
             <div class="m-2">
@@ -87,11 +66,11 @@
       </div>
     </div>
   </div>
-  <div v-if="productData?.data?.description" class="text-gray-600 px-4 pt-8 border-t border-gray-400">
+  <div v-if="productData?.data?.description" class="text-gray-600 px-4 pt-8 border-t border-gray-400 sm:text-sm text-xs">
     <p class="underline underline-offset-8 decoration-violet-600 decoration-2 mb-4 text-bold text-base text-gray-900">
       معرفی
     </p>
-    <p class="sm:text-sm text-xs tracking-wide leading-8 text-indigo-900">
+    <p class="tracking-wide leading-loose text-indigo-900">
       {{ productData?.data?.description }}
     </p>
   </div>
@@ -113,7 +92,8 @@ import axios from 'axios';
 import Message from '@/components/message/Message.vue';
 import type { NewProductCart } from '@/common/typings/cart.typings';
 import ImageDialog from '@/components/dialog/ImageDialog.vue';
-import DocumenPicture from '@/components/icons/DocumenPicture.vue';
+import ShowProperties from '@/components/ShowProperties.vue';
+import Currency from '@/components/Currency.vue';
   const route = useRoute();
   const productId = route.params.productId as string;
   const productStore = useProductStore();
@@ -129,17 +109,11 @@ import DocumenPicture from '@/components/icons/DocumenPicture.vue';
   const showAttachImage = reactive<StringBoolean>({});
   const page = reactive<Page>({
     message: '',
-    typeMessage: TypeMessage.Danger,
+    typeMessage: TypeMessage.Success,
     showMessage: false,
   });
   const addToCart = async () => {
-    if (
-      productData.value?.data?.name &&
-      productData.value?.data?.price &&
-      productData.value?.data?.productImagesSrc[0] &&
-      productData.value?.data?.quantity &&
-      productData.value?.data?._id
-    ) {
+    if ( productData.value?.data?.quantity && productData.value?.data?._id) {
       if (userStore.userLogged) {
         try {
           const product: NewProductCart = {
