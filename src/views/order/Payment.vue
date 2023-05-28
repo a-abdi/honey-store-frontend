@@ -61,6 +61,7 @@ const payment = async () => {
     const paymentConfigAxios = paymentConfig();
     await orderStore.paymentRequest(paymentConfigAxios);
     localStorage.removeItem('carts');
+    cartStore.clearProductCart();
     const { transactionLink } = storeToRefs(orderStore);
     if (transactionLink.value) {
         window.location.href = transactionLink.value;

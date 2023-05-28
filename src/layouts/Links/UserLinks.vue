@@ -9,7 +9,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="relative" @mouseover="showCart = true" @mouseleave="showCart = false">
+                <div v-if="(route.path != '/cart' && route.path != '/shipping' && route.path !== '/payment')" class="relative" @mouseover="showCart = true" @mouseleave="showCart = false">
                     <router-link to="/cart">
                         <div class="relative w-7 h-7 bg-cover bg-no-repeat" style="background-image: url(https://api.iconify.design/cil:cart.svg?color=%23878787);">
                             <span v-show="cartStore.productCartCount" class="bg-violet-600 px-1 py-0.5 text-white text-xs rounded-full">
@@ -17,7 +17,7 @@
                             </span>
                         </div>
                     </router-link>
-                    <div v-if="showCart && cartStore.productCartCount > 0 && route.path != '/cart'" class="absolute top-7 left-0 border border-gray-300 rounded-md shadow-lg bg-white h-auto overflow-auto max-h-128 w-100">
+                    <div v-if="showCart && cartStore.productCartCount > 0" class="absolute top-7 left-0 border border-gray-300 rounded-md shadow-lg bg-white h-auto overflow-auto max-h-128 w-100">
                         <div v-for="productCart in cartStore.listProductsCart?.products" class="w-full h-48 flex pb-4 border-b border-gray-200">
                             <div class="w-1/3">
                                 <img class="object-cover p-2 max-h-44" :src="productCart?.product?.productImagesSrc[0]" alt="">
@@ -75,12 +75,20 @@ import Currency from '@/components/Currency.vue';
 import ProductCartQuantity from '@/components/ProductCartQuantity.vue';
 import { useCartStore } from '@/stores/cart';
 import { useUserStore } from '@/stores/user';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import router from '@/router';
 const cartStore = useCartStore();
 const userStore = useUserStore();
 const showCart = ref(false);
 const route = useRoute();
+watch(
+    () => route.path,
+    path => {
+        if (path == '/cart' || path == '/shipping') {
+            showCart.value = false;
+        }
+    }
+)
 const gotToShipping = () => router.push('/cart');
 const gotToUserLogin = () => router.push('/login');
 </script>

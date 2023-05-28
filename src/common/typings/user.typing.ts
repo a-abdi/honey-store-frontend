@@ -28,7 +28,7 @@ export interface UserRecipient {
 };
 
 export interface User extends UserProfile, Omit<NewUser, 'password' | 'passwordConfirm'>, CommonResponseData {
-    address: UserAddress[] | null
+    address: UserAddress | null
 };
 
 export interface UserData extends CommonResponseDataOptional {
