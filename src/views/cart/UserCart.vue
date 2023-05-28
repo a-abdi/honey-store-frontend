@@ -93,5 +93,5 @@ const cartStore = useCartStore();
 const userStore = useUserStore();
 const { listProductsCart } = storeToRefs(cartStore);
 const gotToUserLogin = () => router.push('/login');
-const gotToShipping = () => router.push('/shipping');
+const gotToShipping = () => router.push('/payment');
 </script>

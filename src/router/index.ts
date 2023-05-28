@@ -69,16 +69,6 @@ const router = createRouter({
       }
     },
     {
-      path: "/shipping",
-      name: "shipping/UserAddress",
-      component: () => import("@/views/shipping/UserAddress.vue"),
-      meta: {
-        layout: "AppLayoutUser",
-        requiresAuthUser: false,
-        requiresAuthAdmin: false,
-      }
-    },
-    {
       path: "/payment",
       name: "order/Payment",
       component: () => import("@/views/order/Payment.vue"),
