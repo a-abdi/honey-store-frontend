@@ -9,7 +9,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex">
+                <div class="flex items-center">
                     <!-- profile -->
                     <div class="ml-6">
                         <ProFileLink/>

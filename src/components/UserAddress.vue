@@ -106,13 +106,13 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, type Ref, onMounted } from 'vue';
+import { reactive, ref, type Ref, watch } from 'vue';
 import { useUserStore } from '@/stores/user';
 import { TypeMessage, type Page, type City} from '@/common/typings/common.typings';
 import axios from 'axios';
 import { getAxiosErrorMessage } from '@/common/helpers';
 import Message from '@/components/message/Message.vue';
-import { getUserConfig, updateUserAddressConfig } from '@/common/config/axiox.config';
+import { updateUserAddressConfig } from '@/common/config/axiox.config';
 import provinces from '@/assets/address/provinces.json';
 import cities from '@/assets/address/cities.json';
 import type { UserAddress } from '@/common/typings/user.typing';
@@ -120,7 +120,6 @@ import { storeToRefs } from 'pinia';
 import { OnClickOutside } from '@vueuse/components'
 const userStore = useUserStore();
 const citiesProvince = ref([]) as Ref<City[]>;
-const config = getUserConfig();
 const { userData } = storeToRefs(userStore);
 const newAddress = reactive<UserAddress>({
     province: '',
@@ -135,7 +134,6 @@ const newAddress = reactive<UserAddress>({
         phoneNumber: '',
     }
 });
-
 defineProps({
     showDialog: {
         type: Boolean,
@@ -143,27 +141,30 @@ defineProps({
     }
 });
 const emit = defineEmits(['cancel', 'success']);
-onMounted(async () => {
-    await userStore.getOneUser(config);
-    const address = userData.value?.data?.address;
-    if (address) {
-        newAddress.province = address?.province;
-        updateCity();
-        newAddress.city = address?.city;
-        newAddress.plaque = address?.plaque;
-        newAddress.postalAddress = address?.postalAddress;
-        newAddress.postalCode = address?.postalCode;
-        newAddress.selected = true;
-        newAddress.recipient.firstName = address?.recipient.firstName;
-        newAddress.recipient.lastName = address?.recipient.lastName;
-        newAddress.recipient.phoneNumber = address?.recipient.phoneNumber;
-    }
-});
 const updateCity = () => {
     citiesProvince.value = [];
     const province = provinces.find(province => province.name == newAddress.province);
     citiesProvince.value = cities.filter(city => city.province_id == province?.id);
 };
+const fillUserAddress = (address: any) => {
+    if (address) {
+        newAddress.province = address.province;
+        updateCity();
+        newAddress.city = address.city;
+        newAddress.plaque = address.plaque;
+        newAddress.postalAddress = address.postalAddress;
+        newAddress.postalCode = address.postalCode;
+        newAddress.selected = true;
+        newAddress.recipient.firstName = address.recipient.firstName;
+        newAddress.recipient.lastName = address.recipient.lastName;
+        newAddress.recipient.phoneNumber = address.recipient.phoneNumber;
+    }
+};
+userData.value?.data?.address && fillUserAddress(userData.value?.data?.address);
+watch(
+    () => userData.value?.data?.address,
+    address => fillUserAddress(address)
+);
 const page = reactive<Page>({
     message: '',
     typeMessage: TypeMessage.Success,

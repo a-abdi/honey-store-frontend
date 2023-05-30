@@ -81,8 +81,6 @@ const showUserAddress = ref(false);
 const cartStore = useCartStore();
 const userStore = useUserStore();
 const orderStore = useOrderStore();
-const userConfig = getUserConfig();
-userStore.getOneUser(userConfig);
 const { userData } = storeToRefs(userStore);
 const getCartConfigAxios = getCartConfig();
 cartStore.getCart(getCartConfigAxios);

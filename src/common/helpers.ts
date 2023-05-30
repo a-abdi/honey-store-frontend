@@ -3,6 +3,7 @@ import type { AxiosRequestConfig } from 'axios';
 import { useAdminStore } from '@/stores/admin';
 import { SetToken } from './typings/common.typings';
 import { useUserStore } from '@/stores/user';
+import type { UserData } from './typings/user.typing';
 
 export const sendRequest = async (config: AxiosRequestConfig, setToken: SetToken = SetToken.Default) => {
     switch (setToken) {
@@ -48,4 +49,17 @@ export const convertToPersian = (str: string ) =>
 
 export const createCode = () => {
     return (Math.random() + 1).toString(36).substring(2);
-}
+};
+
+export const getFullName = (user: UserData) => {
+    if (user.data?.firstName && user.data?.LastName) {
+        return `${user.data?.firstName} ${user.data?.LastName}`
+    }
+    if (user.data?.firstName) {
+        return `${user.data?.firstName}`
+    }
+    if (user.data?.LastName) {
+        return `${user.data.LastName}`
+    }
+    return 'کاربر';
+};
