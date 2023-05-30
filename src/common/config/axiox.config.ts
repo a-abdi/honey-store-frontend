@@ -99,6 +99,12 @@ export const updateUserAddressConfig = <T>(data: T): AxiosRequestConfig<T> => ({
     data
 });
 
+export const updateUserPasswordConfig = <T>(data: T): AxiosRequestConfig<T> => ({
+    method: 'patch',
+    url: `${BASE_URL}users/password`,
+    data
+});
+
 export const getUserConfig = (): AxiosRequestConfig => ({
     method: 'get',
     url: `${BASE_URL}users/info`,

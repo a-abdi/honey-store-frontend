@@ -27,5 +27,4 @@
 <script setup lang="ts">
 import CartLinkVue from '@/components/user-link/CartLink.vue';
 import ProFileLink from '@/components/user-link/ProfileLink.vue';
-
 </script>

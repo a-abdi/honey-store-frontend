@@ -23,7 +23,7 @@
             <div class="flex items-center">
                 <Location class="w-5 h-5"/>
                 <div class="mr-2 text-sm">
-                    آدرس ها
+                    آدرس
                 </div>
             </div>
             <div>
@@ -41,10 +41,10 @@
                 <BigLeft class="w-5 h-5"/>
             </div>
         </div>
-        <div class="flex items-center py-6 text-red-700 cursor-pointer hover:text-red-400">
+        <div class="flex items-center py-6 border-b border-gray-200 text-red-700 cursor-pointer hover:text-red-400">
             <Exit class="w-5 h-5"/>
             <div class="mr-2 text-sm">
-                خروج
+                خروج از حساب
             </div>
         </div>
     </div>

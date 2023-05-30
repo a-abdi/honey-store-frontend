@@ -32,6 +32,9 @@ export const getAxiosErrorMessage = (error: any): string => {
     if (typeof error?.response?.data.message === 'string') {
         return error.response?.data.message;
     }
+    if (typeof error?.response?.data.Message === 'string') {
+        return error.response?.data.Message;
+    }
     return 'خطایی رخ داده'
 };
 

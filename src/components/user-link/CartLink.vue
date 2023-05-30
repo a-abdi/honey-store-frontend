@@ -61,6 +61,8 @@ import { useCartStore } from '@/stores/cart';
 import { useUserStore } from '@/stores/user';
 import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
+import Currency from '../Currency.vue';
+import ProductCartQuantity from '../ProductCartQuantity.vue';
 const cartStore = useCartStore();
 const userStore = useUserStore();
 const gotToShipping = () => router.push('/cart');

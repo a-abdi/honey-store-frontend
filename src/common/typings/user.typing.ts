@@ -6,6 +6,12 @@ export interface NewUser {
     passwordConfirm: string;
 };
 
+export interface PasswordEdit {
+    password: string;
+    newPassword: string;
+    newPasswordConfirm: string;
+};
+
 export interface UserProfile {
     firstName: string;
     LastName: string;

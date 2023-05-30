@@ -9,6 +9,7 @@ export const useUserStore = defineStore("user", {
     return {
       userData: null as UserData | null,
       userLoginData: {} as UserLoginData,
+      passwordUpdateData: null as {message: string} | null,
     }
   },
 
@@ -25,6 +26,10 @@ export const useUserStore = defineStore("user", {
 
     async update(config: AxiosRequestConfig) {
       this.userData = await sendRequest(config, SetToken.User);
+    },
+
+    async updatePassword(config: AxiosRequestConfig) {
+      this.passwordUpdateData = await sendRequest(config, SetToken.User);
     },
 
     async getOneUser(config: AxiosRequestConfig) {

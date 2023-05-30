@@ -87,7 +87,7 @@ import { useCartStore } from '@/stores/cart';
 import ProductCartQuantity from '@/components/ProductCartQuantity.vue';
 import { useUserStore } from '@/stores/user';
 import { reactive, ref } from 'vue';
-import { TypeMessage, type Page, type StringBoolean } from '@/common/typings/common.typings';
+import { TypeMessage, type Page } from '@/common/typings/common.typings';
 import axios from 'axios';
 import Message from '@/components/message/Message.vue';
 import type { NewProductCart } from '@/common/typings/cart.typings';
@@ -106,7 +106,6 @@ import Currency from '@/components/Currency.vue';
   const percentage = computed( () => `${(Math.round((productData.value?.data?.discount! / productData.value?.data?.price!) * 1000) / 10)}%` );
   const additionalsImageUrl = ref(productData.value?.data?.additionalsImageSrc[0]);
   const showAdditionalsImage = ref(false);
-  const showAttachImage = reactive<StringBoolean>({});
   const page = reactive<Page>({
     message: '',
     typeMessage: TypeMessage.Success,
