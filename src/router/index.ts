@@ -78,6 +78,51 @@ const router = createRouter({
         requiresAuthAdmin: false,
       }
     },
+
+    {
+      path: "/profile",
+      name: "Profile",
+      component: () => import("@/views/profile/ProfileIndex.vue"),
+      meta: {
+        layout: "AppLayoutUser",
+        requiresAuthUser: false,
+        requiresAuthAdmin: true,
+      },
+      children: [
+        {
+          path: "",
+          name: "profile/personal-info/PersonalInfoIndex",
+          component: () => import("@/views/profile/personal-info/PersonalInfoIndex.vue"),
+          children: [
+            {
+              path: "",
+              name: "admin/dashboard/products/Home",
+              component: () => import("@/views/admin/dashboard/products/Home.vue"),
+            },
+  
+            {
+              path: "create",
+              name: "admin/dashboard/products/Create",
+              component: () => import("@/views/admin/dashboard/products/Create.vue"),
+            },
+  
+            {
+              path: ":productId/edit",
+              name: "admin/dashboard/products/Edit",
+              component: () => import("@/views/admin/dashboard/products/Edit.vue"),
+            },
+          ]
+        },
+      ]
+    },
+
+
+
+
+
+
+
+
     {
       path: "/admin/dashboard",
       name: "Admin/Dashboard",

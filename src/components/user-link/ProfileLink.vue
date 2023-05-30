@@ -2,7 +2,7 @@
     <div class="relative">
         <UserIcone @click="showProfile = true" class="w-6 h-6 text-gray-500 cursor-pointer"/>
         <OnClickOutside @trigger="showProfile = false">
-            <div v-if="showProfile" class="absolute px-4 top-7 left-0 border border-gray-300 rounded-md shadow-lg bg-white h-auto overflow-auto max-h-96 w-64">
+            <div v-if="showProfile && route.path != '/profile'" class="absolute px-4 top-7 left-0 border border-gray-300 rounded-md shadow-lg bg-white h-auto overflow-auto max-h-96 w-64">
                 <div class="text-center text-sm py-1.5 rounded-md bg-indigo-600 font-bold text-white">
                     <div v-if="userData" class="pb-1.5">
                         {{ getFullName(userData) }}
@@ -11,7 +11,7 @@
                         {{ userData.data?.phoneNumber.replace("+98", "0") }}
                     </div>
                 </div>
-                <div class="flex items-center py-5 border-b border-gray-200 text-indigo-900 cursor-pointer hover:text-indigo-600">
+                <div @click="goToProfile" class="flex items-center py-5 border-b border-gray-200 text-indigo-900 cursor-pointer hover:text-indigo-600">
                     <UserProfile class="w-5 h-5"/>
                     <div class="mr-2 text-sm">
                         پروفایل
@@ -44,9 +44,16 @@ import { useUserStore } from '@/stores/user';
 import { getUserConfig } from '@/common/config/axiox.config';
 import { getFullName } from '@/common/helpers';
 import { storeToRefs } from 'pinia';
+import router from '@/router';
+import { useRoute } from 'vue-router';
 const showProfile = ref(false);
+const route = useRoute();
 const userStore = useUserStore();
 const userConfig = getUserConfig();
 userStore.getOneUser(userConfig);
 const { userData } = storeToRefs(userStore);
+const goToProfile = () => {
+    showProfile.value = false;
+    router.push('/profile'); 
+};
 </script>
