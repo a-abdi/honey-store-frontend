@@ -1,5 +1,5 @@
 <template>
-    <div class="px-6 py-8 w-4/12 text-indigo-900 tracking-wide sm:tracking-wider font-bold">
+    <div class="px-6 w-4/12 text-indigo-900 tracking-wide sm:tracking-wider font-bold">
         <div class="text-center text-sm py-1.5 rounded-md bg-indigo-600 text-white">
             <div v-if="userData" class="pb-1.5">
                 {{ getFullName(userData) }}
