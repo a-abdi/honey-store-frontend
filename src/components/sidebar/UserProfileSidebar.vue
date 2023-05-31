@@ -8,39 +8,45 @@
                 {{ userData.data?.phoneNumber.replace("+98", "0") }}
             </div>
         </div>
-        <div class="flex items-center justify-between py-6 border-b border-gray-200 cursor-pointer hover:text-indigo-600">
-            <div class="flex items-center">
-                <UserProfile class="w-5 h-5"/>
-                <div class="mr-2 text-sm">
-                    اطلاعات کاربری
+        <RouterLink :to="'/profile'">
+            <div class="flex items-center justify-between py-6 border-b border-gray-200 cursor-pointer hover:text-indigo-600">
+                <div class="flex items-center">
+                    <UserProfile class="w-5 h-5"/>
+                    <div class="mr-2 text-sm">
+                        اطلاعات کاربری
+                    </div>
+                </div>
+                <div>
+                    <BigLeft class="w-5 h-5"/>
                 </div>
             </div>
-            <div>
-                <BigLeft class="w-5 h-5"/>
-            </div>
-        </div>
-        <div class="flex items-center justify-between py-6 border-b border-gray-200 cursor-pointer hover:text-indigo-600">
-            <div class="flex items-center">
-                <Location class="w-5 h-5"/>
-                <div class="mr-2 text-sm">
-                    آدرس
+        </RouterLink>
+        <RouterLink :to="'/profile/address'">
+            <div class="flex items-center justify-between py-6 border-b border-gray-200 cursor-pointer hover:text-indigo-600">
+                <div class="flex items-center">
+                    <Location class="w-5 h-5"/>
+                    <div class="mr-2 text-sm">
+                        آدرس
+                    </div>
+                </div>
+                <div>
+                    <BigLeft class="w-5 h-5"/>
                 </div>
             </div>
-            <div>
-                <BigLeft class="w-5 h-5"/>
-            </div>
-        </div>
-        <div class="flex items-center justify-between py-6 border-b border-gray-200 cursor-pointer hover:text-indigo-600">
-            <div class="flex items-center">
-                <Order class="w-5 h-5"/>
-                <div class="mr-2 text-sm">
-                    سفارش های من
+        </RouterLink>
+        <RouterLink :to="'/'">
+            <div class="flex items-center justify-between py-6 border-b border-gray-200 cursor-pointer hover:text-indigo-600">
+                <div class="flex items-center">
+                    <Order class="w-5 h-5"/>
+                    <div class="mr-2 text-sm">
+                        سفارش های من
+                    </div>
+                </div>
+                <div>
+                    <BigLeft class="w-5 h-5"/>
                 </div>
             </div>
-            <div>
-                <BigLeft class="w-5 h-5"/>
-            </div>
-        </div>
+        </RouterLink>
         <div class="flex items-center py-6 border-b border-gray-200 text-red-700 cursor-pointer hover:text-red-400">
             <Exit class="w-5 h-5"/>
             <div class="mr-2 text-sm">

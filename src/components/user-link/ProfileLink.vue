@@ -49,8 +49,10 @@ import { useRoute } from 'vue-router';
 const showProfile = ref(false);
 const route = useRoute();
 const userStore = useUserStore();
-const userConfig = getUserConfig();
-userStore.getOneUser(userConfig);
+if (userStore.userLogged) {
+    const userConfig = getUserConfig();
+    userStore.getOneUser(userConfig);
+}
 const { userData } = storeToRefs(userStore);
 const goToProfile = () => {
     showProfile.value = false;

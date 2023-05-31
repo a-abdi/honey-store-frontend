@@ -1,6 +1,6 @@
 <template>
     <div class="w-full">
-        <div class="pr-3 font-bold text-lg text-gray-900 mb-2">
+        <div class="pr-3 font-bold text-lg text-indigo-900 mb-2">
             اطلاعات حساب کاربری
         </div>
         <div class="w-full md:py-4 md:flex items-center border border-gray-200 rounded-md">

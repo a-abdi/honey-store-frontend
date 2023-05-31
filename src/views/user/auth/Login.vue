@@ -70,7 +70,7 @@ import axios from 'axios';
 import { getAxiosErrorMessage } from '@/common/helpers';
 import Message from '@/components/message/Message.vue';
 import type { UserLogin } from '@/common/typings/user.typing';
-import { userLoginConfig, addToCartConfig, getCartConfig } from '@/common/config/axiox.config';
+import { userLoginConfig, addToCartConfig, getCartConfig, getUserConfig } from '@/common/config/axiox.config';
 import { useCartStore } from '@/stores/cart';
 import { storeToRefs } from 'pinia';
 
@@ -110,10 +110,12 @@ const login =  async () => {
             }
             const addToCartConfigAxios = addToCartConfig({ products });
             await cartStore.addToCart(addToCartConfigAxios);
-            const getCartConfigAxios = getCartConfig();
-            await cartStore.getCart(getCartConfigAxios);
-            cartStore.setCartLocalStorage();
         }
+        const getCartConfigAxios = getCartConfig();
+        await cartStore.getCart(getCartConfigAxios);
+        cartStore.setCartLocalStorage();
+        const getUserConfigAxios = getUserConfig();
+        await userStore.getOneUser(getUserConfigAxios);
         router.push('/');
     } catch (error) {
         page.showMessage = true;

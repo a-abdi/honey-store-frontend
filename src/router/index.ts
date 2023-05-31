@@ -93,25 +93,11 @@ const router = createRouter({
           path: "",
           name: "profile/personal-info/PersonalInfoIndex",
           component: () => import("@/views/profile/personal-info/PersonalInfoIndex.vue"),
-          children: [
-            {
-              path: "",
-              name: "admin/dashboard/products/Home",
-              component: () => import("@/views/admin/dashboard/products/Home.vue"),
-            },
-  
-            {
-              path: "create",
-              name: "admin/dashboard/products/Create",
-              component: () => import("@/views/admin/dashboard/products/Create.vue"),
-            },
-  
-            {
-              path: ":productId/edit",
-              name: "admin/dashboard/products/Edit",
-              component: () => import("@/views/admin/dashboard/products/Edit.vue"),
-            },
-          ]
+        },
+        {
+          path: "address",
+          name: "profile/address/AddressIndex",
+          component: () => import("@/views/profile/address/AddressIndex.vue"),
         },
       ]
     },
