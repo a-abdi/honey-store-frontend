@@ -53,8 +53,9 @@ import ChangePassword from '@/components/dialog/ChangePassword.vue';
 import EditProfile from '@/components/icons/EditProfile.vue';
 import { useUserStore } from '@/stores/user';
 import { storeToRefs } from 'pinia';
-import { ref } from 'vue';
+import { provide, ref } from 'vue';
 const showChangePassword = ref(false);
+provide('showDialog', showChangePassword);
 const userStore = useUserStore();
 const { userData } = storeToRefs(userStore);
 </script>

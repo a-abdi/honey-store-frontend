@@ -1,5 +1,5 @@
 <template>
-    <div :style="{ opacity: opacity }">
+    <div v-if="opacity > 0.1" :style="{ opacity: opacity }">
         <slot />
     </div>
 </template>
