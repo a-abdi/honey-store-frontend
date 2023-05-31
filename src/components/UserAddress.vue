@@ -112,7 +112,7 @@ import { TypeMessage, type Page, type City} from '@/common/typings/common.typing
 import axios from 'axios';
 import { getAxiosErrorMessage } from '@/common/helpers';
 import Message from '@/components/message/Message.vue';
-import { updateUserAddressConfig } from '@/common/config/axiox.config';
+import { updateUserConfig } from '@/common/config/axiox.config';
 import provinces from '@/assets/address/provinces.json';
 import cities from '@/assets/address/cities.json';
 import type { UserAddress } from '@/common/typings/user.typing';
@@ -172,7 +172,7 @@ const page = reactive<Page>({
 });
 const updateAddress = async () => {
     try {
-        const config = updateUserAddressConfig({address: newAddress});
+        const config = updateUserConfig({address: newAddress});
         await userStore.update(config);
         emit('success');
     } catch (error) {

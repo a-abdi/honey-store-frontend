@@ -12,9 +12,9 @@ export interface PasswordEdit {
     newPasswordConfirm: string;
 };
 
-export interface UserProfile {
+export interface FullName {
     firstName: string;
-    LastName: string;
+    lastName: string;
 };
 
 export interface UserAddress {
@@ -33,7 +33,7 @@ export interface UserRecipient {
     phoneNumber: string;
 };
 
-export interface User extends UserProfile, Omit<NewUser, 'password' | 'passwordConfirm'>, CommonResponseData {
+export interface User extends FullName, Omit<NewUser, 'password' | 'passwordConfirm'>, CommonResponseData {
     address: UserAddress | null
 };
 

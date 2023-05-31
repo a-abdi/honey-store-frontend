@@ -93,7 +93,7 @@ export const removeProductFromCartConfig = (productId: string): AxiosRequestConf
     url: `${BASE_URL}carts/products/${productId}`,
 });
 
-export const updateUserAddressConfig = <T>(data: T): AxiosRequestConfig<T> => ({
+export const updateUserConfig = <T>(data: T): AxiosRequestConfig<T> => ({
     method: 'patch',
     url: `${BASE_URL}users`,
     data

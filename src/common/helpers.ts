@@ -55,14 +55,14 @@ export const createCode = () => {
 };
 
 export const getFullName = (user: UserData) => {
-    if (user.data?.firstName && user.data?.LastName) {
-        return `${user.data?.firstName} ${user.data?.LastName}`
+    if (user.data?.firstName && user.data?.lastName) {
+        return `${user.data?.firstName} ${user.data?.lastName}`
     }
     if (user.data?.firstName) {
         return `${user.data?.firstName}`
     }
-    if (user.data?.LastName) {
-        return `${user.data.LastName}`
+    if (user.data?.lastName) {
+        return `${user.data.lastName}`
     }
     return 'کاربر';
 };

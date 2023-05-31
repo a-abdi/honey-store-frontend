@@ -10,11 +10,12 @@
                         نام و نام خانوادگی
                     </div>
                     <div class="py-1 text-base font-bold">
-                        {{ userData?.data?.firstName }} {{ userData?.data?.LastName }}
+                        {{ userData?.data?.firstName }} {{ userData?.data?.lastName }}
                     </div>
                 </div>
                 <div class="">
-                    <EditProfile class="w-5 h-5 cursor-pointer"/>
+                    <EditProfile @click="showChangeFullname = true" class="w-5 h-5 cursor-pointer"/>
+                    <ChangeFullname v-if="showChangeFullname"/>
                 </div>
             </div>
             <div class="md:w-4/12 py-5 md:py-0 px-4 flex items-center justify-between text-indigo-900 md:border-none border-y border-gray-300">
@@ -41,7 +42,7 @@
                 </div>
                 <div class="">
                     <EditProfile @click="showChangePassword = true" class="w-5 h-5 cursor-pointer"/>
-                    <ChangePassword :show-dialog="showChangePassword" @cancel="showChangePassword = false"/>
+                    <ChangePassword v-if="showChangePassword"/>
                 </div>
             </div>
         </div>
@@ -49,13 +50,26 @@
 </template>
 
 <script lang="ts" setup>
+import ChangeFullname from '@/components/dialog/ChangeFullname.vue';
 import ChangePassword from '@/components/dialog/ChangePassword.vue';
 import EditProfile from '@/components/icons/EditProfile.vue';
 import { useUserStore } from '@/stores/user';
 import { storeToRefs } from 'pinia';
-import { provide, ref } from 'vue';
+import { provide, ref, watch } from 'vue';
 const showChangePassword = ref(false);
-provide('showDialog', showChangePassword);
+const showChangeFullname = ref(false);
+const showDialog = ref(true);
+provide('showDialog', showDialog);
+watch(
+    () => showDialog.value,
+    showDialogValue => {
+        if (!showDialogValue) {
+            showChangePassword.value = false;
+            showChangeFullname.value = false;
+            showDialog.value = true;
+        }
+    }
+);
 const userStore = useUserStore();
 const { userData } = storeToRefs(userStore);
 </script>
