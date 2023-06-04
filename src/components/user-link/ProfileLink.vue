@@ -17,7 +17,7 @@
                         پروفایل
                     </div>
                 </div>
-                <div class="flex items-center py-5 border-b border-gray-200 text-indigo-900 cursor-pointer hover:text-indigo-600">
+                <div @click="goToOrders" class="flex items-center py-5 border-b border-gray-200 text-indigo-900 cursor-pointer hover:text-indigo-600">
                     <OrderVue class="w-5 h-5"/>
                     <div class="mr-2 text-sm">
                         سفارش های من
@@ -57,5 +57,9 @@ const { userData } = storeToRefs(userStore);
 const goToProfile = () => {
     showProfile.value = false;
     router.push('/profile'); 
+};
+const goToOrders = () => {
+    showProfile.value = false;
+    router.push('/profile/orders/current'); 
 };
 </script>

@@ -15,8 +15,11 @@
                 {{ userData?.data?.address?.recipient.phoneNumber.replace("+98", "0") }}
             </div>
              <div class="flex items-center">
-                <button @click="showUserAddress = true" class="px-8 btn-violet">
-                    ویرایش
+                <button v-if="userData?.data?.address" @click="showUserAddress = true" class="px-8 btn-violet">
+                    ویرایش آدرس
+                </button>
+                <button v-else @click="showUserAddress = true" class="px-8 btn-violet">
+                    ثبت آدرس
                 </button>
                 <UserAddress :show-dialog="showUserAddress" @cancel="showUserAddress = false" @success="showUserAddress = false"/>
             </div>
@@ -63,35 +66,55 @@
                     <button @click="payment" v-if="userStore.userLogged" class="w-full btn-violet"> پردخت</button>
                 </div>
             </div>
+            <Message class="absolute bottom-8 right-8 bg-gray-300" 
+                :message="page.message"
+                :showMessage="page.showMessage"
+                :typeMessage="page.typeMessage"
+                @fadeMessage="page.showMessage = false" 
+            />
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { getCartConfig, getUserConfig, paymentConfig } from '@/common/config/axiox.config';
-import { convertToPersian } from '@/common/helpers';
+import { getCartConfig, paymentConfig } from '@/common/config/axiox.config';
+import { convertToPersian, getAxiosErrorMessage } from '@/common/helpers';
 import Currency from '@/components/Currency.vue';
 import { useCartStore } from '@/stores/cart';
 import { useUserStore } from '@/stores/user';
 import { useOrderStore } from '@/stores/order';
 import { storeToRefs } from 'pinia';
 import UserAddress from '@/components/UserAddress.vue';
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
+import { TypeMessage, type Page } from '@/common/typings/common.typings';
+import axios from 'axios';
+import Message from '@/components/message/Message.vue';
 const showUserAddress = ref(false);
 const cartStore = useCartStore();
 const userStore = useUserStore();
 const orderStore = useOrderStore();
 const { userData } = storeToRefs(userStore);
 const getCartConfigAxios = getCartConfig();
+const page = reactive<Page>({});
 cartStore.getCart(getCartConfigAxios);
 const payment = async () => {
-    const paymentConfigAxios = paymentConfig();
-    await orderStore.paymentRequest(paymentConfigAxios);
-    localStorage.removeItem('carts');
-    cartStore.clearProductCart();
-    const { transactionLink } = storeToRefs(orderStore);
-    if (transactionLink.value) {
-        window.location.href = transactionLink.value;
+    try {
+        const paymentConfigAxios = paymentConfig();
+        await orderStore.paymentRequest(paymentConfigAxios);
+        localStorage.removeItem('carts');
+        cartStore.clearProductCart();
+        const { transactionLink } = storeToRefs(orderStore);
+        if (transactionLink.value) {
+            window.location.href = transactionLink.value;
+        }
+    } catch (error) {
+        page.showMessage = true;
+        page.typeMessage = TypeMessage.Danger;
+        if (axios.isAxiosError(error)) {
+            page.message = getAxiosErrorMessage(error);
+        } else {
+            console.log(error);
+        }
     }
 };
 </script>

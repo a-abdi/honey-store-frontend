@@ -34,7 +34,7 @@
                 </div>
             </div>
         </RouterLink>
-        <RouterLink :to="'/'">
+        <RouterLink :to="'/profile/orders/current'">
             <div class="flex items-center justify-between py-6 border-b border-gray-200 cursor-pointer hover:text-indigo-600">
                 <div class="flex items-center">
                     <Order class="w-5 h-5"/>

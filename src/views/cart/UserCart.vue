@@ -4,7 +4,7 @@
             <div v-for="productCart in listProductsCart?.products" class="flex pt-4 pb-12 border-b border-gray-200">
                 <div class="pl-4 mt-12">
                     <div>
-                        <img class="object-cover max-w-32 max-h-48" :src="productCart.product.productImagesSrc[0]" alt="">
+                        <img class="object-cover w-44 h-48" :src="productCart.product.productImagesSrc[0]" alt="">
                     </div>
                     <div class="mt-4">
                         <ProductCartQuantity v-if="typeof productCart.product._id == 'string'" class="my-3" :productId="productCart.product._id"/>

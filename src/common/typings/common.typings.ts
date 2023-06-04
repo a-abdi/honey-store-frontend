@@ -1,7 +1,7 @@
 export interface CommonResponseData {
     _id: string;
-    createdAt: string;
-    updatedAt: string;
+    createdAt: Date;
+    updatedAt: Date;
     __v: number;
 };
 

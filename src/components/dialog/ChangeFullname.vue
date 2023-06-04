@@ -8,10 +8,10 @@
         <div
             class="flex mb-10 items-center py-1 bg-white text-gray-600 border border-gray-200 rounded-md shadow shadow-violet-200/50">
             <div class="">
-                <EditAccount class="w-5 h-5 fill-violet-500 mx-1"/>
+                <EditAccount class="w-5 h-5 text-indigo-900 mx-1"/>
             </div>
             <div class="w-full">
-                <input v-model="fullNameEdit.firstName" name="name" id="name" type="text" class="form-input-v-1">
+                <input v-model="fullNameEdit.firstName" name="name" id="name" type="text" class="form-input-v-1 text-sm text-indigo-900">
             </div>
         </div>
         <div class="w-full mb-3 px-2 text-indigo-900 text-sm">
@@ -22,11 +22,11 @@
         <div
             class="flex mb-10 items-center py-1 bg-white text-gray-600 border border-gray-200 rounded-md shadow shadow-violet-200/50">
             <div class="">
-                <EditAccount class="w-5 h-5 fill-violet-500 mx-1"/>
+                <EditAccount class="w-5 h-5 text-indigo-900 mx-1"/>
             </div>
             <div class="w-full">
                 <input v-model="fullNameEdit.lastName" name="lastname" id="lastname" type="text"
-                    class="form-input-v-1">
+                    class="form-input-v-1 text-sm text-indigo-900">
             </div>
         </div>
         <div class="flex flex-row-reverse py-1">

@@ -2,14 +2,14 @@
   <div class="w-full md:flex md:px-0 px-4">
     <div class="md:w-4/12 w-full">
       <div class="md:mx-3 mx-1">
-        <img class="mx-auto" :src="productData?.data?.productImagesSrc[0]" alt="">
+        <img class="mx-auto h-64 w-60" :src="productData?.data?.productImagesSrc[0]" alt="">
       </div>
       <div class="flex justify-center items-center mt-8 ">
         <div @click="showAdditionalsImage = true" class="mx-1 border border-gary-300 rounded-md p-2 cursor-pointer" v-for="additionalImage in productData?.data?.additionalsImageSrc">
           <img class="w-16 h-16 object-cover" :src="additionalImage" alt="">
         </div>
       </div>
-      <ImageDialog :show-dialog="showAdditionalsImage" @cancel="showAdditionalsImage = false"> 
+      <ImageDialog :show-dialog="showAdditionalsImage" @cancel="closeAdditionalImage"> 
         <div class="w-full lg:flex ">
             <div class="lg:w-7/12 mt-12">
               <img class="object-cover w-72 h-96 rounded-md mx-auto" :src="additionalsImageUrl || productData?.data?.additionalsImageSrc[0]" alt="">
@@ -111,6 +111,10 @@ import Currency from '@/components/Currency.vue';
     typeMessage: TypeMessage.Success,
     showMessage: false,
   });
+  const closeAdditionalImage = () => {
+    showAdditionalsImage.value = false;
+    additionalsImageUrl.value = undefined; 
+  };
   const addToCart = async () => {
     if ( productData.value?.data?.quantity && productData.value?.data?._id) {
       if (userStore.userLogged) {

@@ -142,4 +142,9 @@ export const updatePropertyAxiosConfig = <T>(propertyId: string, data: T): Axios
     data
 });
 
+export const getOrdersAxiosConfig = (): AxiosRequestConfig => ({
+    method: 'get',
+    url: `${BASE_URL}order`,
+});
+
 

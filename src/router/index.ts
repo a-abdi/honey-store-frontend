@@ -99,15 +99,35 @@ const router = createRouter({
           name: "profile/address/AddressIndex",
           component: () => import("@/views/profile/address/AddressIndex.vue"),
         },
+        {
+          path: "orders",
+          name: "profile/order/OrderIndex",
+          component: () => import("@/views/profile/order/OrderIndex.vue"),
+          children: [
+            {
+              path: "current",
+              name: "profile/order/CurrentOrder",
+              component: () => import("@/views/profile/order/CurrentOrder.vue"),
+            },
+            {
+              path: "delivered",
+              name: "profile/order/DeliveredOrder",
+              component: () => import("@/views/profile/order/DeliveredOrder.vue"),
+            },
+            {
+              path: "canceled",
+              name: "profile/order/CanceledOrder",
+              component: () => import("@/views/profile/order/CanceledOrder.vue"),
+            },
+            {
+              path: "returned",
+              name: "profile/order/ReturnedOrder",
+              component: () => import("@/views/profile/order/ReturnedOrder.vue"),
+            }
+          ]
+        },
       ]
     },
-
-
-
-
-
-
-
 
     {
       path: "/admin/dashboard",

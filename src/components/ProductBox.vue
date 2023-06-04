@@ -1,7 +1,7 @@
 <template>
     <div class="w-full mx-auto px-3 py-4">
         <div class="my-2 sm:mx-4">
-            <img :src="product?.productImagesSrc[0]" alt="product" class="object-cover h-64 w-full">
+            <img :src="product?.productImagesSrc[0]" alt="product" class="mx-auto object-cover h-60 w-56">
         </div>
 
         <div class="tracking-wide font-medium px-2 py-2">

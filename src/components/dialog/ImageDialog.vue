@@ -21,12 +21,11 @@
 
 <script setup lang="ts">
 import { OnClickOutside } from '@vueuse/components';
-
-    const props = defineProps({
-        showDialog: {
-            type: Boolean,
-            default: false,
-        }
-    });
-    const emit = defineEmits(['cancel', 'yes']);
+defineProps({
+    showDialog: {
+        type: Boolean,
+        default: false,
+    }
+});
+const emit = defineEmits(['cancel']);
 </script>
