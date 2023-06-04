@@ -104,7 +104,6 @@ const payment = async () => {
         const { transactionLink } = storeToRefs(orderStore);
         if (transactionLink.value) {
             window.location.href = transactionLink.value;
-            localStorage.removeItem('carts');
             cartStore.clearProductCart();
         }
     } catch (error) {

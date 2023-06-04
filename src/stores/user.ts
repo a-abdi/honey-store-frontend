@@ -34,6 +34,12 @@ export const useUserStore = defineStore("user", {
 
     async getOneUser(config: AxiosRequestConfig) {
       this.userData = await sendRequest(config, SetToken.User);
+    },
+
+    async signout() {
+      this.userLoginData.data.access_token = '';
+      this.userData = null;
+      localStorage.removeItem('userAccessToken');
     }
   },
 

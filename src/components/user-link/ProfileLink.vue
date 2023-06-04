@@ -23,7 +23,7 @@
                         سفارش های من
                     </div>
                 </div>
-                <div class="flex items-center py-5 text-red-700 cursor-pointer hover:text-red-400">
+                <div @click="signout" class="flex items-center py-5 text-red-700 cursor-pointer hover:text-red-400">
                     <ExitVue class="w-5 h-5"/>
                     <div class="mr-2 text-sm">
                         خروج
@@ -46,9 +46,11 @@ import { getFullName } from '@/common/helpers';
 import { storeToRefs } from 'pinia';
 import router from '@/router';
 import { useRoute } from 'vue-router';
+import { useCartStore } from '@/stores/cart';
 const showProfile = ref(false);
 const route = useRoute();
 const userStore = useUserStore();
+const cartStore = useCartStore();
 if (userStore.userLogged) {
     const userConfig = getUserConfig();
     userStore.getOneUser(userConfig);
@@ -61,5 +63,13 @@ const goToProfile = () => {
 const goToOrders = () => {
     showProfile.value = false;
     router.push('/profile/orders/current'); 
+};
+const signout = () =>{
+    if (userStore.userLogged) {
+        userStore.signout();
+        cartStore.clearProductCart();
+        router.push('/');
+    }
+    showProfile.value = false;
 };
 </script>

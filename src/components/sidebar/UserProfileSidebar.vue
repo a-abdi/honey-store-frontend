@@ -47,7 +47,7 @@
                 </div>
             </div>
         </RouterLink>
-        <div class="flex items-center py-6 border-b border-gray-200 text-red-700 cursor-pointer hover:text-red-400">
+        <div @click="signout" class="flex items-center py-6 border-b border-gray-200 text-red-700 cursor-pointer hover:text-red-400">
             <Exit class="w-5 h-5"/>
             <div class="mr-2 text-sm">
                 خروج از حساب
@@ -60,14 +60,21 @@
 import { getFullName } from '@/common/helpers';
 import { useUserStore } from '@/stores/user';
 import { storeToRefs } from 'pinia';
-import { useRouter } from 'vue-router';
 import Location from '../icons/Location.vue';
 import Order from '../icons/Order.vue';
 import Exit from '../icons/Exit.vue';
 import UserProfile from '../icons/UserProfile.vue';
 import BigLeft from '../icons/BigLeft.vue';
+import { useCartStore } from '@/stores/cart';
+import router from '@/router';
 const userStore = useUserStore();
+const cartStore = useCartStore();
 const { userData } = storeToRefs(userStore);
-const router = useRouter();
-const goTo = (link: string) => router.push(link);
+const signout = () =>{
+    if (userStore.userLogged) {
+        userStore.signout();
+        cartStore.clearProductCart();
+        router.push('/');
+    }
+};
 </script>

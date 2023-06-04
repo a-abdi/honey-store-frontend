@@ -46,6 +46,7 @@ export const useCartStore = defineStore("cart", {
 
     clearProductCart() {
       this.listProductsCart = null;
+      localStorage.removeItem('carts');
     }
   },
 
