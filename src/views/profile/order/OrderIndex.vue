@@ -9,7 +9,7 @@
                     <div>
                         سفارش های باز
                     </div>
-                    <div :class="{ 'bg-violet-600': route.path == '/profile/orders/current', 'bg-gray-600': route.path != '/profile/orders/current' }"
+                    <div :class="{ 'bg-violet-600': route.path == '/profile/orders/current', 'bg-gray-400': route.path != '/profile/orders/current' }"
                         class="py-1 px-2 mx-1 text-white text-xs rounded-md" v-if="orderStore.getCurrentOrderCount">
                         {{ orderStore.getCurrentOrderCount }}
                     </div>
@@ -20,7 +20,7 @@
                     <div>
                         تحویل شده
                     </div>
-                    <div :class="{ 'bg-violet-600': route.path == '/profile/orders/delivered', 'bg-gray-600': route.path != '/profile/orders/delivered' }"
+                    <div :class="{ 'bg-violet-600': route.path == '/profile/orders/delivered', 'bg-gray-400': route.path != '/profile/orders/delivered' }"
                         class="py-1 px-2 mx-1 text-white text-xs rounded-md"
                         v-if="orderStore.getDeliveredOrderCount">
                         {{ orderStore.getDeliveredOrderCount }}
@@ -32,7 +32,7 @@
                     <div>
                         لغو شده
                     </div>
-                    <div :class="{ 'bg-violet-600': route.path == '/profile/orders/canceled', 'bg-gray-600': route.path != '/profile/orders/canceled' }"
+                    <div :class="{ 'bg-violet-600': route.path == '/profile/orders/canceled', 'bg-gray-400': route.path != '/profile/orders/canceled' }"
                         class="py-1 px-2 mx-1 text-white text-xs rounded-md"
                         v-if="orderStore.getCanceledOrderCount">
                         {{ orderStore.getCanceledOrderCount }}
@@ -44,7 +44,7 @@
                     <div>
                         مرجوع شده
                     </div>
-                    <div :class="{ 'bg-violet-600': route.path == '/profile/orders/returned', 'bg-gray-600': route.path != '/profile/orders/returned' }"
+                    <div :class="{ 'bg-violet-600': route.path == '/profile/orders/returned', 'bg-gray-400': route.path != '/profile/orders/returned' }"
                         class="py-1 px-2 mx-1 text-white text-xs rounded-md"
                         v-if="orderStore.getReturnedOrderCount">
                         {{ orderStore.getReturnedOrderCount }}

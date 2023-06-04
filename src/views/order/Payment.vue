@@ -101,11 +101,11 @@ const payment = async () => {
     try {
         const paymentConfigAxios = paymentConfig();
         await orderStore.paymentRequest(paymentConfigAxios);
-        localStorage.removeItem('carts');
-        cartStore.clearProductCart();
         const { transactionLink } = storeToRefs(orderStore);
         if (transactionLink.value) {
             window.location.href = transactionLink.value;
+            localStorage.removeItem('carts');
+            cartStore.clearProductCart();
         }
     } catch (error) {
         page.showMessage = true;
