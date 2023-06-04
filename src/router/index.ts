@@ -1,5 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
 import AdminDashboard from "@/views/admin/dashboard/Index.vue";
+import { authUserGurd } from "@/middlewares/beforeEachAuthUser";
+import { authAdminrGurd } from "@/middlewares/beforeEachAuthAdmin";
+import {guestUser}  from "@/middlewares/beforeEnterGuestUser";
+import { guestAdmin } from "@/middlewares/beforeEnterGuestAdmin";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -14,11 +18,6 @@ const router = createRouter({
       }
     },
     {
-      path: "/about",
-      name: "About",
-      component: () => import("@/views/AboutView.vue"),
-    },
-    {
       path: "/admin/login",
       name: "admin/auth/Login",
       component: () => import("@/views/admin/auth/Login.vue"),
@@ -26,7 +25,8 @@ const router = createRouter({
         layout: "AppLayoutAdmin",
         requiresAuthUser: false,
         requiresAuthAdmin: false,
-      }
+      },
+      beforeEnter: guestAdmin()
     },
     {
       path: "/login",
@@ -36,7 +36,8 @@ const router = createRouter({
         layout: "AppLayoutUser",
         requiresAuthUser: false,
         requiresAuthAdmin: false,
-      }
+      },
+      beforeEnter: guestUser()
     },
     {
       path: "/signup",
@@ -46,7 +47,8 @@ const router = createRouter({
         layout: "AppLayoutUser",
         requiresAuthUser: false,
         requiresAuthAdmin: false,
-      }
+      },
+      beforeEnter: guestUser()
     },
     {
       path: "/products/:productId",
@@ -74,7 +76,7 @@ const router = createRouter({
       component: () => import("@/views/order/Payment.vue"),
       meta: {
         layout: "AppLayoutUser",
-        requiresAuthUser: false,
+        requiresAuthUser: true,
         requiresAuthAdmin: false,
       }
     },
@@ -85,8 +87,8 @@ const router = createRouter({
       component: () => import("@/views/profile/ProfileIndex.vue"),
       meta: {
         layout: "AppLayoutUser",
-        requiresAuthUser: false,
-        requiresAuthAdmin: true,
+        requiresAuthUser: true,
+        requiresAuthAdmin: false,
       },
       children: [
         {
@@ -223,4 +225,6 @@ const router = createRouter({
   ],
 });
 
+authUserGurd(router);
+authAdminrGurd(router);
 export default router;

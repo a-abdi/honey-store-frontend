@@ -1,6 +1,6 @@
 <template>
     <div class="relative">
-        <UserIcone @click="showProfile = true" class="w-6 h-6 text-gray-500 cursor-pointer"/>
+        <UserIcone v-if="userStore.userLogged" @click="showProfile = true" class="w-6 h-6 text-gray-500 cursor-pointer"/>
         <OnClickOutside @trigger="showProfile = false">
             <div v-if="showProfile && route.path != '/profile'" class="absolute px-4 top-7 left-0 border border-gray-300 rounded-md shadow-lg bg-white h-auto overflow-auto max-h-96 w-64">
                 <div class="text-center text-sm py-1.5 rounded-md bg-indigo-600 font-bold text-white">

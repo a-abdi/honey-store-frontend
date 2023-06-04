@@ -9,7 +9,6 @@
             class="cursor-pointer border border-gray-100 hover:shadow-2xl" 
           />
       </div>
-      <Loading v-else />
     </div>
 </template>
 
