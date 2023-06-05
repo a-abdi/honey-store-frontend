@@ -147,4 +147,15 @@ export const getOrdersAxiosConfig = (): AxiosRequestConfig => ({
     url: `${BASE_URL}order`,
 });
 
+export const getCommentListAxiosConfig = (productId: string): AxiosRequestConfig => ({
+    method: 'get',
+    url: `${BASE_URL}product/${productId}/comment`,
+});
+
+export const createCommentAxiosConfig = <T>(productId: string, data: T): AxiosRequestConfig<T> => ({
+    method: 'post',
+    url: `${BASE_URL}product/${productId}/comment`,
+    data
+});
+
 

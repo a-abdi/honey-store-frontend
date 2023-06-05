@@ -33,7 +33,7 @@ const router = createRouter({
       name: "user/auth/Login",
       component: () => import("@/views/user/auth/Login.vue"),
       meta: {
-        layout: "AppLayoutUser",
+        layout: "AppLayoutDefault",
         requiresAuthUser: false,
         requiresAuthAdmin: false,
       },
@@ -44,7 +44,7 @@ const router = createRouter({
       name: "user/auth/Signup",
       component: () => import("@/views/user/auth/Signup.vue"),
       meta: {
-        layout: "AppLayoutUser",
+        layout: "AppLayoutDefault",
         requiresAuthUser: false,
         requiresAuthAdmin: false,
       },

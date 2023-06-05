@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-    const props = defineProps({
+    defineProps({
         showDialog: {
             type: Boolean,
             default: false,
