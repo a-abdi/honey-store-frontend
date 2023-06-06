@@ -2,13 +2,14 @@ import { defineStore } from "pinia";
 import { sendRequest } from "@/common/helpers";
 import type { AxiosRequestConfig } from 'axios';
 import { SetToken } from "@/common/typings/common.typings";
-import type { OrderData } from "@/common/typings/order.typings";
+import type { AdminOrderData, OrderData } from "@/common/typings/order.typings";
 
 export const useOrderStore = defineStore("order", {
     state: () => {
         return {
             transactionLink: null as string | null,
             orderData: null as OrderData | null,
+            adminOrderData: null as AdminOrderData | null
         }
     },
 
@@ -19,6 +20,10 @@ export const useOrderStore = defineStore("order", {
 
         async getUserOrders(config: AxiosRequestConfig) {
             this.orderData = await sendRequest(config, SetToken.User);
+        },
+
+        async getAdminOrders(config: AxiosRequestConfig) {
+            this.adminOrderData = await sendRequest(config, SetToken.Admin);
         },
     },
 
@@ -67,6 +72,20 @@ export const useOrderStore = defineStore("order", {
 
         getDeliveredOrderCount() {
             return this.getDeliveredOrder.length;
+        },
+
+        getStatus() {
+            return (status: 0 | 1 | 2 | 3 | 4 | 5) => {
+                const statusList = {
+                    '0': 'در انتظار پرداخت',
+                    '1': 'پرداخت شده',
+                    '2': 'لغو شده',
+                    '3': 'ارسال شده',
+                    '4': 'مرچوع شده',
+                    '5': 'تحویل داده شده',
+                }
+                return statusList[status];
+            }
         }
     }
 });

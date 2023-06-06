@@ -3,7 +3,7 @@
     <div class="w-full md:flex md:px-0 px-4 py-2">
       <div class="md:w-4/12 w-full">
         <div class="md:mx-3 mx-1">
-          <img class="mx-auto h-64 w-60" :src="productData?.data?.productImagesSrc[0]" alt="">
+          <img class="mx-auto object-cover h-64 w-60" :src="productData?.data?.productImagesSrc[0]" alt="">
         </div>
         <div class="flex justify-center items-center mt-8 ">
           <div @click="showAdditionalsImage = true" class="mx-1 border border-gary-300 rounded-md p-2 cursor-pointer" v-for="additionalImage in productData?.data?.additionalsImageSrc">

@@ -1,4 +1,6 @@
 import type { CommonResponseData, CommonResponseDataOptional } from "./common.typings";
+import type { NoUndefinedField } from "./helper.typings";
+import type { User } from "./user.typing";
 
 export interface CartOrder {
   productId?: string;
@@ -28,9 +30,12 @@ export interface Order extends CommonResponseData {
   user: string;
   cart: CartOrder[];
   amount: number;
-  code: string;
-  status: number;
+  status: 0 | 1 | 2 | 3 | 4 | 5;
   transaction?: OrderTransaction
+}
+
+export interface AdminOrderData {
+  data: (Omit<Order, 'user'> & {user: NoUndefinedField<User>})[] | [];
 }
 
 export interface OrderData extends CommonResponseDataOptional {

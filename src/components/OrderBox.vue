@@ -9,10 +9,10 @@
             </div>
             <div class="px-3 flex items-center">
                 <div class="px-1 text-gray-600 text-xs">
-                    کد سفارش
+                    شماره سفارش
                 </div>
                 <div>
-                    {{ order.code }}
+                    {{ order._id }}
                 </div>
             </div>
             <div class="px-3 flex items-center">

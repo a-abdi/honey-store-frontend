@@ -32,23 +32,12 @@
 </template>
 
 <script setup lang="ts">
-    import { onMounted, ref } from 'vue';
-    import { useCategoryStore } from '@/stores/category';
-    import { getCategoryListConfig } from '@/common/config/axiox.config';
-    import { storeToRefs } from 'pinia';
-    import EditElement from '@/components/element/EditElement.vue';
-
-    const categoryStore = useCategoryStore();
-    const config = getCategoryListConfig();
-    
-    try {
-        onMounted(async () => {
-            await categoryStore.getCategoryList(config);
-        });
-    } catch (error) {
-        console.log(error);
-    }
-    const { categoryListData } = storeToRefs(categoryStore);
-    
-    const showDetails = ref(false);
+import { useCategoryStore } from '@/stores/category';
+import { getCategoryListConfig } from '@/common/config/axiox.config';
+import { storeToRefs } from 'pinia';
+import EditElement from '@/components/element/EditElement.vue';
+const categoryStore = useCategoryStore();
+const config = getCategoryListConfig();
+categoryStore.getCategoryList(config);
+const { categoryListData } = storeToRefs(categoryStore);
 </script>

@@ -220,6 +220,30 @@ const router = createRouter({
             },
           ]
         },
+        {
+          path: "orders",
+          name: "admin/dashboard/orders/Index",
+          component: () => import("@/views/admin/dashboard/orders/Index.vue"),
+          children: [
+            {
+              path: "",
+              name: "admin/dashboard/orders/Home",
+              component: () => import("@/views/admin/dashboard/orders/Home.vue"),
+            },
+  
+            {
+              path: "create",
+              name: "admin/dashboard/orders/Create",
+              component: () => import("@/views/admin/dashboard/orders/Create.vue"),
+            },
+  
+            {
+              path: `:orsers/edit`,
+              name: "admin/dashboard/orders/Edit",
+              component: () => import("@/views/admin/dashboard/orders/Edit.vue"),
+            },
+          ]
+        },
       ]
     },
   ],
