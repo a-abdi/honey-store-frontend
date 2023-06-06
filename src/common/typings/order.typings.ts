@@ -30,12 +30,16 @@ export interface Order extends CommonResponseData {
   user: string;
   cart: CartOrder[];
   amount: number;
+  orderId: string;
   status: 0 | 1 | 2 | 3 | 4 | 5;
   transaction?: OrderTransaction
 }
 
+export interface AdminOrder extends Omit<Order, 'user'> {}
+export interface AdminOrder { user: User } 
+
 export interface AdminOrderData {
-  data: (Omit<Order, 'user'> & {user: NoUndefinedField<User>})[] | [];
+  data: AdminOrder[] | [];
 }
 
 export interface OrderData extends CommonResponseDataOptional {

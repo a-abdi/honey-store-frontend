@@ -21,7 +21,7 @@
                         {{ convertToPersian(order.user.phoneNumber.replace('+98', '0')) }}
                     </td>
                     <td class="table-td">
-                        {{ order.user.address.province }}
+                        {{ order.user.address?.province }}
                     </td>
                     <td class="table-td">
                         <Currency :money="order.amount"/>
@@ -33,8 +33,9 @@
                         {{ new Date(order.createdAt).toLocaleDateString('fa-IR') }}
                     </td>
                     <td class="">
-                        <Details class="w-5 h-5 text-center mx-auto text-indigo-900 cursor-pointer" />
+                        <Details @click="showDetail[order._id] = true" class="w-5 h-5 text-center mx-auto text-indigo-900 cursor-pointer" />
                     </td>
+                    <ShowOrderDetails :order="order" v-if="showDetail[order._id]" @cancel="showDetail[order._id] = false"/>
                 </tr>
             </tbody>
         </table>
@@ -48,7 +49,11 @@ import { useOrderStore } from '@/stores/order';
 import Currency from '@/components/Currency.vue';
 import { convertToPersian } from '@/common/helpers';
 import Details from '@/components/icons/Details.vue';
+import { reactive, ref } from 'vue';
+import ShowOrderDetails from '@/components/dialog/ShowOrderDetails.vue';
+import type { StringBoolean } from '@/common/typings/common.typings';
 const status = 1;
+const showDetail = reactive<StringBoolean>({});
 const orderConfig = getOrdersBystatusAxiosConfig(status);
 const orderStore = useOrderStore();
 orderStore.getAdminOrders(orderConfig);

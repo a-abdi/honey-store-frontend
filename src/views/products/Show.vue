@@ -81,8 +81,7 @@
         {{ productData?.data?.description }}
       </p>
     </div>
-    <Comment class="text-gray-600 px-8 pt-4 sm:text-sm text-xs border-t-2 border-gray-200">
-    </Comment>
+    <Comment class="text-gray-600 px-8 pt-4 sm:text-sm text-xs border-t-2 border-gray-200"/>
   </div>
 </template>
 
