@@ -6,15 +6,16 @@
             </div>
         </ConfirmDialog>
         <Message class="absolute bottom-4 right-4 bg-gray-300" 
-                :message="form.message"
-                :showMessage="form.showMessage"
-                :typeMessage="form.typeMessage"
-                @fadeMessage="form.showMessage = false" 
-            />
+            :message="form.message"
+            :showMessage="form.showMessage"
+            :typeMessage="form.typeMessage"
+            @fadeMessage="form.showMessage = false" 
+        />
         <table class="table-auto w-full tracking-wider">
             <thead>
                 <tr class="">
                     <th class="table-tr">نام</th>
+                    <th class="table-tr">کد</th>
                     <th class="table-tr">قیمت</th>
                     <th class="table-tr">تخفیف</th>
                     <th class="table-tr">تعداد</th>
@@ -25,17 +26,11 @@
             <tbody v-if="productListData?.data?.length">
                 <tr v-for="( product, index ) in productListData.data" :key="product._id" :class="{'bg-neutral-100': (index + 1) % 2 }">
                     <td class="table-td">
-                        <div class="">
-                            <router-link class="flex items-center flex mr-2" :to="`/admin/dashboard/products/${product._id}`">
-                                <div>
-                                    <img class="object-cover h-8 w-8 rounded-md " :src="product.productImagesSrc[0]" alt="">
-                                </div>
-                                <div class="pr-1">
-                                    {{ product.name }} 
-                                </div>
-                            </router-link>
-                        </div>
+                        <router-link class="" :to="`/admin/dashboard/products/${product._id}`">
+                                {{ product.name }} 
+                        </router-link>
                     </td>
+                    <td class="table-td"> {{ product.code }} </td>
                     <td class="table-td"> <Currency :money="product.price" /> </td>
                     <td class="table-td"> <Currency :money="product.discount" /> </td>
                     <td class="table-td"> <Currency :money="product.quantity" /> </td>
