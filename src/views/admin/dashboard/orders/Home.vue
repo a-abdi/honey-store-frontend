@@ -55,15 +55,27 @@ import Currency from '@/components/Currency.vue';
 import { convertToPersian } from '@/common/helpers';
 import Details from '@/components/icons/Details.vue';
 import Information from '@/components/icons/Information.vue';
-import { reactive } from 'vue';
+import { reactive, watch } from 'vue';
 import ShowOrderDetails from '@/components/dialog/ShowOrderDetails.vue';
 import SendInformation from '@/components/dialog/SendInformation.vue';
 import type { StringBoolean } from '@/common/typings/common.typings';
-const status = 1;
+import { useRoute } from 'vue-router';
+const route = useRoute();
+const orderStore = useOrderStore();
+const getOrders = (status: number) => {
+    const orderConfig = getOrdersBystatusAxiosConfig(status);
+    orderStore.getAdminOrders(orderConfig);
+};
+getOrders(Number(route.query?.status));
+watch(
+    () => route.query,
+    query => {
+        if (query?.status) {
+            getOrders(Number(query.status));
+        }
+    }
+)
 const showDetail = reactive<StringBoolean>({});
 const showSendInformation = reactive<StringBoolean>({});
-const orderConfig = getOrdersBystatusAxiosConfig(status);
-const orderStore = useOrderStore();
-orderStore.getAdminOrders(orderConfig);
 const { adminOrderData } = storeToRefs(orderStore);
 </script>
