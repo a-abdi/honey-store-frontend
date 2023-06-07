@@ -33,11 +33,11 @@
                     <td class="table-td">
                         {{ new Date(order.createdAt).toLocaleDateString('fa-IR') }}
                     </td>
-                    <td class="">
+                    <td class="table-td">
                         <Details @click="showDetail[order._id] = true" class="w-5 h-5 text-center mx-auto text-indigo-900 cursor-pointer" />
                         <ShowOrderDetails :order="order" v-if="showDetail[order._id]" @cancel="showDetail[order._id] = false"/>
                     </td>
-                    <td class="">
+                    <td class="table-td">
                         <Information @click="showSendInformation[order._id] = true" class="w-5 h-5 text-center mx-auto text-indigo-900 cursor-pointer"/>
                         <SendInformation :order="order" v-if="showSendInformation[order._id]" @cancel="showSendInformation[order._id] = false"/>
                     </td>

@@ -1,19 +1,23 @@
 <template>
-    <RouterLink :to="link">
-        <div class="flex items-center justify-between py-6 border-b border-gray-200 cursor-pointer hover:text-indigo-600">
-            <div class="flex items-center">
-                <div class="mr-2 text-sm">
-                    <slot></slot>
+    <div>
+        <RouterLink :to="link">
+            <div :class="{'text-red-600': route.path == link, 'py-4': isChild, 'py-6': !isChild}" class="flex items-center justify-between border-b border-gray-200 cursor-pointer">
+                <div class="flex items-center">
+                    <div :class="{'text-xs': isChild}" class="mr-2 text-sm">
+                        <slot></slot>
+                    </div>
+                </div>
+                <div>
+                    <BigLeft class="w-5 h-5"/>
                 </div>
             </div>
-            <div>
-                <BigLeft class="w-5 h-5"/>
-            </div>
-        </div>
-    </RouterLink>
+        </RouterLink>
+    </div>
 </template>
 
 <script lang="ts" setup>
 import BigLeft from '../icons/BigLeft.vue';
-defineProps<{link: string}>()
+import { useRoute } from 'vue-router';
+const route = useRoute();
+defineProps<{isChild: boolean, link: string}>();
 </script>

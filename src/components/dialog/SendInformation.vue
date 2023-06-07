@@ -123,7 +123,9 @@
                                             نام محصول
                                         </div>
                                         <div class="text-indigo-900 text-sm px-1 py-2">
-                                            {{ cart.name }}
+                                            <RouterLink :to="`/admin/dashboard/products/${cart.product}`">
+                                                {{ cart.name }}
+                                            </RouterLink>
                                         </div>
                                     </div>
                                     <div class="flex items-center">
