@@ -4,7 +4,7 @@
             دیدگاه ها
         </p>
         <div class="py-8">
-            <button @click="addComment" class="bg-transparent hover:bg-indigo-500 text-indigo-700 font-semibold hover:text-white py-2 px-12 border border-indigo-500 hover:border-transparent rounded-md">
+            <button @click="addComment" class="w-full sm:w-64 bg-transparent hover:bg-indigo-500 text-indigo-700 font-semibold hover:text-white py-2 px-12 border border-indigo-500 hover:border-transparent rounded-md">
                 افزودن دیدگاه
             </button>
             <CreateComment v-if="showCreateComment" @cancel="showCreateComment = false"/>

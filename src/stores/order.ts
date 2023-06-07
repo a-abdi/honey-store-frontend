@@ -30,6 +30,12 @@ export const useOrderStore = defineStore("order", {
         async getOneAdminOrders(config: AxiosRequestConfig) {
             this.oneOrderData = await sendRequest(config, SetToken.Admin);
         },
+
+        async updateAdminOrders(config: AxiosRequestConfig) {
+            console.log(config, 'YYYYYYYYYYYY');
+            
+            this.oneOrderData = await sendRequest(config, SetToken.Admin);
+        },
     },
 
     getters: {
@@ -79,17 +85,20 @@ export const useOrderStore = defineStore("order", {
             return this.getDeliveredOrder.length;
         },
 
+        statusList() {
+            return [
+                '',
+                'پرداخت شده',
+                'لغو شده',
+                'ارسال شده',
+                'مرجوع شده',
+                'تحویل داده شده',
+            ]
+        },
+
         getStatus() {
             return (status: 0 | 1 | 2 | 3 | 4 | 5) => {
-                const statusList = {
-                    '0': 'در انتظار پرداخت',
-                    '1': 'پرداخت شده',
-                    '2': 'لغو شده',
-                    '3': 'ارسال شده',
-                    '4': 'مرچوع شده',
-                    '5': 'تحویل داده شده',
-                }
-                return statusList[status];
+                return this.statusList[status];
             }
         },
 

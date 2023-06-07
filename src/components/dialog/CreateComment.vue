@@ -58,7 +58,7 @@
                                             </textarea>
                                         </div>
                                         <div>
-                                            <button @click="createComment" class="btn-violet text-sm">
+                                            <button @click="createComment" class="w-full btn-violet text-sm">
                                                 ثبت دیدگاه
                                             </button>
                                         </div>

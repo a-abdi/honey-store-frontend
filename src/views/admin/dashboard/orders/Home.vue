@@ -28,7 +28,13 @@
                         <Currency :money="order.amount"/>
                     </td>
                     <td class="table-td">
-                        {{ orderStore.getStatus(order?.status) }}
+                        <select v-model="statusValue" @change="changeOrderstatus(order._id, order.status)" autofocus="true" class="w-full my-2 md:my-0 appearance-none bg-white text-indigo-900 form-input t">
+                            <option value="" disabled selected>{{ orderStore.getStatus(order?.status) }}</option>
+                            <option v-for="(status, index ) in orderStore.statusList" :disabled="!index" :value="index">
+                                {{ status }}
+                            </option>
+                        </select>
+                        <ChangeOrderStatus :statusValue="statusValue.toString()" :orderId="order._id" @yes="getOrders(Number(route.query?.status))" @cancel="updateOrderStatus[order._id] = false" v-if="updateOrderStatus[order._id]"/>
                     </td>
                     <td class="table-td">
                         {{ new Date(order.createdAt).toLocaleDateString('fa-IR') }}
@@ -55,9 +61,10 @@ import Currency from '@/components/Currency.vue';
 import { convertToPersian } from '@/common/helpers';
 import Details from '@/components/icons/Details.vue';
 import Information from '@/components/icons/Information.vue';
-import { reactive, watch } from 'vue';
+import { reactive, ref, watch } from 'vue';
 import ShowOrderDetails from '@/components/dialog/ShowOrderDetails.vue';
 import SendInformation from '@/components/dialog/SendInformation.vue';
+import ChangeOrderStatus from '@/components/dialog/ChangeOrderStatus.vue';
 import type { StringBoolean } from '@/common/typings/common.typings';
 import { useRoute } from 'vue-router';
 const route = useRoute();
@@ -74,8 +81,15 @@ watch(
             getOrders(Number(query.status));
         }
     }
-)
+);
 const showDetail = reactive<StringBoolean>({});
 const showSendInformation = reactive<StringBoolean>({});
+const updateOrderStatus = reactive<StringBoolean>({});
 const { adminOrderData } = storeToRefs(orderStore);
+const statusValue = ref('');
+const changeOrderstatus = (orderId: string, status: number) => {
+    if(status.toString() != statusValue.value) {
+        updateOrderStatus[orderId] = true;
+    }   
+};
 </script>

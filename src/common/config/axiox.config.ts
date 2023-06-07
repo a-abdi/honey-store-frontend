@@ -157,6 +157,12 @@ export const getOneOrdersAxiosConfig = (orderId: string): AxiosRequestConfig => 
     url: `${BASE_URL}orders/${orderId}`,
 });
 
+export const updateOrderStatusAxiosConfig = <T>(orderId: string, data: T): AxiosRequestConfig<T> => ({
+    method: 'patch',
+    url: `${BASE_URL}orders/${orderId}`,
+    data
+});
+
 export const getCommentListAxiosConfig = (productId: string): AxiosRequestConfig => ({
     method: 'get',
     url: `${BASE_URL}product/${productId}/comment`,
