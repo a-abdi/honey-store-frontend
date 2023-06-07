@@ -2,14 +2,15 @@ import { defineStore } from "pinia";
 import { sendRequest } from "@/common/helpers";
 import type { AxiosRequestConfig } from 'axios';
 import { SetToken } from "@/common/typings/common.typings";
-import type { AdminOrderData, OrderData } from "@/common/typings/order.typings";
+import type { AdminOrderData, OneOrderData, OrderData } from "@/common/typings/order.typings";
 
 export const useOrderStore = defineStore("order", {
     state: () => {
         return {
             transactionLink: null as string | null,
             orderData: null as OrderData | null,
-            adminOrderData: null as AdminOrderData | null
+            adminOrderData: null as AdminOrderData | null,
+            oneOrderData: null as OneOrderData | null
         }
     },
 
@@ -24,6 +25,10 @@ export const useOrderStore = defineStore("order", {
 
         async getAdminOrders(config: AxiosRequestConfig) {
             this.adminOrderData = await sendRequest(config, SetToken.Admin);
+        },
+
+        async getOneAdminOrders(config: AxiosRequestConfig) {
+            this.oneOrderData = await sendRequest(config, SetToken.Admin);
         },
     },
 

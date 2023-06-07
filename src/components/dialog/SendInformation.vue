@@ -46,86 +46,101 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="border-b border-gray-200 mt-6 pb-1 px-4">
+                            <div class="border-b border-gray-200 pb-1 mt-6 px-4">
                                 <p class="tracking-wide text-violet-600">
-                                    اطلاعات سفارش
+                                    اطلاعات گیرنده
                                 </p>
                             </div>
                             <div class="md:flex md:items-center justify-between px-6 py-5">
                                 <div class="flex items-center">
                                     <div class="text-gray-500 text-xs px-1 py-2">
-                                        شناسه سفارش
+                                        نام و نام خانوادگی
                                     </div>
                                     <div class="text-indigo-900 text-sm px-1 py-2">
-                                        {{ order.orderId}}
+                                        {{ order.user.address?.recipient.firstName }} {{ order.user.address?.recipient.lastName }}
                                     </div>
                                 </div>
                                 <div class="flex items-center">
                                     <div class="text-gray-500 text-xs px-1 py-2">
-                                        وضعیت سفارش
+                                        شماره تماس
                                     </div>
-                                    <div class="text-indigo-900 text-sm px-1 py-2">
-                                        {{  orderStore.getStatus(order.status) }}
+                                    <div class="text-indigo-900 text-sm px-1 py-2 tracking-wider">
+                                        {{ convertToPersian(order.user.address?.recipient.phoneNumber.replace('+98', '0')!) }}
                                     </div>
                                 </div>
                                 <div class="flex items-center">
                                     <div class="text-gray-500 text-xs px-1 py-2">
-                                        تاریخ سفارش
+                                        کد پستی
                                     </div>
-                                    <div class="text-indigo-900 text-sm px-1 py-2">
-                                        {{ new Date(order.createdAt).toLocaleDateString('fa-IR').replace(/\//g, '-') }}
+                                    <div class="text-indigo-900 text-sm px-1 py-2 tracking-wider">
+                                        {{ order.user.address?.postalCode }}
                                     </div>
                                 </div>
+                            </div>
+                            <div class="px-6 py-4">
+                                <div class="text-gray-500 text-xs px-1 py-1">
+                                    آدرس پستی
+                                </div>
+                                <p class="tracking-wide leading-loose text-sm text-indigo-900">
+                                    {{ order.user.address?.postalAddress }}
+                                </p>
                             </div>
                             <div class="md:flex md:items-center justify-between px-6 py-5">
                                 <div class="flex items-center">
                                     <div class="text-gray-500 text-xs px-1 py-2">
-                                        مبلغ سفارش
+                                        استان
                                     </div>
                                     <div class="text-indigo-900 text-sm px-1 py-2">
-                                        <Currency :money="order.amount"/>
+                                        {{ order.user.address?.province }}
                                     </div>
                                 </div>
                                 <div class="flex items-center">
                                     <div class="text-gray-500 text-xs px-1 py-2">
-                                        شناسه تراکنش
+                                        شهر
                                     </div>
                                     <div class="text-indigo-900 text-sm px-1 py-2">
-                                        {{  order.transaction?.id }}
+                                        {{ order.user.address?.city }}
                                     </div>
                                 </div>
                                 <div class="flex items-center">
                                     <div class="text-gray-500 text-xs px-1 py-2">
-                                        کد رهگیری
+                                        پلاک
                                     </div>
                                     <div class="text-indigo-900 text-sm px-1 py-2">
-                                        {{ order.transaction?.trackId }}
+                                        {{ order.user.address?.plaque }}
                                     </div>
                                 </div>
                             </div>
-                            <div class="md:flex md:items-center justify-between px-6 py-5">
-                                <div class="flex items-center">
-                                    <div class="text-gray-500 text-xs px-1 py-2">
-                                        شماره کارت
+                            <div class="border-b border-gray-200 pb-1 mt-6 px-4">
+                                <p class="tracking-wide text-violet-600">
+                                    اطلاعات سبد خرید
+                                </p>
+                            </div>
+                            <div v-for="cart in order.cart">
+                                <div class="md:flex md:items-center justify-between px-6 py-5">
+                                    <div class="flex items-center">
+                                        <div class="text-gray-500 text-xs px-1 py-2">
+                                            نام محصول
+                                        </div>
+                                        <div class="text-indigo-900 text-sm px-1 py-2">
+                                            {{ cart.name }}
+                                        </div>
                                     </div>
-                                    <div class="text-indigo-900 text-sm px-1 py-2">
-                                        {{ order.transaction?.cardNo}}
+                                    <div class="flex items-center">
+                                        <div class="text-gray-500 text-xs px-1 py-2">
+                                            کد محصول
+                                        </div>
+                                        <div class="text-indigo-900 text-sm px-1 py-2 tracking-wider">
+                                            {{ cart.code }}
+                                        </div>
                                     </div>
-                                </div>
-                                <div v-if="order.transaction?.status" class="flex items-center">
-                                    <div class="text-gray-500 text-xs px-1 py-2">
-                                        وضعیت تراکنش
-                                    </div>
-                                    <div class="text-indigo-900 text-sm px-1 py-2">
-                                        {{  orderStore.getTransactionStatus(order.transaction?.status) }}
-                                    </div>
-                                </div>
-                                <div class="flex items-center">
-                                    <div class="text-gray-500 text-xs px-1 py-2">
-                                        مبلغ پرداختی
-                                    </div>
-                                    <div class="text-indigo-900 text-sm px-1 py-2">
-                                        <Currency :money="order.transaction?.paymentAmount" />
+                                    <div class="flex items-center">
+                                        <div class="text-gray-500 text-xs px-1 py-2">
+                                            تعداد سفارش
+                                        </div>
+                                        <div v-if="cart.quantity" class="text-indigo-900 text-sm px-1 py-2 tracking-wider">
+                                            {{ convertToPersian(cart.quantity?.toString()) }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -139,11 +154,8 @@
 
 <script setup lang="ts">
 import type { AdminOrder } from '@/common/typings/order.typings';
-import { useOrderStore } from '@/stores/order';
 import { OnClickOutside } from '@vueuse/components';
-import Currency from '../Currency.vue';
 import { convertToPersian } from '@/common/helpers';
 const emit = defineEmits(['cancel']);
 defineProps<{order: AdminOrder}>();
-const orderStore = useOrderStore();
 </script>

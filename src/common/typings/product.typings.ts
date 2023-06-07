@@ -16,6 +16,7 @@ export interface NewProduct {
     quantity: number | null;
     description?: string;
     category: string;
+    code: string;
     customProperty?: ProductProperty[];
 };
 

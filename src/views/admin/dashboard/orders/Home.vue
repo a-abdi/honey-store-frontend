@@ -10,6 +10,7 @@
                     <th class="table-tr text-indigo-900">وضعیت</th>
                     <th class="table-tr text-indigo-900">تاریخ</th>
                     <th class="table-tr text-indigo-900">جزئیات</th>
+                    <th class="table-tr text-indigo-900">اطلاعات ارسال</th>
                 </tr>
             </thead>
             <tbody  v-if="adminOrderData?.data?.length">
@@ -34,8 +35,12 @@
                     </td>
                     <td class="">
                         <Details @click="showDetail[order._id] = true" class="w-5 h-5 text-center mx-auto text-indigo-900 cursor-pointer" />
+                        <ShowOrderDetails :order="order" v-if="showDetail[order._id]" @cancel="showDetail[order._id] = false"/>
                     </td>
-                    <ShowOrderDetails :order="order" v-if="showDetail[order._id]" @cancel="showDetail[order._id] = false"/>
+                    <td class="">
+                        <Information @click="showSendInformation[order._id] = true" class="w-5 h-5 text-center mx-auto text-indigo-900 cursor-pointer"/>
+                        <SendInformation :order="order" v-if="showSendInformation[order._id]" @cancel="showSendInformation[order._id] = false"/>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -49,11 +54,14 @@ import { useOrderStore } from '@/stores/order';
 import Currency from '@/components/Currency.vue';
 import { convertToPersian } from '@/common/helpers';
 import Details from '@/components/icons/Details.vue';
-import { reactive, ref } from 'vue';
+import Information from '@/components/icons/Information.vue';
+import { reactive } from 'vue';
 import ShowOrderDetails from '@/components/dialog/ShowOrderDetails.vue';
+import SendInformation from '@/components/dialog/SendInformation.vue';
 import type { StringBoolean } from '@/common/typings/common.typings';
 const status = 1;
 const showDetail = reactive<StringBoolean>({});
+const showSendInformation = reactive<StringBoolean>({});
 const orderConfig = getOrdersBystatusAxiosConfig(status);
 const orderStore = useOrderStore();
 orderStore.getAdminOrders(orderConfig);
