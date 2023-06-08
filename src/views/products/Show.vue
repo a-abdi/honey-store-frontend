@@ -28,7 +28,7 @@
           <div class="">
             {{ productData?.data?.name }}
           </div>
-          <div class="flex items-end">
+          <div v-if="commenStore.productScore" class="flex items-end">
             <Stare class="text-yellow-400"/>
             <div class="text-xs text-violet-600"> {{ commenStore.productScore }} </div>
           </div>
@@ -113,7 +113,6 @@ import { useCommentStore } from '@/stores/comment';
   const cartStore = useCartStore();
   const config = getProductConfig(productId);
   const commenStore = useCommentStore();
-  const { commentListData } = storeToRefs(commenStore);
   const getCommentListConfig = getCommentListAxiosConfig(productId);
   commenStore.getCommentList(getCommentListConfig);
   productStore.getProduct(config);
