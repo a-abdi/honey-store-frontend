@@ -54,7 +54,7 @@
                                         </div>
                                         <div class="my-6">
                                             <label class="text-indigo-900 text-xs p-2 tracking-wider" for="tiltle">متن نظر</label>
-                                            <textarea v-model="newComment.text" class="p-2 mt-1 text-xs text-indigo-900 resize-y border rounded-md w-full h-10 sm:h-16 md:h-24 xl:h-28 focus:outline-none">
+                                            <textarea v-model="newComment.text" class="p-2 mt-1 text-xs text-indigo-900 resize-none border rounded-md w-full h-10 sm:h-16 md:h-24 xl:h-28 focus:outline-none">
                                             </textarea>
                                         </div>
                                         <div>

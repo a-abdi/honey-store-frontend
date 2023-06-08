@@ -38,9 +38,9 @@ export const createProductConfig = <T>(data: T): AxiosRequestConfig<T> => ({
     data
 });
 
-export const getProductListConfig = (): AxiosRequestConfig => ({
+export const getProductListConfig = (filter: string = ''): AxiosRequestConfig => ({
     method: 'get',
-    url: `${BASE_URL}products`,
+    url: `${BASE_URL}products${filter}`,
 });
 
 export const getProductConfig = (id: string): AxiosRequestConfig => ({

@@ -18,9 +18,23 @@ import { useProductStore } from '@/stores/product';
 import { storeToRefs } from 'pinia';
 import ProductBox from '@/components/ProductBox.vue';
 import router from '@/router';
-  const productStore = useProductStore();
-  const config = getProductListConfig();
-  productStore.getProductList(config);
-  const { productListData } = storeToRefs(productStore);
-  const showProduct = (productId: string) => router.push(`/products/${productId}`);
+import { useRoute } from 'vue-router';
+import { watch } from 'vue';
+const productStore = useProductStore();
+const route = useRoute();
+const getProductData = () => {
+    const categoryId = localStorage.getItem('categoryId');
+    if (categoryId) {
+        const productFilter = `?category=${categoryId}`;
+        const config = getProductListConfig(productFilter);
+        productStore.getProductList(config);
+    }
+};
+watch(
+    () => route.fullPath,
+    () => getProductData()
+);
+getProductData();
+const { productListData } = storeToRefs(productStore);
+const showProduct = (productId: string) => router.push(`/products/${productId}`);
 </script>

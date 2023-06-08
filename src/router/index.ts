@@ -18,6 +18,16 @@ const router = createRouter({
       }
     },
     {
+      path: "/category/:name+",
+      name: "Category",
+      component: () => import("@/views/category/categoryIndex.vue"),
+      meta: {
+        layout: "AppLayoutUser",
+        requiresAuthUser: false,
+        requiresAuthAdmin: false,
+      }
+    },
+    {
       path: "/admin/login",
       name: "admin/auth/Login",
       component: () => import("@/views/admin/auth/Login.vue"),
