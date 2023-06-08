@@ -16,7 +16,7 @@
                         </button>
                         <div class="mt-10 pt-6 mb-4 border-t border-gray-300">
                             <div class="text-indigo-900 tracking-wider">
-                                وضعیت سفارش را به {{ orderStore.statusList[Number(statusValue)] }} تغییر می دهید؟
+                                وضعیت سفارش را به <span class="text-red-600">{{ orderStore.statusList[Number(statusValue)] }}</span> تغییر می دهید؟
                             </div>
                             <div class="flex items-center flex-row-reverse mt-6">
                                 <button @click="changeStatus" class="btn-red mx-2">
@@ -49,7 +49,7 @@ import { TypeMessage, type Page } from '@/common/typings/common.typings';
 import axios from 'axios';
 import { getAxiosErrorMessage } from '@/common/helpers';
 import Message from '../message/Message.vue';
-const emit = defineEmits(['cancel', 'yes']);
+const emit = defineEmits(['cancel', 'orderIsUpdated']);
 const props = defineProps<{statusValue: string, orderId: string}>();
 const orderStore = useOrderStore();
 const page = reactive<Page>({});
@@ -57,10 +57,7 @@ const changeStatus = async () => {
     try {
         const updateConfig = updateOrderStatusAxiosConfig(props.orderId, {status: props.statusValue});
         await orderStore.updateAdminOrders(updateConfig);
-        emit('yes');
-        page.showMessage = true;
-        page.typeMessage = TypeMessage.Success;
-        page.message = orderStore.oneOrderData?.message;
+        emit('orderIsUpdated');
     } catch (error) {
         page.showMessage = true;
         page.typeMessage = TypeMessage.Danger;

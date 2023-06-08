@@ -28,13 +28,19 @@
                         <Currency :money="order.amount"/>
                     </td>
                     <td class="table-td">
-                        <select v-model="statusValue" @change="changeOrderstatus(order._id, order.status)" autofocus="true" class="w-full my-2 md:my-0 appearance-none bg-white text-indigo-900 form-input t">
+                        <select @change="changeOrderstatus($event, order._id, order.status)" autofocus="true" class="w-full my-2 md:my-0 appearance-none bg-white text-indigo-900 form-input t">
                             <option value="" disabled selected>{{ orderStore.getStatus(order?.status) }}</option>
                             <option v-for="(status, index ) in orderStore.statusList" :disabled="!index" :value="index">
                                 {{ status }}
                             </option>
                         </select>
-                        <ChangeOrderStatus :statusValue="statusValue.toString()" :orderId="order._id" @yes="getOrders(Number(route.query?.status))" @cancel="updateOrderStatus[order._id] = false" v-if="updateOrderStatus[order._id]"/>
+                        <ChangeOrderStatus 
+                            :statusValue="statusValue.toString()" 
+                            :orderId="order._id" 
+                            @orderIsUpdated="updateOrders(order._id)" 
+                            @cancel="updateOrderStatus[order._id] = false" 
+                            v-if="updateOrderStatus[order._id]"
+                        />
                     </td>
                     <td class="table-td">
                         {{ new Date(order.createdAt).toLocaleDateString('fa-IR') }}
@@ -87,9 +93,15 @@ const showSendInformation = reactive<StringBoolean>({});
 const updateOrderStatus = reactive<StringBoolean>({});
 const { adminOrderData } = storeToRefs(orderStore);
 const statusValue = ref('');
-const changeOrderstatus = (orderId: string, status: number) => {
-    if(status.toString() != statusValue.value) {
+const changeOrderstatus = (event: Event, orderId: string, status: number) => {
+    const target = event.target as HTMLInputElement;
+    if(status.toString() != target.value) {
         updateOrderStatus[orderId] = true;
+        statusValue.value = target.value;
     }   
+};
+const updateOrders = (orderId: string) => {
+    getOrders(Number(route.query?.status));
+    updateOrderStatus[orderId] = false;
 };
 </script>
