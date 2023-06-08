@@ -18,7 +18,7 @@ const router = createRouter({
       }
     },
     {
-      path: "/category/:name+",
+      path: "/category/:name",
       name: "Category",
       component: () => import("@/views/category/categoryIndex.vue"),
       meta: {
@@ -61,7 +61,7 @@ const router = createRouter({
       beforeEnter: guestUser()
     },
     {
-      path: "/products/:productId",
+      path: "/products/:productId/:productName",
       name: "product/Show",
       component: () => import("@/views/products/Show.vue"),
       meta: {

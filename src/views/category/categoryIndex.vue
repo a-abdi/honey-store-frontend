@@ -5,7 +5,7 @@
             v-for="product in productListData.data"
             :key="product._id"  
             :product="product"
-            @click="showProduct(product._id)"
+            @click="showProduct(product._id, product.name)"
             class="cursor-pointer border border-gray-100 hover:shadow-2xl" 
           />
       </div>
@@ -36,5 +36,5 @@ watch(
 );
 getProductData();
 const { productListData } = storeToRefs(productStore);
-const showProduct = (productId: string) => router.push(`/products/${productId}`);
+const showProduct = (productId: string, productName: string) => router.push(`/products/${productId}/${productName.replace(' ', '-')}`);
 </script>

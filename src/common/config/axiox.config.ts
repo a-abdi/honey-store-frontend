@@ -21,9 +21,9 @@ export const getCategoryConfig = (id: string): AxiosRequestConfig => ({
     url: `${BASE_URL}categories/${id}`,
 });
 
-export const getCategoryListConfig = (): AxiosRequestConfig => ({
+export const getCategoryListConfig = (filter : string = ''): AxiosRequestConfig => ({
     method: 'get',
-    url: `${BASE_URL}categories`,
+    url: `${BASE_URL}categories${filter}`,
 });
 
 export const editCategoryListConfig = (category: EditCategory): AxiosRequestConfig => ({
