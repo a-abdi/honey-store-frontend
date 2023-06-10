@@ -91,6 +91,7 @@ import { useUserStore } from '@/stores/user';
 import { storeToRefs } from 'pinia';
 const cartStore = useCartStore();
 const userStore = useUserStore();
+userStore.userLogged && cartStore.resetUserCart();
 const { listProductsCart } = storeToRefs(cartStore);
 const gotToUserLogin = () => router.push('/login');
 const gotToShipping = () => router.push('/payment');

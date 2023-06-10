@@ -67,7 +67,8 @@ const goToOrders = () => {
 const signout = () =>{
     if (userStore.userLogged) {
         userStore.signout();
-        cartStore.clearProductCart();
+        cartStore.listProductsCart = null;
+        cartStore.clearCartLocalStorage();
         router.push('/');
     }
     showProfile.value = false;

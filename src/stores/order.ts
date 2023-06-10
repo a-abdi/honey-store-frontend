@@ -32,8 +32,6 @@ export const useOrderStore = defineStore("order", {
         },
 
         async updateAdminOrders(config: AxiosRequestConfig) {
-            console.log(config, 'YYYYYYYYYYYY');
-            
             this.oneOrderData = await sendRequest(config, SetToken.Admin);
         },
     },

@@ -23,8 +23,6 @@ export const useCommentStore = defineStore("comment", {
 
     async getCommentList(config: AxiosRequestConfig) {
       this.commentListData = await sendRequest(config);
-      console.log(this.commentListData);
-      
     },
 
     async editComment(config: AxiosRequestConfig) {

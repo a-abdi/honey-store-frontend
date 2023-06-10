@@ -85,7 +85,7 @@ import { useUserStore } from '@/stores/user';
 import { useOrderStore } from '@/stores/order';
 import { storeToRefs } from 'pinia';
 import UserAddress from '@/components/UserAddress.vue';
-import { reactive, ref } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 import { TypeMessage, type Page } from '@/common/typings/common.typings';
 import axios from 'axios';
 import Message from '@/components/message/Message.vue';
@@ -94,9 +94,8 @@ const cartStore = useCartStore();
 const userStore = useUserStore();
 const orderStore = useOrderStore();
 const { userData } = storeToRefs(userStore);
-const getCartConfigAxios = getCartConfig();
 const page = reactive<Page>({});
-cartStore.getCart(getCartConfigAxios);
+userStore.userLogged && cartStore.resetUserCart();
 const payment = async () => {
     try {
         const paymentConfigAxios = paymentConfig();
@@ -104,7 +103,8 @@ const payment = async () => {
         const { transactionLink } = storeToRefs(orderStore);
         if (transactionLink.value) {
             window.location.href = transactionLink.value;
-            cartStore.clearProductCart();
+            cartStore.listProductsCart = null;
+            cartStore.clearCartLocalStorage();
         }
     } catch (error) {
         page.showMessage = true;

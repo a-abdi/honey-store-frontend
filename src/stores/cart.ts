@@ -3,6 +3,7 @@ import { sendRequest } from "@/common/helpers";
 import type { AxiosRequestConfig } from 'axios';
 import type { CartData, ListProductsCart, ProductCart } from "@/common/typings/cart.typings";
 import { SetToken } from "@/common/typings/common.typings";
+import { getCartConfig } from "@/common/config/axiox.config";
 
 export const useCartStore = defineStore("cart", {
   state: () => {
@@ -44,9 +45,20 @@ export const useCartStore = defineStore("cart", {
       localStorage.setItem('carts', JSON.stringify(this.listProductsCart));
     },
 
-    clearProductCart() {
-      this.listProductsCart = null;
+    clearCartLocalStorage() {
       localStorage.removeItem('carts');
+    },
+
+    async resetUserCart() {
+      try {
+        const getCartConfigAxios = getCartConfig();
+        await this.getCart(getCartConfigAxios);
+        this.clearCartLocalStorage();
+        this.setCartLocalStorage();
+      } catch (error) {
+        this.listProductsCart = null;
+        this.clearCartLocalStorage();
+      }
     }
   },
 

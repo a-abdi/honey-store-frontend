@@ -52,7 +52,7 @@
                 </RouterLink>
             </div>
         </div>
-        <div class="px-4 py-4">
+        <div class="px-4 py-4 flex flex-col-reverse">
             <RouterView />
         </div>
     </div>
