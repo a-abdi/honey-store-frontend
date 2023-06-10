@@ -1,7 +1,7 @@
 <template>
     <DashboardIndex>
         <template #search>
-            Search
+            <!-- Search -->
         </template>
     </DashboardIndex>
 </template>
