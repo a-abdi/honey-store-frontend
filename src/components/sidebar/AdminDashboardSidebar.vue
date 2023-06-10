@@ -1,6 +1,8 @@
 <template>
     <div class="py-2 w-4/12 sm:w-32 xl:w-60 bg-gray-50 text-indigo-900 tracking-wide sm:tracking-wider">
-        <AdminSidebarLink :is-child="false" change-color="" :link="'/admin/dashboard/products'">محصولات</AdminSidebarLink>
+        <AdminSidebarLink :is-child="false" :link="'/admin/dashboard/products?deletedAt=false'" @click="showProductLink = !showProductLink"><p class="text-indigo-900"> محصولات </p></AdminSidebarLink>
+        <AdminSidebarLink :is-child="true" :link="'/admin/dashboard/products?deletedAt=false'" class="pr-4" v-if="showProductLink">موجود</AdminSidebarLink>
+        <AdminSidebarLink :is-child="true" :link="'/admin/dashboard/products?deletedAt=true'" class="pr-4" v-if="showProductLink">حذف شده</AdminSidebarLink>
         <AdminSidebarLink :is-child="false" :link="'/admin/dashboard/categories'">دسته ها</AdminSidebarLink>
         <AdminSidebarLink :is-child="false" :link="'/admin/dashboard/properties'">خصوصیات</AdminSidebarLink>
         <AdminSidebarLink :is-child="false" :link="'/admin/dashboard/orders?status=1'" @click="showOrdersLink = !showOrdersLink"><p class="text-indigo-900"> سفارش ها  </p></AdminSidebarLink>
@@ -16,4 +18,5 @@
 import AdminSidebarLink from '../user-link/AdminSidebarLink.vue';
 import { ref } from 'vue';
 const showOrdersLink = ref(false);
+const showProductLink = ref(false);
 </script>
