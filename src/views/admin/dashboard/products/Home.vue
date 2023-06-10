@@ -1,6 +1,6 @@
 <template>
     <div class="">
-        <ConfirmDialog :showDialog="showDialog" @yes="deleteProduct"  @cancel=" showDialog = false">
+        <ConfirmDialog :showDialog="showDialog" @hard-delete="deleteProduct" @safe-delete="safeDelete"  @cancel=" showDialog = false">
             <div class="text-right my-4 text-purple-600">
                <p>محصول مورد نظر حذف شود؟</p>
             </div>
@@ -49,7 +49,7 @@
 </template>
 
 <script setup lang="ts">
-import { deleteProductConfig, getProductListConfig } from '@/common/config/axiox.config';
+import { deleteProductConfig, getProductListConfig, safeDeleteProductConfig } from '@/common/config/axiox.config';
 import { useProductStore } from '@/stores/product';
 import { storeToRefs } from 'pinia';
 import { onMounted, reactive, ref } from 'vue';
@@ -79,9 +79,28 @@ import { getAxiosErrorMessage } from '@/common/helpers';
     const { productListData } = storeToRefs(productStore);
     const deleteProduct = async () => {
         try {
-            const config = deleteProductConfig(productId.value);
             showDialog.value = false;
+            const config = deleteProductConfig(productId.value);
             await productStore.deleteProduct(config);
+            form.showMessage = true;
+            form.typeMessage = TypeMessage.Success;
+            form.message = productData.value?.message;
+            getProductList();
+        } catch (error) {
+            form.showMessage = true;
+            form.typeMessage = TypeMessage.Danger;
+            if (axios.isAxiosError(error)) {
+               form.message = getAxiosErrorMessage(error);
+            } else {
+                console.log(error);
+            }
+        }
+    };
+    const safeDelete = async () => {
+        try {
+            showDialog.value = false;
+            const config = safeDeleteProductConfig(productId.value);
+            await productStore.editProduct(config);
             form.showMessage = true;
             form.typeMessage = TypeMessage.Success;
             form.message = productData.value?.message;

@@ -53,6 +53,11 @@ export const deleteProductConfig = (id: string): AxiosRequestConfig => ({
     url: `${BASE_URL}products/${id}`,
 });
 
+export const safeDeleteProductConfig = (id: string): AxiosRequestConfig => ({
+    method: 'patch',
+    url: `${BASE_URL}products/${id}/safe-delete`,
+});
+
 export const editProductConfig = (productId: string, data: FormData): AxiosRequestConfig => ({
     method: 'patch',
     url: `${BASE_URL}products/${productId}`,
