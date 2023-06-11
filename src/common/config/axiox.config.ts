@@ -199,5 +199,20 @@ export const deleteCommentAdminAxiosConfig = (productId: string, commentId: stri
     url: `${BASE_URL}product/${productId}/comment/${commentId}/admin`,
 });
 
+export const getUsersCommentAxios = (productId: string): AxiosRequestConfig => ({
+    method: 'get',
+    url: `${BASE_URL}product/${productId}/user/comment`,
+});
+
+export const deleteUsersCommentAxios = (productId: string, commentId: string): AxiosRequestConfig => ({
+    method: 'get',
+    url: `${BASE_URL}product/${productId}/comment/${commentId}`,
+});
+
+export const updateUserCommentAxios = <T>(productId: string, commentId: string, data: T): AxiosRequestConfig<T> => ({
+    method: 'patch',
+    url: `${BASE_URL}product/${productId}/comment/${commentId}`,
+    data
+});
 
 
