@@ -36,6 +36,14 @@ export const useCommentStore = defineStore("comment", {
 
     async getNotVerifyComment(config: AxiosRequestConfig) {
       this.commentListDataNotVerify = await sendRequest(config, SetToken.Admin);
+    },
+
+    async updateCommentByAdmin(config: AxiosRequestConfig) {
+      await sendRequest(config, SetToken.Admin);
+    },
+
+    async delteCommentByAdmin(config: AxiosRequestConfig) {
+      await sendRequest(config, SetToken.Admin);
     }
   },
 

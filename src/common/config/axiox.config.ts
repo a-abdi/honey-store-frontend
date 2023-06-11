@@ -189,5 +189,15 @@ export const getCommentListNotVerifyAxiosConfig = (): AxiosRequestConfig => ({
     url: `${BASE_URL}product/comment/not-verify`,
 });
 
+export const updateCommentAdminAxiosConfig = (productId: string, commentId: string): AxiosRequestConfig => ({
+    method: 'patch',
+    url: `${BASE_URL}product/${productId}/comment/${commentId}/admin`,
+});
+
+export const deleteCommentAdminAxiosConfig = (productId: string, commentId: string): AxiosRequestConfig => ({
+    method: 'delete',
+    url: `${BASE_URL}product/${productId}/comment/${commentId}/admin`,
+});
+
 
 
