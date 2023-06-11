@@ -11,9 +11,8 @@
                            <slot>Content</slot>
                        </div>
                        <div class="flex flex-row-reverse text-xs md:text-sm mb-4">
-                           <button @click="emit('hardDelete')" class="btn-red-hollow mx-2 w-24">حذف کامل</button>
-                           <button @click="emit('safeDelete')" class="btn-yellow-hollow mx-2 w-24">حذف امن</button>
-                           <button @click="emit('cancel')" class="btn-blue-hollow mx-2 w-24">خیر</button>
+                           <button @click="emit('yes')" class="btn-red-hollow mx-2">بله</button>
+                           <button @click="emit('cancel')" class="btn-blue-hollow mx-2">خیر</button>
                        </div>
                     </div>
                 </div>
@@ -23,11 +22,6 @@
 </template>
 
 <script setup lang="ts">
-    defineProps({
-        showDialog: {
-            type: Boolean,
-            default: false,
-        }
-    });
-    const emit = defineEmits(['cancel', 'hardDelete', 'safeDelete']);
+defineProps<{showDialog: boolean}>();
+const emit = defineEmits<{(event: 'cancel'): void, (event: 'yes'): void }>();
 </script>
