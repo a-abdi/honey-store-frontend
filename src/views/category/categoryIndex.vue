@@ -25,7 +25,7 @@ const route = useRoute();
 const getProductData = () => {
     const categoryId = localStorage.getItem('categoryId');
     if (categoryId) {
-        const productFilter = `?category=${categoryId}`;
+        const productFilter = `?category=${categoryId}&deletedAt=false`;
         const config = getProductListConfig(productFilter);
         productStore.getProductList(config);
     }

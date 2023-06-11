@@ -96,24 +96,25 @@ const login =  async () => {
         const userLoginConfigAxios = userLoginConfig(loginForm);
         await userStore.login(userLoginConfigAxios);
         const productCartCount = cartStore.productCartCount;
-        if( productCartCount > 0 ) {
-            const { listProductsCart } = storeToRefs(cartStore);
-            const products = [];
-            if (listProductsCart?.value?.products) {
-                for (let index = 0; index < listProductsCart?.value?.products.length; index++) {
-                    const cartProduct =  listProductsCart?.value?.products[index];
-                    products.push({
-                        _id: cartProduct.product._id,
-                        quantity: cartProduct.quantity
-                    });
+        try {
+            if( productCartCount > 0 ) {
+                const { listProductsCart } = storeToRefs(cartStore);
+                const products = [];
+                if (listProductsCart?.value?.products) {
+                    for (let index = 0; index < listProductsCart?.value?.products.length; index++) {
+                        const cartProduct = listProductsCart?.value?.products[index];
+                        products.push({
+                            _id: cartProduct.product._id,
+                            quantity: cartProduct.quantity
+                        });
+                    }
                 }
+                const addToCartConfigAxios = addToCartConfig({ products });
+                await cartStore.addToCart(addToCartConfigAxios);
             }
-            const addToCartConfigAxios = addToCartConfig({ products });
-            await cartStore.addToCart(addToCartConfigAxios);
+        } catch (error) {
+            console.log(error);
         }
-        cartStore.resetUserCart();
-        const getUserConfigAxios = getUserConfig();
-        await userStore.getOneUser(getUserConfigAxios);
         router.push('/');
     } catch (error) {
         page.showMessage = true;
