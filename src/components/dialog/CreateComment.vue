@@ -58,7 +58,15 @@
                                             </textarea>
                                         </div>
                                         <div>
-                                            <button @click="createComment" class="w-full btn-violet text-sm">
+                                            <div v-if="commentData?.data" class="flex flex-row-reverse">
+                                                <button @click="deleteComment" class="btn-red text-sm mx-2">
+                                                    انصراف از دیدگاه
+                                                </button>
+                                                <button @click="updateComment" class="btn-violet text-sm mx-2">
+                                                    ویرایش دیدگاه
+                                                </button>
+                                            </div>
+                                            <button v-else @click="createComment" class="w-full btn-violet text-sm">
                                                 ثبت دیدگاه
                                             </button>
                                         </div>
@@ -84,26 +92,84 @@ import type { NewComment } from '@/common/typings/comment.typings';
 import { useCommentStore } from '@/stores/comment';
 import { OnClickOutside } from '@vueuse/components';
 import { storeToRefs } from 'pinia';
-import { inject, reactive } from 'vue';
-import { createCommentAxiosConfig } from '@/common/config/axiox.config';
+import { inject, reactive, watch } from 'vue';
+import { createCommentAxiosConfig, deleteUsersCommentAxios, getUsersCommentAxios, updateUserCommentAxios } from '@/common/config/axiox.config';
 import { TypeMessage, type Page } from '@/common/typings/common.typings';
 import axios from 'axios';
 import { getAxiosErrorMessage } from '@/common/helpers';
 import Message from '../message/Message.vue';
 const emit = defineEmits(['cancel']);
-const page = reactive<Page>({});
-const newComment = reactive<NewComment>({text: ''});
-const commenStore = useCommentStore();
-const { commentData } = storeToRefs(commenStore);
 const productId = inject<string>('productId');
+const commenStore = useCommentStore();
+const page = reactive<Page>({});
+const { commentData } = storeToRefs(commenStore);
+const newComment = reactive<NewComment>({
+    text: commentData.value?.data?.text ? commentData.value?.data?.text : '',
+    title: commentData.value?.data?.title,
+    score: commentData.value?.data?.score
+});
+watch(
+    () => commentData.value?.data,
+    comment => {
+        newComment.title = comment?.title;
+        comment?.text && ( newComment.text = comment?.text );
+        newComment.score = comment?.score;
+    }
+);
+if (productId) {
+    const getCommentConfig = getUsersCommentAxios(productId);
+    commenStore.getComment(getCommentConfig);
+}
 const createComment = async () => {
     try {
         if (productId) {
             const commentConfig = createCommentAxiosConfig(productId, newComment);
             await commenStore.createComment(commentConfig);
+            emit('cancel');
+        } else {
             page.showMessage = true;
-            page.typeMessage = TypeMessage.Success;
-            page.message = commentData.value?.message;
+            page.typeMessage = TypeMessage.Danger;
+            page.message = 'خطایی پیش اومده';
+        }
+    } catch (error) {
+        page.showMessage = true;
+        page.typeMessage = TypeMessage.Danger;
+        if (axios.isAxiosError(error)) {
+            page.message = getAxiosErrorMessage(error);
+        } else {
+            console.log(error);
+        }
+    }
+};
+const updateComment = async () => {
+    try {
+        const commentId = commentData.value?.data?._id;
+        if (productId && commentId) {
+            const commentConfig = updateUserCommentAxios(productId, commentId, newComment);
+            await commenStore.editComment(commentConfig);
+            emit('cancel');
+        } else {
+            page.showMessage = true;
+            page.typeMessage = TypeMessage.Danger;
+            page.message = 'خطایی پیش اومده';
+        }
+    } catch (error) {
+        page.showMessage = true;
+        page.typeMessage = TypeMessage.Danger;
+        if (axios.isAxiosError(error)) {
+            page.message = getAxiosErrorMessage(error);
+        } else {
+            console.log(error);
+        }
+    }
+};
+const deleteComment = async () => {
+    try {
+        const commentId = commentData.value?.data?._id;
+        if (productId && commentId) {
+            const commentConfig = deleteUsersCommentAxios(productId, commentId);
+            await commenStore.deleteComment(commentConfig);
+            emit('cancel');
         } else {
             page.showMessage = true;
             page.typeMessage = TypeMessage.Danger;

@@ -205,7 +205,7 @@ export const getUsersCommentAxios = (productId: string): AxiosRequestConfig => (
 });
 
 export const deleteUsersCommentAxios = (productId: string, commentId: string): AxiosRequestConfig => ({
-    method: 'get',
+    method: 'delete',
     url: `${BASE_URL}product/${productId}/comment/${commentId}`,
 });
 

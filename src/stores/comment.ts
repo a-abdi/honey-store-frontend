@@ -31,7 +31,8 @@ export const useCommentStore = defineStore("comment", {
     },
 
     async deleteComment(config: AxiosRequestConfig) {
-      this.commentData = await sendRequest(config, SetToken.User);
+      await sendRequest(config, SetToken.User);
+      this.commentData = null;
     },
 
     async getNotVerifyComment(config: AxiosRequestConfig) {

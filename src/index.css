@@ -83,7 +83,7 @@
     }
     
     .btn-violet-hollow {
-        @apply sm:w-64 bg-transparent hover:bg-indigo-500 text-indigo-700 font-semibold hover:text-white py-1.5 px-2 border border-indigo-500 hover:border-transparent rounded-md;
+        @apply bg-transparent hover:bg-indigo-500 text-indigo-700 font-semibold hover:text-white py-1.5 px-2 border border-indigo-500 hover:border-transparent rounded-md;
     }
 
     .btn-red-hollow {
