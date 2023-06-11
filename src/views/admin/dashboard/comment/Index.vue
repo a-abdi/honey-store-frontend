@@ -6,6 +6,6 @@
     </DashboardIndex>
 </template>
 
-<script setup lang="ts">
-    import DashboardIndex from '@/components/AdminDashboardContentIndex.vue'
+<script lang="ts" setup>
+import DashboardIndex from '@/components/AdminDashboardContentIndex.vue';
 </script>

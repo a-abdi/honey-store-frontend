@@ -2,13 +2,14 @@ import { defineStore } from "pinia";
 import { sendRequest } from "@/common/helpers";
 import type { AxiosRequestConfig } from 'axios';
 import { SetToken } from "@/common/typings/common.typings";
-import type { CommentData, CommentListData } from "@/common/typings/comment.typings";
+import type { CommentData, CommentListData, CommentNotVerifyListData } from "@/common/typings/comment.typings";
 
 export const useCommentStore = defineStore("comment", {
   state: () => {
     return {
       commentListData: null as CommentListData | null,
       commentData: null as CommentData | null,
+      commentListDataNotVerify: null as CommentNotVerifyListData | null,
     }
   },
 
@@ -32,6 +33,10 @@ export const useCommentStore = defineStore("comment", {
     async deleteComment(config: AxiosRequestConfig) {
       this.commentData = await sendRequest(config, SetToken.User);
     },
+
+    async getNotVerifyComment(config: AxiosRequestConfig) {
+      this.commentListDataNotVerify = await sendRequest(config, SetToken.Admin);
+    }
   },
 
   getters: {

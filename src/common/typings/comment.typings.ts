@@ -23,3 +23,13 @@ export interface CommentData extends CommonResponseDataOptional {
 export interface CommentListData extends CommonResponseDataOptional {
     data: Comment[] | [];
 }
+
+export interface NotVerifyCommentProduct {
+        _id: string;
+        name: string;
+        code: string;
+}
+
+export interface CommentNotVerifyListData extends CommonResponseDataOptional {
+    data: ( Omit<Comment, 'product'> & { product:  NotVerifyCommentProduct })[] | [];
+}

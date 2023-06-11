@@ -23,6 +23,10 @@
         <AdminSidebarLink :is-child="true" :link="'/admin/dashboard/orders?status=5'" class="pr-4" v-if="showLink.order"> تحویل شده </AdminSidebarLink>
         <AdminSidebarLink :is-child="true" :link="'/admin/dashboard/orders?status=2'" class="pr-4" v-if="showLink.order"> لغو شده </AdminSidebarLink>
         <AdminSidebarLink :is-child="true" :link="'/admin/dashboard/orders?status=4'" class="pr-4" v-if="showLink.order"> مرجوع شده </AdminSidebarLink>
+    
+        <!-- comment link -->
+        <AdminSidebarLink :is-child="false" :link="'/admin/dashboard/comment'" @click="changeShow('comment')"><p class="text-indigo-900"> دیدگاه ها </p></AdminSidebarLink>
+        <AdminSidebarLink :is-child="true" :link="'/admin/dashboard/comment'" class="pr-4" v-if="showLink.comment" > تایید نشده </AdminSidebarLink>
     </div>
 </template>
 
@@ -34,13 +38,14 @@ const showLink = reactive({
     product: false,
     category: false,
     property: false,
+    comment: false,
 });
 
 const resetShowLink = () => {
-    showLink.order = false;
-    showLink.product = false;
-    showLink.category = false;
-    showLink.property = false;
+    let key: keyof typeof showLink;
+    for (key in showLink) {
+        showLink[key] = false;
+    }
 };
 
 const changeShow = (value: keyof typeof showLink) => {

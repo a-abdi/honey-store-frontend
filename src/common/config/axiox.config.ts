@@ -184,4 +184,10 @@ export const createCommentAxiosConfig = <T>(productId: string, data: T): AxiosRe
     data
 });
 
+export const getCommentListNotVerifyAxiosConfig = (): AxiosRequestConfig => ({
+    method: 'get',
+    url: `${BASE_URL}product/comment/not-verify`,
+});
+
+
 

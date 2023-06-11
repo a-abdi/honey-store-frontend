@@ -1,10 +1,10 @@
 <template>
     <div class="">
-        <ConfirmDelete :showDialog="showDialog" @yes="deleteProperty"  @cancel=" showDialog = false">
-            <div class="text-right my-4 text-purple-600">
+        <Dialog :showDialog="showDialog" @yes="deleteProperty"  @cancel=" showDialog = false">
+            <div class="text-right my-4 text-indigo-900">
                <p>خصوصیات مورد نظر حذف شود؟</p>
             </div>
-        </ConfirmDelete>
+        </Dialog>
         <Message class="absolute bottom-4 right-4 bg-gray-300" 
             :message="page.message"
             :showMessage="page.showMessage"
@@ -57,7 +57,7 @@ import { getAxiosErrorMessage } from '@/common/helpers';
 import EditElement from '@/components/element/EditElement.vue';
 import Message from '@/components/message/Message.vue';
 import DeleteElement from '@/components/element/DeleteElement.vue';
-import ConfirmDelete from '@/components/dialog/ConfirmDelete.vue';
+import Dialog from '@/components/dialog/Dialog.vue';
 const properyStore = usePropertyStore();
 const showDialog = ref(false);
 const propertyId = ref('');
