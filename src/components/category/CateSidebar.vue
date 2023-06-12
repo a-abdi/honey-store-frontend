@@ -14,7 +14,7 @@
                                 </div>
                             </RouterLink>
                             <div v-for="category in categoryListData?.data" :key="category._id">
-                                <div @click="getProduct(category._id, category.name)" class="flex items-center justify-between px-4 py-4 my-1 cursor-pointer">
+                                <div @click="getProduct(category._id)" class="flex items-center justify-between px-4 py-4 my-1 cursor-pointer">
                                     <div class="text-sm">
                                         {{ category.name }}
                                     </div>
@@ -43,12 +43,10 @@ const categoryStore = useCategoryStore();
 const { categoryListData } = storeToRefs(categoryStore);
 const categoryConfig = getCategoryListConfig();
 categoryStore.getCategoryList(categoryConfig);
-const getProduct = (id: string, name: string) => {
+const getProduct = (categoryId: string) => {
     emit('cancel');
-    localStorage.removeItem('categoryId');
-    localStorage.setItem('categoryId', id);
     router.push({
-        path: `/category/${name.replace(/ /g, '-')}`
+        path: `/category/${categoryId}`
     });
 };
 </script>

@@ -56,9 +56,13 @@
                 </div>
               </div>
               <div class="m-2">
-                <div v-if="!cartStore.productCartExist(productId)">
-                  <button v-if="productData?.data?.quantity" @click="addToCart" class="btn-violet w-full"> افزودن به سبد خرید </button>
-                  <button v-if="!productData?.data?.quantity" disabled="true" class="btn-violet w-full"> این کالا موجود نمی باشد</button>
+                <div v-if="!cartStore.productCartExist(productId) && productData?.data?.quantity">
+                  <button v-if="productData?.data?.quantity" @click="addToCart" class="btn-violet w-full"> 
+                    افزودن به سبد خرید 
+                  </button>
+                  <button v-if="productData?.data?.quantity <= 0 || productData.data.deletedAt" disabled="true" class="btn-violet w-full cursor-not-allowed"> 
+                    این کالا موجود نمی باشد
+                  </button>
                 </div>
                 <ProductCartQuantity v-else :productId="productId"/>
               </div>

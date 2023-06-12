@@ -1,11 +1,14 @@
 <template>
     <div class="" v-if="discount != 0 && discount">
         <div class="flex items-center justify-between py-2">
-            <div class="bg-violet-500 text-xs text-white inline-flex rounded-full p-1">
+            <div class="bg-violet-500 text-xs text-white inline-flex rounded-full p-1 tracking-wider">
                 {{ convertToPersian(percentage) }}
             </div>
-            <div>
+            <div class="flex items-center">
                 <Currency :money="totalPrice" />
+                <div class="text-vs text-indigo-900 pr-1">
+                    تومان
+                </div>
             </div>
         </div>
         <div class="pr-4 line-through text-gray-400 flex flex-row-reverse">
@@ -13,7 +16,12 @@
         </div> 
     </div>
     <div v-else class="flex flex-row-reverse pt-2 pb-8">
-        <Currency :money="price" />
+        <div class="flex items-center">
+            <Currency :money="price" />
+            <div class="text-vs text-indigo-900 pr-1">
+                تومان
+            </div>
+        </div>
     </div>
 </template>
 

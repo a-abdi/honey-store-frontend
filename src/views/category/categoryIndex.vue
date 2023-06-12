@@ -1,14 +1,15 @@
 <template>
     <div>
-      <div v-if="productListData" class="md:mx-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-6">
-          <ProductBox 
-            v-for="product in productListData.data"
-            :key="product._id"  
-            :product="product"
-            @click="showProduct(product._id, product.name)"
-            class="cursor-pointer border border-gray-100 hover:shadow-2xl" 
-          />
-      </div>
+        <ProductSort :category-id="categoryId"/>
+        <div v-if="productListData" class="md:mx-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-6">
+            <ProductBox 
+                v-for="product in productListData.data"
+                :key="product._id"  
+                :product="product"
+                @click="showProduct(product._id, product.name)"
+                class="cursor-pointer border border-gray-100 hover:shadow-2xl" 
+            />
+        </div>
     </div>
 </template>
 
@@ -19,16 +20,20 @@ import { storeToRefs } from 'pinia';
 import ProductBox from '@/components/ProductBox.vue';
 import router from '@/router';
 import { useRoute } from 'vue-router';
-import { watch } from 'vue';
+import { ref, watch } from 'vue';
+import ProductSort from '@/components/sort/ProductSort.vue';
 const productStore = useProductStore();
 const route = useRoute();
+const categoryId = ref('');
 const getProductData = () => {
-    const categoryId = localStorage.getItem('categoryId');
-    if (categoryId) {
-        const productFilter = `?category=${categoryId}&deletedAt=false`;
-        const config = getProductListConfig(productFilter);
-        productStore.getProductList(config);
+    categoryId.value = route.params.categoryId as string;
+    const query = route.query;
+    let productFilter = `?category=${categoryId.value}`;
+    if (Object.keys(query).some(value => value === 'sort')) {
+        productFilter = productFilter.concat('&', `sort=${query.sort}`);
     }
+    const config = getProductListConfig(productFilter);
+    productStore.getProductList(config);
 };
 watch(
     () => route.fullPath,
