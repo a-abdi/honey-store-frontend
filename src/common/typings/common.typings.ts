@@ -51,3 +51,8 @@ export interface StringObject {
 export interface StringBoolean {
     [name: string]: boolean;
 }
+
+export interface Sort {
+    index: number;
+    text: string;
+}

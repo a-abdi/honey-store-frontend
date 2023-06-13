@@ -1,6 +1,7 @@
 <template>
     <div>
-        <ProductSort :category-id="categoryId"/>
+        <SortIndex :category-id="categoryId" :sortList="SORT_PRODUCT" class="md:block hidden"/>
+        <MobileSort :category-id="categoryId" :sortList="SORT_PRODUCT" class="md:hidden" />
         <div v-if="productListData" class="md:mx-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-6">
             <ProductBox 
                 v-for="product in productListData.data"
@@ -21,7 +22,9 @@ import ProductBox from '@/components/ProductBox.vue';
 import router from '@/router';
 import { useRoute } from 'vue-router';
 import { ref, watch } from 'vue';
-import ProductSort from '@/components/sort/ProductSort.vue';
+import SortIndex from '@/components/sort/SortIndex.vue';
+import { SORT_PRODUCT } from '@/common/constans';
+import MobileSort from '@/components/sort/MobileSort.vue';
 const productStore = useProductStore();
 const route = useRoute();
 const categoryId = ref('');
