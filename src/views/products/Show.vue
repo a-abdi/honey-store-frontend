@@ -23,16 +23,16 @@
           </div> 
         </ImageDialog>
       </div>
-      <div class="md:w-8/12 w-full text-right mt-4">
+      <div class="md:w-8/12 w-full mt-4">
         <div class="w-full text-indigo-900 text-lg py-2">
           <div class="">
             {{ productData?.data?.name }}
           </div>
         </div>
         <div class="w-full md:flex">
-          <div class="md:w-7/12 w-full py-4 border-t border-gray-300">
+          <div class="md:w-7/12 w-full border-t border-gray-300">
             <div class="flex items-center">
-                <div v-if="commenStore.commentListData?.data.length" class="flex items-center">
+                <div v-if="commenStore.commentListData?.data.length" class="flex items-center mt-4">
                   <Stare class="text-yellow-400 w-4 h-4"/>
                   <div class="mt-0.5 text-xs text-gray-900"> 
                     {{ commenStore.commentListData.data[0].scoreAverage }}

@@ -1,16 +1,16 @@
 <template>
     <div class="flex justify-between border border-gray-200 rounded-md shadow-lg p-2">
         <div class="mx-1">
-            <Plus @click="updateProductQuantity(1)" class="w-6 h-6 fill-violet-600 cursor-pointer"/>
+            <Plus @click="updateProductQuantity(1)" class="w-5 h-5 fill-violet-600 cursor-pointer"/>
         </div>
         <div class="mx-4 text-violet-600">
             {{ convertToPersian(`${cartStore.getCartByProductId(prop.productId!)?.quantity}`) }}
         </div>
         <div v-if="cartStore.getQuantityProduct(productId!) > 1" @click="updateProductQuantity(-1)" class="mx-1">
-            <Minus class="w-6 h-6 fill-violet-600 cursor-pointer"/>
+            <Minus class="w-5 h-5 fill-violet-600 cursor-pointer"/>
         </div>
         <div v-if="cartStore.getQuantityProduct(productId!) === 1" @click="delteProductInCart">
-            <Trash class="w-6 h-6 fill-violet-600 cursor-pointer" />
+            <Trash class="w-5 h-5 fill-violet-600 cursor-pointer" />
         </div>
         <Message class="absolute bottom-8 right-8 bg-gray-300" 
           :message="page.message"

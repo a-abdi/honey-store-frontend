@@ -1,6 +1,6 @@
 <template>
     <div class="sticky bottom-0 lg:static bg-white lg:w-1/4 w-full border-t border-gray-200">
-        <div class="lg:block lg:border lg:rounded-md lg:px-2 lg:px-0 px-8 flex flex-row-reverse justify-between mt-4">
+        <div class="lg:block lg:border lg:rounded-md lg:px-2 px-8 flex flex-row-reverse justify-between mt-4">
             <div class="lg:block hidden">
                 <div class="flex justify-between items-center px-2 py-4 text-gray-600 text-sm">
                     <div class="text-sm">

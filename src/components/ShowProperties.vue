@@ -1,25 +1,33 @@
 <template>
     <div>
-        <div v-for="property in customProperties" class="lg:text-xs text-vsl">
-            <div v-if="property && (property.type == 'file'? showFile: true)" class="min-h-full flex lg:mt-8 mt-4">
-                <div class="ml-2">
-                    {{ property.label }}:
+        <div v-for="( property, index) in customProperties" class="lg:text-xs text-vsl">
+            <div v-if="property && index < 3" class="lg:mt-8 mt-4">
+                <div class="flex items-center">
+                    <div class="ml-2">
+                        {{ property.label }}:
+                    </div>
+                    <div v-if="property.type == 'file' && typeof property.value == 'string'">
+                        <DocumenPicture @click="showAttachImage[property.label] = true" class="w-5 h-5 cursor-pointer"/>
+                        <ImageDialog :show-dialog="showAttachImage[property.label]" @cancel="showAttachImage[property.label] = false"> 
+                            <img :src="property.value" class="w-132 h-144 mx-auto" alt=""> 
+                        </ImageDialog>
+                    </div>
+                    <div v-if="property.type == 'number'" class=" text-indigo-900">
+                        {{ property.value }}
+                    </div>
+                    <div v-if="property.type == 'text'" class=" text-indigo-900">
+                        {{ property.value }}
+                    </div>
+                    <div class="mr-1 text-indigo-900">
+                        {{ property.unit }}
+                    </div>
                 </div>
-                <div v-if="property.type == 'file' && typeof property.value == 'string'">
-                    <DocumenPicture @click="showAttachImage[property.label] = true" class="w-6 h-6 cursor-pointer"/>
-                    <ImageDialog :show-dialog="showAttachImage[property.label]" @cancel="showAttachImage[property.label] = false"> 
-                        <img :src="property.value" class="object-cover w-100 h-144 mx-auto" alt=""> 
-                    </ImageDialog>
+            </div>
+            <div v-else-if="index == 3" class="lg:mt-8 mt-4">
+                <div @click="showMoreProperty = true"  class="cursor-pointer text-violet-600">
+                    مشخصات بیشتر
                 </div>
-                <div v-if="property.type == 'number'" class=" text-violet-600">
-                    {{ property.value }}
-                </div>
-                <div v-if="property.type == 'text'" class=" text-violet-600">
-                    {{ property.value }}
-                </div>
-                <div class="mr-1 text-violet-600">
-                    {{ property.unit }}
-                </div>
+                <MoreProperty :show-dialog="showMoreProperty" @cancel="showMoreProperty = false"/>
             </div>
         </div>
     </div>
@@ -28,9 +36,14 @@
 <script lang="ts" setup>
 import type { StringBoolean } from '@/common/typings/common.typings';
 import type { ProductProperty } from '@/common/typings/product.typings';
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 import ImageDialog from './dialog/ImageDialog.vue';
 import DocumenPicture from './icons/DocumenPicture.vue';
+import MoreProperty from '@/components/dialog/MoreProperty.vue'
 const showAttachImage = reactive<StringBoolean>({});
-const props = defineProps<{customProperties: ProductProperty[], showFile?: boolean}>();
+defineProps<{customProperties: ProductProperty[], showFile?: boolean}>();
+const showMoreProperty = ref(false);
+const countProperty = 1;
+console.log(countProperty);
+
 </script>
