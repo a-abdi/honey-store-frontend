@@ -79,10 +79,8 @@ import { useRoute } from 'vue-router';
 import { useProductStore } from '@/stores/product';
 import { addToCartConfig, getProductConfig, getCartConfig, getCommentListAxiosConfig } from '@/common/config/axiox.config';
 import { storeToRefs } from 'pinia';
-import { computed } from '@vue/reactivity';
-import { convertToPersian, getAxiosErrorMessage } from '@/common/helpers';
+import { getAxiosErrorMessage } from '@/common/helpers';
 import { useCartStore } from '@/stores/cart';
-import ProductCartQuantity from '@/components/ProductCartQuantity.vue';
 import { useUserStore } from '@/stores/user';
 import { provide, reactive, ref } from 'vue';
 import { TypeMessage, type Page } from '@/common/typings/common.typings';
@@ -91,64 +89,58 @@ import Message from '@/components/message/Message.vue';
 import type { NewProductCart } from '@/common/typings/cart.typings';
 import ImageDialog from '@/components/dialog/ImageDialog.vue';
 import ShowProperties from '@/components/ShowProperties.vue';
-import Currency from '@/components/Currency.vue';
 import Comment from '@/components/comment/Comment.vue';
 import Stare from '@/components/icons/Stare.vue';
 import { useCommentStore } from '@/stores/comment';
 import ProductPrice from '@/components/ProductPrice.vue';
-  const route = useRoute();
-  const productId = route.params.productId as string;
-  const productStore = useProductStore();
-  const userStore = useUserStore();
-  const cartStore = useCartStore();
-  const config = getProductConfig(productId);
-  const commenStore = useCommentStore();
-  const getCommentListConfig = getCommentListAxiosConfig(productId);
-  commenStore.getCommentList(getCommentListConfig);
-  productStore.getProduct(config);
-  const { productData } = storeToRefs(productStore);
-  const totalPrice = computed( () => productData.value?.data?.price! - productData.value?.data?.discount!);
-  const percentage = computed( () => `${(Math.round((productData.value?.data?.discount! / productData.value?.data?.price!) * 1000) / 10)}%` );
-  const additionalsImageUrl = ref(productData.value?.data?.additionalsImageSrc[0]);
-  const showAdditionalsImage = ref(false);
-  const page = reactive<Page>({
-    message: '',
-    typeMessage: TypeMessage.Success,
-    showMessage: false,
-  });
-  const closeAdditionalImage = () => {
-    showAdditionalsImage.value = false;
-    additionalsImageUrl.value = undefined; 
-  };
-  provide('productId', productId);
-  const addToCart = async () => {
-    if ( productData.value?.data?.quantity && productData.value?.data?._id) {
-      if (userStore.userLogged) {
-        try {
-          const product: NewProductCart = {
-            quantity: 1,
-            _id: productData.value?.data?._id
-          };
-          const products = [];
-          products.push(product);
-          const addToCartConfigAxios = addToCartConfig({products});
-          await cartStore.addToCart(addToCartConfigAxios);
-          const getCartConfigAxios = getCartConfig();
-          await cartStore.getCart(getCartConfigAxios);
-        } catch (error) {
-          page.showMessage = true;
-          page.typeMessage = TypeMessage.Danger;
-          if (axios.isAxiosError(error)) {
-              page.message = getAxiosErrorMessage(error);
-          } else {
-              console.log(error);
-          }
+
+const route = useRoute();
+const productId = route.params.productId as string;
+const productStore = useProductStore();
+const userStore = useUserStore();
+const cartStore = useCartStore();
+const config = getProductConfig(productId);
+const commenStore = useCommentStore();
+const getCommentListConfig = getCommentListAxiosConfig(productId);
+commenStore.getCommentList(getCommentListConfig);
+productStore.getProduct(config);
+const { productData } = storeToRefs(productStore);
+const additionalsImageUrl = ref(productData.value?.data?.additionalsImageSrc[0]);
+const showAdditionalsImage = ref(false);
+const page = reactive<Page>({});
+const closeAdditionalImage = () => {
+  showAdditionalsImage.value = false;
+  additionalsImageUrl.value = undefined; 
+};
+provide('productId', productId);
+const addToCart = async () => {
+  if ( productData.value?.data?.quantity && productData.value?.data?._id) {
+    if (userStore.userLogged) {
+      try {
+        const product: NewProductCart = {
+          quantity: 1,
+          _id: productData.value?.data?._id
+        };
+        const products = [];
+        products.push(product);
+        const addToCartConfigAxios = addToCartConfig({products});
+        await cartStore.addToCart(addToCartConfigAxios);
+        const getCartConfigAxios = getCartConfig();
+        await cartStore.getCart(getCartConfigAxios);
+      } catch (error) {
+        page.showMessage = true;
+        page.typeMessage = TypeMessage.Danger;
+        if (axios.isAxiosError(error)) {
+          page.message = getAxiosErrorMessage(error);
+        } else {
+          console.log(error);
         }
-      } else {
-        const product = productData.value?.data;
-        cartStore.setListProductCart({ product, quantity: 1 });
       }
-      cartStore.setCartLocalStorage();
+    } else {
+      const product = productData.value?.data;
+      cartStore.setListProductCart({ product, quantity: 1 });
     }
-  };
+    cartStore.setCartLocalStorage();
+  }
+};
 </script>
