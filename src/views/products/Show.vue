@@ -24,17 +24,25 @@
         </ImageDialog>
       </div>
       <div class="md:w-8/12 w-full text-right mt-4">
-        <div class="w-full flex items-center font-bold text-indigo-900 text-lg py-2">
+        <div class="w-full text-indigo-900 text-lg py-2">
           <div class="">
             {{ productData?.data?.name }}
-          </div>
-          <div v-if="commenStore.productScore" class="flex items-end">
-            <Stare class="text-yellow-400"/>
-            <div class="text-xs text-violet-600"> {{ commenStore.productScore }} </div>
           </div>
         </div>
         <div class="w-full md:flex">
           <div class="md:w-7/12 w-full py-4 border-t border-gray-300">
+            <div class="flex items-center">
+                <div v-if="commenStore.commentListData?.data.length" class="flex items-center">
+                  <Stare class="text-yellow-400 w-4 h-4"/>
+                  <div class="mt-0.5 text-xs text-gray-900"> 
+                    {{ commenStore.commentListData.data[0].scoreAverage }}
+                  </div>
+                  <div class="mt-0.5 text-xs text-indigo-900 pr-4">
+                    {{ commenStore.commentListData.data[0].totalCount }}
+                      دیدگاه
+                  </div>
+              </div>
+            </div>
             <ShowProperties v-if="productData?.data?.customProperty" :show-file="true" :custom-properties="productData?.data?.customProperty"/>
           </div>
           <div class="md:w-5/12 w-full text-left">

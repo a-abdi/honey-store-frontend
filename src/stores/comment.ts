@@ -49,20 +49,6 @@ export const useCommentStore = defineStore("comment", {
   },
 
   getters: {
-    productScore(state) {
-      let totalScore = 0;
-      let totalScoreCount = 0;
-      if (state.commentListData?.data) {
-        for (let index = 0; index < state.commentListData?.data.length; index++) {
-          const score = state.commentListData?.data[index].score;
-          if (score) {
-            totalScore += score;
-            totalScoreCount += 1;
-          }
-        }
-      }
-      const productScore = totalScoreCount ? totalScore / totalScoreCount : 0;
-      return productScore;
-    },
+    
   }
 });

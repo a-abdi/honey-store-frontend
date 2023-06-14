@@ -9,8 +9,8 @@
             </button>
             <CreateComment v-if="showCreateComment" @cancel="showCreateComment = false"/>
         </div>
-        <div v-if="commentListData?.data">
-            <div v-for="comment in commentListData.data" class="px-4 py-3 border border-gray-200 my-4 rounded-md">
+        <div v-if="commentListData?.data.length">
+            <div v-for="comment in commentListData.data[0].comments" class="px-4 py-3 border border-gray-200 my-4 rounded-md">
                 <div class="flex items-center my-6">
                     <div v-if="comment.score" class="bg-violet-600 text-white mx-1 px-2 py-1 text-xs rounded-md">
                         {{ comment.score }}
