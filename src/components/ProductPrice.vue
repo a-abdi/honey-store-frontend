@@ -18,15 +18,15 @@
     </div>
     <div class="m-2">
       <div v-if="!cartStore.productCartExist(productId) && productData?.data?.quantity">
-        <button v-if="productData?.data?.quantity" @click="emit('addTocart')" class="btn-violet md:w-full w-48 md:static absolute top-8 right-4">
+        <button v-if="productData?.data?.quantity" @click="emit('addTocart')" class="btn-violet md:w-full w-48 md:static absolute top-4 right-4">
           افزودن به سبد خرید
         </button>
         <button v-if="productData?.data?.quantity <= 0 || productData.data.deletedAt" disabled="true"
-          class="btn-violet md:w-full w-48 md:static absolute top-8 right-4 cursor-not-allowed">
+          class="btn-violet md:w-full w-48 md:static absolute top-4 right-4 cursor-not-allowed">
           این کالا موجود نمی باشد
         </button>
       </div>
-      <ProductCartQuantity v-else :productId="productId" class="md:w-full w-48 md:static absolute top-8 right-4"/>
+      <ProductCartQuantity v-else :productId="productId" class="md:w-full w-48 md:static absolute top-4 right-4"/>
     </div>
   </div>
 </template>

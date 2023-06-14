@@ -66,7 +66,7 @@
       </p>
     </div>
     <Comment class="text-gray-600 px-8 pt-4 sm:text-sm text-xs border-t-2 border-gray-200"/>
-    <div class="sticky bottom-0 lg:static lg:top-0 bg-white">
+    <div class="sticky bottom-0 bg-white">
       <div class="w-full border-t border-gray-200 md:hidden">
         <ProductPrice :product-id="productId" @add-tocart="addToCart"/>
       </div>

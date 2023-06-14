@@ -36,20 +36,22 @@
                     </div>
                 </div>
             </div>
-            <div class="w-full flex justify-between bg-slate-100 h-16 py-2 px-3">
-                <div>
-                    <div class="text-gray-600 text-vs">
-                        مبلغ قابل پرداخت
-                    </div>
-                    <div class="flex items-center ">
-                        <Currency class="text-violet-600" :money="cartStore.getTotalPrice" />
-                        <div class="text-vs pr-1">
-                            تومان
+            <div class="sticky bottom-0 bg-white">
+                <div class="w-full flex justify-between bg-slate-100 h-16 py-2 px-3">
+                    <div>
+                        <div class="text-gray-600 text-vs">
+                            مبلغ قابل پرداخت
+                        </div>
+                        <div class="flex items-center ">
+                            <Currency class="text-violet-600" :money="cartStore.getTotalPrice" />
+                            <div class="text-vs pr-1">
+                                تومان
+                            </div>
                         </div>
                     </div>
+                    <button @click="gotToShipping" v-if="userStore.userLogged" class="btn-violet h-10">ثبت سفارش</button>
+                    <button @click="gotToUserLogin" v-else="userStore.userLogged" class="btn-violet h-10"> ورود و ثبت سفارش </button>
                 </div>
-                <button @click="gotToShipping" v-if="userStore.userLogged" class="btn-violet h-10">ثبت سفارش</button>
-                <button @click="gotToUserLogin" v-else="userStore.userLogged" class="btn-violet h-10"> ورود و ثبت سفارش </button>
             </div>
         </div>
     </div>
