@@ -45,36 +45,8 @@
             </div>
             <ShowProperties v-if="productData?.data?.customProperty" :show-file="true" :custom-properties="productData?.data?.customProperty"/>
           </div>
-          <div class="md:w-5/12 w-full text-left">
-            <div class="border border-gray-300 shadow-md rounded-md md:mx-2 py-4">
-              <div v-if="productData?.data?.discount" class="flex items-center text-xs flex-row-reverse my-2 w-full">
-                <div class="ml-2 bg-violet-500 text-white rounded-full p-1">
-                  {{ convertToPersian(percentage) }}
-                </div>
-                <div class="pl-2 line-through text-gray-400">
-                  <Currency :money="productData?.data?.price"/>
-                </div>
-              </div>
-              <div class="flex items-center flex-row-reverse pl-4 my-2 ">
-                <div class=" text-xs text-gray-500 pr-1">
-                  تومان
-                </div>
-                <div class="text-xl">
-                  <Currency :money="totalPrice"/>
-                </div>
-              </div>
-              <div class="m-2">
-                <div v-if="!cartStore.productCartExist(productId) && productData?.data?.quantity">
-                  <button v-if="productData?.data?.quantity" @click="addToCart" class="btn-violet w-full"> 
-                    افزودن به سبد خرید 
-                  </button>
-                  <button v-if="productData?.data?.quantity <= 0 || productData.data.deletedAt" disabled="true" class="btn-violet w-full cursor-not-allowed"> 
-                    این کالا موجود نمی باشد
-                  </button>
-                </div>
-                <ProductCartQuantity v-else :productId="productId"/>
-              </div>
-            </div>
+          <div class="w-5/12 md:block hidden">
+            <ProductPrice :product-id="productId" @add-tocart="addToCart"/>
           </div>
           <Message class="absolute bottom-8 right-8 bg-gray-300" 
             :message="page.message"
@@ -94,6 +66,11 @@
       </p>
     </div>
     <Comment class="text-gray-600 px-8 pt-4 sm:text-sm text-xs border-t-2 border-gray-200"/>
+    <div class="sticky bottom-0 lg:static lg:top-0 bg-white">
+      <div class="w-full border-t border-gray-200 md:hidden">
+        <ProductPrice :product-id="productId" @add-tocart="addToCart"/>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -118,6 +95,7 @@ import Currency from '@/components/Currency.vue';
 import Comment from '@/components/comment/Comment.vue';
 import Stare from '@/components/icons/Stare.vue';
 import { useCommentStore } from '@/stores/comment';
+import ProductPrice from '@/components/ProductPrice.vue';
   const route = useRoute();
   const productId = route.params.productId as string;
   const productStore = useProductStore();

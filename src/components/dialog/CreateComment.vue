@@ -4,8 +4,8 @@
             enter-to-class="opacity-100" leave-active-class="transition ease-in duration-200 transform"
             leave-from-class="opacity-100" leave-to-class="opacity-0">
             <div class="fixed z-10 inset-0 overflow-y-auto bg-gray-400 bg-opacity-25">
-                <div class="max-h-128">
-                    <div class="relative mx-auto bg-white rounded-lg shadow-xl sm:w-5/12 w-full" role="dialog" ref="modal"
+                <div class="">
+                    <div class="relative mx-auto bg-white rounded-lg shadow-xl h-screen sm:w-5/12 w-full" role="dialog" ref="modal"
                         aria-modal="true" aria-labelledby="modal-headline">
                         <OnClickOutside @trigger="emit('cancel')" class="sm:my-4 p-4">
                             <button @click="emit('cancel')"
@@ -54,7 +54,7 @@
                                         </div>
                                         <div class="my-6">
                                             <label class="text-indigo-900 text-xs p-2 tracking-wider" for="tiltle">متن نظر</label>
-                                            <textarea v-model="newComment.text" class="p-2 mt-1 text-xs text-indigo-900 resize-none border rounded-md w-full h-10 sm:h-16 md:h-24 xl:h-28 focus:outline-none">
+                                            <textarea v-model="newComment.text" class="p-2 mt-1 text-xs text-indigo-900 resize-none border rounded-md w-full h-28 md:h-28 xl:h-28 focus:outline-none">
                                             </textarea>
                                         </div>
                                         <div>

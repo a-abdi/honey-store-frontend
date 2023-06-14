@@ -2,7 +2,7 @@
     <div class="text-vsl px-8 sm:py-1 py-2">
         <div class="flex items-center">
             <SortIcone class="text-gray-900 w-6 h-6" @click="showContent = true"/>
-            <div class="text-gray-900 px-2">
+            <div class="text-gray-900 px-2" @click="showContent = true">
                 مرتب سازی
             </div>
         </div>

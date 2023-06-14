@@ -21,7 +21,7 @@
                 </div>
                 <div class="flex items-center my-6">
                     <div class="text-gray-600 mx-3 text-xs">
-                        {{ new Date(comment.createdAt).toLocaleDateString('fa-IR') }}
+                        {{ new Date(comment.createdAt).toLocaleDateString('fa-IR').replace(/\//g, '-') }}
                     </div>
                     <div v-if="comment.user.fullName !== 'کاربر'" class="text-gray-600 mx-3 text-xs">
                         {{  comment.user.fullName }}
