@@ -1,11 +1,11 @@
 <template>
-    <nav class="sticky top-0 left-0 right-0 w-full bg-white border-b border-gray-200">
+    <nav class="sm:sticky top-0 left-0 right-0 w-full bg-white border-b border-gray-200">
         <div class="px-2">
             <div class="relative flex-1 flex items-center justify-between h-16">
-                <div class="pr-4 flex items-center">
+                <div class="pr-1 flex items-center">
                     <div @click="showCategory = true" class="p-1 cursor-pointer flex items-center">
                         <ThreeBars class="w-6 h-6 text-gray-900 "/>
-                        <p class="text-xs text-gray-900 font-bold px-1">
+                        <p class="sm:block hidden text-xs text-gray-900 px-1">
                             دسته بندی
                         </p>
                     </div>

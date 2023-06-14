@@ -1,6 +1,11 @@
 <template>
-    <div class="text-vsl px-8 py-1">
-        <SortIcone class="text-gray-900 w-6 h-6" @click="showContent = true"/>
+    <div class="text-vsl px-8 sm:py-1 py-2">
+        <div class="flex items-center">
+            <SortIcone class="text-gray-900 w-6 h-6" @click="showContent = true"/>
+            <div class="text-gray-900 px-2">
+                مرتب سازی
+            </div>
+        </div>
         <ShowMobileSort :show-dialog="showContent" @cancel="showContent = false">
             <div v-for="sort in sortList" class="text-gray-600 mx-2 w-full text-xs py-4 text-indigo-900 border-b border-gray-200">
                 <div @click="sortProduct(sort.index)" class="flex items-center justify-between">

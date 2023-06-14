@@ -23,5 +23,5 @@ const productStore = useProductStore();
 const config = getProductListConfig();
 productStore.getProductList(config);
 const { productListData } = storeToRefs(productStore);
-const showProduct = (productId: string, productName: string) => router.push(`/products/${productId}/${productName.replace(' ', '-')}`);
+const showProduct = (productId: string, productName: string) => router.push(`/products/${productId}/${productName.replace(/ /g, '-')}`);
 </script>
