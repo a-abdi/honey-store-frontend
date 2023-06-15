@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-for="( property, index) in customProperties" class="lg:text-xs text-vsl">
-            <div v-if="property && index < 3" class="lg:mt-8 mt-4">
+            <div v-if="property && index < 3" class="md:mt-8 mt-4">
                 <div class="flex items-center">
                     <div class="ml-2">
                         {{ property.label }}:
@@ -25,7 +25,7 @@
             </div>
             <div v-else-if="index == 3" class="lg:mt-8 mt-4">
                 <div @click="showMoreProperty = true"  class="cursor-pointer text-violet-600">
-                    مشخصات بیشتر
+                    ویژگی بیشتر
                 </div>
                 <MoreProperty :show-dialog="showMoreProperty" @cancel="showMoreProperty = false"/>
             </div>
