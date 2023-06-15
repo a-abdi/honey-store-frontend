@@ -4,13 +4,13 @@
             <div v-for="productCart in listProductsCart?.products" class="flex items-center justify-between pt-4 pb-12 border-b border-gray-200">
                 <div class="flex">
                     <div>
-                        <img class="object-cover w-20 h-24" :src="productCart.product.productImagesSrc[0]" alt="">
+                        <img class="object-cover sm:w-20 sm:h-24 w-14 h-16" :src="productCart.product.productImagesSrc[0]" alt="">
                     </div>
-                    <div class="pr-6">
-                        <div class="mb-10 text-sm text-indigo-900">
+                    <div class="sm:pr-6 pr-4">
+                        <div class="sm:mb-10 mb-4 sm:text-sm text-xs text-indigo-900">
                             {{ productCart.product.name }}
                         </div>
-                        <ProductCartQuantity class="text-sm" v-if="typeof productCart.product._id == 'string'" :productId="productCart.product._id" />
+                        <ProductCartQuantity class="sm:text-sm text-xs" v-if="typeof productCart.product._id == 'string'" :productId="productCart.product._id" />
                     </div>
                 </div>
                 <div class="">
@@ -26,7 +26,7 @@
                         <div class="lg:text-lg text-sm">
                             <Currency :money="productCart.product.price - (productCart.product.discount || 0)" />
                         </div>
-                        <div class="text-vsl pr-2">
+                        <div class="sm:text-vsl text-vs pr-2">
                             تومان
                         </div>
                     </div>
