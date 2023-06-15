@@ -4,6 +4,9 @@
         <OrderBox v-if="order.status == 1" :order="order">در انتظار ارسال</OrderBox>
         <OrderBox v-if="order.status == 3" :order="order">ارسال شده</OrderBox>
     </div>
+    <div class="text-base md:text-lg lg:text-2xl text-indigo-900 w-full text-center pt-8" v-if="orderStore.getCurrentOrder.length == 0">
+        سفارش جاری وجود ندارد
+    </div>
 </template>
 
 <script lang="ts" setup>

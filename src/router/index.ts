@@ -102,7 +102,7 @@ const router = createRouter({
       },
       children: [
         {
-          path: "",
+          path: "personal-info",
           name: "profile/personal-info/PersonalInfoIndex",
           component: () => import("@/views/profile/personal-info/PersonalInfoIndex.vue"),
         },

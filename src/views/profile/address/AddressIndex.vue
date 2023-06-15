@@ -1,9 +1,9 @@
 <template>
-    <div class="w-full p-4 border border-gray-200 rounded-md">
-        <div class="underline underline-offset-8 decoration-violet-600 decoration-2 mb-4 text-bold text-lg text-gray-900">
+    <div class="md:h-80 h-screen w-full p-4 border border-gray-200 rounded-md">
+        <div class="mb-4 lg:text-lg md:text-base text-sm text-gray-900">
             آدرس
         </div>
-        <div class="tracking-wide leading-loose text-indigo-900">
+        <div class="tracking-wide md:text-sm text-xs leading-loose text-indigo-900">
             {{ userData?.data?.address?.postalAddress }}
         </div>
         <div class="text-indigo-700 text-xs">

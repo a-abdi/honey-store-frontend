@@ -1,5 +1,5 @@
 <template>
-    <div class="px-6 w-4/12 text-indigo-900 tracking-wide sm:tracking-wider font-bold">
+    <div class="px-6 py-12 text-indigo-900 tracking-wide sm:tracking-wider">
         <div class="text-center text-sm py-1.5 rounded-md bg-indigo-600 text-white">
             <div v-if="userData" class="pb-1.5">
                 {{ getFullName(userData) }}
@@ -8,7 +8,7 @@
                 {{ userData.data?.phoneNumber.replace("+98", "0") }}
             </div>
         </div>
-        <RouterLink :to="'/profile'">
+        <RouterLink :to="'/profile/personal-info'">
             <div class="flex items-center justify-between py-6 border-b border-gray-200 cursor-pointer hover:text-indigo-600">
                 <div class="flex items-center">
                     <UserProfile class="w-5 h-5"/>
@@ -73,7 +73,8 @@ const { userData } = storeToRefs(userStore);
 const signout = () =>{
     if (userStore.userLogged) {
         userStore.signout();
-        cartStore.clearProductCart();
+        cartStore.clearCartLocalStorage();
+        cartStore.listProductsCart = null;
         router.push('/');
     }
 };

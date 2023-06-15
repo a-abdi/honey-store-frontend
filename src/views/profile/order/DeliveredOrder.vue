@@ -2,6 +2,9 @@
     <div v-for="order in orderStore.getDeliveredOrder" class="p-4 my-6 border border-gray-200 rounded-md">
         <OrderBox :order="order">تحویل شده</OrderBox>
     </div>
+    <div class="text-base md:text-lg lg:text-2xl text-indigo-900 w-full text-center pt-8" v-if="orderStore.getDeliveredOrder.length == 0">
+        سفارش تحویل شده وجود ندارد
+    </div>
 </template>
 
 <script lang="ts" setup>

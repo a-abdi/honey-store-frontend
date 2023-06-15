@@ -58,7 +58,7 @@
       </div>
     </div>
     <div v-if="productData?.data?.description" class="text-gray-600 px-8 pt-8 pb-12 border-t-2 border-gray-200 sm:text-sm text-xs">
-      <p class="underline underline-offset-8 decoration-violet-600 decoration-2 mb-4 text-bold text-base text-gray-900">
+      <p class="underline underline-offset-8 decoration-violet-600 decoration-2 mb-4 text-base text-gray-900">
         معرفی
       </p>
       <p class="tracking-wide leading-loose text-indigo-900">
