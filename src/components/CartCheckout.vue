@@ -39,10 +39,13 @@
                 </div>
             </div>
             <div class="my-4">
-                <button @click="gotToShipping" v-if="userStore.userLogged" class="w-full btn-violet"> 
+                <button @click="gotToShipping" v-if="userStore.userLogged && cartStore.productCartCount > 0" class="w-full btn-violet"> 
                     ثبت سفارش
                 </button>
-                <button @click="gotToUserLogin" v-else="userStore.userLogged" class="w-full btn-violet">
+                <button v-if="userStore.userLogged && cartStore.productCartCount == 0" class="w-full btn-violet-desible"> 
+                    ثبت سفارش
+                </button>
+                <button @click="gotToUserLogin" v-if="!userStore.userLogged" class="w-full btn-violet">
                      ورود و ثبت سفارش
                 </button>
             </div>

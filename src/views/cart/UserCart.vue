@@ -32,6 +32,14 @@
                     </div>
                 </div>
             </div>
+            <div v-if="cartStore.productCartCount == 0" class="flex justify-center pt-24">
+                <div class="">
+                    <p class="md:text-3xl text-xl text-indigo-900 pb-10">
+                        سبد خرید خالی است
+                    </p>
+                    <CartEmoji class="md:w-48 md:h-48 w-32 h-32 mx-auto"/>
+                </div>
+            </div>
         </div>
         <CartCheckout class="lg:ml-8" />
     </div>
@@ -44,6 +52,7 @@ import { useCartStore } from '@/stores/cart';
 import { useUserStore } from '@/stores/user';
 import { storeToRefs } from 'pinia';
 import CartCheckout from '@/components/CartCheckout.vue';
+import CartEmoji from '@/components/icons/CartEmoji.vue';
 
 const cartStore = useCartStore();
 const userStore = useUserStore();
