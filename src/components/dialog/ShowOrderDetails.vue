@@ -4,7 +4,7 @@
             enter-to-class="opacity-100" leave-active-class="transition ease-in duration-200 transform"
             leave-from-class="opacity-100" leave-to-class="opacity-0">
             <div class="fixed z-10 inset-0 overflow-y-auto bg-gray-400 bg-opacity-25">
-                <div class="relative lg:mx-auto bg-white rounded-lg shadow-xl lg:w-10/12 w-full" role="dialog" ref="modal"
+                <div class="relative lg:mx-auto bg-white rounded-lg shadow-xl lg:w-10/12 w-full min-w-lg" role="dialog" ref="modal"
                     aria-modal="true" aria-labelledby="modal-headline">
                     <OnClickOutside @trigger="emit('cancel')" class="sm:my-4 p-4">
                         <button @click="emit('cancel')"

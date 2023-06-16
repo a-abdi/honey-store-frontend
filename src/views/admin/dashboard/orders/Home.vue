@@ -27,7 +27,7 @@
                     <td class="table-td">
                         <Currency :money="order.amount"/>
                     </td>
-                    <td class="table-td">
+                    <td class="table-td min-w-36">
                         <select @change="changeOrderstatus($event, order._id, order.status)" autofocus="true" class="w-full my-2 md:my-0 appearance-none bg-white text-indigo-900 form-input t">
                             <option value="" disabled selected>{{ orderStore.getStatus(order?.status) }}</option>
                             <option v-for="(status, index ) in orderStore.statusList" :disabled="!index" :value="index">

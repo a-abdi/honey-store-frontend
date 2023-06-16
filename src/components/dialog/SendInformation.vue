@@ -4,9 +4,9 @@
             enter-to-class="opacity-100" leave-active-class="transition ease-in duration-200 transform"
             leave-from-class="opacity-100" leave-to-class="opacity-0">
             <div class="fixed z-10 inset-0 overflow-y-auto bg-gray-400 bg-opacity-25">
-                <div class="relative lg:mx-auto bg-white rounded-lg shadow-xl lg:w-10/12 w-full" role="dialog" ref="modal"
+                <div class="relative lg:mx-auto bg-white rounded-lg shadow-xl lg:w-10/12 w-full min-w-68" role="dialog" ref="modal"
                     aria-modal="true" aria-labelledby="modal-headline">
-                    <OnClickOutside @trigger="emit('cancel')" class="sm:my-4 p-4">
+                    <OnClickOutside @trigger="emit('cancel')" class="sm:my-4 py-4 ms:px-4">
                         <button @click="emit('cancel')"
                             class="absolute top-4 left-4 text-indigo-600 focus:outline-none">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24">
@@ -22,7 +22,7 @@
                             </div>
                             <div class="md:flex md:items-center justify-between px-6 py-5">
                                 <div class="flex items-center ">
-                                    <div class="text-gray-500 text-xs px-1 py-2">
+                                    <div class="text-gray-500 sm:text-xs text-vsl px-1 py-2">
                                         نام و نام خانوادگی
                                     </div>
                                     <div class="text-indigo-900 text-sm px-1 py-2">
@@ -30,15 +30,15 @@
                                     </div>
                                 </div>
                                 <div class="flex items-center">
-                                    <div class="text-gray-500 text-xs px-1 py-2">
+                                    <div class="text-gray-500 sm:text-xs text-vsl px-1 py-2">
                                         شماره تماس
                                     </div>
-                                    <div class="text-indigo-900 text-sm px-1 py-2 tracking-wider">
+                                    <div class="text-indigo-900 sm:text-sm text-xs px-1 py-2 tracking-wider">
                                         {{ convertToPersian(order.user.phoneNumber.replace('+98', '0')) }}
                                     </div>
                                 </div>
                                 <div class="flex items-center">
-                                    <div class="text-gray-500 text-xs px-1 py-2">
+                                    <div class="text-gray-500 sm:text-xs text-vsl px-1 py-2">
                                         تاریخ عضویت
                                     </div>
                                     <div class="text-indigo-900 text-sm px-1 py-2">
@@ -53,7 +53,7 @@
                             </div>
                             <div class="md:flex md:items-center justify-between px-6 py-5">
                                 <div class="flex items-center">
-                                    <div class="text-gray-500 text-xs px-1 py-2">
+                                    <div class="text-gray-500 sm:text-xs text-vsl px-1 py-2">
                                         نام و نام خانوادگی
                                     </div>
                                     <div class="text-indigo-900 text-sm px-1 py-2">
@@ -61,18 +61,18 @@
                                     </div>
                                 </div>
                                 <div class="flex items-center">
-                                    <div class="text-gray-500 text-xs px-1 py-2">
+                                    <div class="text-gray-500 sm:text-xs text-vsl px-1 py-2">
                                         شماره تماس
                                     </div>
-                                    <div class="text-indigo-900 text-sm px-1 py-2 tracking-wider">
+                                    <div class="text-indigo-900 sm:text-sm text-xs px-1 py-2 tracking-wider">
                                         {{ convertToPersian(order.user.address?.recipient.phoneNumber.replace('+98', '0')!) }}
                                     </div>
                                 </div>
                                 <div class="flex items-center">
-                                    <div class="text-gray-500 text-xs px-1 py-2">
+                                    <div class="text-gray-500 sm:text-xs text-vsl px-1 py-2">
                                         کد پستی
                                     </div>
-                                    <div class="text-indigo-900 text-sm px-1 py-2 tracking-wider">
+                                    <div class="text-indigo-900 sm:text-sm text-xs px-1 py-2 tracking-wider">
                                         {{ order.user.address?.postalCode }}
                                     </div>
                                 </div>
@@ -87,7 +87,7 @@
                             </div>
                             <div class="md:flex md:items-center justify-between px-6 py-5">
                                 <div class="flex items-center">
-                                    <div class="text-gray-500 text-xs px-1 py-2">
+                                    <div class="text-gray-500 sm:text-xs text-vsl px-1 py-2">
                                         استان
                                     </div>
                                     <div class="text-indigo-900 text-sm px-1 py-2">
@@ -95,7 +95,7 @@
                                     </div>
                                 </div>
                                 <div class="flex items-center">
-                                    <div class="text-gray-500 text-xs px-1 py-2">
+                                    <div class="text-gray-500 sm:text-xs text-vsl px-1 py-2">
                                         شهر
                                     </div>
                                     <div class="text-indigo-900 text-sm px-1 py-2">
@@ -103,7 +103,7 @@
                                     </div>
                                 </div>
                                 <div class="flex items-center">
-                                    <div class="text-gray-500 text-xs px-1 py-2">
+                                    <div class="text-gray-500 sm:text-xs text-vsl px-1 py-2">
                                         پلاک
                                     </div>
                                     <div class="text-indigo-900 text-sm px-1 py-2">
@@ -119,7 +119,7 @@
                             <div v-for="cart in order.cart">
                                 <div class="md:flex md:items-center justify-between px-6 py-5">
                                     <div class="flex items-center">
-                                        <div class="text-gray-500 text-xs px-1 py-2">
+                                        <div class="text-gray-500 sm:text-xs text-vsl px-1 py-2">
                                             نام محصول
                                         </div>
                                         <div class="text-indigo-900 text-sm px-1 py-2">
@@ -129,18 +129,18 @@
                                         </div>
                                     </div>
                                     <div class="flex items-center">
-                                        <div class="text-gray-500 text-xs px-1 py-2">
+                                        <div class="text-gray-500 sm:text-xs text-vsl px-1 py-2">
                                             کد محصول
                                         </div>
-                                        <div class="text-indigo-900 text-sm px-1 py-2 tracking-wider">
+                                        <div class="text-indigo-900 sm:text-sm text-xs px-1 py-2 tracking-wider">
                                             {{ cart.code }}
                                         </div>
                                     </div>
                                     <div class="flex items-center">
-                                        <div class="text-gray-500 text-xs px-1 py-2">
+                                        <div class="text-gray-500 sm:text-xs text-vsl px-1 py-2">
                                             تعداد سفارش
                                         </div>
-                                        <div v-if="cart.quantity" class="text-indigo-900 text-sm px-1 py-2 tracking-wider">
+                                        <div v-if="cart.quantity" class="text-indigo-900 sm:text-sm text-xs px-1 py-2 tracking-wider">
                                             {{ convertToPersian(cart.quantity?.toString()) }}
                                         </div>
                                     </div>
