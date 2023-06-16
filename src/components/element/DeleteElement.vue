@@ -2,7 +2,7 @@
     <div class="flex justify-center">
         <div class="flex items-center">
             <div @click="emit('delete')" class="ml-1 cursor-pointer">
-                <Trash class="w-5 h-5 fill-red-600"/>
+                <Trash class="sm:w-5 sm:h-5 w-4 h-4 fill-red-600"/>
             </div>
         </div>
     </div>

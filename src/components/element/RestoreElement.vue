@@ -1,6 +1,6 @@
 <template>
     <div @click="emit('restore')" class="ml-1 cursor-pointer">
-        <Restore class="w-5 h-5 text-green-600 mx-auto" />
+        <Restore class="sm:w-5 sm:h-5 w-4 h-4 text-green-600 mx-auto"/>
     </div>
 </template>
 

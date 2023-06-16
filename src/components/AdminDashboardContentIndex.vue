@@ -1,14 +1,14 @@
 <template>
-    <div class="min-w-min">
+    <div class="overflow-x-auto">
        <div class="flex justify-between w-full h-10 bg-violet-400">
-           <div class="flex justify-items-center mr-4">
+           <div class="">
                <slot name="create"> </slot>
            </div>
-           <div class="ml-4 flex text-white justify-items-center my-auto tracking-wider cursor-pointer">
+           <div class="">
                <slot name="search"> </slot>
            </div>
        </div>
-       <div class="min-w-min">
+       <div class="overflow-x-auto">
            <router-view />
        </div>
     </div>

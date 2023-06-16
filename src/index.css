@@ -75,11 +75,11 @@
     }
 
     .table-tr {
-        @apply py-6 px-2 border-b border-zinc-200 text-center text-gray-600;
+        @apply py-6 px-2 border-b border-zinc-200 2xl:text-lg md:text-base text-xs text-center text-gray-600;
     }
 
     .table-td {
-        @apply py-6 px-2 border-b border-zinc-200 text-center text-xs text-violet-600;
+        @apply py-6 px-2 border-b border-zinc-200 text-center 2xl:text-base md:text-sm sm:text-xs text-vsl text-violet-600;
     }
 
     .btn-link {
