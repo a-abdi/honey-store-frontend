@@ -11,11 +11,21 @@ module.exports = {
     },
     minWidth: {
       '1/2': '50%',
+      '68': '17rem',
+      '100': '25rem',
+      '144': '36rem',
+      'lg': '32rem'
+    },
+    maxWidth: {
+      '1/2': '50%',
+      '8': '2rem',
+      '68': '17rem',
       '100': '25rem',
       '144': '36rem',
       'lg': '32rem'
     },
     maxHeight: {
+      '68': '17rem',
       'lg': '32rem'
     },
     extend: {

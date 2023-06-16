@@ -54,10 +54,10 @@
                 </div>
                 <div class="flex items-center mt-6 mb-3 w-full">
                     <div v-for="additionalImage of additionalsImage" class="px-2">
-                        <img v-if="additionalImage.url" :src="additionalImage.url" alt="" class="object-cover w-auto h-auto min-w-full sm:max-h-14 max-h-10 mx-auto">
+                        <img v-if="additionalImage.url" :src="additionalImage.url" alt="" class="object-cover sm:w-10 sm:h-12 w-8 h-10 mx-auto">
                     </div>
                     <div v-for="attach of attachImage" class="px-2">
-                        <img v-if="attach.url" :src="attach.url" alt="" class="object-cover w-auto h-auto min-w-full sm:max-h-14 max-h-10 mx-auto">
+                        <img v-if="attach.url" :src="attach.url" alt="" class="object-cover sm:w-10 sm:h-12 w-8 h-10 mx-auto">
                     </div>
                 </div>
                 <Message class="absolute bottom-8 right-8 bg-gray-300" 
@@ -69,7 +69,7 @@
             </div>
             <div class="sm:w-1/3 w-full">
                 <div class="sm:p-4 p-0.5 sm:m-0 mt-2">
-                    <img v-if="productImage[0]?.url" :src="productImage[0].url" alt="" class="object-cover w-auto h-auto min-w-full max-w-64 max-h-96 mx-auto">
+                    <img v-if="productImage[0]?.url" :src="productImage[0].url" alt="" class="object-cover w-auto h-auto sm:min-w-full max-w-full max-h-72 mx-auto">
                 </div>
             </div>
         </div>

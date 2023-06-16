@@ -36,7 +36,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="md:flex md:justify-between md:items-center my-2">
+                <div class="flex justify-between items-center my-2">
                     <div class="block w-full my-2 md:my-0 text-center">
                         <label for="productImage" class="btn-violet cursor-pointer p-2 border border-gray-200"> تصویر
                             محصول</label>
@@ -51,27 +51,27 @@
                 </div>
                 <div class="mt-6 mb-3 w-full">
                     <textarea v-model="newProduct.description" :placeholder="productData?.data?.description"
-                        class="p-2 text-gray-600 resize-y border rounded-md w-full h-16 sm:h-24 md:h-32 xl:h-40 focus:outline-none focus:ring-2 focus:ring-blue-200 text-right"></textarea>
+                        class="md:text-sm text-vsl p-2 text-gray-600 resize-y border rounded-md w-full h-20 sm:h-24 md:h-32 xl:h-40 focus:outline-none focus:ring-2 focus:ring-blue-200 text-right"></textarea>
                 </div>
-                <div class="flex items-center mt-6 mb-3 w-full">
-                    <div class="flex items-center" v-if="additionalsImage.length">
+                <div class="flex flex-wrap items-center mt-6 mb-3 w-full">
+                    <div class="flex items-center py-1" v-if="additionalsImage.length">
                         <div v-for="additionalImage of additionalsImage" class="px-2">
-                            <img v-if="additionalImage.url" :src="additionalImage.url" alt="" class="object-cover w-auto h-auto min-w-full max-w-12 max-h-12 mx-auto">
+                            <img v-if="additionalImage.url" :src="additionalImage.url" alt="" class="object-cover sm:w-10 sm:h-12 w-8 h-10 mx-auto">
                         </div>
                     </div>
-                    <div class="flex items-center" v-else>
+                    <div class="flex items-center py-1" v-else>
                         <div v-for="additionalImage of productData?.data?.additionalsImageSrc" class="px-2">
-                            <img v-if="additionalImage" :src="additionalImage" alt="" class="object-cover w-auto h-auto min-w-full max-w-12 max-h-12 mx-auto">
+                            <img v-if="additionalImage" :src="additionalImage" alt="" class="object-cover sm:w-10 sm:h-12 w-8 h-10 mx-auto">
                         </div>
                     </div>
-                    <div class="flex items-center" v-if="attachImage.length">
+                    <div class="flex items-center py-1" v-if="attachImage.length">
                         <div v-for="attach of attachImage" class="px-2">
-                            <img v-if="attach.url" :src="attach.url" alt="" class="object-cover w-auto h-auto min-w-full max-w-12 max-h-16 mx-auto">
+                            <img v-if="attach.url" :src="attach.url" alt="" class="object-cover sm:w-10 sm:h-12 w-8 h-10 mx-auto">
                         </div>
                     </div>
-                    <div class="flex items-center" v-else>
+                    <div class="flex items-center py-1" v-else>
                         <div v-for="property of productData?.data?.customProperty" class="px-2">
-                            <img v-if="property.type == 'file' && typeof property.value == 'string'" :src="property.value" alt="" class="object-cover w-auto h-auto min-w-full max-w-12 max-h-12 mx-auto">
+                            <img v-if="property.type == 'file' && typeof property.value == 'string'" :src="property.value" alt="" class="object-cover sm:w-10 sm:h-12 w-8 h-10 mx-auto">
                         </div>
                     </div>
                 </div>
@@ -88,50 +88,52 @@
                 </div>
             </div>
         </div>
-        <table class="table-auto w-full tracking-wider">
-            <thead>
-                <tr class="">
-                    <th class="table-tr">برچسب</th>
-                    <th class="table-tr">مقدار</th>
-                    <th class="table-tr">نوع</th>
-                    <th class="table-tr">واحد</th>
-                    <th class="table-tr">اضافه کردن</th>
-                </tr>
-            </thead>
-            <tbody v-if="propertyListData?.data?.length">
-                <tr v-for="( property, index ) in propertyListData.data" :key="property._id"
-                    :class="{ 'bg-neutral-100': (index + 1) % 2 }">
-                    <td class="table-td"> {{ property.label }} </td>
-                    <td class="table-td">
-                        <input :id="property._id" :disabled="!propertyListId.includes(property._id)"
-                            v-if="property.type == 'file'" @change="onFileChange($event, attachImage)" type="file"
-                            class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100">
-                        <input :id="property._id" :disabled="!propertyListId.includes(property._id)"
-                            v-if="property.type == 'text'" v-model="propertyListValue[property._id]" type="text"
-                            class="form-input" :placeholder="`${findProductProperty(property)?.value || ''}`">
-                        <input :id="property._id" :disabled="!propertyListId.includes(property._id)"
-                            v-if="property.type == 'number'" v-model="propertyListValue[property._id]" type="number"
-                            class="form-input" :placeholder="`${findProductProperty(property)?.value || ''}`">
-                    </td>
-                    <td class="table-td"> {{ property.type }} </td>
-                    <td class="table-td">
-                        <div v-if="property.unit?.length">
-                            <select v-model="propertyListUnit[property._id]"
-                                autofocus="true" :id="property._id"
-                                class="w-full my-2 md:my-0 bg-white text-gray-600 form-input text-right">
-                                <option value="" disabled selected="true">واحد</option>
-                                <option v-for="unit in property.unit" :key="unit" :value="unit">
-                                    {{ unit }}
-                                </option>
-                            </select>
-                        </div>
-                    </td>
-                    <td class="table-td">
-                        <input type="checkbox" v-model="propertyListId" :id="property._id" :value="property._id" class="accent-violet-600">
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="overflow-x-auto">
+            <table class="table-auto w-full tracking-wider min-w-lg">
+                <thead>
+                    <tr class="">
+                        <th class="table-tr">برچسب</th>
+                        <th class="table-tr">مقدار</th>
+                        <th class="table-tr">نوع</th>
+                        <th class="table-tr">واحد</th>
+                        <th class="table-tr">اضافه کردن</th>
+                    </tr>
+                </thead>
+                <tbody v-if="propertyListData?.data?.length">
+                    <tr v-for="( property, index ) in propertyListData.data" :key="property._id"
+                        :class="{ 'bg-neutral-100': (index + 1) % 2 }">
+                        <td class="table-td"> {{ property.label }} </td>
+                        <td class="table-td">
+                            <input :id="`${property._id}-file`" :disabled="!propertyListId.includes(property._id)"
+                                v-if="property.type == 'file'" @change="onFileChange($event, attachImage)" type="file"
+                                class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100">
+                            <input :id="`${property._id}-text`" :disabled="!propertyListId.includes(property._id)"
+                                v-if="property.type == 'text'" v-model="propertyListValue[property._id]" type="text"
+                                class="form-input" :placeholder="`${findProductProperty(property)?.value || ''}`">
+                            <input :id="`${property._id}-number`" :disabled="!propertyListId.includes(property._id)"
+                                v-if="property.type == 'number'" v-model="propertyListValue[property._id]" type="number"
+                                class="form-input" :placeholder="`${findProductProperty(property)?.value || ''}`">
+                        </td>
+                        <td class="table-td"> {{ property.type }} </td>
+                        <td class="table-td">
+                            <div v-if="property.unit?.length">
+                                <select v-model="propertyListUnit[property._id]"
+                                    autofocus="true" :id="`${property._id}-product-edit`"
+                                    class="w-full my-2 md:my-0 bg-white text-gray-600 form-input text-right">
+                                    <option value="" disabled selected="true">واحد</option>
+                                    <option v-for="unit in property.unit" :key="unit" :value="unit">
+                                        {{ unit }}
+                                    </option>
+                                </select>
+                            </div>
+                        </td>
+                        <td class="table-td">
+                            <input type="checkbox" v-model="propertyListId" :id="property._id" :value="property._id" class="accent-violet-600">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </form>
 </template>
 
