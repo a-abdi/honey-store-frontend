@@ -1,6 +1,6 @@
 <template>
     <div class="">
-        <table class="table-auto w-full tracking-wider">
+        <table class="table-auto w-full tracking-wider min-w-lg">
             <thead>
                 <tr class="">
                     <th class="table-tr text-indigo-900">نام</th>
