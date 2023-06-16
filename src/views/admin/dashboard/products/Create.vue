@@ -35,13 +35,13 @@
                         </button>
                     </div>
                 </div>
-                <div class="md:flex md:justify-between md:items-center my-2">
-                    <div class="block w-full my-2 md:my-0 text-center">
+                <div class="flex justify-between md:items-center my-2">
+                    <div class="w-full my-2 md:my-0 text-center">
                         <label for="productImage" class="btn-violet cursor-pointer p-2 border border-gray-200"> تصویر
                             محصول</label>
                         <input id="productImage" hidden @change="onFileChange($event, productImage)" type="file" />
                     </div>
-                    <div class="block w-full my-2 md:my-0 text-center">
+                    <div class="w-full my-2 md:my-0 text-center">
                         <label for="addintionalFile" class="btn-violet cursor-pointer p-2 border border-gray-200">تصویر
                             بیشتر</label>
                         <input hidden id="addintionalFile" @change="onFileChange($event, additionalsImage)" type="file"
@@ -54,10 +54,10 @@
                 </div>
                 <div class="flex items-center mt-6 mb-3 w-full">
                     <div v-for="additionalImage of additionalsImage" class="px-2">
-                        <img v-if="additionalImage.url" :src="additionalImage.url" alt="" class="object-cover w-auto h-auto min-w-full max-w-12 max-h-16 mx-auto">
+                        <img v-if="additionalImage.url" :src="additionalImage.url" alt="" class="object-cover w-auto h-auto min-w-full sm:max-h-14 max-h-10 mx-auto">
                     </div>
                     <div v-for="attach of attachImage" class="px-2">
-                        <img v-if="attach.url" :src="attach.url" alt="" class="object-cover w-auto h-auto min-w-full max-w-12 max-h-16 mx-auto">
+                        <img v-if="attach.url" :src="attach.url" alt="" class="object-cover w-auto h-auto min-w-full sm:max-h-14 max-h-10 mx-auto">
                     </div>
                 </div>
                 <Message class="absolute bottom-8 right-8 bg-gray-300" 
@@ -73,50 +73,52 @@
                 </div>
             </div>
         </div>
-        <table class="table-auto w-full tracking-wider">
-            <thead>
-                <tr class="">
-                    <th class="table-tr">برچسب</th>
-                    <th class="table-tr">مقدار</th>
-                    <th class="table-tr">نوع</th>
-                    <th class="table-tr">واحد</th>
-                    <th class="table-tr">اضافه کردن</th>
-                </tr>
-            </thead>
-            <tbody v-if="propertyListData?.data?.length">
-                <tr v-for="( property, index ) in propertyListData.data" :key="property._id"
-                    :class="{ 'bg-neutral-100': (index + 1) % 2 }">
-                    <td class="table-td"> {{ property.label }} </td>
-                    <td class="table-td">
-                        <input :id="`${property._id}-file`" :disabled="!propertyListId.includes(property._id)"
-                            v-if="property.type == 'file'" @change="onFileChange($event, attachImage)" type="file"
-                            class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100">
-                        <input :id="`${property._id}-text`" :disabled="!propertyListId.includes(property._id)"
-                            v-if="property.type == 'text'" v-model="propertyListValue[property._id]" type="text"
-                            class="form-input">
-                        <input :id="`${property._id}-number`" :disabled="!propertyListId.includes(property._id)"
-                            v-if="property.type == 'number'" v-model="propertyListValue[property._id]" type="number"
-                            class="form-input">
-                    </td>
-                    <td class="table-td"> {{ property.type }} </td>
-                    <td class="table-td">
-                        <div v-if="property.unit?.length">
-                            <select v-model="propertyListUnit[property._id]"
-                                autofocus="true" :id="`${property._id}-create-product`"
-                                class="w-full my-2 md:my-0 bg-white text-gray-600 form-input text-right">
-                                <option value="" disabled selected="true">واحد</option>
-                                <option v-for="unit in property.unit" :key="unit" :value="unit">
-                                    {{ unit }}
-                                </option>
-                            </select>
-                        </div>
-                    </td>
-                    <td class="table-td">
-                        <input type="checkbox" v-model="propertyListId" :id="property._id" :value="property._id" class="accent-violet-600">
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="overflow-x-auto">
+            <table class="table-auto w-full tracking-wider min-w-lg">
+                <thead>
+                    <tr class="">
+                        <th class="table-tr">برچسب</th>
+                        <th class="table-tr">مقدار</th>
+                        <th class="table-tr">نوع</th>
+                        <th class="table-tr">واحد</th>
+                        <th class="table-tr">اضافه کردن</th>
+                    </tr>
+                </thead>
+                <tbody v-if="propertyListData?.data?.length">
+                    <tr v-for="( property, index ) in propertyListData.data" :key="property._id"
+                        :class="{ 'bg-neutral-100': (index + 1) % 2 }">
+                        <td class="table-td"> {{ property.label }} </td>
+                        <td class="table-td">
+                            <input :id="`${property._id}-file`" :disabled="!propertyListId.includes(property._id)"
+                                v-if="property.type == 'file'" @change="onFileChange($event, attachImage)" type="file"
+                                class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100">
+                            <input :id="`${property._id}-text`" :disabled="!propertyListId.includes(property._id)"
+                                v-if="property.type == 'text'" v-model="propertyListValue[property._id]" type="text"
+                                class="form-input">
+                            <input :id="`${property._id}-number`" :disabled="!propertyListId.includes(property._id)"
+                                v-if="property.type == 'number'" v-model="propertyListValue[property._id]" type="number"
+                                class="form-input">
+                        </td>
+                        <td class="table-td"> {{ property.type }} </td>
+                        <td class="table-td">
+                            <div v-if="property.unit?.length">
+                                <select v-model="propertyListUnit[property._id]"
+                                    autofocus="true" :id="`${property._id}-create-product`"
+                                    class="w-full my-2 md:my-0 bg-white text-gray-600 form-input text-right">
+                                    <option value="" disabled selected="true">واحد</option>
+                                    <option v-for="unit in property.unit" :key="unit" :value="unit">
+                                        {{ unit }}
+                                    </option>
+                                </select>
+                            </div>
+                        </td>
+                        <td class="table-td">
+                            <input type="checkbox" v-model="propertyListId" :id="property._id" :value="property._id" class="accent-violet-600">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </form>
 </template>
 

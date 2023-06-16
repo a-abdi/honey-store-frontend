@@ -13,6 +13,10 @@ module.exports = {
       '1/2': '50%',
       '100': '25rem',
       '144': '36rem',
+      'lg': '32rem'
+    },
+    maxHeight: {
+      'lg': '32rem'
     },
     extend: {
       spacing: {
