@@ -88,13 +88,13 @@
                     :class="{ 'bg-neutral-100': (index + 1) % 2 }">
                     <td class="table-td"> {{ property.label }} </td>
                     <td class="table-td">
-                        <input :id="property._id" :disabled="!propertyListId.includes(property._id)"
+                        <input :id="`${property._id}-file`" :disabled="!propertyListId.includes(property._id)"
                             v-if="property.type == 'file'" @change="onFileChange($event, attachImage)" type="file"
                             class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100">
-                        <input :id="property._id" :disabled="!propertyListId.includes(property._id)"
+                        <input :id="`${property._id}-text`" :disabled="!propertyListId.includes(property._id)"
                             v-if="property.type == 'text'" v-model="propertyListValue[property._id]" type="text"
                             class="form-input">
-                        <input :id="property._id" :disabled="!propertyListId.includes(property._id)"
+                        <input :id="`${property._id}-number`" :disabled="!propertyListId.includes(property._id)"
                             v-if="property.type == 'number'" v-model="propertyListValue[property._id]" type="number"
                             class="form-input">
                     </td>
@@ -102,7 +102,7 @@
                     <td class="table-td">
                         <div v-if="property.unit?.length">
                             <select v-model="propertyListUnit[property._id]"
-                                autofocus="true" :id="property._id"
+                                autofocus="true" :id="`${property._id}-create-product`"
                                 class="w-full my-2 md:my-0 bg-white text-gray-600 form-input text-right">
                                 <option value="" disabled selected="true">واحد</option>
                                 <option v-for="unit in property.unit" :key="unit" :value="unit">
