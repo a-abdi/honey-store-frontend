@@ -18,7 +18,6 @@ import { useProductStore } from '@/stores/product';
 import { storeToRefs } from 'pinia';
 import ProductBox from '@/components/ProductBox.vue';
 import router from '@/router';
-import ProductSort from '@/components/sort/ProductSort.vue';
 const productStore = useProductStore();
 const config = getProductListConfig();
 productStore.getProductList(config);

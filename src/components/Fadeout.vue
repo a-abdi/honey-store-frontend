@@ -31,7 +31,7 @@ import { ref, watch } from 'vue';
     const run = () => {
         timeOut.value  = 0
         for (let index = 0; index < props.fadeStep; index++) {
-            opacityID.value[index] = setTimeout(() => {
+            opacityID.value[index] = window.setTimeout(() => {
                 opacity.value = 1 - index/props.fadeStep
             }, timeOut.value);
             
@@ -42,7 +42,7 @@ import { ref, watch } from 'vue';
 
     const stop = () => {
         for (let index = 0; index < props.fadeStep; index++) {
-            clearTimeout(opacityID.value[index]);
+            window.clearTimeout(opacityID.value[index]);
         }
         opacity.value = 0;
     };

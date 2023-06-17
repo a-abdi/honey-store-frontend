@@ -17,7 +17,7 @@
                     <input @keyup.enter="enterUnit" v-model="unitInput" id="unit" type="text" placeholder="واحد" class="form-input">
                     <div class="flex">
                         <label class="flex items-center m-1 " v-for="unit of property.unit" >
-                            <input v-model="checkbox[unit]" @change="changeUnit(unit, checkbox[unit])" :id="unit" class="mx-0.5 accent-violet-600" v-if="unit" type="checkbox" checked>
+                            <input v-model="checkbox[unit]" @change="changeUnit(unit, checkbox[unit])" :id="unit" class="mx-0.5 accent-violet-600" v-if="unit" type="checkbox">
                             {{ unit }}
                         </label>
                     </div>

@@ -48,10 +48,10 @@
 <script lang="ts" setup>
 import { OnClickOutside } from '@vueuse/components';
 import AdminSidebarLink from '../user-link/AdminSidebarLink.vue';
+import { reactive } from 'vue';
 
 defineProps<{showAdminSidebar: boolean }>();
 const emit = defineEmits<{(event: 'cancel'): void}>();
-import { reactive, ref } from 'vue';
 const showLink = reactive({
     order: false,
     product: false,
