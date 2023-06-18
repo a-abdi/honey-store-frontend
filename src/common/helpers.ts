@@ -7,18 +7,20 @@ import type { UserData } from './typings/user.typing';
 
 export const sendRequest = async (config: AxiosRequestConfig, setToken: SetToken = SetToken.Default) => {
     switch (setToken) {
-        case 'admin':
+        case 'admin': {
             const adminStore = useAdminStore();
             if (adminStore.adminData?.data?.access_token) {
                 axios.defaults.headers.common['Authorization'] = `Bearer ${adminStore.adminData.data.access_token}`;
             }
             break;
-        case 'user':
+        }
+        case 'user': {
             const userStore = useUserStore();
             if (userStore.userLoginData?.data?.access_token) {
                 axios.defaults.headers.common['Authorization'] = `Bearer ${userStore.userLoginData.data.access_token}`;
             }
             break;
+        }
         default:
             break;
     }
