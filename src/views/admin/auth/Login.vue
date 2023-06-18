@@ -6,7 +6,7 @@
                     ورود ادمین
                 </div>
                 <div class="form-label">
-                    <label for="email" class="">تلفن</label>
+                    <label for="phoneNumber" class="">تلفن</label>
                 </div>
                 <div class="mb-2 px-2 text-gray-600">
                     <input v-model="loginData.phoneNumber" name="phoneNumber" id="phoneNumber" class="form-input">
@@ -59,7 +59,7 @@ const login = async() => {
     try {
         const config = adminLoginConfig(loginData);
         await adminStore.login(config);
-        router.push({ name: 'Admin/Dashboard' })
+        router.push({ name: 'admin/dashboard/products/Home' })
     } catch (error: any) {
         page.errorMessage = error.response?.data;
     }

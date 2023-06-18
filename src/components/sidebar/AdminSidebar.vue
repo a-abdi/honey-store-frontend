@@ -7,7 +7,7 @@
                         <button @click="emit('cancel')" class="absolute top-4 left-4 focus:outline-none">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-blue-500" viewBox="0 0 24 24"><path fill="currentColor" d="m12 13.4l-4.9 4.9q-.275.275-.7.275q-.425 0-.7-.275q-.275-.275-.275-.7q0-.425.275-.7l4.9-4.9l-4.9-4.9q-.275-.275-.275-.7q0-.425.275-.7q.275-.275.7-.275q.425 0 .7.275l4.9 4.9l4.9-4.9q.275-.275.7-.275q.425 0 .7.275q.275.275.275.7q0 .425-.275.7L13.4 12l4.9 4.9q.275.275.275.7q0 .425-.275.7q-.275.275-.7.275q-.425 0-.7-.275Z"/></svg>
                         </button>
-                        <div class="mt-10 pt-12 mb-6 text-indigo-900">
+                        <div class="pt-12 mb-6 text-indigo-900">
                             <div class="py-2 px-2 w-full bg-gray-50 text-indigo-900 tracking-wide sm:tracking-wider">
                                 <!-- product link -->
                                 <AdminSidebarLink :is-child="false" :link="'/admin/dashboard/products?deletedAt=false'" @click="changeShow('product')"><p class="text-indigo-900"> محصولات </p></AdminSidebarLink>

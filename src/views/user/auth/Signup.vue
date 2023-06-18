@@ -41,7 +41,7 @@
                         <Confirm class="w-5 h-5 fill-violet-500 mx-1" />
                     </div>
                     <div class="w-full">
-                        <input v-model="newUser.passwordConfirm" name="password" id="password" type="password" class="form-input-v-1 placeholder-violet-500" placeholder="تایید پسورد">
+                        <input v-model="newUser.passwordConfirm" name="passwordConfirm" id="passwordConfirm" type="password" class="form-input-v-1 placeholder-violet-500" placeholder="تایید پسورد">
                     </div>
                 </div>
                 <div @click="signup" class="my-6 px-6 ">

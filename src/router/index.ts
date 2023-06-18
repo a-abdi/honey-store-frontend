@@ -32,7 +32,7 @@ const router = createRouter({
       name: "admin/auth/Login",
       component: () => import("@/views/admin/auth/Login.vue"),
       meta: {
-        layout: "AppLayoutAdmin",
+        layout: "AppLayoutDefault",
         requiresAuthUser: false,
         requiresAuthAdmin: false,
       },

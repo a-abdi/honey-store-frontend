@@ -5,7 +5,10 @@
                 <div class="flex items-center justify-center sm:items-stretch sm:justify-start">
                     <div class="">
                         <div class="flex items-center">
-                            <DashboardIcone @click="showSidebar = true" class="w-6 h-6 cursor-pointer"/>
+                            <DashboardIcone v-if="adminStore.adminLogged" @click="showSidebar = true" class="w-6 h-6 cursor-pointer"/>
+                            <div @click="showSidebar = true" class="md:text-sm text-xs px-1 cursor-pointer ">
+                                داشبورد
+                            </div>
                             <HomeIcone @click="$router.push('/')" class="w-6 h-6 cursor-pointer mx-4"/>
                             <AdminSidebar :show-admin-sidebar="showSidebar" @cancel="showSidebar = false"/>
                         </div>
@@ -20,6 +23,8 @@
 import DashboardIcone from '@/components/icons/DashboardIcone.vue';
 import HomeIcone from '@/components/icons/Home.vue';
 import AdminSidebar from '@/components/sidebar/AdminSidebar.vue';
+import { useAdminStore } from '@/stores/admin';
 import { ref } from 'vue';
+const adminStore = useAdminStore();
 const showSidebar = ref(false);
 </script>
