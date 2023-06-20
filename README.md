@@ -1,27 +1,29 @@
 # honey-front
+ store site created with VueJS, Tailwind.
 
-## Requirements 
-  ### honey-market
-  #### For more information, see [Honey Backend](https://github.com/a-abdi/honey-market).
+## Table of contents
+* [General info](#general-info)
+* [Technologies](#technologies)
+* [Setup](#setup)
 
-## Running the app
+## General info
+The site sells products related to beekeeping.
+this repository is frontend for  [Honey Market](https://github.com/a-abdi/honey-market). 
 
-```bash
-# run sample docker-compose
-services:
-  mongo:
-    container_name: mongo
-    image: mongo:4.4.6
-    network_mode: "host"
-    ports:
-      - 27017:21017
-    restart: always
+## Technologies
+Project is created with:
+* VueJS 
+* TailwindCSS
+* TypeScript
+* Vite
+* Pinia
+* VueRouter
+* Docker
+* Docker-Compose
+	
+## Setup
+To run this project, run docker-compose:
 
-  backend:
-    container_name: backend
-    image: aliabdi709/honey-backend:0.0.1
-    network_mode: "host"
-    env_file: .env
-    ports:
-      - 3000:3000
-    restart: always
+```
+$ docker-compose up -d
+```
