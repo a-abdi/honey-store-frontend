@@ -253,7 +253,7 @@ const fillProductProperty = (property: Property ) => {
         productProperty.unit = ( propertyListUnit[property._id] || findProductProperty(property)?.unit);
     }
     if (property.type == 'file') {
-        const image = attachImage.find(attach => attach.id == property._id);
+        const image = attachImage.find(attach => attach.id == `${property._id}-file`);
         productProperty.value = ( image?.file?.size || findProductProperty(property)?.value );
     } else {
         productProperty.value = ( propertyListValue[property._id] || findProductProperty(property)?.value);

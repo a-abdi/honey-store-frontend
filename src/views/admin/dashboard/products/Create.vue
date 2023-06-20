@@ -215,7 +215,7 @@ const fillProductProperty = (property: any ) => {
         productProperty.unit = propertyListUnit[property._id];
     }
     if (property.type == 'file' && attachImage.length > 0) {
-        const image = attachImage.find(attach => attach.id == property._id);
+        const image = attachImage.find(attach => attach.id == `${property._id}-file`);
         productProperty.value = image?.file?.size;
     } else {
         productProperty.value = propertyListValue[property._id];
