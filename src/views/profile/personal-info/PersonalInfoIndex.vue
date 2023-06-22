@@ -27,9 +27,6 @@
                         {{ userData?.data?.phoneNumber.replace('+98', '0') }}
                     </div>
                 </div>
-                <div class="">
-                    <EditProfile class="w-5 h-5 cursor-pointer"/>
-                </div>
             </div>
             <div class="md:w-4/12 py-5 md:py-0 px-4 flex items-center justify-between text-indigo-900  md:border-r border-gray-300">
                 <div>

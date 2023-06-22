@@ -53,8 +53,7 @@ import { useRoute } from 'vue-router';
     const route = useRoute();
     const propertyId = route.params.propertyId as string;
     const propertyStore = usePropertyStore();
-    const getPropertyConfig = getProperyAxiosConfig(propertyId);
-    propertyStore.getProperty(getPropertyConfig);
+    
     const typeList = [
         "input",
         "image",
@@ -70,12 +69,16 @@ import { useRoute } from 'vue-router';
     });
     const property = reactive<Partial<newProperty>>({});
 
-    if (propertyData.value?.data?.unit.length) {
-        property.unit = propertyData.value?.data?.unit;
-        for (const unit of property.unit) {
-            checkbox[unit] = true;
+    onMounted(async ()=> {
+        const getPropertyConfig = getProperyAxiosConfig(propertyId);
+        await propertyStore.getProperty(getPropertyConfig);
+        if (propertyData.value?.data?.unit.length) {
+            property.unit = propertyData.value?.data?.unit;
+            for (const unit of property.unit) {
+                checkbox[unit] = true;
+            }
         }
-    }
+    })
     const formSubmit = ref(true);
     const enterUnit = () => {
         formSubmit.value = false;

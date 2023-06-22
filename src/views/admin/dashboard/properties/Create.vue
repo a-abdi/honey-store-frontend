@@ -6,7 +6,7 @@
                     <input v-model="property.label" id="name" type="text" placeholder="برچسب" class="form-input">
                 </div>
                 <div class="w-full sm:my-4 px-2 my-8">
-                    <select v-model="property.type" name="type" autofocus="true" id="type" aria-placeholder="select type" class="w-full py-2 bg-white text-gray-600 form-input text-right">
+                    <select v-model="property.type" name="type" autofocus="true" id="type" aria-placeholder="select type" class="w-full bg-white text-gray-600 form-input text-right">
                         <option value="" disabled selected>نوع</option>
                         <option v-for="types in typeList" :value="types">{{ types }}</option>
                     </select>                
@@ -91,8 +91,8 @@ import { storeToRefs } from 'pinia';
         page.successMessage = null;
         try {
             const config = createPropertyAxiosConfig(property);
-            showMessage.value = true;
             await propertyStore.createProperty(config);
+            showMessage.value = true;
             const { propertyData } = storeToRefs(propertyStore);
             page.typeMessage = TypeMessage.Success;
             page.message = propertyData.value?.message;

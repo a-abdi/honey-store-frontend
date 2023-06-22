@@ -7,7 +7,7 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      'sans': ['Helvetica', 'Arial', 'sans-serif', 'iranyekan'],
+      'sans': ['iranyekan', 'Helvetica', 'Arial', 'sans-serif'],
     },
     minWidth: {
       '1/2': '50%',

@@ -2,7 +2,7 @@
     <div v-if="(route.path != '/cart' && route.path != '/shipping' && route.path !== '/payment')" class="relative" @mouseover="showCart = true" @mouseleave="showCart = false">
         <router-link to="/cart">
             <div class="relative w-7 h-7 bg-cover bg-no-repeat" style="background-image: url(https://api.iconify.design/cil:cart.svg?color=%23878787);">
-                <span v-show="cartStore.productCartCount" class="bg-violet-600 px-1 py-0.5 text-white text-xs rounded-full">
+                <span v-show="cartStore.productCartCount" class="bg-violet-600 px-1 text-white text-xs rounded-full">
                     {{ convertToPersian(`${cartStore.productCartCount}`) }}
                 </span>
             </div>
