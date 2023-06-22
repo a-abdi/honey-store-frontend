@@ -2,7 +2,7 @@ import type { AxiosRequestConfig } from 'axios';
 import type { AdminLoginData } from '../typings/admin.typings';
 import type { EditCategory, NewCategory } from '../typings/category.typings';
 
-const BASE_URL = 'http://localhost:3000/';
+const BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
 
 export const adminLoginConfig = (data: AdminLoginData): AxiosRequestConfig => ({
     method: 'post',
