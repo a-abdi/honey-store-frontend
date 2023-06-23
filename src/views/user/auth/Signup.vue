@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div @click="signup" class="my-6 px-6 ">
-                    <div class="flex items-center justify-center rounded-md bg-violet-600 py-3 w-full cursor-pointer">
+                    <div :class="{'cursor-progress': page.loading}" class="flex items-center justify-center rounded-md bg-violet-600 py-3 w-full cursor-pointer">
                         <div class="text-white">
                             ثبت نام
                         </div>
@@ -98,6 +98,7 @@ const newUser = reactive<NewUser>({
 const signup = async () => {
     try {
         const config = userSignupConfig(newUser);
+        page.loading = true;
         await userStore.signup(config);
         newUser.phoneNumber = '';
         newUser.password = '';
@@ -114,5 +115,6 @@ const signup = async () => {
             console.log(error);
         }
     }
+    page.loading = false;
 }
 </script>

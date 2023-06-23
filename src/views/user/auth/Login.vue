@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <div class="my-6 px-6 ">
-                    <div @click="login" class="flex items-center justify-center rounded-md bg-violet-600 py-3 w-full cursor-pointer">
+                    <div @click="login" :class="{'cursor-progress': page.loading}" class="flex items-center justify-center rounded-md bg-violet-600 py-3 w-full cursor-pointer">
                         <div class="text-white">
                             ورود
                         </div>
@@ -70,13 +70,14 @@ import axios from 'axios';
 import { getAxiosErrorMessage } from '@/common/helpers';
 import Message from '@/components/message/Message.vue';
 import type { UserLogin } from '@/common/typings/user.typing';
-import { userLoginConfig, addToCartConfig, getUserConfig } from '@/common/config/axiox.config';
+import { userLoginConfig, addToCartConfig } from '@/common/config/axiox.config';
 import { useCartStore } from '@/stores/cart';
 import { storeToRefs } from 'pinia';
 
 const userStore = useUserStore();
 const cartStore = useCartStore();
 const page = reactive<Page>({
+    loading: false,
     message: '',
     typeMessage: TypeMessage.Success,
     showMessage: false,
@@ -94,6 +95,7 @@ const goToSignup = () => {
 const login =  async () => {
     try {
         const userLoginConfigAxios = userLoginConfig(loginForm);
+        page.loading = true;
         await userStore.login(userLoginConfigAxios);
         const productCartCount = cartStore.productCartCount;
         try {
@@ -115,6 +117,7 @@ const login =  async () => {
         } catch (error) {
             console.log(error);
         }
+        page.loading = false;
         router.push('/');
     } catch (error) {
         page.showMessage = true;
@@ -125,6 +128,7 @@ const login =  async () => {
             console.log(error);
         }
     }
+    page.loading = false;
 };
 
 </script>
