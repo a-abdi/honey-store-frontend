@@ -16,14 +16,17 @@ export const useOrderStore = defineStore("order", {
 
     actions: {
         async paymentRequest(config: AxiosRequestConfig) {
+            this.transactionLink = null;
             this.transactionLink = (await sendRequest(config, SetToken.User)).data.transactionLink;
         },
 
         async getUserOrders(config: AxiosRequestConfig) {
+            this.orderData = null;
             this.orderData = await sendRequest(config, SetToken.User);
         },
 
         async getAdminOrders(config: AxiosRequestConfig) {
+            this.adminOrderData = null;
             this.adminOrderData = await sendRequest(config, SetToken.Admin);
         },
 

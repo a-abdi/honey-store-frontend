@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full sm:p-4 p-2 border border-gray-200 rounded-md">
+    <div v-if="orderStore.orderData" class="w-full sm:p-4 p-2 border border-gray-200 rounded-md">
         <div class="decoration-2 text-indigo-900 mb-6 lg:text-lg md:text-base text-sm">
             سفارش های من
         </div>
@@ -56,10 +56,12 @@
             <RouterView />
         </div>
     </div>
+    <PageLoading v-else/>
 </template>
 
 <script lang="ts" setup>
 import { getOrdersAxiosConfig } from '@/common/config/axiox.config';
+import PageLoading from '@/components/loading/PageLoading.vue';
 import { useOrderStore } from '@/stores/order';
 import { useRoute } from 'vue-router';
 const orderStore = useOrderStore();

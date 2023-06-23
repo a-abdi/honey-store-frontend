@@ -56,6 +56,7 @@
                 </tr>
             </tbody>
         </table>
+        <PageLoading v-if="!commentListDataNotVerify"/>
     </div>
 </template>
 
@@ -68,6 +69,7 @@ import Trash from '@/components/icons/Trash.vue';
 import Dialog from '@/components/dialog/Dialog.vue';
 import { reactive } from 'vue';
 import type { StringBoolean } from '@/common/typings/common.typings';
+import PageLoading from '@/components/loading/PageLoading.vue';
 const commentStore = useCommentStore();
 const showVerifyDialog = reactive<StringBoolean>({});
 const showDeleteDialog = reactive<StringBoolean>({});

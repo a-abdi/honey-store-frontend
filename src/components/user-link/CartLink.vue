@@ -67,10 +67,12 @@ import Currency from '../Currency.vue';
 import ProductCartQuantity from '../ProductCartQuantity.vue';
 const cartStore = useCartStore();
 const userStore = useUserStore();
-userStore.userLogged && cartStore.resetUserCart();
 const gotToShipping = () => router.push('/cart');
 const gotToUserLogin = () => router.push('/login');
 const route = useRoute();
+if (userStore.userLogged && route.path != '/cart') {
+    cartStore.resetUserCart();
+}
 const showCart = ref(false);
 watch(
     () => route.path,

@@ -54,6 +54,7 @@
                 </tr>
             </tbody>
         </table>
+        <PageLoading v-if="!productListData"/>
     </div>
 </template>
 
@@ -73,6 +74,7 @@ import { getAxiosErrorMessage } from '@/common/helpers';
 import { useRoute } from 'vue-router';
 import RestoreElement from '@/components/element/RestoreElement.vue';
 import RestoreDialog from '@/components/dialog/RestoreDialog.vue';
+import PageLoading from '@/components/loading/PageLoading.vue';
     const productStore = useProductStore();
     const showDialog = ref(false);
     const showRestoreDialog = ref(false);

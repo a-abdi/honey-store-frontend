@@ -28,6 +28,7 @@
                 </tr>
             </tbody>
         </table>
+        <PageLoading v-if="!categoryListData"/>
     </div>
 </template>
 
@@ -36,6 +37,7 @@ import { useCategoryStore } from '@/stores/category';
 import { getCategoryListConfig } from '@/common/config/axiox.config';
 import { storeToRefs } from 'pinia';
 import EditElement from '@/components/element/EditElement.vue';
+import PageLoading from '@/components/loading/PageLoading.vue';
 const categoryStore = useCategoryStore();
 const config = getCategoryListConfig();
 categoryStore.getCategoryList(config);

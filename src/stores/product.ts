@@ -14,22 +14,27 @@ export const useProductStore = defineStore("product", {
 
   actions: {
     async createProduct(config: AxiosRequestConfig<FormData>) {
+      this.productData = null;
       this.productData = await sendRequest(config, SetToken.Admin);
     },
 
     async getProductList(config: AxiosRequestConfig) {
+      this.productListData = null;
       this.productListData = await sendRequest(config);
     },
 
     async getProduct(config: AxiosRequestConfig) {
+      this.productData = null;
       this.productData = await sendRequest(config);
     },
 
     async deleteProduct(config: AxiosRequestConfig) {
+      this.productData = null;
       this.productData = await sendRequest(config, SetToken.Admin);
     },
 
     async editProduct(config: AxiosRequestConfig) {
+      this.productData = null;
       this.productData = await sendRequest(config, SetToken.Admin);
     },
   }

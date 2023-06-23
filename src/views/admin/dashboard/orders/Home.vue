@@ -56,6 +56,7 @@
                 </tr>
             </tbody>
         </table>
+        <PageLoading v-if="!adminOrderData"/>
     </div>
 </template>
 
@@ -73,6 +74,7 @@ import SendInformation from '@/components/dialog/SendInformation.vue';
 import ChangeOrderStatus from '@/components/dialog/ChangeOrderStatus.vue';
 import type { StringBoolean } from '@/common/typings/common.typings';
 import { useRoute } from 'vue-router';
+import PageLoading from '@/components/loading/PageLoading.vue';
 const route = useRoute();
 const orderStore = useOrderStore();
 const getOrders = (status: number) => {

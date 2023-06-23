@@ -1,6 +1,6 @@
 <template>
     <form>
-        <div class="px-1 sm:px-4 sm:pb-36 mt-6 mx-auto w-11/12 border border-gray-200 rounded-md">
+        <div v-if="propertyData" class="px-1 sm:px-4 sm:pb-36 mt-6 mx-auto w-11/12 border border-gray-200 rounded-md">
             <div class="sm:flex sm:mt-6 sm:mb-12">
                 <div class="w-full sm:my-4 px-2 my-8">
                     <input v-model="property.label" id="name" type="text" :placeholder="propertyData?.data?.label" class="form-input">
@@ -35,6 +35,7 @@
                 @fadeMessage="page.showMessage = false" 
             />
         </div>
+        <PageLoading v-else/>
     </form>
 </template>
 
@@ -49,6 +50,7 @@ import type { newProperty } from '@/common/typings/property.typing';
 import { usePropertyStore } from '@/stores/property';
 import { storeToRefs } from 'pinia';
 import { useRoute } from 'vue-router';
+import PageLoading from '@/components/loading/PageLoading.vue';
 
     const route = useRoute();
     const propertyId = route.params.propertyId as string;

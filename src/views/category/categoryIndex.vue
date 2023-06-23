@@ -11,6 +11,7 @@
                 class="cursor-pointer border border-gray-100 hover:shadow-2xl" 
             />
         </div>
+        <PageLoading v-else/>
     </div>
 </template>
 
@@ -25,6 +26,7 @@ import { ref, watch } from 'vue';
 import SortIndex from '@/components/sort/SortIndex.vue';
 import { SORT_PRODUCT } from '@/common/constans';
 import MobileSort from '@/components/sort/MobileSort.vue';
+import PageLoading from '@/components/loading/PageLoading.vue';
 const productStore = useProductStore();
 const route = useRoute();
 const categoryId = ref('');

@@ -43,6 +43,7 @@
                 </tr>
             </tbody>
         </table>
+        <PageLoading v-if="!propertyListData"/>
     </div>
 </template>
 
@@ -58,6 +59,7 @@ import EditElement from '@/components/element/EditElement.vue';
 import Message from '@/components/message/Message.vue';
 import DeleteElement from '@/components/element/DeleteElement.vue';
 import Dialog from '@/components/dialog/Dialog.vue';
+import PageLoading from '@/components/loading/PageLoading.vue';
 const properyStore = usePropertyStore();
 const showDialog = ref(false);
 const propertyId = ref('');

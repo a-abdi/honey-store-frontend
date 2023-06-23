@@ -29,6 +29,7 @@ module.exports = {
     },
     maxHeight: {
       '68': '17rem',
+      '128': '32rem',
       'lg': '32rem'
     },
     extend: {

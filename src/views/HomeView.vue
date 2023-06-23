@@ -9,6 +9,7 @@
             class="cursor-pointer border border-gray-100 hover:shadow-2xl" 
           />
       </div>
+      <PageLoading v-else/>
     </div>
 </template>
 
@@ -18,6 +19,7 @@ import { useProductStore } from '@/stores/product';
 import { storeToRefs } from 'pinia';
 import ProductBox from '@/components/ProductBox.vue';
 import router from '@/router';
+import PageLoading from '@/components/loading/PageLoading.vue';
 const productStore = useProductStore();
 const config = getProductListConfig();
 productStore.getProductList(config);

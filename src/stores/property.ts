@@ -18,10 +18,12 @@ export const usePropertyStore = defineStore("property", {
     },
 
     async getProperty(config: AxiosRequestConfig) {
+      this.propertyData = null;
       this.propertyData = await sendRequest(config, SetToken.Admin);
     },
 
     async getPropertyList(config: AxiosRequestConfig) {
+      this.propertyListData = null;
       this.propertyListData = await sendRequest(config, SetToken.Admin);
     },
 
