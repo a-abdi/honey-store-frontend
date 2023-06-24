@@ -9,16 +9,19 @@
 ## General info
 The site sells products. all page of this site are responsive.
 
-Online Site [Honey Store](http://5.75.202.22:4173/)
+###### Admin User: 09394552776
+###### Admin Password: !QAZ1qaz
+#### Admin Link: [http://5.75.202.22:4173/admin/login](http://5.75.202.22:4173/admin/login)
 
-Online Docs [Honey Docs]( http://5.75.202.22:2000/docs/)
+#### Demo: [http://5.75.202.22:4173/](http://5.75.202.22:4173/)
 
-For more information about backend. see [Honey Store Backend](https://github.com/a-abdi/honey-store-backend)
+#### Swagger Demo: [http://5.75.202.22:2000/docs/]( http://5.75.202.22:2000/docs/)
 
-For more information about Docs. see [Honey Store Swagger](https://github.com/a-abdi/honey-swagger)
+#### Backend Repo: [Honey Store Backend](https://github.com/a-abdi/honey-store-backend)
+
+#### Swagger Repo [Honey Store Swagger](https://github.com/a-abdi/honey-swagger)
 
 ## Technologies
-Project is created with:
 * VueJS 
 * TailwindCSS
 * TypeScript
@@ -29,9 +32,6 @@ Project is created with:
 * Docker-Compose
 	
 ## Setup
-### To test, enter the admin username and password as follow:
-###### User: 09394552776
-###### Password: !QAZ1qaz
 ### To run this project:
 #### First, configure the baseUrl in the .env.production file, and then choose one of the three options below to run the projec.
 * run with docker-compose develop version
