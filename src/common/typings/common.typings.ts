@@ -12,6 +12,7 @@ export interface CommonResponseDataOptional {
 
 export interface Page {
     loading?: boolean;
+    sending?: boolean;
     errorMessage?: null | string;
     successMessage?: null | string;
     message?: string;

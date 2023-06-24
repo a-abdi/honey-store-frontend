@@ -47,7 +47,14 @@
               <ShowProperties v-if="productData?.data?.customProperty" :show-file="true" :custom-properties="productData?.data?.customProperty"/>
             </div>
             <div class="w-5/12 md:block hidden">
-              <ProductPrice :product-id="productId" @add-tocart="addToCart"/>
+              <ProductPrice :product-id="productId">
+                <button :disabled="page.sending" @click="addToCart" v-if="productData?.data?.quantity" class="btn-violet md:w-full w-48 md:static absolute top-4 right-4">
+                  <div v-if="!page.sending">
+                    افزودن به سبد خرید
+                  </div>
+                  <LoadingIcone class="mx-auto text-white h-5 w-5" v-else/>
+                </button>
+              </ProductPrice>
             </div>
             <Message class="absolute bottom-8 right-8 bg-gray-300" 
               :message="page.message"
@@ -69,7 +76,14 @@
       <Comment class="text-gray-600 px-8 pt-4 sm:text-sm text-xs border-t-2 border-gray-200"/>
       <div class="sticky bottom-0 bg-white">
         <div class="w-full border-t border-gray-200 md:hidden">
-          <ProductPrice :product-id="productId" @add-tocart="addToCart"/>
+          <ProductPrice :product-id="productId">
+            <button :disabled="page.sending" @click="addToCart" v-if="productData?.data?.quantity" class="btn-violet md:w-full w-48 md:static absolute top-4 right-4">
+              <div v-if="!page.sending">
+                افزودن به سبد خرید
+              </div>
+              <LoadingIcone class="mx-auto text-white h-5 w-5" v-else/>
+            </button>
+          </ProductPrice>
         </div>
       </div>
     </div>
@@ -97,6 +111,7 @@ import Stare from '@/components/icons/Stare.vue';
 import { useCommentStore } from '@/stores/comment';
 import ProductPrice from '@/components/ProductPrice.vue';
 import PageLoading from '@/components/loading/PageLoading.vue';
+import LoadingIcone from '@/components/icons/LoadingIcone.vue';
 
 const route = useRoute();
 const productId = route.params.productId as string;
@@ -128,6 +143,7 @@ const addToCart = async () => {
         const products = [];
         products.push(product);
         const addToCartConfigAxios = addToCartConfig({products});
+        page.sending = true;
         await cartStore.addToCart(addToCartConfigAxios);
         const getCartConfigAxios = getCartConfig();
         await cartStore.getCart(getCartConfigAxios);
@@ -140,6 +156,7 @@ const addToCart = async () => {
           console.log(error);
         }
       }
+      page.sending = false;
     } else {
       const product = productData.value?.data;
       cartStore.setListProductCart({ product, quantity: 1 });

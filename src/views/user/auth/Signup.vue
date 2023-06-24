@@ -44,14 +44,17 @@
                         <input v-model="newUser.passwordConfirm" name="passwordConfirm" id="passwordConfirm" type="password" class="form-input-v-1 placeholder-violet-500" placeholder="تایید پسورد">
                     </div>
                 </div>
-                <div @click="signup" class="my-6 px-6 ">
-                    <div :class="{'cursor-progress': page.loading}" class="flex items-center justify-center rounded-md bg-violet-600 py-3 w-full cursor-pointer">
-                        <div class="text-white">
-                            ثبت نام
+                <div class="my-6 px-6 ">
+                    <div class="rounded-md bg-violet-600 py-3 w-full">
+                        <div v-if="!page.loading" @click="signup" class="flex items-center justify-center cursor-pointer">
+                            <div class="text-white">
+                                ثبت نام
+                            </div>
+                            <div>
+                                <AddUser class="fill-white w-4 h-4 mr-2"/>
+                            </div>
                         </div>
-                        <div>
-                            <AddUser class="fill-white w-4 h-4 mr-2"/>
-                        </div>
+                        <LoadingIcone class="mx-auto text-white h-5 w-5" v-else/>
                     </div>
                 </div>
             </form>
@@ -81,6 +84,7 @@ import axios from 'axios';
 import { getAxiosErrorMessage } from '@/common/helpers';
 import { storeToRefs } from 'pinia';
 import Message from '@/components/message/Message.vue';
+import LoadingIcone from '@/components/icons/LoadingIcone.vue';
 
 const userStore = useUserStore();
 const { userData } = storeToRefs(userStore);

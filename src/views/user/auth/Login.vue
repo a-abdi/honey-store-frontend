@@ -37,13 +37,16 @@
                     </div>
                 </div>
                 <div class="my-6 px-6 ">
-                    <div @click="login" :class="{'cursor-progress': page.loading}" class="flex items-center justify-center rounded-md bg-violet-600 py-3 w-full cursor-pointer">
-                        <div class="text-white">
-                            ورود
+                    <div class="rounded-md bg-violet-600 py-3 w-full">
+                        <div v-if="!page.loading" @click="login" class="flex items-center justify-center cursor-pointer">
+                            <div class="text-white">
+                                ورود
+                            </div>
+                            <div>
+                                <SimpleUser class="fill-white w-4 h-4 mr-2"/>
+                            </div>
                         </div>
-                        <div>
-                            <SimpleUser class="fill-white w-4 h-4 mr-2"/>
-                        </div>
+                        <LoadingIcone class="mx-auto text-white h-5 w-5" v-else/>
                     </div>
                 </div>
             </form>
@@ -73,6 +76,7 @@ import type { UserLogin } from '@/common/typings/user.typing';
 import { userLoginConfig, addToCartConfig } from '@/common/config/axiox.config';
 import { useCartStore } from '@/stores/cart';
 import { storeToRefs } from 'pinia';
+import LoadingIcone from '@/components/icons/LoadingIcone.vue';
 
 const userStore = useUserStore();
 const cartStore = useCartStore();
