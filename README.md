@@ -39,6 +39,9 @@ Project is created with:
 * Docker-Compose
 	
 ## Setup
+### To test, enter the admin username and password as follow:
+###### User: 09394552776
+###### Password: !QAZ1qaz
 ### To run this project:
 #### First, configure the baseUrl in the .env.production file, and then choose one of the three options below to run the projec.
 * run with docker-compose develop version
@@ -49,7 +52,7 @@ $ docker-compose -f docker-compose-develop.yaml up --build -d
 ```
 $ docker-compose -f docker-compose-production.yaml up --build -d
 ```
-* run with npm develop version
+* run with npm in develop version
 ```
 $ npm run build
 $ npm run preview
