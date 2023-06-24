@@ -1,4 +1,4 @@
-# Honey Front
+# Honey Store Front
  Store site created with VueJS, Tailwind.
 
 ## Table of contents
@@ -8,8 +8,8 @@
 * [Setup](#setup)
 
 ## General info
-The site sells products. all page of this site is responsive.
-this repository is frontend for backend [Honey Market](https://github.com/a-abdi/honey-market). 
+The site sells products. all page of this site are responsive.
+this repository is for [Honey Store Backend](https://github.com/a-abdi/honey-store-backend). 
 
 ## Screenshots
 #### Show Product
@@ -39,8 +39,19 @@ Project is created with:
 * Docker-Compose
 	
 ## Setup
-To run this project, run docker-compose:
+### To run this project:
+#### First, configure the baseUrl in the .env.production file, and then choose one of the three options below to run the projec.
+* run with docker-compose develop version
+```
+$ docker-compose -f docker-compose-develop.yaml up --build -d
+```
+* run with docker-compose in stable version
+```
+$ docker-compose -f docker-compose-production.yaml up --build -d
+```
+* run with npm develop version
+```
+$ npm run build
+$ npm run preview
+```
 
-```
-$ docker-compose up -d
-```
