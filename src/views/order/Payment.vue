@@ -63,7 +63,12 @@
                     </div>
                 </div>
                 <div class="my-4">
-                    <button @click="payment" v-if="userStore.userLogged" class="w-full btn-violet md:text-base text-sm"> پردخت</button>
+                    <button :disabled="page.sending" @click="payment" v-if="userStore.userLogged" class="w-full btn-violet md:text-base text-sm"> 
+                        <div v-if="!page.sending">
+                            پردخت
+                        </div>
+                        <LoadingIcone class="mx-auto text-white h-5 w-5" v-else/>
+                    </button>
                 </div>
             </div>
         </div>
@@ -77,7 +82,7 @@
 </template>
 
 <script setup lang="ts">
-import { getCartConfig, paymentConfig } from '@/common/config/axiox.config';
+import { paymentConfig } from '@/common/config/axiox.config';
 import { convertToPersian, getAxiosErrorMessage } from '@/common/helpers';
 import Currency from '@/components/Currency.vue';
 import { useCartStore } from '@/stores/cart';
@@ -89,6 +94,7 @@ import { reactive, ref } from 'vue';
 import { TypeMessage, type Page } from '@/common/typings/common.typings';
 import axios from 'axios';
 import Message from '@/components/message/Message.vue';
+import LoadingIcone from '@/components/icons/LoadingIcone.vue';
 const showUserAddress = ref(false);
 const cartStore = useCartStore();
 const userStore = useUserStore();
@@ -99,6 +105,7 @@ userStore.userLogged && cartStore.resetUserCart();
 const payment = async () => {
     try {
         const paymentConfigAxios = paymentConfig();
+        page.sending = true;
         await orderStore.paymentRequest(paymentConfigAxios);
         const { transactionLink } = storeToRefs(orderStore);
         if (transactionLink.value) {
@@ -115,5 +122,6 @@ const payment = async () => {
             console.log(error);
         }
     }
+    page.sending = false;
 };
 </script>
