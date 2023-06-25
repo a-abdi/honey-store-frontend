@@ -13,7 +13,7 @@
                                     خانه
                                 </div>
                             </RouterLink>
-                            <div v-for="category in categoryListData?.data" :key="category._id">
+                            <div v-if="categoryListData?.data" v-for="category in categoryListData?.data" :key="category._id">
                                 <div @click="getProduct(category._id)" class="flex items-center justify-between px-4 py-4 my-1 cursor-pointer">
                                     <div class="text-sm">
                                         {{ category.name }}
@@ -23,6 +23,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <PageLoading v-else/>
                         </div>
                     </OnClickOutside>
                 </div>
@@ -37,6 +38,7 @@ import { OnClickOutside } from '@vueuse/components';
 import { storeToRefs } from 'pinia';
 import BigLeft from '../icons/BigLeft.vue';
 import router from '@/router';
+import PageLoading from '../loading/PageLoading.vue';
 const emit = defineEmits<{(event: 'cancel'): void}>();
 defineProps<{showCategory: boolean}>();
 const categoryStore = useCategoryStore();
