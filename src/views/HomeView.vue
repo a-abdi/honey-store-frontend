@@ -1,5 +1,7 @@
 <template>
     <div class="px-4 py-1">
+      <SortIndex :path="`/`" :sortList="SORT_PRODUCT" class="md:block hidden"/>
+      <MobileSort :path="`/`" :sortList="SORT_PRODUCT" class="md:hidden" />
       <div v-if="productListData" class="md:mx-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-6">
           <ProductBox 
             v-for="product in productListData.data"
@@ -20,9 +22,27 @@ import { storeToRefs } from 'pinia';
 import ProductBox from '@/components/ProductBox.vue';
 import router from '@/router';
 import PageLoading from '@/components/loading/PageLoading.vue';
+import { useRoute } from 'vue-router';
+import { watch } from 'vue';
+import SortIndex from '@/components/sort/SortIndex.vue';
+import MobileSort from '@/components/sort/MobileSort.vue';
+import { SORT_PRODUCT } from '@/common/constans';
 const productStore = useProductStore();
-const config = getProductListConfig();
-productStore.getProductList(config);
+const route = useRoute();
+const getProductData = () => {
+    const query = route.query;
+    let productFilter = '';
+    if (Object.keys(query).some(value => value === 'sort')) {
+      productFilter = productFilter.concat('?', `sort=${query.sort}`);
+    }
+    const config = getProductListConfig(productFilter);
+    productStore.getProductList(config);
+};
+watch(
+    () => route.fullPath,
+    () => getProductData()
+);
+getProductData();
 const { productListData } = storeToRefs(productStore);
 const showProduct = (productId: string, productName: string) => router.push(`/products/${productId}/${productName.replace(/ /g, '-')}`);
 </script>

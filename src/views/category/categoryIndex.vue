@@ -1,7 +1,7 @@
 <template>
     <div>
-        <SortIndex :category-id="categoryId" :sortList="SORT_PRODUCT" class="md:block hidden"/>
-        <MobileSort :category-id="categoryId" :sortList="SORT_PRODUCT" class="md:hidden" />
+        <SortIndex :path="`/category/${categoryId}/`" :sortList="SORT_PRODUCT" class="md:block hidden"/>
+        <MobileSort :path="`/category/${categoryId}/`" :sortList="SORT_PRODUCT" class="md:hidden" />
         <div v-if="productListData" class="md:mx-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-6">
             <ProductBox 
                 v-for="product in productListData.data"

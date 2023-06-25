@@ -7,8 +7,8 @@
             </div>
             <RouterLink 
                 v-for="sort in sortList"
-                :to="`/category/${categoryId}/?sort=${sort.index}`" 
-                :class="{'text-violet-600': route.fullPath == `/category/${categoryId}/?sort=${sort.index}`}" 
+                :to="`${path}?sort=${sort.index}`" 
+                :class="{'text-violet-600': route.fullPath == `${path}?sort=${sort.index}`}" 
                 class="text-gray-600 mx-2"
             >
                {{ sort.text }}
@@ -21,6 +21,6 @@
 import { useRoute } from 'vue-router';
 import SortIcone from '../icons/Sort.vue';
 import type { Sort as SortInterface } from '@/common/typings/common.typings';
-defineProps<{categoryId: string, sortList: SortInterface[]}>();
+defineProps<{path: string, sortList: SortInterface[]}>();
 const route = useRoute();
 </script>

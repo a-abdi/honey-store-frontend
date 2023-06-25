@@ -9,10 +9,10 @@
         <ShowMobileSort :show-dialog="showContent" @cancel="showContent = false">
             <div v-for="sort in sortList" class="text-gray-600 mx-2 w-full text-xs py-4 text-indigo-900 border-b border-gray-200">
                 <div @click="sortProduct(sort.index)" class="flex items-center justify-between">
-                    <div :class="{'text-violet-600': route.fullPath == `/category/${categoryId}/?sort=${sort.index}`}">
+                    <div :class="{'text-violet-600': route.fullPath == `${path}?sort=${sort.index}`}">
                        {{ sort.text }}
                     </div>
-                    <Check v-if="route.fullPath == `/category/${categoryId}/?sort=${sort.index}`" class="w-5 h-5 text-indigo-900 ml-4"/>
+                    <Check v-if="route.fullPath == `${path}?sort=${sort.index}`" class="w-5 h-5 text-indigo-900 ml-4"/>
                 </div>
             </div>
         </ShowMobileSort>
@@ -27,11 +27,11 @@ import ShowMobileSort from './ShowMobileSort.vue';
 import { ref } from 'vue';
 import Check from '@/components/icons/Cehck.vue';
 import router from '@/router';
-const props = defineProps<{categoryId: string, sortList: SortInterface[]}>();
+const props = defineProps<{path: string, sortList: SortInterface[]}>();
 const route = useRoute();
 const showContent = ref(false);
 const sortProduct = (index: number) => {
     showContent.value = false;
-    router.push(`/category/${props.categoryId}/?sort=${index}`);
+    router.push(`${props.path}?sort=${index}`);
 };
 </script>
