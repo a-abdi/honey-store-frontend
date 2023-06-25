@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="w-full sm:my-4 my-8">
-                    <div @click="createProperty" class="text-center cursor-pointer w-full h-8 btn-violet">
+                    <div @click="createProperty" :class="{'cursor-wait': page.sending, 'cursor-pointer': !page.sending}" class="text-center w-full h-8 btn-violet">
                         ویرایش خصوصیت
                     </div>
                 </div> 
@@ -64,7 +64,7 @@ import PageLoading from '@/components/loading/PageLoading.vue';
     const unitInput = ref('');
     const checkbox = reactive<any>({});
     const page = reactive<Page>({
-        loading: false,
+        sending: false,
         message: '',
         typeMessage: TypeMessage.Success,
         showMessage: false
@@ -100,11 +100,9 @@ import PageLoading from '@/components/loading/PageLoading.vue';
         }
     }
     const createProperty = async () => {
-        page.loading = true;
-        page.errorMessage = null;
-        page.successMessage = null;
         try {
             const config = updatePropertyAxiosConfig(propertyId, property);
+            page.sending = true;
             await propertyStore.createProperty(config);
             page.showMessage = true;
             page.typeMessage = TypeMessage.Success;
@@ -118,7 +116,7 @@ import PageLoading from '@/components/loading/PageLoading.vue';
                 console.log(error);
             }
         }
-        page.loading = false;
+        page.sending = false;
     };
 
 </script>

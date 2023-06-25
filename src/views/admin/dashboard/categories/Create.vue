@@ -76,17 +76,18 @@ import { usePropertyStore } from '@/stores/property';
             properties: []
         });        
         const createCategory = async () => {
-            form.loading = true;
-            form.errorMessage = null;
-            form.successMessage = null;
             try {
+                form.loading = true;
+                form.errorMessage = null;
+                form.successMessage = null;
                 const config = createCategoryConfig(category);
-                showMessage.value = true;
                 await categoryStore.createCategory(config);
+                showMessage.value = true;
                 const { categoryData } = storeToRefs(categoryStore);
                 form.typeMessage = TypeMessage.Success;
                 form.message = categoryData.value?.message;
             } catch (error: any) {
+                showMessage.value = true;
                 form.typeMessage = TypeMessage.Danger;
                 if (axios.isAxiosError(error)) {
                 form.message = getAxiosErrorMessage(error);

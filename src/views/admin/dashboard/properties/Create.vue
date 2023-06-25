@@ -23,16 +23,16 @@
                     </div>
                 </div>
                 <div class="w-full sm:my-4 my-8">
-                    <div @click="createProperty" class="text-center cursor-pointer w-full h-8 btn-violet">
+                    <div @click="createProperty" :class="{'cursor-wait': page.sending, 'cursor-pointer': !page.sending}" class="text-center w-full h-8 btn-violet">
                         ایجاد خصوصیت
                     </div>
                 </div> 
             </div>
             <Message class="absolute bottom-4 right-4 bg-gray-300" 
                 :message="page.message"
-                :showMessage="showMessage"
+                :showMessage="page.showMessage"
                 :typeMessage="page.typeMessage"
-                @fadeMessage="showMessage = false" 
+                @fadeMessage="page.showMessage = false" 
             />
         </div>
     </form>
@@ -58,11 +58,11 @@ import { storeToRefs } from 'pinia';
     const unitInput = ref('');
     const checkbox = reactive<any>({});
     const page = reactive<Page>({
-        loading: false,
+        sending: false,
         message: '',
+        showMessage: false,
         typeMessage: TypeMessage.Success
     });
-    const showMessage = ref(false);
     const property = reactive<newProperty>({
         label: "",
         unit: [],
@@ -86,17 +86,16 @@ import { storeToRefs } from 'pinia';
         }
     }
     const createProperty = async () => {
-        page.loading = true;
-        page.errorMessage = null;
-        page.successMessage = null;
         try {
             const config = createPropertyAxiosConfig(property);
+            page.sending = true;
             await propertyStore.createProperty(config);
-            showMessage.value = true;
+            page.showMessage = true;
             const { propertyData } = storeToRefs(propertyStore);
             page.typeMessage = TypeMessage.Success;
             page.message = propertyData.value?.message;
         } catch (error: any) {
+            page.showMessage = true;
             page.typeMessage = TypeMessage.Danger;
             if (axios.isAxiosError(error)) {
             page.message = getAxiosErrorMessage(error);
@@ -104,6 +103,7 @@ import { storeToRefs } from 'pinia';
                 console.log(error);
             }
         }
+        page.sending = false;
         property.category = [];
         property.label = "";
         property.type = "";

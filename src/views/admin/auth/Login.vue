@@ -24,9 +24,12 @@
                         </button>
                     </div>
                 </div>
-                <div v-if="page.errorMessage" class="w-full px-2 mb-4">
-                    <ErrorMessage class="my-2" :error="page.errorMessage" />
-                </div>
+                <Message class="absolute bottom-8 right-8 bg-gray-300" 
+                    :message="page.message"
+                    :showMessage="page.showMessage"
+                    :typeMessage="page.typeMessage"
+                    @fadeMessage="page.showMessage = false" 
+                />
             </form>
         </div>
     </div>
@@ -35,11 +38,13 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
-import ErrorMessage from '@/components/message/ErrorMessage.vue';
 import { useAdminStore } from '@/stores/admin';
 import { adminLoginConfig } from '@/common/config/axiox.config';
-import type { Page } from '@/common/typings/common.typings';
+import { TypeMessage, type Page } from '@/common/typings/common.typings';
 import type { AdminLoginData } from '@/common/typings/admin.typings';
+import Message from '@/components/message/Message.vue';
+import axios from 'axios';
+import { getAxiosErrorMessage } from '@/common/helpers';
 
 const adminStore = useAdminStore();
 const router = useRouter();
@@ -47,12 +52,10 @@ const page = reactive<Page>({
     errorMessage: null,
     loading: false,
 });
-
 const loginData = reactive<AdminLoginData>({
     phoneNumber: null,
     password: null,
 });
-
 const login = async() => {
     page.loading = true;
     page.errorMessage = null;
@@ -61,7 +64,13 @@ const login = async() => {
         await adminStore.login(config);
         router.push({ name: 'admin/dashboard/products/Home' })
     } catch (error: any) {
-        page.errorMessage = error.response?.data;
+        page.showMessage = true;
+        page.typeMessage = TypeMessage.Danger;
+        if (axios.isAxiosError(error)) {
+            page.message = getAxiosErrorMessage(error);
+        } else {
+            console.log(error);
+        }
     }
     page.loading = false;
 }

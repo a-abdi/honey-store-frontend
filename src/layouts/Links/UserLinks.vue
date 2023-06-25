@@ -9,7 +9,7 @@
                             دسته بندی
                         </p>
                     </div>
-                    <CategorySidebar :show-category="showCategory" @cancel="showCategory = false"/>
+                    <CategorySidebar v-if="showCategory" :show-category="showCategory" @cancel="showCategory = false"/>
                     <div class="mr-1">
                         <router-link to="/" class="text-gray-600 hover:bg-gray-50 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium"> 
                             خانه 

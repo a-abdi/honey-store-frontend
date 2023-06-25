@@ -34,7 +34,6 @@ export const useProductStore = defineStore("product", {
     },
 
     async editProduct(config: AxiosRequestConfig) {
-      this.productData = null;
       this.productData = await sendRequest(config, SetToken.Admin);
     },
   }

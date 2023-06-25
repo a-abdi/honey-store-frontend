@@ -46,10 +46,8 @@ import { getUserConfig } from '@/common/config/axiox.config';
 import { getFullName } from '@/common/helpers';
 import { storeToRefs } from 'pinia';
 import router from '@/router';
-import { useRoute } from 'vue-router';
 import { useCartStore } from '@/stores/cart';
 const showProfile = ref(false);
-const route = useRoute();
 const userStore = useUserStore();
 const cartStore = useCartStore();
 if (userStore.userLogged) {

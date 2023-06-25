@@ -9,7 +9,7 @@
                    <textarea v-model="newCategory.description" :placeholder="categoryData?.data?.description" class="p-2 text-gray-600 resize-y border rounded-md w-full h-16 sm:h-24 md:h-32 xl:h-40 focus:outline-none focus:ring-2 focus:ring-blue-200"></textarea>
                </div>
                <div class="w-full my-4 flex flex-row-reverse">
-                   <button type="submit" class="btn-violet">
+                   <button  :disabled="form.sending" :class="{'cursor-wait': form.sending}" type="submit" class="btn-violet">
                        ویرایش دسته
                    </button>
                </div> 
@@ -67,6 +67,7 @@ import PageLoading from '@/components/loading/PageLoading.vue';
     const route = useRoute();
     const categoryId = route.params.categoryId as string;
     const form = reactive<Page>({
+        sending: false,
         message: '',
         typeMessage: TypeMessage.Success,
         showMessage: false,
@@ -109,12 +110,13 @@ import PageLoading from '@/components/loading/PageLoading.vue';
         }
         try {
             const config = editCategoryListConfig(editCategory);
-            form.showMessage = true;
+            form.sending = true;
             await categoryStore.editCategory(config);
+            form.showMessage = true;
             form.typeMessage = TypeMessage.Success;
             form.message = categoryData.value?.message;
-
         } catch (error: any) {
+            form.showMessage = true;
             form.typeMessage = TypeMessage.Danger;
             if (axios.isAxiosError(error)) {
                form.message = getAxiosErrorMessage(error);
@@ -122,5 +124,6 @@ import PageLoading from '@/components/loading/PageLoading.vue';
                 console.log(error);
             }
         }
+        form.sending = false;
     }
 </script>

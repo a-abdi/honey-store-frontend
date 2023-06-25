@@ -30,7 +30,7 @@
                         </select>
                     </div>
                     <div class="px-2 w-full ">
-                        <button type="submit" class="w-full my-2 md:my-0 btn-blue">
+                        <button :disabled="page.sending" :class="{'cursor-wait': page.sending}" type="submit" class="w-full my-2 md:my-0 btn-blue">
                             اضافه کردن محصول
                         </button>
                     </div>
@@ -159,6 +159,7 @@ const newProduct = reactive<NewProduct>({
     category: '',
 });
 const page = reactive<Page>({
+    sending: false,
     message: '',
     typeMessage: TypeMessage.Success,
     showMessage: false,
@@ -266,6 +267,7 @@ const addProduct = async () => {
         formData.append('category', newProduct.category);
         formData.append('description', newProduct.description!);
         const config = createProductConfig(formData);
+        page.sending = true;
         await productStore.createProduct(config);
         page.showMessage = true;
         page.typeMessage = TypeMessage.Success;
@@ -280,5 +282,6 @@ const addProduct = async () => {
             console.log(error);
         }
     }
+    page.sending = false;
 }
 </script>
