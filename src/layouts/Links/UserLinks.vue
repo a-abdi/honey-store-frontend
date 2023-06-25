@@ -18,8 +18,19 @@
                 </div>
                 <div class="flex items-center">
                     <!-- profile -->
-                    <div class="ml-6">
+                    <div v-if="userStore.userLogged" class="ml-6">
                         <ProFileLink/>
+                    </div>
+                    <div v-else class="sm:border border-gray-200 rounded-md px-2 py-1 ml-6">
+                        <button @click="router.push('/login')" class="flex items-center ">
+                            <LoginIcone class="rotate-180 w-6 h-6 text-gray-500 ml-2"/>
+                            <div class="text-xs sm:block hidden">
+                                ورود | ثبت نام
+                            </div>
+                            <div class="text-vs sm:hidden">
+                                ورود 
+                            </div>
+                        </button>
                     </div>
                     <div class="ml-4">
                         <CartLinkVue/>
@@ -36,6 +47,10 @@ import ThreeBars from '@/components/icons/ThreeBars.vue';
 import CartLinkVue from '@/components/user-link/CartLink.vue';
 import ProFileLink from '@/components/user-link/ProfileLink.vue';
 import CategorySidebar from '@/components/category/CateSidebar.vue';
+import LoginIcone from '@/components/icons/LoginIcone.vue';
 import { ref } from 'vue';
+import { useUserStore } from '@/stores/user';
+import router from '@/router';
 const showCategory = ref(false);
+const userStore = useUserStore();
 </script>

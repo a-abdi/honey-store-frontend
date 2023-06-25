@@ -1,7 +1,7 @@
 <template>
     <div class="relative">
-        <UserIcone v-if="userStore.userLogged" @click="showProfile = !showProfile" class="md:block hidden w-6 h-6 text-gray-500 cursor-pointer"/>
-        <UserIcone v-if="userStore.userLogged" @click="goToProfile" class="md:hidden w-6 h-6 text-gray-500 cursor-pointer"/>
+        <UserIcone @click="showProfile = !showProfile" class="md:block hidden w-6 h-6 text-gray-500 cursor-pointer"/>
+        <UserIcone @click="goToProfile" class="md:hidden w-6 h-6 text-gray-500 cursor-pointer"/>
         <OnClickOutside @trigger="showProfile = false">
             <div v-if="showProfile" class="absolute px-4 top-7 left-0 border border-gray-300 rounded-md shadow-lg bg-white h-auto overflow-auto max-h-96 w-64">
                 <div class="text-center text-sm py-1.5 rounded-md bg-indigo-600 font-bold text-white">

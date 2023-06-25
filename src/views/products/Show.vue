@@ -34,12 +34,12 @@
             <div class="md:w-7/12 w-full border-t border-gray-300">
               <div class="flex items-center">
                   <div v-if="commenStore.commentListData?.data.length" class="flex items-center mt-4">
-                    <Stare class="text-yellow-400 w-4 h-4"/>
-                    <div class="mt-0.5 text-xs text-gray-900"> 
-                      {{ commenStore.commentListData.data[0].scoreAverage }}
+                    <Stare v-if="commenStore.commentListData.data[0]?.scoreAverage" class="text-yellow-400 w-4 h-4"/>
+                    <div v-if="commenStore.commentListData.data[0]?.scoreAverage" class="mt-0.5 text-xs text-gray-900"> 
+                      {{ Math.round( commenStore.commentListData.data[0].scoreAverage * 10 ) / 10 }}
                     </div>
                     <div class="mt-0.5 text-xs text-indigo-900 pr-4">
-                      {{ commenStore.commentListData.data[0].totalCount }}
+                      {{ commenStore.commentListData.data[0]?.totalCount }}
                         دیدگاه
                     </div>
                 </div>

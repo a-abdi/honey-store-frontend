@@ -5,8 +5,6 @@ services:
     build: .
     container_name: honey-store-frontend-develop
     network_mode: "host"
-    ports:
-      - 4173:4173
     restart: always
 
   

@@ -5,8 +5,6 @@ services:
     container_name: honey-store-frontend-production
     image: aliabdi709/honey-frontend:0.0.2
     network_mode: "host"
-    ports:
-      - 4173:4173
     restart: always
 
   
