@@ -16,12 +16,17 @@ export const useAdminStore = defineStore("admin", {
       this.adminData = await sendRequest(config, SetToken.Admin);
       localStorage.removeItem('adminAccessToken');  
       localStorage.setItem('adminAccessToken', this.adminData?.data?.access_token)
+    },
+
+    async signout() {
+      this.adminData.data.access_token = '';
+      localStorage.removeItem('adminAccessToken');
     }
   },
 
   getters: {
     adminLogged() {
-      if( this.adminData?.data?.access_token ) {
+      if( this.adminData?.data?.access_token && this.adminData?.data?.access_token.length > 1) {
         return true;
       } else {
         return false;
