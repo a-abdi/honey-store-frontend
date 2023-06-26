@@ -12,7 +12,7 @@
                     <input v-model="loginData.phoneNumber" name="phoneNumber" id="phoneNumber" class="form-input">
                 </div>
                 <div class="form-label">
-                    <label for="password" class="">پسورود</label>
+                    <label for="password" class="">پسورد</label>
                 </div>
                 <div class="mb-2 px-2 text-gray-600">
                     <input v-model="loginData.password" name="password" id="password" type="password" class="form-input">

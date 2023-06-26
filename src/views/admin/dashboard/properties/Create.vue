@@ -1,33 +1,29 @@
 <template>
     <form>
-        <div class="px-1 sm:px-4 sm:pb-36 mt-6 mx-auto w-11/12 border border-gray-200 rounded-md">
-            <div class="sm:flex sm:mt-6 sm:mb-12">
-                <div class="w-full sm:my-4 px-2 my-8">
-                    <input v-model="property.label" id="name" type="text" placeholder="برچسب" class="form-input">
-                </div>
-                <div class="w-full sm:my-4 px-2 my-8">
-                    <select v-model="property.type" name="type" autofocus="true" id="type" aria-placeholder="select type" class="w-full bg-white text-gray-600 form-input text-right">
-                        <option value="" disabled selected>نوع</option>
-                        <option v-for="types in typeList" :value="types">{{ types }}</option>
-                    </select>                
+        <div class="px-1 sm:space-y-12 sm:pb-8 sm:mb-8 mt-6 mx-auto 2xl:w-4/12 xl:w-5/12 lg:w-6/12 md:w-8/12 sm:w-full border border-gray-200 rounded-md">
+            <div class="w-full sm:my-4 px-2 my-8">
+                <input v-model="property.label" id="name" type="text" placeholder="برچسب" class="form-input">
+            </div>
+            <div class="w-full sm:my-4 px-2 my-8">
+                <select v-model="property.type" name="type" autofocus="true" id="type" aria-placeholder="select type" class="w-full bg-white text-gray-600 form-input text-right">
+                    <option value="" disabled selected>نوع</option>
+                    <option v-for="types in typeList" :value="types">{{ types }}</option>
+                </select>                
+            </div>
+            <div class="w-full sm:my-4 px-2 my-8">
+                <input @keyup.enter="enterUnit" v-model="unitInput" id="unit" type="text" placeholder="واحد" class="form-input">
+                <div class="flex">
+                    <label class="flex items-center m-1" v-for="unit of property.unit" >
+                        <input v-model="checkbox[unit]" @change="changeUnit(unit, checkbox[unit])" :id="unit" class="mx-0.5 accent-violet-600" v-if="unit" type="checkbox">
+                        {{ unit }}
+                    </label>
                 </div>
             </div>
-            <div class="sm:flex">
-                <div class="w-full sm:my-4 px-2 my-8">
-                    <input @keyup.enter="enterUnit" v-model="unitInput" id="unit" type="text" placeholder="واحد" class="form-input">
-                    <div class="flex">
-                        <label class="flex items-center m-1 " v-for="unit of property.unit" >
-                            <input v-model="checkbox[unit]" @change="changeUnit(unit, checkbox[unit])" :id="unit" class="mx-0.5 accent-violet-600" v-if="unit" type="checkbox">
-                            {{ unit }}
-                        </label>
-                    </div>
+            <div class="w-full sm:my-4 my-8 flex flex-row-reverse pl-2">
+                <div @click="createProperty" :class="{'cursor-wait': page.sending, 'cursor-pointer': !page.sending}" class="flex items-center justify-center w-36 h-8 btn-violet">
+                    ایجاد خصوصیت
                 </div>
-                <div class="w-full sm:my-4 my-8">
-                    <div @click="createProperty" :class="{'cursor-wait': page.sending, 'cursor-pointer': !page.sending}" class="text-center w-full h-8 btn-violet">
-                        ایجاد خصوصیت
-                    </div>
-                </div> 
-            </div>
+            </div> 
             <Message class="absolute bottom-4 right-4 bg-gray-300" 
                 :message="page.message"
                 :showMessage="page.showMessage"

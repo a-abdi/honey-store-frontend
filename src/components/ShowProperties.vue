@@ -9,7 +9,7 @@
                     <div v-if="property.type == 'file' && typeof property.value == 'string'">
                         <DocumenPicture @click="showAttachImage[property.label] = true" class="w-5 h-5 cursor-pointer"/>
                         <ImageDialog :show-dialog="showAttachImage[property.label]" @cancel="showAttachImage[property.label] = false"> 
-                            <img :src="property.value" class="w-132 h-144 mx-auto" alt=""> 
+                            <img :src="property.value" class="max-w-132 max-h-144 mx-auto min-w-68 mx-auto" alt=""> 
                         </ImageDialog>
                     </div>
                     <div v-if="property.type == 'number'" class=" text-indigo-900">
