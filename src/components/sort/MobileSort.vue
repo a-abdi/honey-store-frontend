@@ -24,9 +24,10 @@ import { useRoute } from 'vue-router';
 import SortIcone from '../icons/Sort.vue';
 import type { Sort as SortInterface } from '@/common/typings/common.typings';
 import ShowMobileSort from './ShowMobileSort.vue';
-import { ref } from 'vue';
-import Check from '@/components/icons/Cehck.vue';
+import { defineAsyncComponent, ref } from 'vue';
 import router from '@/router';
+
+const Check = defineAsyncComponent(() => import('@/components/icons/Cehck.vue'));
 const props = defineProps<{path: string, sortList: SortInterface[]}>();
 const route = useRoute();
 const showContent = ref(false);

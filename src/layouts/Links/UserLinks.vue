@@ -46,11 +46,17 @@
 import ThreeBars from '@/components/icons/ThreeBars.vue';
 import CartLinkVue from '@/components/user-link/CartLink.vue';
 import ProFileLink from '@/components/user-link/ProfileLink.vue';
-import CategorySidebar from '@/components/category/CateSidebar.vue';
-import LoginIcone from '@/components/icons/LoginIcone.vue';
-import { ref } from 'vue';
+import { defineAsyncComponent, ref } from 'vue';
 import { useUserStore } from '@/stores/user';
 import router from '@/router';
-const showCategory = ref(false);
+
+const LoginIcone = defineAsyncComponent(
+    () => import('@/components/icons/LoginIcone.vue')
+);
+
+const CategorySidebar = defineAsyncComponent(
+    () => import('@/components/category/CateSidebar.vue')
+);
 const userStore = useUserStore();
+const showCategory = ref(false);
 </script>

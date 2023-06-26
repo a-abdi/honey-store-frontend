@@ -37,16 +37,16 @@
 <script lang="ts" setup>
 import UserIcone from '@/components/icons/UserLink.vue';
 import { OnClickOutside } from '@vueuse/components'
-import { ref } from 'vue';
-import UserProfile from '../icons/UserProfile.vue';
-import OrderVue from '../icons/Order.vue';
-import ExitVue from '../icons/Exit.vue';
+import { defineAsyncComponent, ref } from 'vue';
 import { useUserStore } from '@/stores/user';
 import { getUserConfig } from '@/common/config/axiox.config';
 import { getFullName } from '@/common/helpers';
 import { storeToRefs } from 'pinia';
 import router from '@/router';
 import { useCartStore } from '@/stores/cart';
+const UserProfile = defineAsyncComponent(() => import('../icons/UserProfile.vue'));
+const OrderVue = defineAsyncComponent(() => import('../icons/Order.vue'));
+const ExitVue = defineAsyncComponent(() => import('../icons/Exit.vue'));
 const showProfile = ref(false);
 const userStore = useUserStore();
 const cartStore = useCartStore();

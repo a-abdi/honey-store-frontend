@@ -61,15 +61,17 @@ import { convertToPersian } from '@/common/helpers';
 import router from '@/router';
 import { useCartStore } from '@/stores/cart';
 import { useUserStore } from '@/stores/user';
-import { ref, watch } from 'vue';
+import { defineAsyncComponent, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import Currency from '../Currency.vue';
-import ProductCartQuantity from '../ProductCartQuantity.vue';
 const cartStore = useCartStore();
 const userStore = useUserStore();
 const gotToShipping = () => router.push('/cart');
 const gotToUserLogin = () => router.push('/login');
 const route = useRoute();
+const ProductCartQuantity = defineAsyncComponent(
+    () => import('../ProductCartQuantity.vue')
+);
 if (userStore.userLogged && route.path != '/cart') {
     cartStore.resetUserCart();
 }
