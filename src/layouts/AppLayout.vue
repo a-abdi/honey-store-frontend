@@ -6,9 +6,9 @@
 
 <script setup lang="ts">
 import AppLayoutDefault from './AppLayoutList/AppLayoutDefault.vue';
-import { watch, ref } from 'vue';
+import { watch, ref, shallowRef } from 'vue';
 import { useRoute } from 'vue-router';
-const layout = ref();
+const layout = shallowRef();
 const route = useRoute();
 watch (
     () => route.meta,
