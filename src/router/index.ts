@@ -4,6 +4,8 @@ import { authUserGurd } from "@/middlewares/beforeEachAuthUser";
 import { authAdminrGurd } from "@/middlewares/beforeEachAuthAdmin";
 import {guestUser}  from "@/middlewares/beforeEnterGuestUser";
 import { guestAdmin } from "@/middlewares/beforeEnterGuestAdmin";
+import { beforPageLoading } from "@/middlewares/beforEachPageLoading";
+import { afterPageLoading } from "@/middlewares/afterEachPageLoading";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -259,6 +261,8 @@ const router = createRouter({
   ],
 });
 
+beforPageLoading(router);
+afterPageLoading(router);
 authUserGurd(router);
 authAdminrGurd(router);
 export default router;

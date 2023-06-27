@@ -1,7 +1,7 @@
 <template>
     <nav class="sticky top-0 right-0 left-0 bg-white border-b border-gray-150">
         <div class="mx-auto px-2 sm:px-6 lg:px-8">
-            <div class="relative flex items-center justify-between h-14">
+            <div class="relative flex items-center justify-between h-16">
                 <div class="flex items-center justify-center sm:items-stretch sm:justify-start">
                     <div class="flex items-center">
                         <DashboardIcone v-if="adminStore.adminLogged" @click="showSidebar = true" class="w-6 h-6 cursor-pointer"/>

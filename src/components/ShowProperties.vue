@@ -43,7 +43,4 @@ import MoreProperty from '@/components/dialog/MoreProperty.vue'
 const showAttachImage = reactive<StringBoolean>({});
 defineProps<{customProperties: ProductProperty[], showFile?: boolean}>();
 const showMoreProperty = ref(false);
-const countProperty = 1;
-console.log(countProperty);
-
 </script>
