@@ -92,7 +92,16 @@ const router = createRouter({
         requiresAuthAdmin: false,
       }
     },
-
+    {
+      path: "/search",
+      name: "search/Result",
+      component: () => import("@/views/search/SearchResult.vue"),
+      meta: {
+        layout: "AppLayoutUser",
+        requiresAuthUser: false,
+        requiresAuthAdmin: false,
+      }
+    },
     {
       path: "/profile",
       name: "Profile",
