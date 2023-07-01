@@ -69,7 +69,7 @@
 </template>
 
 <script setup lang="ts">
-import { userSignupConfig } from '@/common/config/axiox.config';
+import { userSignupConfig } from '@/common/config/axios/user.config';
 import type { NewUser } from '@/common/typings/user.typing';
 import AddUser from '@/components/icons/AddUser.vue';
 import Confirm from '@/components/icons/Confirm.vue';
