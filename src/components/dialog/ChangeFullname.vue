@@ -40,7 +40,7 @@
 </template>
 <script setup lang="ts">
 import { reactive } from 'vue';
-import { updateUserConfig } from '@/common/config/axiox.config';
+import { updateUserConfig } from '@/common/config/axios/user.config';
 import type { FullName } from '@/common/typings/user.typing';
 import { useUserStore } from '@/stores/user';
 import { TypeMessage, type Page } from '@/common/typings/common.typings';

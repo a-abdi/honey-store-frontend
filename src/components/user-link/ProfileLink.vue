@@ -39,7 +39,7 @@ import UserIcone from '@/components/icons/UserLink.vue';
 import { OnClickOutside } from '@vueuse/components'
 import { defineAsyncComponent, ref } from 'vue';
 import { useUserStore } from '@/stores/user';
-import { getUserConfig } from '@/common/config/axiox.config';
+import { getUserConfig } from '@/common/config/axios/user.config';
 import { getFullName } from '@/common/helpers';
 import { storeToRefs } from 'pinia';
 import router from '@/router';

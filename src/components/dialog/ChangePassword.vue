@@ -8,7 +8,7 @@
         <div
             class="flex mb-10 items-center py-1 bg-white text-gray-600 border border-gray-200 rounded-md shadow shadow-violet-200/50">
             <div class="">
-                <password class="w-5 h-5 fill-violet-500 mx-1" />
+                <PasswordIcone class="w-5 h-5 fill-violet-500 mx-1" />
             </div>
             <div class="w-full">
                 <input v-model="passwordEdit.password" name="password" id="password" type="password" class="form-input-v-1">
@@ -22,7 +22,7 @@
         <div
             class="flex mb-10 items-center py-1 bg-white text-gray-600 border border-gray-200 rounded-md shadow shadow-violet-200/50">
             <div class="">
-                <password class="w-5 h-5 fill-violet-500 mx-1" />
+                <PasswordIcone class="w-5 h-5 fill-violet-500 mx-1" />
             </div>
             <div class="w-full">
                 <input v-model="passwordEdit.newPassword" name="passwordConfirm" id="passwordConfirm" type="password"
@@ -37,7 +37,7 @@
         <div
             class="flex mb-10 items-center py-1 bg-white text-gray-600 border border-gray-200 rounded-md shadow shadow-violet-200/50">
             <div class="">
-                <password class="w-5 h-5 fill-violet-500 mx-1" />
+                <PasswordIcone class="w-5 h-5 fill-violet-500 mx-1" />
             </div>
             <div class="w-full">
                 <input v-model="passwordEdit.newPasswordConfirm" name="newPasswordConfirm" id="newPasswordConfirm"
@@ -54,9 +54,9 @@
     </TemplateChangeUserInfo>
 </template>
 <script setup lang="ts">
-import Password from '../icons/Password.vue';
+import PasswordIcone from '../icons/PasswordIcone.vue';
 import { reactive } from 'vue';
-import { updateUserPasswordConfig } from '@/common/config/axiox.config';
+import { updateUserPasswordConfig } from '@/common/config/axios/user.config';
 import type { PasswordEdit } from '@/common/typings/user.typing';
 import { useUserStore } from '@/stores/user';
 import { TypeMessage, type Page } from '@/common/typings/common.typings';

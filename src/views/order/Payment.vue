@@ -82,7 +82,7 @@
 </template>
 
 <script setup lang="ts">
-import { paymentConfig } from '@/common/config/axiox.config';
+import { paymentConfig } from '@/common/config/axios/payment.config';
 import { convertToPersian, getAxiosErrorMessage } from '@/common/helpers';
 import Currency from '@/components/Currency.vue';
 import { useCartStore } from '@/stores/cart';

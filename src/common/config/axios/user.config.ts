@@ -13,3 +13,20 @@ export const userLoginConfig = <T>(data: T): AxiosRequestConfig<T> => ({
     url: `${BASE_URL}auth/login`,
     data
 });
+
+export const updateUserConfig = <T>(data: T): AxiosRequestConfig<T> => ({
+    method: 'patch',
+    url: `${BASE_URL}users`,
+    data
+});
+
+export const updateUserPasswordConfig = <T>(data: T): AxiosRequestConfig<T> => ({
+    method: 'patch',
+    url: `${BASE_URL}users/password`,
+    data
+});
+
+export const getUserConfig = (): AxiosRequestConfig => ({
+    method: 'get',
+    url: `${BASE_URL}users/info`,
+});

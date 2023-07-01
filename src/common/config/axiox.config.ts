@@ -2,32 +2,6 @@ import type { AxiosRequestConfig } from 'axios';
 
 const BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
 
-
-
-
-
-export const updateUserConfig = <T>(data: T): AxiosRequestConfig<T> => ({
-    method: 'patch',
-    url: `${BASE_URL}users`,
-    data
-});
-
-export const updateUserPasswordConfig = <T>(data: T): AxiosRequestConfig<T> => ({
-    method: 'patch',
-    url: `${BASE_URL}users/password`,
-    data
-});
-
-export const getUserConfig = (): AxiosRequestConfig => ({
-    method: 'get',
-    url: `${BASE_URL}users/info`,
-});
-
-export const paymentConfig = (): AxiosRequestConfig => ({
-    method: 'get',
-    url: `${BASE_URL}checkout/payment`,
-});
-
 export const getOrdersAxiosConfig = (): AxiosRequestConfig => ({
     method: 'get',
     url: `${BASE_URL}user/orders`,
