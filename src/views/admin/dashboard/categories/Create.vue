@@ -49,7 +49,7 @@
 </template>
 
 <script setup lang="ts">
-import { getProperyListConfig } from '@/common/config/axiox.config';
+import { getPropertyListConfig } from '@/common/config/axios/property.config';
 import { createCategoryConfig } from '@/common/config/axios/category.config';
 
 import { reactive, ref } from 'vue';
@@ -69,7 +69,7 @@ import { usePropertyStore } from '@/stores/property';
         const showMessage = ref(false);
         const categoryStore = useCategoryStore();
         const propertyStore = usePropertyStore();
-        const getPropertyConfig = getProperyListConfig();
+        const getPropertyConfig = getPropertyListConfig();
         propertyStore.getPropertyList(getPropertyConfig);
         const { propertyListData } = storeToRefs(propertyStore);
         const category = reactive<NewCategory>({

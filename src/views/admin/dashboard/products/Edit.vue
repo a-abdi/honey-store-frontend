@@ -144,7 +144,7 @@
 import { ref, reactive, type Ref, onMounted } from 'vue';
 import { useCategoryStore } from '@/stores/category';
 import { getProductConfig, editProductConfig } from '@/common/config/axios/product.config';
-import { getProperyListConfig } from '@/common/config/axiox.config';
+import { getPropertyListConfig } from '@/common/config/axios/property.config';
 import { getCategoryListConfig } from '@/common/config/axios/category.config';
 import { storeToRefs } from 'pinia';
 import { useProductStore } from '@/stores/product';
@@ -167,7 +167,7 @@ const { categoryListData } = storeToRefs(categoryStore);
 const { propertyListData } = storeToRefs(propertyStore);
 const { productData } = storeToRefs(productStore);
 const categoryConfig = getCategoryListConfig();
-const propertyConfig = getProperyListConfig();
+const propertyConfig = getPropertyListConfig();
 categoryStore.getCategoryList(categoryConfig);
 const additionalsImage = reactive<Image[]>([]);
 const route = useRoute();

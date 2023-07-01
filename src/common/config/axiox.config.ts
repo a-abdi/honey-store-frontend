@@ -28,33 +28,6 @@ export const paymentConfig = (): AxiosRequestConfig => ({
     url: `${BASE_URL}checkout/payment`,
 });
 
-export const getProperyListConfig = (): AxiosRequestConfig => ({
-    method: 'get',
-    url: `${BASE_URL}property`,
-});
-
-export const getProperyAxiosConfig = (propertyId: string): AxiosRequestConfig => ({
-    method: 'get',
-    url: `${BASE_URL}property/${propertyId}`,
-});
-
-export const deletePropertyConfig = (propertyId: string): AxiosRequestConfig => ({
-    method: 'delete',
-    url: `${BASE_URL}property/${propertyId}`,
-});
-
-export const createPropertyAxiosConfig = <T>(data: T): AxiosRequestConfig<T> => ({
-    method: 'post',
-    url: `${BASE_URL}property`,
-    data
-});
-
-export const updatePropertyAxiosConfig = <T>(propertyId: string, data: T): AxiosRequestConfig<T> => ({
-    method: 'patch',
-    url: `${BASE_URL}property/${propertyId}`,
-    data
-});
-
 export const getOrdersAxiosConfig = (): AxiosRequestConfig => ({
     method: 'get',
     url: `${BASE_URL}user/orders`,

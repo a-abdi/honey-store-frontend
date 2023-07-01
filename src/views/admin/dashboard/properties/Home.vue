@@ -48,7 +48,7 @@
 </template>
 
 <script setup lang="ts">
-import { getProperyListConfig, deletePropertyConfig } from '@/common/config/axiox.config';
+import { getPropertyListConfig, deletePropertyConfig } from '@/common/config/axios/property.config';
 import { storeToRefs } from 'pinia';
 import { usePropertyStore } from '@/stores/property';
 import { reactive, ref } from 'vue';
@@ -66,7 +66,7 @@ const propertyId = ref('');
 const page = reactive<Page>({});
 const { propertyListData } = storeToRefs(properyStore);
 const { propertyData } = storeToRefs(properyStore);
-const propertyConfig = getProperyListConfig();
+const propertyConfig = getPropertyListConfig();
 properyStore.getPropertyList(propertyConfig);
 const deleteProperty = async () => {
     try {

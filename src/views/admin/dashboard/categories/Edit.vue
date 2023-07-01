@@ -52,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-import { getProperyListConfig } from '@/common/config/axiox.config';
+import { getPropertyListConfig } from '@/common/config/axios/property.config';
 import { getCategoryConfig, editCategoryListConfig } from '@/common/config/axios/category.config';
 import { getAxiosErrorMessage } from '@/common/helpers';
 import { useCategoryStore } from '@/stores/category';
@@ -78,7 +78,7 @@ import PageLoading from '@/components/loading/PageLoading.vue';
     const newCategory = reactive<Partial<NewCategory>>({});
     const categoryProperties = ref([]) as Ref<string[]>;
     const categoryConfig = getCategoryConfig(categoryId);
-    const propertyConfig = getProperyListConfig();
+    const propertyConfig = getPropertyListConfig();
     const { categoryData } = storeToRefs(categoryStore);
     const { propertyListData } = storeToRefs(propertyStore);
     onMounted(async () => {

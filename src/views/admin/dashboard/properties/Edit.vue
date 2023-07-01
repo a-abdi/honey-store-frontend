@@ -38,7 +38,7 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue';
 import Message from '@/components/message/Message.vue';
-import { updatePropertyAxiosConfig, getProperyAxiosConfig } from '@/common/config/axiox.config'
+import { updatePropertyAxiosConfig, getPropertyAxiosConfig } from '@/common/config/axios/property.config'
 import axios from 'axios';
 import { getAxiosErrorMessage } from '@/common/helpers';
 import { TypeMessage, type Page } from '@/common/typings/common.typings';
@@ -68,7 +68,7 @@ import PageLoading from '@/components/loading/PageLoading.vue';
     const property = reactive<Partial<newProperty>>({});
 
     onMounted(async ()=> {
-        const getPropertyConfig = getProperyAxiosConfig(propertyId);
+        const getPropertyConfig = getPropertyAxiosConfig(propertyId);
         await propertyStore.getProperty(getPropertyConfig);
         if (propertyData.value?.data?.unit.length) {
             property.unit = propertyData.value?.data?.unit;
