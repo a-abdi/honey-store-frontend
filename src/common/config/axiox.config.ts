@@ -1,29 +1,6 @@
 import type { AxiosRequestConfig } from 'axios';
-import type { EditCategory, NewCategory } from '../typings/category.typings';
 
 const BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
-
-export const createCategoryConfig = (data: NewCategory): AxiosRequestConfig => ({
-    method: 'post',
-    url: `${BASE_URL}categories`,
-    data,
-});
-
-export const getCategoryConfig = (id: string): AxiosRequestConfig => ({
-    method: 'get',
-    url: `${BASE_URL}categories/${id}`,
-});
-
-export const getCategoryListConfig = (filter : string = ''): AxiosRequestConfig => ({
-    method: 'get',
-    url: `${BASE_URL}categories${filter}`,
-});
-
-export const editCategoryListConfig = (category: EditCategory): AxiosRequestConfig => ({
-    method: 'patch',
-    url: `${BASE_URL}categories/${category.id}`,
-    data: category.newData
-});
 
 export const createProductConfig = <T>(data: T): AxiosRequestConfig<T> => ({
     method: 'post',

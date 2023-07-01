@@ -125,7 +125,8 @@
 <script setup lang="ts">
 import { ref, reactive, type Ref } from 'vue';
 import { useCategoryStore } from '@/stores/category';
-import { getCategoryListConfig, createProductConfig, getProperyListConfig } from '@/common/config/axiox.config';
+import { getCategoryListConfig } from '@/common/config/axios/category.config';
+import { createProductConfig, getProperyListConfig } from '@/common/config/axiox.config';
 import { storeToRefs } from 'pinia';
 import { useProductStore } from '@/stores/product';
 import Message from '@/components/message/Message.vue';

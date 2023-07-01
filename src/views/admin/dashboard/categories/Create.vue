@@ -49,7 +49,9 @@
 </template>
 
 <script setup lang="ts">
-import { createCategoryConfig, getProperyListConfig } from '@/common/config/axiox.config';
+import { getProperyListConfig } from '@/common/config/axiox.config';
+import { createCategoryConfig } from '@/common/config/axios/category.config';
+
 import { reactive, ref } from 'vue';
 import { useCategoryStore } from '@/stores/category';
 import { storeToRefs } from 'pinia';

@@ -52,7 +52,8 @@
 </template>
 
 <script setup lang="ts">
-import { getCategoryConfig, editCategoryListConfig, getProperyListConfig } from '@/common/config/axiox.config';
+import { getProperyListConfig } from '@/common/config/axiox.config';
+import { getCategoryConfig, editCategoryListConfig } from '@/common/config/axios/category.config';
 import { getAxiosErrorMessage } from '@/common/helpers';
 import { useCategoryStore } from '@/stores/category';
 import { storeToRefs } from 'pinia';
@@ -109,7 +110,7 @@ import PageLoading from '@/components/loading/PageLoading.vue';
             editCategory.newData.name = newCategory.name;
         }
         try {
-            const config = editCategoryListConfig(editCategory);
+            const config = editCategoryListConfig(editCategory.newData, editCategory.id);
             form.sending = true;
             await categoryStore.editCategory(config);
             form.showMessage = true;

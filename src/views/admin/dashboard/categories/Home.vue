@@ -34,7 +34,7 @@
 
 <script setup lang="ts">
 import { useCategoryStore } from '@/stores/category';
-import { getCategoryListConfig } from '@/common/config/axiox.config';
+import { getCategoryListConfig } from '@/common/config/axios/category.config';
 import { storeToRefs } from 'pinia';
 import EditElement from '@/components/element/EditElement.vue';
 import PageLoading from '@/components/loading/PageLoading.vue';
