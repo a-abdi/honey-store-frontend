@@ -52,8 +52,9 @@
 </template>
 
 <script setup lang="ts">
-import { getPropertyListConfig } from '@/common/config/axios/property.config';
-import { getCategoryConfig, editCategoryListConfig } from '@/common/config/axios/category.config';
+import { getPropertyListConfig } from '@/common/config/axios/admin/property.config';
+import { editCategoryListConfig } from '@/common/config/axios/admin/category.config';
+import { getCategoryConfig } from '@/common/config/axios/category.config';
 import { getAxiosErrorMessage } from '@/common/helpers';
 import { useCategoryStore } from '@/stores/category';
 import { storeToRefs } from 'pinia';

@@ -59,7 +59,8 @@
 </template>
 
 <script setup lang="ts">
-import { deleteProductConfig, getProductListConfig, safeDeleteProductConfig, restoreProductConfig } from '@/common/config/axios/product.config';
+import { deleteProductConfig, safeDeleteProductConfig, restoreProductConfig } from '@/common/config/axios/admin/product.config';
+import { getProductListConfig } from '@/common/config/axios/product.config';
 import { useProductStore } from '@/stores/product';
 import { storeToRefs } from 'pinia';
 import { reactive, ref, watch } from 'vue';

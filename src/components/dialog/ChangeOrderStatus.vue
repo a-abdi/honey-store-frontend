@@ -37,7 +37,7 @@
 
 <script setup lang="ts">
 import { useOrderStore } from '@/stores/order';
-import { updateOrderStatusAxiosConfig } from '@/common/config/axios/order.config';
+import { updateOrderStatusAxiosConfig } from '@/common/config/axios/admin/order.config';
 import { reactive } from 'vue';
 import { TypeMessage, type Page } from '@/common/typings/common.typings';
 import axios from 'axios';

@@ -48,7 +48,7 @@
 </template>
 
 <script setup lang="ts">
-import { getPropertyListConfig, deletePropertyConfig } from '@/common/config/axios/property.config';
+import { getPropertyListConfig, deletePropertyConfig } from '@/common/config/axios/admin/property.config';
 import { storeToRefs } from 'pinia';
 import { usePropertyStore } from '@/stores/property';
 import { reactive, ref } from 'vue';

@@ -49,8 +49,8 @@
 </template>
 
 <script setup lang="ts">
-import { getPropertyListConfig } from '@/common/config/axios/property.config';
-import { createCategoryConfig } from '@/common/config/axios/category.config';
+import { getPropertyListConfig } from '@/common/config/axios/admin/property.config';
+import { createCategoryConfig } from '@/common/config/axios/admin/category.config';
 
 import { reactive, ref } from 'vue';
 import { useCategoryStore } from '@/stores/category';

@@ -39,7 +39,7 @@
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAdminStore } from '@/stores/admin';
-import { adminLoginConfig } from '@/common/config/axios/admin.config';
+import { adminLoginConfig } from '@/common/config/axios/admin/admin.config';
 import { TypeMessage, type Page } from '@/common/typings/common.typings';
 import type { AdminLoginData } from '@/common/typings/admin.typings';
 import Message from '@/components/message/Message.vue';

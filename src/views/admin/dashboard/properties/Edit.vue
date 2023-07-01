@@ -38,7 +38,7 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue';
 import Message from '@/components/message/Message.vue';
-import { updatePropertyAxiosConfig, getPropertyAxiosConfig } from '@/common/config/axios/property.config'
+import { updatePropertyAxiosConfig, getPropertyAxiosConfig } from '@/common/config/axios/admin/property.config'
 import axios from 'axios';
 import { getAxiosErrorMessage } from '@/common/helpers';
 import { TypeMessage, type Page } from '@/common/typings/common.typings';

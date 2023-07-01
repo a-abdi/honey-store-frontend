@@ -63,7 +63,7 @@
 <script setup lang="ts">
 import { useCommentStore } from '@/stores/comment';
 import { storeToRefs } from 'pinia';
-import { getCommentListNotVerifyAxiosConfig, updateCommentAdminAxiosConfig, deleteCommentAdminAxiosConfig} from '@/common/config/axios/comment.config';
+import { getCommentListNotVerifyAxiosConfig, updateCommentAdminAxiosConfig, deleteCommentAdminAxiosConfig } from '@/common/config/axios/admin/comment.config';
 import Verify from '@/components/icons/Verify.vue';
 import Trash from '@/components/icons/Trash.vue';
 import Dialog from '@/components/dialog/Dialog.vue';

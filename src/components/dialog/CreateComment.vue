@@ -47,14 +47,14 @@
                                             </div>
                                         </div>
                                         <div class="my-6">
-                                            <label class="text-indigo-900 text-xs p-2 tracking-wider" for="tiltle">عنوان</label>
+                                            <label class="text-indigo-900 text-xs p-2 tracking-wider" for="title">عنوان</label>
                                             <div class="w-full py-1 mt-1 bg-white text-gray-600 border border-gray-200 rounded-md shadow shadow-violet-200/50">
                                                 <input v-model="newComment.title" name="title" id="title" type="text" class="form-input-v-1 text-sm text-indigo-900">
                                             </div>
                                         </div>
                                         <div class="my-6">
-                                            <label class="text-indigo-900 text-xs p-2 tracking-wider" for="tiltle">متن نظر</label>
-                                            <textarea v-model="newComment.text" class="p-2 mt-1 text-xs text-indigo-900 resize-none border rounded-md w-full h-28 md:h-28 xl:h-28 focus:outline-none">
+                                            <label class="text-indigo-900 text-xs p-2 tracking-wider" for="commentText">متن نظر</label>
+                                            <textarea v-model="newComment.text" name="commentText" id="commentText" class="p-2 mt-1 text-xs text-indigo-900 resize-none border rounded-md w-full h-28 md:h-28 xl:h-28 focus:outline-none">
                                             </textarea>
                                         </div>
                                         <div>

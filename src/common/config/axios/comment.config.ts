@@ -13,21 +13,6 @@ export const createCommentAxiosConfig = <T>(productId: string, data: T): AxiosRe
     data
 });
 
-export const getCommentListNotVerifyAxiosConfig = (): AxiosRequestConfig => ({
-    method: 'get',
-    url: `${BASE_URL}product/comment/not-verify`,
-});
-
-export const updateCommentAdminAxiosConfig = (productId: string, commentId: string): AxiosRequestConfig => ({
-    method: 'patch',
-    url: `${BASE_URL}product/${productId}/comment/${commentId}/admin`,
-});
-
-export const deleteCommentAdminAxiosConfig = (productId: string, commentId: string): AxiosRequestConfig => ({
-    method: 'delete',
-    url: `${BASE_URL}product/${productId}/comment/${commentId}/admin`,
-});
-
 export const getUsersCommentAxios = (productId: string): AxiosRequestConfig => ({
     method: 'get',
     url: `${BASE_URL}product/${productId}/user/comment`,
