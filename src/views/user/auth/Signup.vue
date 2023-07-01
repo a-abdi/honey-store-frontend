@@ -30,7 +30,7 @@
                 </div>
                 <div class="flex items-center py-1 bg-white my-10 mx-6 text-gray-600 rounded-md shadow shadow-violet-200/50">
                     <div class="">
-                        <Password class="w-5 h-5 fill-violet-500 mx-1" />
+                        <PasswordIcone class="w-5 h-5 fill-violet-500 mx-1" />
                     </div>
                     <div class="w-full">
                         <input v-model="newUser.password" name="password" id="password" type="password" class="form-input-v-1 placeholder-violet-500" placeholder="پسورد">
@@ -73,7 +73,7 @@ import { userSignupConfig } from '@/common/config/axios/user.config';
 import type { NewUser } from '@/common/typings/user.typing';
 import AddUser from '@/components/icons/AddUser.vue';
 import Confirm from '@/components/icons/Confirm.vue';
-import Password from '@/components/icons/Password.vue';
+import PasswordIcone from '@/components/icons/PasswordIcone.vue';
 import Phone from '@/components/icons/Phone.vue';
 import SimpleUser from '@/components/icons/SimpleUser.vue';
 import router from '@/router';
