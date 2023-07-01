@@ -93,7 +93,7 @@ import { useCommentStore } from '@/stores/comment';
 import { OnClickOutside } from '@vueuse/components';
 import { storeToRefs } from 'pinia';
 import { inject, reactive, watch } from 'vue';
-import { createCommentAxiosConfig, deleteUsersCommentAxios, getUsersCommentAxios, updateUserCommentAxios } from '@/common/config/axiox.config';
+import { createCommentAxiosConfig, deleteUsersCommentAxios, getUsersCommentAxios, updateUserCommentAxios } from '@/common/config/axios/comment.config';
 import { TypeMessage, type Page } from '@/common/typings/common.typings';
 import axios from 'axios';
 import { getAxiosErrorMessage } from '@/common/helpers';

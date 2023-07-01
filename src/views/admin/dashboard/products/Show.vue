@@ -53,7 +53,7 @@
   import { useRoute } from 'vue-router';
   import { useProductStore } from '@/stores/product';
   import { getProductConfig } from '@/common/config/axios/product.config';
-  import { getCommentListAxiosConfig } from '@/common/config/axiox.config';
+  import { getCommentListAxiosConfig } from '@/common/config/axios/comment.config';
   import { storeToRefs } from 'pinia';
   import { ref } from 'vue';
   import ImageDialog from '@/components/dialog/ImageDialog.vue';
