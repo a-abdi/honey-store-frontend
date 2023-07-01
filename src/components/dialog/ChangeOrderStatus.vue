@@ -37,8 +37,7 @@
 
 <script setup lang="ts">
 import { useOrderStore } from '@/stores/order';
-import { OnClickOutside } from '@vueuse/components';
-import { updateOrderStatusAxiosConfig } from '@/common/config/axiox.config';
+import { updateOrderStatusAxiosConfig } from '@/common/config/axios/order.config';
 import { reactive } from 'vue';
 import { TypeMessage, type Page } from '@/common/typings/common.typings';
 import axios from 'axios';

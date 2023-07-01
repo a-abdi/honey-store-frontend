@@ -60,7 +60,7 @@
 </template>
 
 <script lang="ts" setup>
-import { getOrdersAxiosConfig } from '@/common/config/axiox.config';
+import { getOrdersAxiosConfig } from '@/common/config/axios/order.config';
 import PageLoading from '@/components/loading/PageLoading.vue';
 import { useOrderStore } from '@/stores/order';
 import { useRoute } from 'vue-router';

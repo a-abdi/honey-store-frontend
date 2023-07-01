@@ -61,7 +61,7 @@
 </template>
 
 <script setup lang="ts">
-import { getOrdersBystatusAxiosConfig } from '@/common/config/axiox.config';
+import { getOrdersBystatusAxiosConfig } from '@/common/config/axios/order.config';
 import { storeToRefs } from 'pinia';
 import { useOrderStore } from '@/stores/order';
 import Currency from '@/components/Currency.vue';
