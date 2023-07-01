@@ -94,7 +94,8 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
 import { useProductStore } from '@/stores/product';
-import { addToCartConfig, getCartConfig, getCommentListAxiosConfig } from '@/common/config/axiox.config';
+import { addToCartConfig, getCartConfig } from '@/common/config/axios/cart.config';
+import { getCommentListAxiosConfig } from '@/common/config/axiox.config';
 import { getProductConfig } from '@/common/config/axios/product.config';
 import { storeToRefs } from 'pinia';
 import { getAxiosErrorMessage } from '@/common/helpers';

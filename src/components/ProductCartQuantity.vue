@@ -31,7 +31,7 @@ import Plus from '@/components/icons/Plus.vue';
 import Minus from '@/components/icons/Minus.vue';
 import Trash from '@/components/icons/Trash.vue';
 import { useUserStore } from '@/stores/user';
-import { updateCartConfig, getCartConfig, removeProductFromCartConfig } from '@/common/config/axiox.config';
+import { updateCartConfig, getCartConfig, removeProductFromCartConfig } from '@/common/config/axios/cart.config';
 import { TypeMessage, type Page } from '@/common/typings/common.typings';
 import { reactive } from 'vue';
 import axios from 'axios';

@@ -73,7 +73,7 @@ import axios from 'axios';
 import { getAxiosErrorMessage } from '@/common/helpers';
 import Message from '@/components/message/Message.vue';
 import type { UserLogin } from '@/common/typings/user.typing';
-import { addToCartConfig } from '@/common/config/axiox.config';
+import { addToCartConfig } from '@/common/config/axios/cart.config';
 import { userLoginConfig } from '@/common/config/axios/user.config';
 import { useCartStore } from '@/stores/cart';
 import { storeToRefs } from 'pinia';

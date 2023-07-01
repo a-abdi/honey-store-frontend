@@ -3,7 +3,7 @@ import { sendRequest } from "@/common/helpers";
 import type { AxiosRequestConfig } from 'axios';
 import type { CartData, ListProductsCart, ProductCart } from "@/common/typings/cart.typings";
 import { SetToken } from "@/common/typings/common.typings";
-import { getCartConfig } from "@/common/config/axiox.config";
+import { getCartConfig } from "@/common/config/axios/cart.config";
 
 export const useCartStore = defineStore("cart", {
   state: () => {
