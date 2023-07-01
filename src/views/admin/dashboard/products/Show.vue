@@ -52,7 +52,8 @@
   <script setup lang="ts">
   import { useRoute } from 'vue-router';
   import { useProductStore } from '@/stores/product';
-  import { getProductConfig, getCommentListAxiosConfig } from '@/common/config/axiox.config';
+  import { getProductConfig } from '@/common/config/axios/product.config';
+  import { getCommentListAxiosConfig } from '@/common/config/axiox.config';
   import { storeToRefs } from 'pinia';
   import { ref } from 'vue';
   import ImageDialog from '@/components/dialog/ImageDialog.vue';

@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { getProductListConfig } from '@/common/config/axiox.config';
+import { getProductListConfig } from '@/common/config/axios/product.config';
 import { useProductStore } from '@/stores/product';
 import { storeToRefs } from 'pinia';
 import ProductBox from '@/components/ProductBox.vue';

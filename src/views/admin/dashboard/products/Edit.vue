@@ -143,7 +143,8 @@
 <script setup lang="ts">
 import { ref, reactive, type Ref, onMounted } from 'vue';
 import { useCategoryStore } from '@/stores/category';
-import { getProperyListConfig, getProductConfig, editProductConfig } from '@/common/config/axiox.config';
+import { getProductConfig, editProductConfig } from '@/common/config/axios/product.config';
+import { getProperyListConfig } from '@/common/config/axiox.config';
 import { getCategoryListConfig } from '@/common/config/axios/category.config';
 import { storeToRefs } from 'pinia';
 import { useProductStore } from '@/stores/product';
