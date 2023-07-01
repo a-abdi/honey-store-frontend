@@ -25,7 +25,7 @@ import router from '@/router';
 import PageLoading from '@/components/loading/PageLoading.vue';
 import { useRoute } from 'vue-router';
 import { useSearchStore } from '@/stores/search';
-import { searchAxiosConfig } from '@/common/config/axios/searchConfig';
+import { searchAxiosConfig } from '@/common/config/axios/search.config';
 import { watch } from 'vue';
 const searchStore = useSearchStore();
 const route = useRoute();

@@ -37,7 +37,7 @@ import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import ErrorMessage from '@/components/message/ErrorMessage.vue';
 import { useAdminStore } from '@/stores/admin';
-import { adminLoginConfig } from '@/common/config/axiox.config';
+import { adminLoginConfig } from '@/common/config/axios/admin.config';
 import type  { AxiosError } from 'axios';
 
 const adminStore = useAdminStore();
