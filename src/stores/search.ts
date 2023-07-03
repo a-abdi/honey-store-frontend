@@ -7,6 +7,7 @@ export const useSearchStore = defineStore("search", {
   state: () => {
     return {
       searchData: null as ProductListData | null,
+      searchDataLazy: null as ProductListData | null,
     }
   },
 
@@ -15,5 +16,19 @@ export const useSearchStore = defineStore("search", {
       this.searchData = null;
       this.searchData = await sendRequest(config);
     },
+    async lazySearch(config: AxiosRequestConfig) {
+      this.searchData = await sendRequest(config);
+      if (this.searchDataLazy?.data.length && this.searchData?.data) {
+        const { data } = this.searchData;
+        this.searchDataLazy.data = [ ...this.searchDataLazy.data, ...this.searchData.data ];
+      } else {
+        this.searchDataLazy = this.searchData;
+      }
+    },
+
+    reset() {
+      this.searchData = null;
+      this.searchDataLazy = null;
+    }
   }
 });

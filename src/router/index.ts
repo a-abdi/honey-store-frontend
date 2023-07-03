@@ -6,13 +6,14 @@ import {guestUser}  from "@/middlewares/beforeEnterGuestUser";
 import { guestAdmin } from "@/middlewares/beforeEnterGuestAdmin";
 import { beforPageLoading } from "@/middlewares/beforEachPageLoading";
 import { afterPageLoading } from "@/middlewares/afterEachPageLoading";
+import HomeViewVue from "@/views/HomeView.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: "/",
       name: "Home",
-      component: () => import("@/views/HomeView.vue"),
+      component: HomeViewVue,
       meta: {
         layout: "AppLayoutUser",
         requiresAuthUser: false,

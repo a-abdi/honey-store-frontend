@@ -5,9 +5,14 @@ export interface CommonResponseData {
     __v: number;
 };
 
+export interface metaData {
+    previousPage?: string;
+    nextPage: string;
+}
+
 export interface CommonResponseDataOptional {
     message?: string;
-    metaData?: object; 
+    metaData?: metaData; 
 };
 
 export interface Page {
