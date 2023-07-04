@@ -62,3 +62,12 @@ export interface Sort {
     index: number;
     text: string;
 }
+
+export enum OrderStatus {
+    WatingPay,
+    Payment,
+    Cancel,
+    Send,
+    Return,
+    Delivered,
+}
