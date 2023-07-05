@@ -13,29 +13,21 @@ import type { ChartConfiguration, ChartData } from 'chart.js';
 import Chart from 'chart.js/auto';
 import { storeToRefs } from 'pinia';
 import { onMounted } from 'vue';
+import { ORDER_STATUS } from '@/common/constans';
 
 const useChart = useChartStore();
-let chart: Chart;
 let chartDate: ChartData;
 onMounted(async () => {
     const { orderStatus } = storeToRefs(useChart);
-    const data = orderStatus.value?.data.map(order => order.count);
+    const data = orderStatus.value?.data.sort((a,b) => a._id - b._id).map(order => order.count);   
     if (data) {
-        const status = [
-            'در انتظار پرداخت',
-            'پرداخت شده',
-            'لغو شده',
-            'فرستاده شده',
-            'مرجوع شده',
-            'تحویل داده شده',
-        ]
-        const labels = orderStatus.value?.data.map(order => status[order._id])
+        const labels = orderStatus.value?.data.map(order => ORDER_STATUS[order._id]);
         chartDate = {
             labels,
             datasets: [
                 {
                     label: 'تعداد',
-                    data: data.sort(),
+                    data: data,
                     borderColor: 'rgb(100, 100, 100)',
                     backgroundColor: ['rgb(256, 0, 0)', 'rgb(54, 54, 255)', 'rgb(204, 204, 2)', 'rgb(25, 250, 255)', 'rgb(255, 128, 0)', 'rgb(0, 256, 100)']
                 },
@@ -66,7 +58,7 @@ onMounted(async () => {
         };
         const ctx = document.getElementById('orderDatePie') as HTMLCanvasElement;
         if (ctx) {
-            chart = new Chart(ctx, config);
+            new Chart(ctx, config);
         }
     }
 });
