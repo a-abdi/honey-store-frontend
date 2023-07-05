@@ -11,3 +11,13 @@ export interface ReportOrderDate {
 export interface ReportOrderDateData {
     data: ReportOrderDate[] | []
 }
+
+export interface ReportOrderstatus {
+    _id: number,
+    totalAmount: number,
+    count: number
+}
+
+export interface ReportOrderStatusData {
+    data: ReportOrderstatus[] | []
+}

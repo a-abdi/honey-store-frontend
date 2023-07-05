@@ -6,3 +6,8 @@ export const getOrderDateReport = (filter: any = {}): AxiosRequestConfig => ({
     method: 'get',
     url: `${BASE_URL}chart/order/date/?${filter}`,
 });
+
+export const getOrderStatusReport = (filter: any = {}): AxiosRequestConfig => ({
+    method: 'get',
+    url: `${BASE_URL}chart/order/status/?${filter}`,
+});

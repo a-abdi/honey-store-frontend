@@ -62,7 +62,7 @@ const login = async() => {
     try {
         const config = adminLoginConfig(loginData);
         await adminStore.login(config);
-        router.push({ name: 'admin/dashboard/products/Home' })
+        router.push({ name: 'admin/dashboard/chart/IndexChart' })
     } catch (error: any) {
         page.showMessage = true;
         page.typeMessage = TypeMessage.Danger;

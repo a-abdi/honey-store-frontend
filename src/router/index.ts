@@ -165,8 +165,8 @@ const router = createRouter({
       children: [
         {
           path: "",
-          name: "admin/dashboard/chart/OrderDate",
-          component: () => import("@/views/admin/dashboard/chart/OrderDate.vue"),
+          name: "admin/dashboard/chart/IndexChart",
+          component: () => import("@/views/admin/dashboard/chart/IndexChart.vue"),
         },
         {
           path: "products",

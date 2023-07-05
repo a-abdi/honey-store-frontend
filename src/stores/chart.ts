@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { sendRequest } from "@/common/helpers";
 import type { AxiosRequestConfig } from 'axios';
-import type { ReportOrderDateData } from "@/common/typings/chart.typings";
+import type { ReportOrderDateData, ReportOrderStatusData } from "@/common/typings/chart.typings";
 import { SetToken } from "@/common/typings/common.typings";
 
 export const useChartStore = defineStore("chart", {
@@ -13,6 +13,7 @@ export const useChartStore = defineStore("chart", {
       orderPaymentDates: null as ReportOrderDateData | null,
       orderSendDate: null as ReportOrderDateData | null,
       orderReturnDate: null as ReportOrderDateData | null,
+      orderStatus: null as ReportOrderStatusData | null,
     }
   },
 
@@ -41,5 +42,9 @@ export const useChartStore = defineStore("chart", {
         this.orderReturnDate = null;
         this.orderReturnDate = await sendRequest(config, SetToken.Admin);
     },
+    async getOrderStatus(config: AxiosRequestConfig) {
+      this.orderStatus = null;
+      this.orderStatus = await sendRequest(config, SetToken.Admin);
+  },
   }
 });
