@@ -16,22 +16,17 @@
                 <tr class="">
                     <th class="table-tr">برچسب</th>
                     <th class="table-tr">نوع</th>
-                    <th class="table-tr">واحد</th>
                     <th class="table-tr">ویرایش</th>
                     <th class="table-tr">حذف</th>
                 </tr>
             </thead>
             <tbody v-if="propertyListData?.data?.length">
                 <tr v-for="( property, index ) in propertyListData.data" :key="property._id" :class="{'bg-neutral-100': (index + 1) % 2 }">
-                    <td class="table-td"> {{ property.label }} </td>
-                    <td class="table-td"> {{ property.type }} </td>
-                    <td class="table-td"> 
-                        <div v-if="property.unit?.length">
-                            <div class="" v-for="unit of property.unit">
-                                {{ unit }}
-                            </div>
-                        </div>
+                    <td @click="showProperty[property._id] = true" class="table-td cursor-pointer">
+                        {{ property.label }} 
+                        <PropertyDetails v-if="showProperty[property._id]" @close="showProperty[property._id] = false" :propertyId="property._id" :showProperty="showProperty[property._id]"/>
                     </td>
+                    <td class="table-td"> {{ property.type }} </td>
                     <td class="table-td">  
                         <router-link :to="`/admin/dashboard/properties/${property._id}/edit`">
                             <EditElement/>
@@ -52,16 +47,19 @@ import { getPropertyListConfig, deletePropertyConfig } from '@/common/config/axi
 import { storeToRefs } from 'pinia';
 import { usePropertyStore } from '@/stores/property';
 import { reactive, ref } from 'vue';
-import { TypeMessage, type Page } from '@/common/typings/common.typings';
+import { TypeMessage, type Page, type StringBoolean } from '@/common/typings/common.typings';
 import axios from 'axios';
 import { getAxiosErrorMessage } from '@/common/helpers';
 import EditElement from '@/components/element/EditElement.vue';
 import Message from '@/components/message/Message.vue';
 import DeleteElement from '@/components/element/DeleteElement.vue';
 import Dialog from '@/components/dialog/Dialog.vue';
+import PropertyDetails from '@/components/dialog/PropertyDetails.vue';
 import PageLoading from '@/components/loading/PageLoading.vue';
+
 const properyStore = usePropertyStore();
 const showDialog = ref(false);
+const showProperty = reactive<StringBoolean>({});
 const propertyId = ref('');
 const page = reactive<Page>({});
 const { propertyListData } = storeToRefs(properyStore);

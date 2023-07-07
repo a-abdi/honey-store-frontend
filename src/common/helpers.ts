@@ -68,3 +68,7 @@ export const getFullName = (user: UserData) => {
     }
     return 'کاربر';
 };
+
+export const getDate = (timestamp: Date) => {
+    return new Date(timestamp).toLocaleDateString('fa-IR').replace(/\//g, '-');
+};
