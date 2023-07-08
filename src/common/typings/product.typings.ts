@@ -9,6 +9,11 @@ export interface ProductProperty {
     value?: any;
 }
 
+interface Property {
+    label: string;
+    description: string;
+}
+
 export interface NewProduct {
     name: string;
     price: number | null;
@@ -25,6 +30,7 @@ export interface Product extends Omit<NoUndefinedField<NewProduct>, 'category'>,
     deletedAt: boolean;
     productImagesSrc: string[];
     additionalsImageSrc: string[];
+    property: Property[] | []; 
 };
 
 export interface ProductData extends CommonResponseDataOptional {

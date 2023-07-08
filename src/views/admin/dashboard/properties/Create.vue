@@ -7,7 +7,7 @@
             <div class="w-full px-2">
                 <select v-model="property.type" name="type" autofocus="true" id="type" aria-placeholder="select type" class="w-full bg-white text-gray-600 form-input py-1">
                     <option value="" disabled selected>نوع</option>
-                    <option v-for="types in typeList" :value="types">{{ types }}</option>
+                    <option v-for="types in PROPERTY_TYPES" :value="types">{{ types }}</option>
                 </select>                
             </div>
             <div class="w-full px-2">
@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="w-full px-2">
-                <textarea placeholder="توضیخات" class="p-2 text-gray-600 resize-none border rounded-md w-full h-16 sm:h-24 md:h-32 xl:h-40 focus:outline-none focus:ring-2 focus:ring-blue-200"></textarea>
+                <textarea placeholder="توضیخات" class="p-2 text-gray-600 resize-none border rounded-md w-full h-16 sm:h-24 md:h-32 focus:outline-none focus:ring-2 focus:ring-blue-200"></textarea>
             </div>
             <div class="w-full flex flex-row-reverse pl-2">
                 <div @click="createProperty" :class="{'cursor-wait': page.sending, 'cursor-pointer': !page.sending}" class="flex items-center justify-center w-36 h-8 btn-violet">
@@ -47,67 +47,62 @@ import { TypeMessage, type Page } from '@/common/typings/common.typings';
 import type { newProperty } from '@/common/typings/property.typing';
 import { usePropertyStore } from '@/stores/property';
 import { storeToRefs } from 'pinia';
+import { PROPERTY_TYPES } from '@/common/constans';
 
-    const typeList = [
-        "file",
-        "text",
-        "number",
-    ];
-    const propertyStore = usePropertyStore();
-    const unitInput = ref('');
-    const checkbox = reactive<any>({});
-    const page = reactive<Page>({
-        sending: false,
-        message: '',
-        showMessage: false,
-        typeMessage: TypeMessage.Success
-    });
-    const property = reactive<newProperty>({
-        label: "",
-        unit: [],
-        type: "",
-    });
-    const formSubmit = ref(true);
-    const enterUnit = () => {
-        formSubmit.value = false;
-        if (unitInput.value && property.unit.every(el => el != unitInput.value)) {
-            property.unit.push(unitInput.value);
-        }
-        checkbox[unitInput.value] = true;
-        unitInput.value = '';
-    };
+const propertyStore = usePropertyStore();
+const unitInput = ref('');
+const checkbox = reactive<any>({});
+const page = reactive<Page>({
+    sending: false,
+    message: '',
+    showMessage: false,
+    typeMessage: TypeMessage.Success
+});
+const property = reactive<newProperty>({
+    label: "",
+    unit: [],
+    type: "",
+});
+const formSubmit = ref(true);
+const enterUnit = () => {
+    formSubmit.value = false;
+    if (unitInput.value && property.unit.every(el => el != unitInput.value)) {
+        property.unit.push(unitInput.value);
+    }
+    checkbox[unitInput.value] = true;
+    unitInput.value = '';
+};
 
-    const changeUnit = (unit: string, checkboxUnit: any) => {
-        if (checkboxUnit) {
-            property.unit.push(unit);
+const changeUnit = (unit: string, checkboxUnit: any) => {
+    if (checkboxUnit) {
+        property.unit.push(unit);
+    } else {
+        property.unit.splice(property.unit.indexOf(unit), 1);
+    }
+}
+const createProperty = async () => {
+    try {
+        const config = createPropertyAxiosConfig(property);
+        page.sending = true;
+        await propertyStore.createProperty(config);
+        page.showMessage = true;
+        const { propertyData } = storeToRefs(propertyStore);
+        page.typeMessage = TypeMessage.Success;
+        page.message = propertyData.value?.message;
+    } catch (error: any) {
+        page.showMessage = true;
+        page.typeMessage = TypeMessage.Danger;
+        if (axios.isAxiosError(error)) {
+        page.message = getAxiosErrorMessage(error);
         } else {
-            property.unit.splice(property.unit.indexOf(unit), 1);
+            console.log(error);
         }
     }
-    const createProperty = async () => {
-        try {
-            const config = createPropertyAxiosConfig(property);
-            page.sending = true;
-            await propertyStore.createProperty(config);
-            page.showMessage = true;
-            const { propertyData } = storeToRefs(propertyStore);
-            page.typeMessage = TypeMessage.Success;
-            page.message = propertyData.value?.message;
-        } catch (error: any) {
-            page.showMessage = true;
-            page.typeMessage = TypeMessage.Danger;
-            if (axios.isAxiosError(error)) {
-            page.message = getAxiosErrorMessage(error);
-            } else {
-                console.log(error);
-            }
-        }
-        page.sending = false;
-        property.category = [];
-        property.label = "";
-        property.type = "";
-        property.unit = [];
-        page.loading = false;
-    };
-
+    page.sending = false;
+    property.category = [];
+    property.label = "";
+    property.type = "";
+    property.unit = [];
+    page.loading = false;
+};
 </script>

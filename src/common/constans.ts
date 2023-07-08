@@ -35,3 +35,9 @@ export const ORDER_STATUS = [
     'مرجوع شده',
     'تحویل داده شده',
 ];
+
+export const PROPERTY_TYPES = [
+    "file",
+    "text",
+    "number",
+];

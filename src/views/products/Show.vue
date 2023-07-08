@@ -31,7 +31,7 @@
             </div>
           </div>
           <div class="w-full md:flex">
-            <div class="md:w-7/12 w-full border-t border-gray-300">
+            <div class="md:w-7/12 my-4 md:my-0 w-full border-t border-gray-300">
               <div class="flex items-center">
                   <div v-if="commenStore.commentListData?.data.length" class="flex items-center mt-4">
                     <Stare v-if="commenStore.commentListData.data[0]?.scoreAverage" class="text-yellow-400 w-4 h-4"/>
@@ -74,7 +74,7 @@
         </p>
       </div>
       <Comment class="text-gray-600 px-8 pt-4 sm:text-sm text-xs border-t-2 border-gray-200"/>
-      <div class="sticky bottom-0 bg-white">
+      <div class="sticky bottom-0 bg-white z-30">
         <div class="w-full border-t border-gray-200 md:hidden">
           <ProductPrice :product-id="productId">
             <button :disabled="page.sending" @click="addToCart" v-if="productData?.data?.quantity" class="btn-violet md:w-full w-48 md:static absolute top-4 right-4">

@@ -36,5 +36,21 @@ export const useProductStore = defineStore("product", {
     async editProduct(config: AxiosRequestConfig) {
       this.productData = await sendRequest(config, SetToken.Admin);
     },
+  },
+  getters: {
+    existLabel(state) {
+      return (label: string) => {
+        return state.productData?.data?.property.some( 
+          property => property.label == label
+        );
+      }
+    },
+    propertyDescription(state) {
+      return (label: string) => {
+        return state.productData?.data?.property.find( 
+          property => property.label == label
+        )?.description;
+      }
+    }
   }
 });

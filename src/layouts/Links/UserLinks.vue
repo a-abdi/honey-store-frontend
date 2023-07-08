@@ -1,5 +1,5 @@
 <template>
-    <nav class="lg:sticky top-0 left-0 right-0 w-full bg-white border-b border-gray-200">
+    <nav class="lg:sticky z-30 top-0 left-0 right-0 w-full bg-white border-b border-gray-200">
         <div class="px-2">
             <div class="relative lg:flex-1 lg:flex items-center justify-between lg:h-16 h-32">
                 <div class="pr-1 flex items-center lg:py-0 py-2.5 border-b border-gray-200 lg:border-none">
@@ -24,7 +24,7 @@
                         <UserSreach :screen="'sm'"/>
                     </div>
                     <div class="flex items-center">
-                        <div v-if="userStore.userLogged" class="lg:ml-6">
+                        <div v-if="userStore.userLogged" class="ml-4">
                             <ProFileLink/>
                         </div>
                         <div v-else class="lg:border border-gray-200 rounded-md px-2 py-1 ml-6">
