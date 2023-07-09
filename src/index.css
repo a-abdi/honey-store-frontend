@@ -1,4 +1,9 @@
-@import url('https://fonts.cdnfonts.com/css/iranyekan');
+/* @import url('https://fonts.cdnfonts.com/css/iranyekan'); */
+
+@font-face {
+    font-family: 'iranyekan';
+    src: local('iranyekan'), url(./assets/font/iranyekan/Qs_Iranyekan.ttf) format('ttf');
+}
 
 /* ./src/index.css */
 @tailwind base;
