@@ -1,7 +1,7 @@
 <template>
     <div v-if="(route.path != '/cart' && route.path != '/shipping' && route.path !== '/payment')" class="relative" @mouseover="showCart = true" @mouseleave="showCart = false">
         <router-link to="/cart">
-            <div class="w-7 h-7 bg-cover bg-no-repeat bg-[url('@/assets/icone/cartMeduim.svg')]">
+            <div class="w-7 h-7 bg-cover bg-no-repeat bg-[url('@/assets/icone/shopping-cart.png')]">
                 <span v-show="cartStore.productCartCount" class="bg-violet-600 px-1 text-white text-xs rounded-full">
                     {{ convertToPersian(`${cartStore.productCartCount}`) }}
                 </span>
