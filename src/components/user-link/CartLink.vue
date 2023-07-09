@@ -1,7 +1,7 @@
 <template>
     <div v-if="(route.path != '/cart' && route.path != '/shipping' && route.path !== '/payment')" class="relative" @mouseover="showCart = true" @mouseleave="showCart = false">
         <router-link to="/cart">
-            <div class="relative w-7 h-7 bg-cover bg-no-repeat" style="background-image: url(https://api.iconify.design/cil:cart.svg?color=%23878787);">
+            <div class="w-7 h-7 bg-cover bg-no-repeat bg-[url('../../../public/icone/cartMeduim.svg')]">
                 <span v-show="cartStore.productCartCount" class="bg-violet-600 px-1 text-white text-xs rounded-full">
                     {{ convertToPersian(`${cartStore.productCartCount}`) }}
                 </span>
@@ -64,6 +64,8 @@ import { useUserStore } from '@/stores/user';
 import { defineAsyncComponent, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import Currency from '../Currency.vue';
+import CartEmojiVue from '../icons/CartEmoji.vue';
+import favicon from '../../assets/icone/cartLight.svg'
 const cartStore = useCartStore();
 const userStore = useUserStore();
 const gotToShipping = () => router.push('/cart');
