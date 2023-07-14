@@ -107,3 +107,24 @@
         @apply bg-transparent hover:bg-yellow-500 text-yellow-700 font-semibold hover:text-white py-1.5 sm:px-4 px-2 border border-yellow-500 hover:border-transparent rounded-md;
     }
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+  
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #bbb;
+    border-radius: 5px;
+}
+  
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
