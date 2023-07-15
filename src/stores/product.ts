@@ -8,6 +8,7 @@ export const useProductStore = defineStore("product", {
   state: () => {
     return {
       productListData: null as ProductListData | null,
+      productListDataLazy: null as ProductListData | null,
       productData: null as ProductData | null,
     }
   },
@@ -21,6 +22,11 @@ export const useProductStore = defineStore("product", {
     async getProductList(config: AxiosRequestConfig) {
       this.productListData = null;
       this.productListData = await sendRequest(config);
+      if (this.productListDataLazy?.data.length && this.productListData?.data) {
+        this.productListDataLazy.data = [ ...this.productListDataLazy.data, ...this.productListData.data ];
+      } else {
+        this.productListDataLazy = this.productListData;
+      }
     },
 
     async getProduct(config: AxiosRequestConfig) {
@@ -36,6 +42,11 @@ export const useProductStore = defineStore("product", {
     async editProduct(config: AxiosRequestConfig) {
       this.productData = await sendRequest(config, SetToken.Admin);
     },
+
+    resetProductList() {
+      this.productListData = null;
+      this.productListDataLazy = null;
+    }
   },
   getters: {
     existLabel(state) {

@@ -19,7 +19,6 @@ export const useSearchStore = defineStore("search", {
     async lazySearch(config: AxiosRequestConfig) {
       this.searchData = await sendRequest(config);
       if (this.searchDataLazy?.data.length && this.searchData?.data) {
-        const { data } = this.searchData;
         this.searchDataLazy.data = [ ...this.searchDataLazy.data, ...this.searchData.data ];
       } else {
         this.searchDataLazy = this.searchData;

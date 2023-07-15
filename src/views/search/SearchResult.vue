@@ -67,7 +67,6 @@ watch(
     searchStore.reset();
     getProductData();
   }
-
 );
 searchStore.reset();
 getProductData();
