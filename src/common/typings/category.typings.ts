@@ -9,6 +9,7 @@ export interface NewCategory {
 
 export interface Category extends CommonResponseData, Omit<NewCategory, 'properties'> {
     properties: Property[];
+    imageSrc: string;
 };
 
 export interface CategoryData extends CommonResponseDataOptional {
