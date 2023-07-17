@@ -28,6 +28,7 @@ export interface NewProduct {
 export interface Product extends Omit<NoUndefinedField<NewProduct>, 'category'>, CommonResponseData {
     category: string | Category;
     deletedAt: boolean;
+    percentDiscount?: number,
     productImagesSrc: string[];
     additionalsImageSrc: string[];
     property: Property[] | []; 

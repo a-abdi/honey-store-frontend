@@ -4,21 +4,21 @@
             <div class="bg-violet-500 text-xs text-white inline-flex rounded-full p-1 tracking-wider">
                 {{ convertToPersian(percentage) }}
             </div>
-            <div class="flex items-center">
-                <Currency :money="totalPrice" />
-                <div class="text-vs text-indigo-900 pr-1">
+            <div class="flex items-center text-indigo-900">
+                <Currency :money="totalPrice" class="text-sm"/>
+                <div class="text-vs pr-1">
                     تومان
                 </div>
             </div>
         </div>
-        <div class="pr-4 line-through text-gray-400 flex flex-row-reverse">
+        <div class="pr-4 line-through text-gray-400 flex flex-row-reverse text-sm">
             <Currency :money="price" />
         </div> 
     </div>
-    <div v-else class="flex flex-row-reverse pt-2 pb-8">
-        <div class="flex items-center">
+    <div v-else class="flex flex-row-reverse pt-2 pb-8 text-indigo-900">
+        <div class="flex items-center text-sm">
             <Currency :money="price" />
-            <div class="text-vs text-indigo-900 pr-1">
+            <div class="text-vs pr-1">
                 تومان
             </div>
         </div>
