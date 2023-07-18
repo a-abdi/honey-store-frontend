@@ -1,7 +1,9 @@
 <template>
     <div class="relative">
         <div class="mx-3 mb-1">
-            <p class="text-lg font-bold text-indigo-900 tracking-wider"> بیشترین تخفیف </p>
+            <p class="xl:text-lg md:text-normal text-sm font-bold text-indigo-900 tracking-wider">
+                بیشترین تخفیف 
+            </p>
         </div>
         <div @click="scroll('rtl')" v-if="hasLeftScroll"
             class="md:block hidden absolute top-36 left-4 lg:p-2 p-1 bg-white text-gray-600 border border-gray-300 rounded-full cursor-pointer">

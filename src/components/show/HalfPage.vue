@@ -1,12 +1,12 @@
 <template>
     <div
-        class="md:col-span-1 col-span-full border border-gray-200 rounded-md flex justify-between bg-gradient-to-l from-indigo-50">
-        <div class="md:p-20 p-5 w-1/2">
-            <p class="traking-wider font-bold text-indigo-600 md:text-lg text-sm"> 
-               <slot name="text"></slot>
+        class="sm:col-span-1 col-span-full py-2 border border-gray-200 rounded-md flex justify-between bg-gradient-to-l from-indigo-50">
+        <div class="w-1/2 flex items-center px-2">
+            <p class="tracking-wider font-bold text-indigo-600 xl:text-xl lg:text-lg md:text-normal sm:text-sm text-xs"> گرده
+                <slot name="text"></slot>
             </p>
         </div>
-        <div class="w-1/2">
+        <div class="w-1/2 flex items-center">
             <slot name="image"></slot>
         </div>
     </div>

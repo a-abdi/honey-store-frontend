@@ -1,60 +1,60 @@
 <template>
     <div class="px-4 py-1 mb-12">
-      <div class="flex my-8">
-        <div>
+      <div class="grid grid-cols-2 my-8">
+        <div class="sm:col-span-1 col-span-full">
           <img src="@/assets/test.webp" alt="">
         </div>
-        <div class="mt-20 text-indigo-600">
-          <p class="text-3xl font-bold tracking-wider mb-4">
-            مطمئن تر و ارزان تر خرید کنید
-          </p>
-          <div class="space-y-3">
-            <div class="flex items-center">
-              <CheckCircleIcone class="ml-1" />
-              <p> همراه برگ آزمایش و تایید کیفیت </p>
-            </div>
-            <div class="flex items-center">
-              <CheckCircleIcone class="ml-1" />
-              <p> بزرگ ترین تولید کننده عسل طبیعی </p>
-            </div>
-            <div class="flex items-center">
-              <CheckCircleIcone class="ml-1" />
-              <p> امکان مرجوع کالا </p>
+        <div class="sm:col-span-1 col-span-full xl:pt-16 lg:pt-12 md:pt-8 sm:pt-4 py-2 text-indigo-600 bg-gradient-to-r from-indigo-50">
+          <div class="">
+            <p class="tracking-wider font-bold 2xl:text-4xl xl:text-3xl lg:text-2xl md:text-xl sm:text-lg text-normal mb-4">
+              مطمئن تر و ارزان تر خرید کنید
+            </p>
+            <div class="space-y-3">
+              <div class="flex items-center">
+                <CheckCircleIcone class="ml-1" />
+                <p class="tracking-wider 2xl:text-lg xl:text-normal lg:text-sm md:text-xs sm:text-vsl text-vs"> 
+                  همراه برگ آزمایش و تایید کیفیت 
+                </p>
+              </div>
+              <div class="flex items-center">
+                <CheckCircleIcone class="ml-1" />
+                <p class="tracking-wider 2xl:text-lg xl:text-normal lg:text-sm md:text-xs sm:text-vsl text-vs">  
+                  صد درصد ارگانیک 
+                </p>
+              </div>
+              <div class="flex items-center">
+                <CheckCircleIcone class="ml-1" />
+                <p class="tracking-wider 2xl:text-lg xl:text-normal lg:text-sm md:text-xs sm:text-vsl text-vs"> 
+                  امکان مرجوع کالا 
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <HorizontalProduct class="my-8"/>
       <div class="grid grid-cols-2 my-8 gap-4">
-        <div class="md:col-span-1 col-span-full border border-gray-200 rounded-md flex justify-between bg-gradient-to-l from-indigo-50">
-          <div class="md:p-20 p-10 w-1/2">
-            <p class="traking-wider font-bold text-indigo-600 md:text-lg text-sm"> گرده گل بهترین مکمل غذایی </p>
-          </div>
-          <div class="w-1/2">
-            <img src="@/assets/garde.webp" class="w-auto h-auto md:max-h-32" alt="">
-          </div>
-        </div>
-        <!-- <HalfPage>
+        <HalfPage>
           <template #text>
             گرده گل بهترین مکمل غذایی
           </template>
           <template #image>
-            <img src="@/assets/garde.webp" class="w-auto h-auto md:h-56" alt="">
+            <img src="@/assets/garde.webp" class="mx-auto w-auto h-auto 2xl:max-h-60 xl-max-h-52 lg:max-h-44  md:max-h-36 sm:max-h-28 max-h-20" alt="">
           </template>
-        </HalfPage> -->
-        <div class="md:col-span-1 col-span-full border border-gray-200 rounded-md flex justify-between bg-gradient-to-l from-indigo-50">
-          <div class="md:p-20 p-10 w-1/2">
-            <p class="traking-wider font-bold text-indigo-600 md:text-lg text-sm"> ژل رویال اکسیر جوانی </p>
-          </div>
-          <div class="w-1/2">
-            <img src="@/assets/royal1.jpg" class="w-auto h-auto md:h-56" alt="">
-          </div>
-        </div>
+        </HalfPage>
+        <HalfPage>
+          <template #text>
+            ژل رویال اکسیر جوانی 
+          </template>
+          <template #image>
+            <img src="@/assets/royal1.jpg" class="mx-auto w-auto h-auto 2xl:max-h-60 xl-max-h-52 lg:max-h-44  md:max-h-36 sm:max-h-28 max-h-20" alt="">
+          </template>
+        </HalfPage>
       </div>
       <div class="grid grid-cols-6 my-8 gap-4">
-        <div v-for="category in categoryListData?.data.slice(0, 6)" :key="category._id">
+        <div v-for="category in categoryListData?.data.slice(0, 6)" :key="category._id" class="xl:col-span-1 md:col-span-2 col-span-3 my-2">
           <div class="flex items-center">
-            <img :src="category.imageSrc" alt="" class="object-cover w-28 h-28 mx-auto rounded-full">
+            <img :src="category.imageSrc" alt="" class="object-cover sm:w-28 sm:h-28 w-20 h-20 mx-auto rounded-full">
           </div>
           <div class="text-center mt-4">
             <p class="text-indigo-900 text-sm"> {{ category.name }} </p>
@@ -71,6 +71,7 @@ import HorizontalProduct from '@/components/show/HorizontalProduct.vue';
 import { useCategoryStore } from '@/stores/category';
 import { getCategoryListConfig } from '@/common/config/axios/category.config';
 import { storeToRefs } from 'pinia';
+import HalfPage from '@/components/show/HalfPage.vue';
 
 const categoryStore = useCategoryStore();
 const config = getCategoryListConfig();
