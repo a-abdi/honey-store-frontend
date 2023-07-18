@@ -38,11 +38,11 @@ module.exports = {
       '144': '36rem',
       'lg': '32rem'
     },
-    maxHeight: {
-      '68': '17rem',
-      '128': '32rem',
-      'lg': '32rem'
-    },
+    // maxHeight: {
+    //   '68': '17rem',
+    //   '128': '32rem',
+    //   'lg': '32rem'
+    // },
     extend: {
       spacing: {
         '68': '17rem',
