@@ -36,18 +36,18 @@
       <div class="grid grid-cols-2 my-8 gap-4">
         <HalfPage @click="gotToCategory(categoryListData?.data[0]?._id)" class="cursor-pointer">
           <template #text>
-            {{ categoryListData?.data[0].description }}
+            {{ categoryListData?.data[0]?.description }}
           </template>
           <template #image>
-            <img :src="categoryListData?.data[0].imageSrc" class="mx-auto w-auto h-auto 2xl:max-h-60 xl-max-h-52 lg:max-h-44  md:max-h-36 sm:max-h-28 max-h-20" alt="">
+            <img :src="categoryListData?.data[0]?.imageSrc" class="mx-auto w-auto h-auto 2xl:max-h-60 xl-max-h-52 lg:max-h-44  md:max-h-36 sm:max-h-28 max-h-20" alt="">
           </template>
         </HalfPage>
         <HalfPage @click="gotToCategory(categoryListData?.data[1]?._id)" class="cursor-pointer">
           <template #text>
-            {{ categoryListData?.data[1].description }}
+            {{ categoryListData?.data[1]?.description }}
           </template>
           <template #image>
-            <img :src="categoryListData?.data[1].imageSrc" class="mx-auto w-auto h-auto 2xl:max-h-60 xl-max-h-52 lg:max-h-44  md:max-h-36 sm:max-h-28 max-h-20" alt="">
+            <img :src="categoryListData?.data[1]?.imageSrc" class="mx-auto w-auto h-auto 2xl:max-h-60 xl-max-h-52 lg:max-h-44  md:max-h-36 sm:max-h-28 max-h-20" alt="">
           </template>
         </HalfPage>
       </div>

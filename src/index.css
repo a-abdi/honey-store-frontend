@@ -1,8 +1,12 @@
 /* @import url('https://fonts.cdnfonts.com/css/iranyekan'); */
 
 @font-face {
-    font-family: 'iranyekan';
-    src: local('iranyekan'), url(./assets/font/iranyekan/Qs_Iranyekan.ttf) format('ttf');
+    font-family: "iranyekan";
+    src: 
+    url('./assets/font/tickroom/IRANSans-Light-web.woff') format('woff'),
+    url('./assets/font/tickroom/glyphicons-halflings-regular.woff2') format('woff2'),
+    url('./assets/font/tickroom/IRANSans-Bold-web.woff') format('woff');
+    /* src: url('./assets/font/tickroom/IRANSans-Bold-web.woff') format('woff'); */
 }
 
 /* ./src/index.css */
