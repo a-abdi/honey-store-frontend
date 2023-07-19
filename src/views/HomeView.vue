@@ -34,27 +34,27 @@
       </div>
       <HorizontalProduct class="my-8"/>
       <div class="grid grid-cols-2 my-8 gap-4">
-        <HalfPage>
+        <HalfPage @click="gotToCategory(categoryListData?.data[0]?._id)" class="cursor-pointer">
           <template #text>
-            گرده گل بهترین مکمل غذایی
+            {{ categoryListData?.data[0].description }}
           </template>
           <template #image>
-            <img src="@/assets/garde.webp" class="mx-auto w-auto h-auto 2xl:max-h-60 xl-max-h-52 lg:max-h-44  md:max-h-36 sm:max-h-28 max-h-20" alt="">
+            <img :src="categoryListData?.data[0].imageSrc" class="mx-auto w-auto h-auto 2xl:max-h-60 xl-max-h-52 lg:max-h-44  md:max-h-36 sm:max-h-28 max-h-20" alt="">
           </template>
         </HalfPage>
-        <HalfPage>
+        <HalfPage @click="gotToCategory(categoryListData?.data[1]?._id)" class="cursor-pointer">
           <template #text>
-            ژل رویال اکسیر جوانی 
+            {{ categoryListData?.data[1].description }}
           </template>
           <template #image>
-            <img src="@/assets/royal1.jpg" class="mx-auto w-auto h-auto 2xl:max-h-60 xl-max-h-52 lg:max-h-44  md:max-h-36 sm:max-h-28 max-h-20" alt="">
+            <img :src="categoryListData?.data[1].imageSrc" class="mx-auto w-auto h-auto 2xl:max-h-60 xl-max-h-52 lg:max-h-44  md:max-h-36 sm:max-h-28 max-h-20" alt="">
           </template>
         </HalfPage>
       </div>
       <div class="grid grid-cols-6 my-8 gap-4">
-        <div v-for="category in categoryListData?.data.slice(0, 6)" :key="category._id" class="xl:col-span-1 md:col-span-2 col-span-3 my-2">
-          <div class="flex items-center">
-            <img :src="category.imageSrc" alt="" class="object-cover sm:w-28 sm:h-28 w-20 h-20 mx-auto rounded-full">
+        <div v-for="category in categoryListData?.data.slice(2, 8)" @click="gotToCategory(category._id)" :key="category._id" class="xl:col-span-1 md:col-span-2 col-span-3 my-2 cursor-pointer">
+          <div class="flex items-center mx-auto sm:w-36 sm:h-36 w-28 h-28 rounded-full border border-indigo-200">
+            <img :src="category.imageSrc" alt="" class="object-cover sm:w-24 sm:h-24 w-16 h-16 mx-auto">
           </div>
           <div class="text-center mt-4">
             <p class="text-indigo-900 text-sm"> {{ category.name }} </p>
@@ -65,17 +65,21 @@
 </template>
 
 <script setup lang="ts">
-import PageLoading from '@/components/loading/PageLoading.vue';
 import CheckCircleIcone from '@/components/icons/CheckCircleIcone.vue';
 import HorizontalProduct from '@/components/show/HorizontalProduct.vue';
 import { useCategoryStore } from '@/stores/category';
 import { getCategoryListConfig } from '@/common/config/axios/category.config';
 import { storeToRefs } from 'pinia';
 import HalfPage from '@/components/show/HalfPage.vue';
+import router from '@/router';
 
 const categoryStore = useCategoryStore();
 const config = getCategoryListConfig();
 categoryStore.getCategoryList(config);
 const { categoryListData } = storeToRefs(categoryStore);
-
+const gotToCategory = (categoryId?: string) => {
+  if (categoryId) {
+    router.push(`/category/${categoryId}`);
+  }
+} 
 </script>

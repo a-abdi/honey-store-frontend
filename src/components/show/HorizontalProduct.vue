@@ -15,7 +15,7 @@
         </div>
         <div ref="showProducts" @mousedown="mousedown" @touchstart="touchStart"
             class="flex items-center overflow-x-hidden shadow">
-            <div v-for="product in productListData?.data" ref="productBox" :key="product._id"
+            <div @click="showProduct(product._id, product.name)" v-for="product in productListData?.data" ref="productBox" :key="product._id"
                 class="mx-3 p-4 bg-neutral-50 shadow-2xl cursor-pointer">
                 <div class="w-28 md:w-36 xl:w-44 2xl:52">
                     <img :src="product.productImagesSrc[0]" :alt="product.name" draggable="false"
@@ -41,10 +41,12 @@ const scrollLeft = ref(0);
 const hasLeftScroll = ref(true);
 const hasRightScroll = ref(false);
 const showProducts = ref<HTMLDivElement>();
+const darging = ref(false);
 const mousedown = (e: MouseEvent) => {
     const oldX = e.clientX;
     const scrollValue = scrollLeft.value;
     const mousemove = (e: MouseEvent) => {
+        darging.value = true;
         scrollLeft.value = oldX - e.clientX + scrollValue;
         if (showProducts.value) {
             handelScroll();
@@ -72,6 +74,7 @@ const touchStart = (e: TouchEvent) => {
     const oldX = e.changedTouches[0].clientX;
     const scrollValue = scrollLeft.value;
     const touchMove = (e: TouchEvent) => {
+        darging.value = true;
         scrollLeft.value = oldX - e.changedTouches[0].clientX + scrollValue;
         if (showProducts.value) {
             handelScroll();
@@ -110,5 +113,11 @@ const getProductData = () => {
 };
 getProductData();
 const { productListData } = storeToRefs(productStore);
-const showProduct = (productId: string, productName: string) => router.push(`/products/${productId}/${productName.replace(/ /g, '-')}`);
+const showProduct = (productId: string, productName: string) => {
+    if (!darging.value) {
+        router.push(`/products/${productId}/${productName.replace(/ /g, '-')}`)
+    } else {
+        darging.value = false;
+    }
+};
 </script>
