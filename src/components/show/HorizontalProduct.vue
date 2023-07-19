@@ -13,7 +13,7 @@
             class="md:block hidden absolute top-36 right-4 lg:p-2 p-1 bg-white text-gray-600 border border-gray-300 rounded-full cursor-pointer">
             <BigLeft class="lg:w-5 lg:h-5 w-4 h-4 rotate-180" />
         </div>
-        <div ref="showProducts" @mousedown="mousedown" @touchstart="touchStart"
+        <div v-if="productListData?.data.length" ref="showProducts" @mousedown="mousedown" @touchstart="touchStart"
             class="flex items-center overflow-x-hidden shadow">
             <div @click="showProduct(product._id, product.name)" v-for="product in productListData?.data" ref="productBox" :key="product._id"
                 class="mx-3 p-4 bg-neutral-50 shadow-2xl cursor-pointer">
@@ -22,6 +22,11 @@
                         class="mx-auto w-24 h-28 md:w-32 md:h-36 xl:w-40 xl:h-44 2xl:w-48 2xl:h-52 object-cover p-2">
                 </div>
                 <TotalPrice :price="product?.price" :discount="product?.discount" />
+            </div>
+        </div>
+        <div v-else>
+            <div class="flex justify-center items-center h-full bg-white-100">
+                <LoadingIcone class="w-8 h-8"/>
             </div>
         </div>
     </div>
@@ -35,6 +40,7 @@ import router from '@/router';
 import TotalPrice from '@/components/TotalPrice.vue';
 import { ref } from 'vue';
 import BigLeft from '@/components/icons/BigLeft.vue';
+import LoadingIcone from '../icons/LoadingIcone.vue';
 
 const productBox = ref<HTMLDivElement[]>([]);
 const scrollLeft = ref(0);

@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="w-full px-2">
-                <textarea placeholder="توضیخات" class="p-2 text-gray-600 resize-none border rounded-md w-full h-16 sm:h-24 md:h-32 focus:outline-none focus:ring-2 focus:ring-blue-200"></textarea>
+                <textarea v-model="property.description" placeholder="توضیخات" class="p-2 text-gray-600 resize-none border rounded-md w-full h-16 sm:h-24 md:h-32 focus:outline-none focus:ring-2 focus:ring-blue-200"></textarea>
             </div>
             <div class="w-full flex flex-row-reverse pl-2">
                 <div @click="createProperty" :class="{'cursor-wait': page.sending, 'cursor-pointer': !page.sending}" class="flex items-center justify-center w-36 h-8 btn-violet">
@@ -102,6 +102,7 @@ const createProperty = async () => {
     property.category = [];
     property.label = "";
     property.type = "";
+    property.description = "";
     property.unit = [];
     page.loading = false;
 };

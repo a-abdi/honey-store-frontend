@@ -32,7 +32,6 @@
     </teleport>   
 </template>
 <script setup lang="ts">
-import { getCategoryListConfig } from '@/common/config/axios/category.config';
 import { useCategoryStore } from '@/stores/category';
 import { OnClickOutside } from '@vueuse/components';
 import { storeToRefs } from 'pinia';
@@ -43,8 +42,6 @@ const emit = defineEmits<{(event: 'cancel'): void}>();
 defineProps<{showCategory: boolean}>();
 const categoryStore = useCategoryStore();
 const { categoryListData } = storeToRefs(categoryStore);
-const categoryConfig = getCategoryListConfig();
-categoryStore.getCategoryList(categoryConfig);
 const getProduct = (categoryId: string) => {
     emit('cancel');
     router.push({
