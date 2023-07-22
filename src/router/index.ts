@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import AdminDashboard from "@/views/admin/dashboard/Index.vue";
 import { authUserGurd } from "@/middlewares/beforeEachAuthUser";
 import { authAdminrGurd } from "@/middlewares/beforeEachAuthAdmin";
 import {guestUser}  from "@/middlewares/beforeEnterGuestUser";
@@ -155,7 +154,7 @@ const router = createRouter({
     {
       path: "/admin/dashboard",
       name: "Admin/Dashboard",
-      component: AdminDashboard,
+      component: () => import("@/views/admin/dashboard/Index.vue"),
       meta: {
         layout: "AppLayoutAdmin",
         requiresAuthUser: false,
