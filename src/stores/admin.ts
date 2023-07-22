@@ -1,19 +1,20 @@
 import { defineStore } from "pinia";
-import { sendRequest } from "@/common/helpers";
 import type { AxiosRequestConfig } from 'axios';
 import type { AdminData } from "@/common/typings/admin.typings";
 import { SetToken } from "@/common/typings/common.typings";
+import { RequestHelper } from "@/helper/request.helper";
 
 export const useAdminStore = defineStore("admin", {
   state: () => {
     return {
       adminData: {} as AdminData,
+      requestHelper: RequestHelper.getInstance(),
     }
   },
 
   actions: {
     async login(config: AxiosRequestConfig) {
-      this.adminData = await sendRequest(config, SetToken.Admin);
+      this.adminData = await this.requestHelper.send(config, SetToken.Admin);
       localStorage.removeItem('adminAccessToken');  
       localStorage.setItem('adminAccessToken', this.adminData?.data?.access_token)
     },

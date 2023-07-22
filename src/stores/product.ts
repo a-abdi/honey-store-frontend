@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
-import { sendRequest } from "@/common/helpers";
 import type { AxiosRequestConfig } from 'axios';
 import type { ProductData, ProductListData } from "@/common/typings/product.typings";
 import { SetToken } from "@/common/typings/common.typings";
+import { RequestHelper } from "@/helper/request.helper";
 
 export const useProductStore = defineStore("product", {
   state: () => {
@@ -16,12 +16,12 @@ export const useProductStore = defineStore("product", {
   actions: {
     async createProduct(config: AxiosRequestConfig<FormData>) {
       this.productData = null;
-      this.productData = await sendRequest(config, SetToken.Admin);
+      this.productData = await RequestHelper.getInstance().send(config, SetToken.Admin);
     },
 
     async getProductList(config: AxiosRequestConfig) {
       this.productListData = null;
-      this.productListData = await sendRequest(config);
+      this.productListData = await RequestHelper.getInstance().send(config);
       if (this.productListDataLazy?.data.length && this.productListData?.data) {
         this.productListDataLazy.data = [ ...this.productListDataLazy.data, ...this.productListData.data ];
       } else {
@@ -31,16 +31,16 @@ export const useProductStore = defineStore("product", {
 
     async getProduct(config: AxiosRequestConfig) {
       this.productData = null;
-      this.productData = await sendRequest(config);
+      this.productData = await RequestHelper.getInstance().send(config);
     },
 
     async deleteProduct(config: AxiosRequestConfig) {
       this.productData = null;
-      this.productData = await sendRequest(config, SetToken.Admin);
+      this.productData = await RequestHelper.getInstance().send(config, SetToken.Admin);
     },
 
     async editProduct(config: AxiosRequestConfig) {
-      this.productData = await sendRequest(config, SetToken.Admin);
+      this.productData = await RequestHelper.getInstance().send(config, SetToken.Admin);
     },
 
     resetProductList() {

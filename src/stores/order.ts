@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
-import { sendRequest } from "@/common/helpers";
 import type { AxiosRequestConfig } from 'axios';
 import { SetToken } from "@/common/typings/common.typings";
 import type { AdminOrderData, OneOrderData, OrderData } from "@/common/typings/order.typings";
+import { RequestHelper } from "@/helper/request.helper";
 
 export const useOrderStore = defineStore("order", {
     state: () => {
@@ -17,25 +17,25 @@ export const useOrderStore = defineStore("order", {
     actions: {
         async paymentRequest(config: AxiosRequestConfig) {
             this.transactionLink = null;
-            this.transactionLink = (await sendRequest(config, SetToken.User)).data.transactionLink;
+            this.transactionLink = (await RequestHelper.getInstance().send(config, SetToken.User)).data.transactionLink;
         },
 
         async getUserOrders(config: AxiosRequestConfig) {
             this.orderData = null;
-            this.orderData = await sendRequest(config, SetToken.User);
+            this.orderData = await RequestHelper.getInstance().send(config, SetToken.User);
         },
 
         async getAdminOrders(config: AxiosRequestConfig) {
             this.adminOrderData = null;
-            this.adminOrderData = await sendRequest(config, SetToken.Admin);
+            this.adminOrderData = await RequestHelper.getInstance().send(config, SetToken.Admin);
         },
 
         async getOneAdminOrders(config: AxiosRequestConfig) {
-            this.oneOrderData = await sendRequest(config, SetToken.Admin);
+            this.oneOrderData = await RequestHelper.getInstance().send(config, SetToken.Admin);
         },
 
         async updateAdminOrders(config: AxiosRequestConfig) {
-            this.oneOrderData = await sendRequest(config, SetToken.Admin);
+            this.oneOrderData = await RequestHelper.getInstance().send(config, SetToken.Admin);
         },
     },
 

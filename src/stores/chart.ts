@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
-import { sendRequest } from "@/common/helpers";
 import type { AxiosRequestConfig } from 'axios';
 import type { ReportOrderDateData, ReportOrderStatusData } from "@/common/typings/chart.typings";
 import { SetToken } from "@/common/typings/common.typings";
+import { RequestHelper } from "@/helper/request.helper";
 
 export const useChartStore = defineStore("chart", {
   state: () => {
@@ -20,31 +20,31 @@ export const useChartStore = defineStore("chart", {
   actions: {
     async getOrderDeliveredDate(config: AxiosRequestConfig) {
       this.orderDeliveredDates = null;
-      this.orderDeliveredDates = await sendRequest(config, SetToken.Admin);
+      this.orderDeliveredDates = await RequestHelper.getInstance().send(config, SetToken.Admin);
     },
     async getOrderWatingDate(config: AxiosRequestConfig) {
         this.orderWatingPayDates = null;
-        this.orderWatingPayDates = await sendRequest(config, SetToken.Admin);
+        this.orderWatingPayDates = await RequestHelper.getInstance().send(config, SetToken.Admin);
     },
     async getOrderCanceledDate(config: AxiosRequestConfig) {
         this.orderCanceledDates = null;
-        this.orderCanceledDates = await sendRequest(config, SetToken.Admin);
+        this.orderCanceledDates = await RequestHelper.getInstance().send(config, SetToken.Admin);
     },
     async getOrderPaymentDate(config: AxiosRequestConfig) {
         this.orderPaymentDates = null;
-        this.orderPaymentDates = await sendRequest(config, SetToken.Admin);
+        this.orderPaymentDates = await RequestHelper.getInstance().send(config, SetToken.Admin);
     },
     async getOrderSendDate(config: AxiosRequestConfig) {
         this.orderSendDate = null;
-        this.orderSendDate = await sendRequest(config, SetToken.Admin);
+        this.orderSendDate = await RequestHelper.getInstance().send(config, SetToken.Admin);
     },
     async getOrderReturnedDate(config: AxiosRequestConfig) {
         this.orderReturnDate = null;
-        this.orderReturnDate = await sendRequest(config, SetToken.Admin);
+        this.orderReturnDate = await RequestHelper.getInstance().send(config, SetToken.Admin);
     },
     async getOrderStatus(config: AxiosRequestConfig) {
       this.orderStatus = null;
-      this.orderStatus = await sendRequest(config, SetToken.Admin);
+      this.orderStatus = await RequestHelper.getInstance().send(config, SetToken.Admin);
   },
   }
 });

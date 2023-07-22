@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
-import { sendRequest } from "@/common/helpers";
 import type { AxiosRequestConfig } from 'axios';
 import { SetToken } from "@/common/typings/common.typings";
 import type { CommentData, CommentListData, CommentNotVerifyListData } from "@/common/typings/comment.typings";
+import { RequestHelper } from "@/helper/request.helper";
 
 export const useCommentStore = defineStore("comment", {
   state: () => {
@@ -15,37 +15,37 @@ export const useCommentStore = defineStore("comment", {
 
   actions: {
     async createComment(config: AxiosRequestConfig) {
-      this.commentData = await sendRequest(config, SetToken.User);
+      this.commentData = await RequestHelper.getInstance().send(config, SetToken.User);
     },
 
     async getComment(config: AxiosRequestConfig) {
-      this.commentData = await sendRequest(config, SetToken.User);
+      this.commentData = await RequestHelper.getInstance().send(config, SetToken.User);
     },
 
     async getCommentList(config: AxiosRequestConfig) {
-      this.commentListData = await sendRequest(config);
+      this.commentListData = await RequestHelper.getInstance().send(config);
     },
 
     async editComment(config: AxiosRequestConfig) {
-      this.commentData = await sendRequest(config, SetToken.User);
+      this.commentData = await RequestHelper.getInstance().send(config, SetToken.User);
     },
 
     async deleteComment(config: AxiosRequestConfig) {
-      await sendRequest(config, SetToken.User);
+      await RequestHelper.getInstance().send(config, SetToken.User);
       this.commentData = null;
     },
 
     async getNotVerifyComment(config: AxiosRequestConfig) {
       this.commentListDataNotVerify = null;
-      this.commentListDataNotVerify = await sendRequest(config, SetToken.Admin);
+      this.commentListDataNotVerify = await RequestHelper.getInstance().send(config, SetToken.Admin);
     },
 
     async updateCommentByAdmin(config: AxiosRequestConfig) {
-      await sendRequest(config, SetToken.Admin);
+      await RequestHelper.getInstance().send(config, SetToken.Admin);
     },
 
     async delteCommentByAdmin(config: AxiosRequestConfig) {
-      await sendRequest(config, SetToken.Admin);
+      await RequestHelper.getInstance().send(config, SetToken.Admin);
     }
   },
 

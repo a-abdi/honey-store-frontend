@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
-import { sendRequest } from "@/common/helpers";
 import type { AxiosRequestConfig } from 'axios';
 import type { ProductListData } from "@/common/typings/product.typings";
+import { RequestHelper } from "@/helper/request.helper";
 
 export const useSearchStore = defineStore("search", {
   state: () => {
@@ -14,10 +14,10 @@ export const useSearchStore = defineStore("search", {
   actions: {
     async search(config: AxiosRequestConfig) {
       this.searchData = null;
-      this.searchData = await sendRequest(config);
+      this.searchData = await RequestHelper.getInstance().send(config);
     },
     async lazySearch(config: AxiosRequestConfig) {
-      this.searchData = await sendRequest(config);
+      this.searchData = await RequestHelper.getInstance().send(config);
       if (this.searchDataLazy?.data.length && this.searchData?.data) {
         this.searchDataLazy.data = [ ...this.searchDataLazy.data, ...this.searchData.data ];
       } else {

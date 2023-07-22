@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
-import { sendRequest } from "@/common/helpers";
 import type { AxiosRequestConfig } from 'axios';
 import { SetToken } from "@/common/typings/common.typings";
 import type { UserData, UserLoginData } from "@/common/typings/user.typing";
+import { RequestHelper } from "@/helper/request.helper";
 
 export const useUserStore = defineStore("user", {
   state: () => {
@@ -15,25 +15,25 @@ export const useUserStore = defineStore("user", {
 
   actions: {
     async login(config: AxiosRequestConfig) {
-      this.userLoginData = await sendRequest(config);
+      this.userLoginData = await RequestHelper.getInstance().send(config);
       localStorage.removeItem('userAccessToken');      
       localStorage.setItem('userAccessToken', this.userLoginData.data.access_token);
     },
 
     async signup(config: AxiosRequestConfig) {
-      this.userData = await sendRequest(config);
+      this.userData = await RequestHelper.getInstance().send(config);
     },
 
     async update(config: AxiosRequestConfig) {
-      this.userData = await sendRequest(config, SetToken.User);
+      this.userData = await RequestHelper.getInstance().send(config, SetToken.User);
     },
 
     async updatePassword(config: AxiosRequestConfig) {
-      this.passwordUpdateData = await sendRequest(config, SetToken.User);
+      this.passwordUpdateData = await RequestHelper.getInstance().send(config, SetToken.User);
     },
 
     async getOneUser(config: AxiosRequestConfig) {
-      this.userData = await sendRequest(config, SetToken.User);
+      this.userData = await RequestHelper.getInstance().send(config, SetToken.User);
     },
 
     async signout() {

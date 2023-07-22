@@ -1,34 +1,35 @@
 import { defineStore } from "pinia";
-import { sendRequest } from "@/common/helpers";
 import type { AxiosRequestConfig } from 'axios';
 import type { CartData, ListProductsCart, ProductCart } from "@/common/typings/cart.typings";
 import { SetToken } from "@/common/typings/common.typings";
 import { getCartConfig } from "@/common/config/axios/cart.config";
+import { RequestHelper } from "@/helper/request.helper";
 
 export const useCartStore = defineStore("cart", {
   state: () => {
     return {
       cartData: null as CartData | null,
       listProductsCart: null as ListProductsCart | null,
+      requestHelper: RequestHelper.getInstance(),
     }
   },
 
   actions: {
     async getCart(config: AxiosRequestConfig) {
-      this.cartData = await sendRequest(config, SetToken.User);
+      this.cartData = await this.requestHelper.send(config, SetToken.User);
       this.listProductsCart = this.cartData?.data!;
     },
 
     async addToCart(config: AxiosRequestConfig) {
-      await sendRequest(config, SetToken.User);
+      await this.requestHelper.send(config, SetToken.User);
     },
 
     async updateCart(config: AxiosRequestConfig) {
-      await sendRequest(config, SetToken.User);
+      await this.requestHelper.send(config, SetToken.User);
     },
 
     async removeFromCart(config: AxiosRequestConfig) {
-      await sendRequest(config, SetToken.User);
+      await this.requestHelper.send(config, SetToken.User);
     },
 
     setListProductCart(productCart: ProductCart) {
