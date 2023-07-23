@@ -7,27 +7,31 @@
 
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
-import { useAdminStore } from '@/stores/admin';
-import { useCartStore } from '@/stores/cart';
 import type { ListProductsCart } from '@/common/typings/cart.typings';
 import { useUserStore } from './stores/user';
 import ScreenLoading from './components/loading/ScreenLoading.vue';
 import { useCommonStore } from './stores/common';
 
-const adminStore = useAdminStore();
-const cartStore = useCartStore();
-const userStore = useUserStore();
 const commonStore = useCommonStore();
 const adminAccessToken = localStorage.getItem('adminAccessToken');
 const userAccessToken = localStorage.getItem('userAccessToken');
 const cart: ListProductsCart = JSON.parse(localStorage.getItem('carts')!);
 if (userAccessToken) {
-  userStore.userLoginData.data = { access_token: userAccessToken };
+  import("@/stores/user").then((piniaStore)=> {
+    const userStore = piniaStore.useUserStore();
+    userStore.userLoginData.data = { access_token: userAccessToken };
+  });
 }
 if (adminAccessToken) {
-  adminStore.adminData.data = { access_token: adminAccessToken };
+  import("@/stores/admin").then((piniaStore)=> {
+    const adminStore = piniaStore.useAdminStore();
+    adminStore.adminData.data = { access_token: adminAccessToken };
+  });
 }
 if (cart) {
-  cartStore.listProductsCart = cart;
+  import("@/stores/cart").then((piniaStore)=> {
+    const cartStore = piniaStore.useCartStore();
+    cartStore.listProductsCart = cart;
+  });
 }
 </script>
