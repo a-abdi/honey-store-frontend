@@ -34,7 +34,7 @@
                                         شماره تماس
                                     </div>
                                     <div class="text-indigo-900 sm:text-sm text-xs px-1 py-2 tracking-wider">
-                                        {{ convertToPersian(order.user.phoneNumber.replace('+98', '0')) }}
+                                        {{ numberHelper.convertToPersian(order.user.phoneNumber.replace('+98', '0')) }}
                                     </div>
                                 </div>
                                 <div class="flex items-center">
@@ -65,7 +65,7 @@
                                         شماره تماس
                                     </div>
                                     <div class="text-indigo-900 sm:text-sm text-xs px-1 py-2 tracking-wider">
-                                        {{ convertToPersian(order.user.address?.recipient.phoneNumber.replace('+98', '0')!) }}
+                                        {{ numberHelper.convertToPersian(order.user.address?.recipient.phoneNumber.replace('+98', '0')!) }}
                                     </div>
                                 </div>
                                 <div class="flex items-center">
@@ -141,7 +141,7 @@
                                             تعداد سفارش
                                         </div>
                                         <div v-if="cart.quantity" class="text-indigo-900 sm:text-sm text-xs px-1 py-2 tracking-wider">
-                                            {{ convertToPersian(cart.quantity?.toString()) }}
+                                            {{ numberHelper.convertToPersian(cart.quantity?.toString()) }}
                                         </div>
                                     </div>
                                 </div>
@@ -156,8 +156,10 @@
 
 <script setup lang="ts">
 import type { AdminOrder } from '@/common/typings/order.typings';
+import { NumberHelper } from '@/helper/number.helper';
 import { OnClickOutside } from '@vueuse/components';
-import { convertToPersian } from '@/common/helpers';
+
+const numberHelper = NumberHelper.getInstance();
 const emit = defineEmits(['cancel']);
 defineProps<{order: AdminOrder}>();
 </script>

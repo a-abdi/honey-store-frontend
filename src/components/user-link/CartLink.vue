@@ -3,7 +3,7 @@
         <router-link to="/cart">
             <div class="w-7 h-7 bg-cover bg-no-repeat bg-[url('@/assets/icone/shopping-cart.png')]">
                 <span v-show="cartStore.productCartCount" class="bg-violet-600 px-1 text-white text-xs rounded-full">
-                    {{ convertToPersian(`${cartStore.productCartCount}`) }}
+                    {{ numberHelper.convertToPersian(`${cartStore.productCartCount}`) }}
                 </span>
             </div>
         </router-link>
@@ -57,15 +57,15 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { convertToPersian } from '@/common/helpers';
 import router from '@/router';
 import { useCartStore } from '@/stores/cart';
 import { useUserStore } from '@/stores/user';
 import { defineAsyncComponent, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import Currency from '../Currency.vue';
-import CartEmojiVue from '../icons/CartEmoji.vue';
-import favicon from '../../assets/icone/cartLight.svg'
+import { NumberHelper } from '@/helper/number.helper';
+
+const numberHelper = NumberHelper.getInstance();
 const cartStore = useCartStore();
 const userStore = useUserStore();
 const gotToShipping = () => router.push('/cart');

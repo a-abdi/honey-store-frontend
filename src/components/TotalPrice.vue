@@ -2,7 +2,7 @@
     <div class="" v-if="discount != 0 && discount">
         <div class="flex items-center justify-between py-2">
             <div class="bg-violet-500 text-xs text-white inline-flex rounded-full p-1 tracking-wider">
-                {{ convertToPersian(percentage) }}
+                {{ numberHelper.convertToPersian(percentage) }}
             </div>
             <div class="flex items-center text-indigo-900">
                 <Currency :money="totalPrice" class="text-sm"/>
@@ -26,9 +26,11 @@
 </template>
 
 <script setup lang="ts">
-import { convertToPersian } from '@/common/helpers';
 import { computed } from 'vue';
 import Currency from './Currency.vue';
+import { NumberHelper } from '@/helper/number.helper';
+
+const numberHelper = NumberHelper.getInstance();
 const props = defineProps<{price: number, discount: number}>();
 const totalPrice = computed( () => props.price!  - props.discount!);
 const percentage = computed( () => `${(Math.round((props.discount! / props.price!) * 1000) / 10)}%` );

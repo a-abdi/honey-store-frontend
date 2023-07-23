@@ -19,7 +19,7 @@
                        {{ order.user.firstName }} {{ order.user.lastName }}
                     </td>
                     <td class="table-td">
-                        {{ convertToPersian(order.user.phoneNumber.replace('+98', '0')) }}
+                        {{ numberHelper.convertToPersian(order.user.phoneNumber.replace('+98', '0')) }}
                     </td>
                     <td class="table-td">
                         {{ order.user.address?.province }}
@@ -65,7 +65,6 @@ import { getOrdersBystatusAxiosConfig } from '@/common/config/axios/admin/order.
 import { storeToRefs } from 'pinia';
 import { useOrderStore } from '@/stores/order';
 import Currency from '@/components/Currency.vue';
-import { convertToPersian } from '@/common/helpers';
 import Details from '@/components/icons/Details.vue';
 import Information from '@/components/icons/Information.vue';
 import { reactive, ref, watch } from 'vue';
@@ -75,6 +74,9 @@ import ChangeOrderStatus from '@/components/dialog/ChangeOrderStatus.vue';
 import type { StringBoolean } from '@/common/typings/common.typings';
 import { useRoute } from 'vue-router';
 import PageLoading from '@/components/loading/PageLoading.vue';
+import { NumberHelper } from '@/helper/number.helper';
+
+const numberHelper = NumberHelper.getInstance();
 const route = useRoute();
 const orderStore = useOrderStore();
 const getOrders = (status: number) => {

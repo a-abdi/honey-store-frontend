@@ -1,17 +1,5 @@
 import type { UserData } from './typings/user.typing';
 
-const PERSIAN_NUMBER = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
-export const convertToPersian = (str: string ) =>
-{
-    for(let i=0; i<10; i++)
-    {
-        const strNumber: string = `${i}`;
-        str = str?.replaceAll(strNumber, PERSIAN_NUMBER[i]);
-    }
-    
-    return str;
-};
-
 export const createCode = () => {
     return (Math.random() + 1).toString(36).substring(2);
 };

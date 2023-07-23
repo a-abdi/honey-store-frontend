@@ -34,7 +34,7 @@
                                         شماره تماس
                                     </div>
                                     <div class="text-indigo-900 text-sm px-1 py-2 tracking-wider">
-                                        {{ convertToPersian(order.user.phoneNumber.replace('+98', '0')) }}
+                                        {{ numberHelper.convertToPersian(order.user.phoneNumber.replace('+98', '0')) }}
                                     </div>
                                 </div>
                                 <div class="flex items-center">
@@ -142,7 +142,9 @@ import type { AdminOrder } from '@/common/typings/order.typings';
 import { useOrderStore } from '@/stores/order';
 import { OnClickOutside } from '@vueuse/components';
 import Currency from '../Currency.vue';
-import { convertToPersian } from '@/common/helpers';
+import { NumberHelper } from '@/helper/number.helper';
+
+const numberHelper = NumberHelper.getInstance();
 const emit = defineEmits(['cancel']);
 defineProps<{order: AdminOrder}>();
 const orderStore = useOrderStore();

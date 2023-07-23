@@ -2,7 +2,7 @@
   <div class="md:border border-gray-300 shadow-md rounded-md md:mx-2 py-4">
     <div v-if="productData?.data?.discount" class="flex items-center text-vsl flex-row-reverse my-2 w-full">
       <div class="ml-2 bg-violet-500 text-white rounded-full p-1">
-        {{ convertToPersian(percentage) }}
+        {{ numberHepler.convertToPersian(percentage) }}
       </div>
       <div class="pl-2 line-through text-gray-400">
         <Currency :money="productData?.data?.price" />
@@ -30,14 +30,15 @@
 </template>
 
 <script lang="ts" setup>
-import { convertToPersian } from '@/common/helpers';
 import { useCartStore } from '@/stores/cart';
 import { useProductStore } from '@/stores/product';
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 import ProductCartQuantity from './ProductCartQuantity.vue';
 import Currency from './Currency.vue';
+import { NumberHelper } from '@/helper/number.helper';
 
+const numberHepler = NumberHelper.getInstance();
 defineProps<{ productId: string }>();
 const emit = defineEmits<{ (event: 'addTocart'): void }>();
 const productStore = useProductStore();

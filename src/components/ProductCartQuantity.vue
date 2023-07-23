@@ -5,7 +5,7 @@
         </div>
         <div class="mx-4 text-violet-600">
             <div v-if="!page.sending">
-                {{ convertToPersian(`${cartStore.getCartByProductId(prop.productId!)?.quantity}`) }}
+                {{ numberHepler.convertToPersian(`${cartStore.getCartByProductId(prop.productId!)?.quantity}`) }}
             </div>
             <LoadingIcone class="mx-auto text-violet-600 h-5 w-5" v-else/>
         </div>
@@ -25,7 +25,6 @@
 </template>
 
 <script setup lang="ts">
-import { convertToPersian } from '@/common/helpers';
 import { useCartStore } from '@/stores/cart';
 import Plus from '@/components/icons/Plus.vue';
 import Minus from '@/components/icons/Minus.vue';
@@ -38,81 +37,82 @@ import axios from 'axios';
 import Message from './message/Message.vue';
 import LoadingIcone from './icons/LoadingIcone.vue';
 import { ErrorHander } from '@/helper/handel-error.helper';
+import { NumberHelper } from '@/helper/number.helper';
 
-    const prop = defineProps({
-        productId: String
-    });
-    const cartStore = useCartStore();
-    const userStore = useUserStore();
-    const page = reactive<Page>({
-        sending: false,
-        message: '',
-        typeMessage: TypeMessage.Success,
-        showMessage: false,
-    });
-    const updateProductQuantity = async (value: number) => {
-        if (!page.sending) {
-            if (userStore.userLogged) {
-                const product = {
-                    quantity: value
-                } 
-                if (cartStore.getCartByProductId(prop.productId!)?.quantity) {
-                    product.quantity += cartStore.getCartByProductId(prop.productId!)?.quantity!;
-                }
-                try {
-                    const updateCartConfigAxios = updateCartConfig(prop.productId!, {product});   
-                    const getCartConfigAxios = getCartConfig();
-                    page.sending = true;
-                    await cartStore.updateCart(updateCartConfigAxios);
-                    await cartStore.getCart(getCartConfigAxios);
-                } catch (error) {
-                    page.typeMessage = TypeMessage.Danger;
-                    page.showMessage = true;
-                    if (axios.isAxiosError(error)) {
-                        const errorHander = ErrorHander.getInstance();
-                        page.message = errorHander.getMessage(error);
-                    } else {
-                        console.log(error);
-                    }
-                }
-                page.sending = false;
-            } else {
-                const objIndex = cartStore.listProductsCart?.products.findIndex((productCart => productCart.product._id == prop.productId)) as number;
-                if (cartStore.listProductsCart?.products[objIndex].quantity) {
-                    cartStore.listProductsCart.products[objIndex].quantity += value;
+const numberHepler = NumberHelper.getInstance();
+const prop = defineProps({
+    productId: String
+});
+const cartStore = useCartStore();
+const userStore = useUserStore();
+const page = reactive<Page>({
+    sending: false,
+    message: '',
+    typeMessage: TypeMessage.Success,
+    showMessage: false,
+});
+const updateProductQuantity = async (value: number) => {
+    if (!page.sending) {
+        if (userStore.userLogged) {
+            const product = {
+                quantity: value
+            } 
+            if (cartStore.getCartByProductId(prop.productId!)?.quantity) {
+                product.quantity += cartStore.getCartByProductId(prop.productId!)?.quantity!;
+            }
+            try {
+                const updateCartConfigAxios = updateCartConfig(prop.productId!, {product});   
+                const getCartConfigAxios = getCartConfig();
+                page.sending = true;
+                await cartStore.updateCart(updateCartConfigAxios);
+                await cartStore.getCart(getCartConfigAxios);
+            } catch (error) {
+                page.typeMessage = TypeMessage.Danger;
+                page.showMessage = true;
+                if (axios.isAxiosError(error)) {
+                    const errorHander = ErrorHander.getInstance();
+                    page.message = errorHander.getMessage(error);
+                } else {
+                    console.log(error);
                 }
             }
-            cartStore.setCartLocalStorage();
-        }
-    };
-
-    const delteProductInCart = async () => {
-        if (!page.sending) {
-            if (userStore.userLogged) {
-                try {
-                    const removeFromCartConfigAxios = removeProductFromCartConfig(prop.productId!);   
-                    const getCartConfigAxios = getCartConfig();
-                    page.sending = true;
-                    await cartStore.removeFromCart(removeFromCartConfigAxios);
-                    await cartStore.getCart(getCartConfigAxios);
-                } catch (error) {
-                    page.typeMessage = TypeMessage.Danger;
-                    page.showMessage = true;
-                    if (axios.isAxiosError(error)) {
-                        const errorHander = ErrorHander.getInstance();
-                        page.message = errorHander.getMessage(error);
-                    } else {
-                        console.log(error);
-                    }
-                }
-                page.sending = false;
-            } else {
-                const objIndex = cartStore.listProductsCart?.products.findIndex((productCart => productCart.product._id == prop.productId)) as number;
-                if (cartStore.listProductsCart?.products[objIndex].quantity) {
-                    cartStore.listProductsCart.products.splice(objIndex, 1);
-                }
+            page.sending = false;
+        } else {
+            const objIndex = cartStore.listProductsCart?.products.findIndex((productCart => productCart.product._id == prop.productId)) as number;
+            if (cartStore.listProductsCart?.products[objIndex].quantity) {
+                cartStore.listProductsCart.products[objIndex].quantity += value;
             }
-            cartStore.setCartLocalStorage();
         }
+        cartStore.setCartLocalStorage();
     }
+};
+const delteProductInCart = async () => {
+    if (!page.sending) {
+        if (userStore.userLogged) {
+            try {
+                const removeFromCartConfigAxios = removeProductFromCartConfig(prop.productId!);   
+                const getCartConfigAxios = getCartConfig();
+                page.sending = true;
+                await cartStore.removeFromCart(removeFromCartConfigAxios);
+                await cartStore.getCart(getCartConfigAxios);
+            } catch (error) {
+                page.typeMessage = TypeMessage.Danger;
+                page.showMessage = true;
+                if (axios.isAxiosError(error)) {
+                    const errorHander = ErrorHander.getInstance();
+                    page.message = errorHander.getMessage(error);
+                } else {
+                    console.log(error);
+                }
+            }
+            page.sending = false;
+        } else {
+            const objIndex = cartStore.listProductsCart?.products.findIndex((productCart => productCart.product._id == prop.productId)) as number;
+            if (cartStore.listProductsCart?.products[objIndex].quantity) {
+                cartStore.listProductsCart.products.splice(objIndex, 1);
+            }
+        }
+        cartStore.setCartLocalStorage();
+    }
+}
 </script>

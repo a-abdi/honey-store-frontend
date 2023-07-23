@@ -16,7 +16,7 @@
                                         {{ customProperty.label }}:
                                     </div>
                                     <div class="text-indigo-900 text-sm px-2 tracking-wider" v-if="typeof customProperty.value == 'string'">
-                                        {{ convertToPersian(customProperty.value) }}
+                                        {{ numberHelper.convertToPersian(customProperty.value) }}
                                     </div>
                                     <div class="text-gray-500 text-xs">
                                         {{ customProperty.unit }}
@@ -40,11 +40,12 @@
 </template>
 
 <script setup lang="ts">
-import { convertToPersian } from '@/common/helpers';
+import { NumberHelper } from '@/helper/number.helper';
 import { useProductStore } from '@/stores/product';
 import { OnClickOutside } from '@vueuse/components';
 import { storeToRefs } from 'pinia';
 
+const numberHelper = NumberHelper.getInstance();
 defineProps<{showDialog: boolean}>();
 const emit = defineEmits(['cancel']);
 const productStore = useProductStore();

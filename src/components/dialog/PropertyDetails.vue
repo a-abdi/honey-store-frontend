@@ -19,7 +19,7 @@
                                 </div>
                                 <div class="flex items-center col-span-3 sm:col-span-1" v-if="propertyData?.data?.createdAt">
                                     <p class="text-gray-600 text-xs ml-2"> ایجاد شده: </p>
-                                    <p>{{ convertToPersian(getDate(propertyData?.data?.createdAt)) }}</p>
+                                    <p>{{ numberHelper.convertToPersian(getDate(propertyData?.data?.createdAt)) }}</p>
                                 </div>
                                 <div class="flex items-center ml-2 col-span-3" v-if="propertyData?.data?.unit.length">
                                     <p class="text-gray-600 text-xs"> واحد: </p>
@@ -41,11 +41,13 @@
 </template>
 <script setup lang="ts">
 import { getPropertyAxiosConfig } from '@/common/config/axios/admin/property.config';
-import { convertToPersian, getDate } from '@/common/helpers';
+import { getDate } from '@/common/helpers';
+import { NumberHelper } from '@/helper/number.helper';
 import { usePropertyStore } from '@/stores/property';
 import { OnClickOutside } from '@vueuse/components';
 import { storeToRefs } from 'pinia';
 
+const numberHelper = NumberHelper.getInstance();
 const props = defineProps<{showProperty: boolean, propertyId: string}>();
 const emits = defineEmits<{(event: 'close'): void}>();
 const propertyStore = usePropertyStore();

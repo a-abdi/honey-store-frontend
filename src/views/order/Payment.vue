@@ -12,7 +12,7 @@
                 </p>
             </div>
             <div class="tracking-wide text-sm md:text-base leading-loose text-indigo-900" v-if="userData?.data?.address?.recipient.phoneNumber">
-                {{ convertToPersian(userData?.data?.address?.recipient.phoneNumber.replace("+98", "0")) }}
+                {{ numberHelper.convertToPersian(userData?.data?.address?.recipient.phoneNumber.replace("+98", "0")) }}
             </div>
              <div class="flex items-center">
                 <button v-if="userData?.data?.address" @click="showUserAddress = true" class="px-8 btn-violet text-sm md:text-base">
@@ -31,7 +31,7 @@
                 </div>
                 <div class="flex justify-between items-center px-2 md:py-4 py-2 text-gray-600 md:text-sm text-xs">
                     <div class="text-sm">
-                        قیمت کالاها ({{ convertToPersian(`${cartStore.productCartCount}`) }})
+                        قیمت کالاها ({{ numberHelper.convertToPersian(`${cartStore.productCartCount}`) }})
                     </div>
                     <div class="flex items-center">
                         <Currency :money="cartStore.getSumAllPrice"/>
@@ -53,7 +53,7 @@
                 </div>
                 <div class="flex justify-between items-center px-2 md:py-4 py-2 text-violet-600 md:text-sm text-xs">
                     <div class="text-sm">
-                        سود شما{{ convertToPersian(`(%${cartStore.getPercentage})`) }}
+                        سود شما{{ numberHelper.convertToPersian(`(%${cartStore.getPercentage})`) }}
                     </div>
                     <div class="flex items-center">
                         <Currency :money="cartStore.getSumAllDiscount"/>
@@ -83,7 +83,6 @@
 
 <script setup lang="ts">
 import { paymentConfig } from '@/common/config/axios/payment.config';
-import { convertToPersian } from '@/common/helpers';
 import Currency from '@/components/Currency.vue';
 import { useCartStore } from '@/stores/cart';
 import { useUserStore } from '@/stores/user';
@@ -96,6 +95,9 @@ import axios from 'axios';
 import Message from '@/components/message/Message.vue';
 import LoadingIcone from '@/components/icons/LoadingIcone.vue';
 import { ErrorHander } from '@/helper/handel-error.helper';
+import { NumberHelper } from '@/helper/number.helper';
+
+const numberHelper = NumberHelper.getInstance();
 const showUserAddress = ref(false);
 const cartStore = useCartStore();
 const userStore = useUserStore();

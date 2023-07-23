@@ -4,7 +4,7 @@
             <div class="lg:block hidden">
                 <div class="flex justify-between items-center px-2 py-4 text-gray-600 text-sm">
                     <div class="text-sm">
-                        قیمت کالاها ({{ convertToPersian(`${cartStore.productCartCount}`) }})
+                        قیمت کالاها ({{ numberHepller.convertToPersian(`${cartStore.productCartCount}`) }})
                     </div>
                     <div class="flex items-center">
                         <Currency :money="cartStore.getSumAllPrice" />
@@ -28,7 +28,7 @@
             <div class="hidden lg:block">
                 <div class="flex justify-between items-center px-2 py-4 text-violet-600">
                     <div class="text-sm">
-                        سود شما{{ convertToPersian(`(%${cartStore.getPercentage})`) }}
+                        سود شما{{ numberHepller.convertToPersian(`(%${cartStore.getPercentage})`) }}
                     </div>
                     <div class="flex items-center">
                         <Currency :money="cartStore.getSumAllDiscount" />
@@ -54,12 +54,13 @@
 </template>
 
 <script lang="ts" setup>
-import { convertToPersian } from '@/common/helpers';
 import { useCartStore } from '@/stores/cart';
 import { useUserStore } from '@/stores/user';
 import router from '@/router';
 import Currency from './Currency.vue';
+import { NumberHelper } from '@/helper/number.helper';
 
+const numberHepller = NumberHelper.getInstance();
 const cartStore = useCartStore();
 const userStore = useUserStore();
 const gotToUserLogin = () => router.push('/login');
