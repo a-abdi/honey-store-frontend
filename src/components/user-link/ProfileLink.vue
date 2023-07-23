@@ -6,7 +6,7 @@
             <div v-if="showProfile" class="absolute px-4 top-7 left-0 border border-gray-300 rounded-md shadow-lg bg-white h-auto overflow-auto max-h-96 w-64">
                 <div class="text-center text-sm py-1.5 rounded-md bg-indigo-600 font-bold text-white">
                     <div v-if="userData" class="pb-1.5">
-                        {{ getFullName(userData) }}
+                        {{ fullnameHelper.getUserFullName(userData) }}
                     </div>
                     <div v-if="userData" class="tracking-widest">
                         {{ userData.data?.phoneNumber.replace("+98", "0") }}
@@ -40,10 +40,12 @@ import { OnClickOutside } from '@vueuse/components'
 import { defineAsyncComponent, ref } from 'vue';
 import { useUserStore } from '@/stores/user';
 import { getUserConfig } from '@/common/config/axios/user.config';
-import { getFullName } from '@/common/helpers';
 import { storeToRefs } from 'pinia';
 import router from '@/router';
 import { useCartStore } from '@/stores/cart';
+import { FullNameHepler } from '@/helper/fullname.helper';
+
+const fullnameHelper = FullNameHepler.getInstance();
 const UserProfile = defineAsyncComponent(() => import('../icons/UserProfile.vue'));
 const OrderVue = defineAsyncComponent(() => import('../icons/Order.vue'));
 const ExitVue = defineAsyncComponent(() => import('../icons/Exit.vue'));

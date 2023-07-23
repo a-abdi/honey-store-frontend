@@ -2,7 +2,7 @@
     <div class="px-6 py-12 text-indigo-900 tracking-wide sm:tracking-wider">
         <div class="text-center text-sm py-1.5 rounded-md bg-indigo-600 text-white">
             <div v-if="userData" class="pb-1.5">
-                {{ getFullName(userData) }}
+                {{ fullnameHelper.getUserFullName(userData) }}
             </div>
             <div v-if="userData" class="tracking-widest">
                 {{ userData.data?.phoneNumber.replace("+98", "0") }}
@@ -57,7 +57,6 @@
 </template>
 
 <script setup lang="ts">
-import { getFullName } from '@/common/helpers';
 import { useUserStore } from '@/stores/user';
 import { storeToRefs } from 'pinia';
 import Location from '../icons/Location.vue';
@@ -67,6 +66,9 @@ import UserProfile from '../icons/UserProfile.vue';
 import BigLeft from '../icons/BigLeft.vue';
 import { useCartStore } from '@/stores/cart';
 import router from '@/router';
+import { FullNameHepler } from '@/helper/fullname.helper';
+
+const fullnameHelper = FullNameHepler.getInstance();
 const userStore = useUserStore();
 const cartStore = useCartStore();
 const { userData } = storeToRefs(userStore);
