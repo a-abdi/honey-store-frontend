@@ -1,18 +1,5 @@
 import type { UserData } from './typings/user.typing';
 
-export const getAxiosErrorMessage = (error: any): string => {
-    if (Array.isArray(error?.response?.data?.message)) {
-        return error.response?.data.message[0];
-    }
-    if (typeof error?.response?.data.message === 'string') {
-        return error.response?.data.message;
-    }
-    if (typeof error?.response?.data.Message === 'string') {
-        return error.response?.data.Message;
-    }
-    return 'خطایی رخ داده'
-};
-
 const PERSIAN_NUMBER = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
 export const convertToPersian = (str: string ) =>
 {

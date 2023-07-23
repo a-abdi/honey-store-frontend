@@ -49,13 +49,13 @@ import { usePropertyStore } from '@/stores/property';
 import { reactive, ref } from 'vue';
 import { TypeMessage, type Page, type StringBoolean } from '@/common/typings/common.typings';
 import axios from 'axios';
-import { getAxiosErrorMessage } from '@/common/helpers';
 import EditElement from '@/components/element/EditElement.vue';
 import Message from '@/components/message/Message.vue';
 import DeleteElement from '@/components/element/DeleteElement.vue';
 import Dialog from '@/components/dialog/Dialog.vue';
 import PropertyDetails from '@/components/dialog/PropertyDetails.vue';
 import PageLoading from '@/components/loading/PageLoading.vue';
+import { ErrorHander } from '@/helper/handel-error.helper';
 
 const properyStore = usePropertyStore();
 const showDialog = ref(false);
@@ -79,7 +79,8 @@ const deleteProperty = async () => {
         page.showMessage = true;
         page.typeMessage = TypeMessage.Danger;
         if (axios.isAxiosError(error)) {
-            page.message = getAxiosErrorMessage(error);
+            const errorHander = ErrorHander.getInstance();
+            page.message = errorHander.getMessage(error);
         } else {
             console.log(error);
         }

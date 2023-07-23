@@ -70,7 +70,6 @@ import { reactive } from 'vue';
 import { useUserStore } from '@/stores/user';
 import { TypeMessage, type Page } from '@/common/typings/common.typings';
 import axios from 'axios';
-import { getAxiosErrorMessage } from '@/common/helpers';
 import Message from '@/components/message/Message.vue';
 import type { UserLogin } from '@/common/typings/user.typing';
 import { addToCartConfig } from '@/common/config/axios/cart.config';
@@ -78,6 +77,7 @@ import { userLoginConfig } from '@/common/config/axios/user.config';
 import { useCartStore } from '@/stores/cart';
 import { storeToRefs } from 'pinia';
 import LoadingIcone from '@/components/icons/LoadingIcone.vue';
+import { ErrorHander } from '@/helper/handel-error.helper';
 
 const userStore = useUserStore();
 const cartStore = useCartStore();
@@ -128,7 +128,8 @@ const login =  async () => {
         page.showMessage = true;
         page.typeMessage = TypeMessage.Danger;
         if (axios.isAxiosError(error)) {
-            page.message = getAxiosErrorMessage(error);
+            const errorHander = ErrorHander.getInstance();
+            page.message = errorHander.getMessage(error);
         } else {
             console.log(error);
         }

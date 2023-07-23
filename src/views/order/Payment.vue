@@ -83,7 +83,7 @@
 
 <script setup lang="ts">
 import { paymentConfig } from '@/common/config/axios/payment.config';
-import { convertToPersian, getAxiosErrorMessage } from '@/common/helpers';
+import { convertToPersian } from '@/common/helpers';
 import Currency from '@/components/Currency.vue';
 import { useCartStore } from '@/stores/cart';
 import { useUserStore } from '@/stores/user';
@@ -95,6 +95,7 @@ import { TypeMessage, type Page } from '@/common/typings/common.typings';
 import axios from 'axios';
 import Message from '@/components/message/Message.vue';
 import LoadingIcone from '@/components/icons/LoadingIcone.vue';
+import { ErrorHander } from '@/helper/handel-error.helper';
 const showUserAddress = ref(false);
 const cartStore = useCartStore();
 const userStore = useUserStore();
@@ -117,7 +118,8 @@ const payment = async () => {
         page.showMessage = true;
         page.typeMessage = TypeMessage.Danger;
         if (axios.isAxiosError(error)) {
-            page.message = getAxiosErrorMessage(error);
+            const errorHander = ErrorHander.getInstance();
+            page.message = errorHander.getMessage(error);
         } else {
             console.log(error);
         }

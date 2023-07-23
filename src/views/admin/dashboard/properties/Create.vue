@@ -42,12 +42,12 @@ import { reactive, ref } from 'vue';
 import Message from '@/components/message/Message.vue';
 import { createPropertyAxiosConfig } from '@/common/config/axios/admin/property.config'
 import axios from 'axios';
-import { getAxiosErrorMessage } from '@/common/helpers';
 import { TypeMessage, type Page } from '@/common/typings/common.typings';
 import type { newProperty } from '@/common/typings/property.typing';
 import { usePropertyStore } from '@/stores/property';
 import { storeToRefs } from 'pinia';
 import { PROPERTY_TYPES } from '@/common/constans';
+import { ErrorHander } from '@/helper/handel-error.helper';
 
 const propertyStore = usePropertyStore();
 const unitInput = ref('');
@@ -93,7 +93,8 @@ const createProperty = async () => {
         page.showMessage = true;
         page.typeMessage = TypeMessage.Danger;
         if (axios.isAxiosError(error)) {
-        page.message = getAxiosErrorMessage(error);
+            const errorHander = ErrorHander.getInstance();
+            page.message = errorHander.getMessage(error);
         } else {
             console.log(error);
         }

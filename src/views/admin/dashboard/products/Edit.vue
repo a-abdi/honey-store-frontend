@@ -151,13 +151,13 @@ import { storeToRefs } from 'pinia';
 import { useProductStore } from '@/stores/product';
 import Message from '@/components/message/Message.vue';
 import axios from 'axios';
-import { getAxiosErrorMessage } from '@/common/helpers';
 import { TypeMessage, type Page, type Image, type StringObject } from '@/common/typings/common.typings';
 import type { NewProduct, ProductProperty } from '@/common/typings/product.typings'
 import { usePropertyStore } from '@/stores/property';
 import { useRoute } from 'vue-router';
 import type { Property } from '@/common/typings/property.typing';
 import PageLoading from '@/components/loading/PageLoading.vue';
+import { ErrorHander } from '@/helper/handel-error.helper';
 const categoryStore = useCategoryStore();
 const productStore = useProductStore();
 const propertyStore = usePropertyStore();
@@ -319,7 +319,8 @@ const addProduct = async () => {
         page.showMessage = true;
         page.typeMessage = TypeMessage.Danger;
         if (axios.isAxiosError(error)) {
-            page.message = getAxiosErrorMessage(error);
+            const errorHander = ErrorHander.getInstance();
+            page.message = errorHander.getMessage(error);
         } else {
             page.message = error.message;
             console.log(error);

@@ -44,7 +44,7 @@ import { TypeMessage, type Page } from '@/common/typings/common.typings';
 import type { AdminLoginData } from '@/common/typings/admin.typings';
 import Message from '@/components/message/Message.vue';
 import axios from 'axios';
-import { getAxiosErrorMessage } from '@/common/helpers';
+import { ErrorHander } from '@/helper/handel-error.helper';
 
 const adminStore = useAdminStore();
 const router = useRouter();
@@ -67,7 +67,8 @@ const login = async() => {
         page.showMessage = true;
         page.typeMessage = TypeMessage.Danger;
         if (axios.isAxiosError(error)) {
-            page.message = getAxiosErrorMessage(error);
+            const errorHander = ErrorHander.getInstance();
+            page.message = errorHander.getMessage(error);
         } else {
             console.log(error);
         }

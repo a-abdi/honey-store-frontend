@@ -41,8 +41,9 @@ import { updateOrderStatusAxiosConfig } from '@/common/config/axios/admin/order.
 import { reactive } from 'vue';
 import { TypeMessage, type Page } from '@/common/typings/common.typings';
 import axios from 'axios';
-import { getAxiosErrorMessage } from '@/common/helpers';
 import Message from '../message/Message.vue';
+import { ErrorHander } from '@/helper/handel-error.helper';
+
 const emit = defineEmits(['cancel', 'orderIsUpdated']);
 const props = defineProps<{ statusValue: string, orderId: string }>();
 const orderStore = useOrderStore();
@@ -56,7 +57,8 @@ const changeStatus = async () => {
         page.showMessage = true;
         page.typeMessage = TypeMessage.Danger;
         if (axios.isAxiosError(error)) {
-            page.message = getAxiosErrorMessage(error);
+            const errorHander = ErrorHander.getInstance();
+            page.message = errorHander.getMessage(error);
         } else {
             console.log(error);
         }

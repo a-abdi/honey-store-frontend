@@ -58,7 +58,6 @@
 import { getPropertyListConfig } from '@/common/config/axios/admin/property.config';
 import { editCategoryListConfig } from '@/common/config/axios/admin/category.config';
 import { getCategoryConfig } from '@/common/config/axios/category.config';
-import { getAxiosErrorMessage } from '@/common/helpers';
 import { useCategoryStore } from '@/stores/category';
 import { storeToRefs } from 'pinia';
 import { onMounted, reactive, ref, type Ref } from 'vue';
@@ -69,6 +68,7 @@ import { TypeMessage, type Page, type Image } from '@/common/typings/common.typi
 import type { NewCategory } from '@/common/typings/category.typings';
 import { usePropertyStore } from '@/stores/property';
 import PageLoading from '@/components/loading/PageLoading.vue';
+import { ErrorHander } from '@/helper/handel-error.helper';
 
 const route = useRoute();
 const categoryId = route.params.categoryId as string;
@@ -135,7 +135,8 @@ const editCategory = async () => {
         form.showMessage = true;
         form.typeMessage = TypeMessage.Danger;
         if (axios.isAxiosError(error)) {
-            form.message = getAxiosErrorMessage(error);
+            const errorHander = ErrorHander.getInstance();
+            form.message = errorHander.getMessage(error);
         } else {
             console.log(error);
         }

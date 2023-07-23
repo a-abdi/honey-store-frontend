@@ -59,10 +59,10 @@ import { useCategoryStore } from '@/stores/category';
 import { storeToRefs } from 'pinia';
 import Message from '@/components/message/Message.vue';
 import axios from 'axios';
-import { getAxiosErrorMessage } from '@/common/helpers';
 import { TypeMessage, type Page, type Image } from '@/common/typings/common.typings';
 import type { NewCategory } from '@/common/typings/category.typings';
 import { usePropertyStore } from '@/stores/property';
+import { ErrorHander } from '@/helper/handel-error.helper';
 
 const form = reactive<Page>({
     loading: false,
@@ -115,7 +115,8 @@ const createCategory = async () => {
         showMessage.value = true;
         form.typeMessage = TypeMessage.Danger;
         if (axios.isAxiosError(error)) {
-        form.message = getAxiosErrorMessage(error);
+            const errorHander = ErrorHander.getInstance();
+            form.message = errorHander.getMessage(error);
         } else {
             form.message = error.message;
             console.log(error);

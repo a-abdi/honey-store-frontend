@@ -8,7 +8,6 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
 import type { ListProductsCart } from '@/common/typings/cart.typings';
-import { useUserStore } from './stores/user';
 import ScreenLoading from './components/loading/ScreenLoading.vue';
 import { useCommonStore } from './stores/common';
 

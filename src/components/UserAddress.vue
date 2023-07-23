@@ -110,7 +110,6 @@ import { reactive, ref, type Ref, watch } from 'vue';
 import { useUserStore } from '@/stores/user';
 import { TypeMessage, type Page, type City} from '@/common/typings/common.typings';
 import axios from 'axios';
-import { getAxiosErrorMessage } from '@/common/helpers';
 import Message from '@/components/message/Message.vue';
 import { updateUserConfig } from '@/common/config/axios/user.config';
 import provinces from '@/assets/address/provinces.json';
@@ -118,6 +117,7 @@ import cities from '@/assets/address/cities.json';
 import type { UserAddress } from '@/common/typings/user.typing';
 import { storeToRefs } from 'pinia';
 import { OnClickOutside } from '@vueuse/components'
+import { ErrorHander } from '@/helper/handel-error.helper';
 const userStore = useUserStore();
 const citiesProvince = ref([]) as Ref<City[]>;
 const { userData } = storeToRefs(userStore);
@@ -179,7 +179,8 @@ const updateAddress = async () => {
         page.showMessage = true;
         page.typeMessage = TypeMessage.Danger;
         if (axios.isAxiosError(error)) {
-            page.message = getAxiosErrorMessage(error)
+            const errorHander = ErrorHander.getInstance();
+            page.message = errorHander.getMessage(error)
                 .replace('address.', '')
                 .replace('recipient.', '');
             page.message.replace('address', '');

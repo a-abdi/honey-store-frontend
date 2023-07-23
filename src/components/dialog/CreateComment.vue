@@ -96,8 +96,9 @@ import { inject, reactive, watch } from 'vue';
 import { createCommentAxiosConfig, deleteUsersCommentAxios, getUsersCommentAxios, updateUserCommentAxios } from '@/common/config/axios/comment.config';
 import { TypeMessage, type Page } from '@/common/typings/common.typings';
 import axios from 'axios';
-import { getAxiosErrorMessage } from '@/common/helpers';
 import Message from '../message/Message.vue';
+import { ErrorHander } from '@/helper/handel-error.helper';
+
 const emit = defineEmits(['cancel']);
 const productId = inject<string>('productId');
 const commenStore = useCommentStore();
@@ -135,7 +136,8 @@ const createComment = async () => {
         page.showMessage = true;
         page.typeMessage = TypeMessage.Danger;
         if (axios.isAxiosError(error)) {
-            page.message = getAxiosErrorMessage(error);
+            const errorHander = ErrorHander.getInstance();
+            page.message = errorHander.getMessage(error);
         } else {
             console.log(error);
         }
@@ -157,7 +159,8 @@ const updateComment = async () => {
         page.showMessage = true;
         page.typeMessage = TypeMessage.Danger;
         if (axios.isAxiosError(error)) {
-            page.message = getAxiosErrorMessage(error);
+            const errorHander = ErrorHander.getInstance();
+            page.message = errorHander.getMessage(error);
         } else {
             console.log(error);
         }
@@ -179,7 +182,8 @@ const deleteComment = async () => {
         page.showMessage = true;
         page.typeMessage = TypeMessage.Danger;
         if (axios.isAxiosError(error)) {
-            page.message = getAxiosErrorMessage(error);
+            const errorHander = ErrorHander.getInstance();
+            page.message = errorHander.getMessage(error);
         } else {
             console.log(error);
         }

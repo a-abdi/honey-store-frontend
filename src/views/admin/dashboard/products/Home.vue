@@ -71,11 +71,11 @@ import ConfirmDialog from '@/components/dialog/ConfirmDialog.vue';
 import Message from '@/components/message/Message.vue';
 import { TypeMessage, type Page } from '@/common/typings/common.typings';
 import axios from 'axios';
-import { getAxiosErrorMessage } from '@/common/helpers';
 import { useRoute } from 'vue-router';
 import RestoreElement from '@/components/element/RestoreElement.vue';
 import RestoreDialog from '@/components/dialog/RestoreDialog.vue';
 import PageLoading from '@/components/loading/PageLoading.vue';
+import { ErrorHander } from '@/helper/handel-error.helper';
     const productStore = useProductStore();
     const showDialog = ref(false);
     const showRestoreDialog = ref(false);
@@ -115,7 +115,8 @@ import PageLoading from '@/components/loading/PageLoading.vue';
             form.showMessage = true;
             form.typeMessage = TypeMessage.Danger;
             if (axios.isAxiosError(error)) {
-               form.message = getAxiosErrorMessage(error);
+                const errorHander = ErrorHander.getInstance();
+                form.message = errorHander.getMessage(error);
             } else {
                 console.log(error);
             }
@@ -134,7 +135,8 @@ import PageLoading from '@/components/loading/PageLoading.vue';
             form.showMessage = true;
             form.typeMessage = TypeMessage.Danger;
             if (axios.isAxiosError(error)) {
-               form.message = getAxiosErrorMessage(error);
+                const errorHander = ErrorHander.getInstance();
+                form.message = errorHander.getMessage(error);
             } else {
                 console.log(error);
             }
@@ -153,7 +155,8 @@ import PageLoading from '@/components/loading/PageLoading.vue';
             form.showMessage = true;
             form.typeMessage = TypeMessage.Danger;
             if (axios.isAxiosError(error)) {
-               form.message = getAxiosErrorMessage(error);
+                const errorHander = ErrorHander.getInstance();
+                form.message = errorHander.getMessage(error);
             } else {
                 console.log(error);
             }

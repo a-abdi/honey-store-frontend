@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { convertToPersian, getAxiosErrorMessage } from '@/common/helpers';
+import { convertToPersian } from '@/common/helpers';
 import { useCartStore } from '@/stores/cart';
 import Plus from '@/components/icons/Plus.vue';
 import Minus from '@/components/icons/Minus.vue';
@@ -37,6 +37,7 @@ import { reactive } from 'vue';
 import axios from 'axios';
 import Message from './message/Message.vue';
 import LoadingIcone from './icons/LoadingIcone.vue';
+import { ErrorHander } from '@/helper/handel-error.helper';
 
     const prop = defineProps({
         productId: String
@@ -68,7 +69,8 @@ import LoadingIcone from './icons/LoadingIcone.vue';
                     page.typeMessage = TypeMessage.Danger;
                     page.showMessage = true;
                     if (axios.isAxiosError(error)) {
-                        page.message = getAxiosErrorMessage(error);
+                        const errorHander = ErrorHander.getInstance();
+                        page.message = errorHander.getMessage(error);
                     } else {
                         console.log(error);
                     }
@@ -97,7 +99,8 @@ import LoadingIcone from './icons/LoadingIcone.vue';
                     page.typeMessage = TypeMessage.Danger;
                     page.showMessage = true;
                     if (axios.isAxiosError(error)) {
-                        page.message = getAxiosErrorMessage(error);
+                        const errorHander = ErrorHander.getInstance();
+                        page.message = errorHander.getMessage(error);
                     } else {
                         console.log(error);
                     }

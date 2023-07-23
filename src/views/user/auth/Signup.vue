@@ -81,10 +81,10 @@ import { reactive } from 'vue';
 import { useUserStore } from '@/stores/user';
 import { TypeMessage, type Page } from '@/common/typings/common.typings';
 import axios from 'axios';
-import { getAxiosErrorMessage } from '@/common/helpers';
 import { storeToRefs } from 'pinia';
 import Message from '@/components/message/Message.vue';
 import LoadingIcone from '@/components/icons/LoadingIcone.vue';
+import { ErrorHander } from '@/helper/handel-error.helper';
 
 const userStore = useUserStore();
 const { userData } = storeToRefs(userStore);
@@ -114,7 +114,8 @@ const signup = async () => {
         page.showMessage = true;
         page.typeMessage = TypeMessage.Danger;
         if (axios.isAxiosError(error)) {
-            page.message = getAxiosErrorMessage(error);
+            const errorHander = ErrorHander.getInstance();
+            page.message = errorHander.getMessage(error);
         } else {
             console.log(error);
         }

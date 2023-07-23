@@ -98,7 +98,6 @@ import { addToCartConfig, getCartConfig } from '@/common/config/axios/cart.confi
 import { getCommentListAxiosConfig } from '@/common/config/axios/comment.config';
 import { getProductConfig } from '@/common/config/axios/product.config';
 import { storeToRefs } from 'pinia';
-import { getAxiosErrorMessage } from '@/common/helpers';
 import { useCartStore } from '@/stores/cart';
 import { useUserStore } from '@/stores/user';
 import { defineAsyncComponent, provide, reactive, ref } from 'vue';
@@ -113,6 +112,7 @@ import { useCommentStore } from '@/stores/comment';
 import ProductPrice from '@/components/ProductPrice.vue';
 import PageLoading from '@/components/loading/PageLoading.vue';
 import LoadingIcone from '@/components/icons/LoadingIcone.vue';
+import { ErrorHander } from '@/helper/handel-error.helper';
 
 const Message = defineAsyncComponent(() => import('@/components/message/Message.vue'));
 const route = useRoute();
@@ -153,7 +153,8 @@ const addToCart = async () => {
         page.showMessage = true;
         page.typeMessage = TypeMessage.Danger;
         if (axios.isAxiosError(error)) {
-          page.message = getAxiosErrorMessage(error);
+          const errorHander = ErrorHander.getInstance();
+          page.message = errorHander.getMessage(error);
         } else {
           console.log(error);
         }

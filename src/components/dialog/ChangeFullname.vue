@@ -45,10 +45,11 @@ import type { FullName } from '@/common/typings/user.typing';
 import { useUserStore } from '@/stores/user';
 import { TypeMessage, type Page } from '@/common/typings/common.typings';
 import axios from 'axios';
-import { getAxiosErrorMessage } from '@/common/helpers';
 import Message from '../message/Message.vue';
 import TemplateChangeUserInfo from './TemplateChangeUserInfo.vue';
 import EditAccount from '../icons/EditAccount.vue';
+import { ErrorHander } from '@/helper/handel-error.helper';
+
 const page = reactive<Page>({});
 const fullNameEdit = reactive<Partial<FullName>>({});
 const userStore = useUserStore();
@@ -63,7 +64,8 @@ const changeFullname = async () => {
         page.showMessage = true;
         page.typeMessage = TypeMessage.Danger;
         if (axios.isAxiosError(error)) {
-            page.message = getAxiosErrorMessage(error);
+            const errorHander = ErrorHander.getInstance();
+            page.message = errorHander.getMessage(error);
         } else {
             console.log(error);
         }
