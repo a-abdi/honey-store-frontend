@@ -5,6 +5,9 @@ export class ErrorHander {
         if (Array.isArray(error?.response?.data?.message)) {
             return error.response?.data.message[0];
         }
+        if (typeof error?.response?.data.message === 'string') {
+            return error.response?.data.message;
+        }
         if (typeof error?.response?.data.Message === 'string') {
             return error.response?.data.Message;
         }
