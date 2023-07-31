@@ -9,7 +9,7 @@
                         </p>
                     </div>
                     <OnClickOutside @trigger="showDescription[property.label] = false">
-                        <div v-if="showDescription[property.label] && productStore.existLabel(property.label)" class="absolute z-10 p-4 top-4 right-0 border border-gray-300 rounded-md shadow-lg bg-white h-auto overflow-auto max-h-96 2xl:w-144 lg:w-100 md:w-68 w-auto">
+                        <div v-if="showDescription[property.label] && productStore.existLabel(property.label)" class="absolute z-40 p-4 top-4 right-0 border border-gray-300 rounded-md shadow-lg bg-white h-auto overflow-auto max-h-96 2xl:w-144 lg:w-100 md:w-68 w-auto">
                             {{ productStore.propertyDescription(property.label) }}
                         </div>
                     </OnClickOutside>

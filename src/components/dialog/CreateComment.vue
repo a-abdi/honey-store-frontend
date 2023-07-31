@@ -3,9 +3,9 @@
         <transition enter-active-class="transition ease-out duration-200 transform" enter-from-class="opacity-0"
             enter-to-class="opacity-100" leave-active-class="transition ease-in duration-200 transform"
             leave-from-class="opacity-100" leave-to-class="opacity-0">
-            <div class="fixed z-10 inset-0 overflow-y-auto bg-gray-400 bg-opacity-25">
+            <div class="fixed z-40 inset-0 overflow-y-auto bg-gray-400 bg-opacity-25">
                 <div class="">
-                    <div class="relative mx-auto bg-white rounded-lg shadow-xl md:h-128 h-screen sm:w-5/12 w-full" role="dialog" ref="modal"
+                    <div class="relative mx-auto bg-white rounded-lg shadow-xl md:h-128 h-screen md:w-5/12 w-full" role="dialog" ref="modal"
                         aria-modal="true" aria-labelledby="modal-headline">
                         <OnClickOutside @trigger="emit('cancel')" class="sm:my-4 p-4">
                             <button @click="emit('cancel')"
@@ -92,7 +92,7 @@ import type { NewComment } from '@/common/typings/comment.typings';
 import { useCommentStore } from '@/stores/comment';
 import { OnClickOutside } from '@vueuse/components';
 import { storeToRefs } from 'pinia';
-import { inject, reactive, watch } from 'vue';
+import { inject, onMounted, reactive, watch } from 'vue';
 import { createCommentAxiosConfig, deleteUsersCommentAxios, getUsersCommentAxios, updateUserCommentAxios } from '@/common/config/axios/comment.config';
 import { TypeMessage, type Page } from '@/common/typings/common.typings';
 import axios from 'axios';
@@ -105,22 +105,29 @@ const commenStore = useCommentStore();
 const page = reactive<Page>({});
 const { commentData } = storeToRefs(commenStore);
 const newComment = reactive<NewComment>({
-    text: commentData.value?.data?.text ? commentData.value?.data?.text : '',
-    title: commentData.value?.data?.title,
-    score: commentData.value?.data?.score
+    text: '',
 });
+const fillCommentData = () => {
+    newComment.title = commentData.value?.data?.title || '';
+    commentData.value?.data?.text && ( newComment.text = commentData.value?.data?.text );
+    newComment.score = commentData.value?.data?.score;
+};
+onMounted(
+    async () => {
+        if (productId) {
+            const getCommentConfig = getUsersCommentAxios(productId);
+            await commenStore.getComment(getCommentConfig);
+            fillCommentData();
+        }
+    }
+);
 watch(
     () => commentData.value?.data,
     comment => {
-        newComment.title = comment?.title;
-        comment?.text && ( newComment.text = comment?.text );
-        newComment.score = comment?.score;
+        fillCommentData();
     }
 );
-if (productId) {
-    const getCommentConfig = getUsersCommentAxios(productId);
-    commenStore.getComment(getCommentConfig);
-}
+
 const createComment = async () => {
     try {
         if (productId) {

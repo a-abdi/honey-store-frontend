@@ -1,7 +1,7 @@
 <template>
     <teleport to='body'>
         <transition enter-active-class="transition ease-out duration-200 transform" enter-from-class="opacity-0" enter-to-class="opacity-100" leave-active-class="transition ease-in duration-200 transform" leave-from-class="opacity-100" leave-to-class="opacity-0">
-            <div v-if="showProperty" class="fixed z-10 inset-0 overflow-y-auto bg-gray-400 bg-opacity-25">
+            <div v-if="showProperty" class="fixed z-14 inset-0 overflow-y-auto bg-gray-400 bg-opacity-25">
                 <div class="max-h-128">
                     <div class="relative mx-auto bg-white rounded-lg shadow-xl sm:w-10/12 sm:max-h-128 sm:min-h-0 min-h-screen w-full" role="dialog" ref="modal" aria-modal="true" aria-labelledby="modal-headline">
                         <OnClickOutside @trigger="emits('close')" class="sm:my-4 p-4">

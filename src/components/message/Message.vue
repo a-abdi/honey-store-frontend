@@ -3,7 +3,7 @@
         <div 
             v-if="message"
             :class="{'bg-green-600': success, 'bg-red-600': danger, 'bg-yellow-600': warning}" 
-            class="absolute text-white whitespace-nowrap text-xs md:text-sm 2xl:text-base p-2 tracking-wider border rounded-md bottom-0 right-0 shadow-lg z-10"
+            class="absolute text-white whitespace-nowrap text-xs md:text-sm 2xl:text-base p-2 tracking-wider border rounded-md bottom-0 right-0 shadow-lg z-40"
         >
             {{ message }}
         </div>

@@ -3,7 +3,7 @@
         <transition enter-active-class="transition ease-out duration-200 transform" enter-from-class="opacity-0"
             enter-to-class="opacity-100" leave-active-class="transition ease-in duration-200 transform"
             leave-from-class="opacity-100" leave-to-class="opacity-0">
-            <div class="fixed z-10 inset-0 overflow-y-auto bg-gray-400 bg-opacity-25">
+            <div class="fixed z-40 inset-0 overflow-y-auto bg-gray-400 bg-opacity-25">
                 <div class="relative lg:mx-auto bg-white rounded-lg shadow-xl md:w-6/12 w-full sm:my-4 p-4 mx-auto" role="dialog"
                     ref="modal" aria-modal="true" aria-labelledby="modal-headline">
                     <button @click="emit('cancel')" class="absolute top-4 left-4 text-indigo-600 focus:outline-none">
