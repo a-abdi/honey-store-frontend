@@ -10,7 +10,7 @@
                             </button>
                         </div>
                         <div class="grid sm:grid-cols-2 grid-cols-1 gap-4 my-8">
-                            <div class="" v-for="(customProperty, index) in productData?.data?.customProperty.filter(property => property.type !== 'file')">
+                            <div class="" v-for="(customProperty, index) in productData?.data?.customProperty.filter(property => property.type !== 'file')" :key="customProperty.label">
                                 <div class="flex items-center bg-gray-100 pr-2 py-3">
                                     <div class="text-gray-400 text-xs">
                                         {{ customProperty.label }}:
@@ -20,6 +20,18 @@
                                     </div>
                                     <div class="text-gray-500 text-xs">
                                         {{ customProperty.unit }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 gap-4 my-8">
+                            <div class="" v-for="customProperty in productData?.data?.customProperty" :key="customProperty.label">
+                                <div v-if="productStore.existLabel(customProperty.label)" class="bg-gray-100 pr-2 py-3">
+                                    <div class="text-indigo-900 text-sm mb-1">
+                                        {{ customProperty.label }}:
+                                    </div>
+                                    <div class="text-gray-600 text-xs px-2 tracking-wider" v-if="typeof customProperty.value == 'string'">
+                                        {{ productStore.propertyDescription(customProperty.label) }}
                                     </div>
                                 </div>
                             </div>

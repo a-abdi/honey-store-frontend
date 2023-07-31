@@ -48,12 +48,10 @@ import ImageDialog from './dialog/ImageDialog.vue';
 import DocumenPicture from './icons/DocumenPicture.vue';
 import MoreProperty from '@/components/dialog/MoreProperty.vue';
 import { useProductStore } from '@/stores/product';
-import { storeToRefs } from 'pinia';
 import { OnClickOutside } from '@vueuse/components';
 const showAttachImage = reactive<StringBoolean>({});
 const showDescription = reactive<StringBoolean>({});
 defineProps<{customProperties: ProductProperty[], showFile?: boolean}>();
 const productStore = useProductStore();
-const { productData } = storeToRefs(productStore);
 const showMoreProperty = ref(false);
 </script>
