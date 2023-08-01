@@ -4,20 +4,21 @@ import { SetToken } from '@/common/typings/common.typings';
 
 export class RequestHelper {
     static instance: RequestHelper;
-    private readonly adminAccessToken = localStorage.getItem('adminAccessToken');
-    private readonly userAccessToken = localStorage.getItem('userAccessToken');
 
     async send(config: AxiosRequestConfig, setToken: SetToken = SetToken.Default) {
+        const adminAccessToken = localStorage.getItem('adminAccessToken');
+        const userAccessToken = localStorage.getItem('userAccessToken');
+        
         switch (setToken) {
             case 'admin': {
-                if (this.adminAccessToken) {
-                    axios.defaults.headers.common['Authorization'] = `Bearer ${this.adminAccessToken}`;
+                if (adminAccessToken) {
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${adminAccessToken}`;
                 }
                 break;
             }
             case 'user': {
-                if (this.userAccessToken) {
-                    axios.defaults.headers.common['Authorization'] = `Bearer ${this.userAccessToken}`;
+                if (userAccessToken) {
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${userAccessToken}`;
                 }
                 break;
             }

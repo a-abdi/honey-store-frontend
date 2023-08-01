@@ -11,7 +11,7 @@
             </div>
             <div>
                 <p class="2xl:text-2xl xl:text-xl lg:text-lg md:text-base sm:text-sm text-xs text-center text-indigo-900 text-sm">
-                     اگر سفارشی برای شما ثبت نشد بعد از 24 ساعت با ادمین در تماس باشید.
+                    اگر سفارشی برای شما ثبت نشد بعد از 24 ساعت با ادمین در تماس باشید.
                 </p>
             </div>
         </div>
