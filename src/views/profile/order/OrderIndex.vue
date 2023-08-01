@@ -6,7 +6,7 @@
         <div class="flex overflow-x-auto items-center md:text-sm text-xs text-gray-600 border-b border-gray-300 pb-4">
             <div :class="{ 'text-violet-600': route.path == '/profile/orders/current' }" class="mx-3 cursor-pointer">
                 <RouterLink :to="'/profile/orders/current'" class="flex items-center">
-                    <div class="sm:w-24 w-20">
+                    <div class="sm:w-28 w-24">
                         سفارش های باز
                     </div>
                     <div :class="{ 'bg-violet-600': route.path == '/profile/orders/current', 'bg-gray-400': route.path != '/profile/orders/current' }"

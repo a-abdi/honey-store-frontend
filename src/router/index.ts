@@ -92,6 +92,16 @@ const router = createRouter({
       }
     },
     {
+      path: "/paymenterror",
+      name: "order/PaymentError",
+      component: () => import("@/views/order/PaymentError.vue"),
+      meta: {
+        layout: "AppLayoutUser",
+        requiresAuthUser: true,
+        requiresAuthAdmin: false,
+      }
+    },
+    {
       path: "/search",
       name: "search/Result",
       component: () => import("@/views/search/SearchResult.vue"),
