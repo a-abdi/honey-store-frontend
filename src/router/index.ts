@@ -268,6 +268,18 @@ const router = createRouter({
           ]
         },
         {
+          path: "users",
+          name: "admin/dashboard/users/Index",
+          component: () => import("@/views/admin/dashboard/users/Index.vue"),
+          children: [
+            {
+              path: "",
+              name: "admin/dashboard/users/Home",
+              component: () => import("@/views/admin/dashboard/users/Home.vue"),
+            },
+          ]
+        },
+        {
           path: "comment",
           name: "admin/dashboard/comment/Index",
           component: () => import("@/views/admin/dashboard/comment/Index.vue"),

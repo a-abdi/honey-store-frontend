@@ -9,6 +9,10 @@
                         </button>
                         <div class="pt-12 mb-6 text-indigo-900">
                             <div class="py-2 px-2 w-full bg-gray-50 text-indigo-900 tracking-wide sm:tracking-wider">
+                                <!-- user link -->
+                                <AdminSidebarLink :is-child="false" :link="'/admin/dashboard/users'" @click="changeShow('user')"><p class="text-indigo-900"> کاربران </p></AdminSidebarLink>
+                                <AdminSidebarLink :is-child="true" :link="'/admin/dashboard/users'" @click="emit('cancel')" class="pr-4" v-if="showLink.comment" > کاربران </AdminSidebarLink>
+                                
                                 <!-- product link -->
                                 <AdminSidebarLink :is-child="false" :link="'/admin/dashboard/products?deletedAt=false'" @click="changeShow('product')"><p class="text-indigo-900"> محصولات </p></AdminSidebarLink>
                                 <AdminSidebarLink :is-child="true" :link="'/admin/dashboard/products?deletedAt=false'" @click="emit('cancel')" class="pr-4" v-if="showLink.product"> محصولات </AdminSidebarLink>
@@ -53,6 +57,7 @@ import { reactive } from 'vue';
 defineProps<{showAdminSidebar: boolean }>();
 const emit = defineEmits<{(event: 'cancel'): void}>();
 const showLink = reactive({
+    user: false,
     order: false,
     product: false,
     category: false,

@@ -1,13 +1,14 @@
 import { defineStore } from "pinia";
 import type { AxiosRequestConfig } from 'axios';
 import { SetToken } from "@/common/typings/common.typings";
-import type { UserData, UserLoginData } from "@/common/typings/user.typing";
+import type { UserData, UserDataList, UserLoginData } from "@/common/typings/user.typing";
 import { RequestHelper } from "@/helper/request.helper";
 
 export const useUserStore = defineStore("user", {
   state: () => {
     return {
       userData: null as UserData | null,
+      userDataList: null as UserDataList | null,
       userLoginData: {} as UserLoginData,
       passwordUpdateData: null as {message: string} | null,
     }
@@ -34,6 +35,11 @@ export const useUserStore = defineStore("user", {
 
     async getOneUser(config: AxiosRequestConfig) {
       this.userData = await RequestHelper.getInstance().send(config, SetToken.User);
+    },
+
+    async getUserList(config: AxiosRequestConfig) {
+      this.userDataList = null;
+      this.userDataList = await RequestHelper.getInstance().send(config, SetToken.Admin);
     },
 
     async signout() {

@@ -41,6 +41,10 @@ export interface UserData extends CommonResponseDataOptional {
     data: User | null;
 };
 
+export interface UserDataList extends CommonResponseDataOptional {
+    data: User[] | [];
+};
+
 export interface UserLogin {
     phoneNumber: string | null;
     password: string | null;
