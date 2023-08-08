@@ -3,6 +3,7 @@ import type { AxiosRequestConfig } from 'axios';
 import { SetToken } from "@/common/typings/common.typings";
 import type { UserData, UserDataList, UserLoginData } from "@/common/typings/user.typing";
 import { RequestHelper } from "@/helper/request.helper";
+import type { VerifyCodeData } from "@/common/typings/user-auth.typings";
 
 export const useUserStore = defineStore("user", {
   state: () => {
@@ -11,6 +12,7 @@ export const useUserStore = defineStore("user", {
       userDataList: null as UserDataList | null,
       userLoginData: {} as UserLoginData,
       passwordUpdateData: null as {message: string} | null,
+      verifyCodeData: null as VerifyCodeData | null,
     }
   },
 
@@ -21,8 +23,15 @@ export const useUserStore = defineStore("user", {
       localStorage.setItem('userAccessToken', this.userLoginData.data.access_token);
     },
 
-    async signup(config: AxiosRequestConfig) {
-      this.userData = await RequestHelper.getInstance().send(config);
+    async verifyCode(config: AxiosRequestConfig) {
+      this.userLoginData = await RequestHelper.getInstance().send(config);
+      localStorage.removeItem('userAccessToken');      
+      localStorage.setItem('userAccessToken', this.userLoginData.data.access_token);
+    },
+
+    async sendSms(config: AxiosRequestConfig) {
+      this.verifyCodeData = null;
+      this.verifyCodeData = await RequestHelper.getInstance().send(config);
     },
 
     async update(config: AxiosRequestConfig) {

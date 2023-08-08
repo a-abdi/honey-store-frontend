@@ -27,7 +27,7 @@
                 <Timer v-if="!timerEnd" @timer-end="timerEnd = true" :time="Number(verifyCodeData?.data.smsTtl)">
                     مانده تا دریافت مجدد کد
                 </Timer>
-                <div v-else class="cursor-pointer">
+                <div @click="emits('resendCode')" v-else class="cursor-pointer">
                     <p class="text-indigo-500">
                         ارسال مجدد کد تایید
                     </p>
@@ -35,7 +35,7 @@
             </div>
             <div class="my-10 px-6">
                 <div @click="emits('verify')" class="rounded-md bg-violet-600 py-3 w-full cursor-pointer">
-                    <div v-if="!page.loading" class="flex items-center justify-center">
+                    <div v-if="!sending" class="flex items-center justify-center">
                         <div class="text-white">
                             <button>
                                 تایید
@@ -51,19 +51,19 @@
 
 <script lang="ts" setup>
 import LoadingIcone from '@/components/icons/LoadingIcone.vue';
-import { reactive, ref, watch } from 'vue';
-import type { Page } from '@/common/typings/common.typings';
+import { ref, watch } from 'vue';
 import { useUserStore } from '@/stores/user';
 import { storeToRefs } from 'pinia';
 import Timer from '@/components/time/Timer.vue';
 
 const userStore = useUserStore();
 const { verifyCodeData } = storeToRefs(userStore);
-const page = reactive<Page>({});
+defineProps<{sending: boolean | undefined}>();
 const timerEnd = ref(false);
 const emits = defineEmits<{
     (event: 'verify'): void,
     (event: 'loginPass'): void,
+    (event: 'resendCode'): void,
 }>();
 watch(
     () => verifyCodeData.value?.data.smsTtl,

@@ -2,8 +2,8 @@ import type { CommonResponseData, CommonResponseDataOptional } from "./common.ty
 
 export interface NewUser {
     phoneNumber: string;
-    password: string;
-    passwordConfirm: string;
+    password?: string;
+    passwordConfirm?: string;
 };
 
 export interface PasswordEdit {

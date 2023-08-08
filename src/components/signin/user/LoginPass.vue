@@ -13,15 +13,15 @@
                     <PasswordIcone class="w-5 h-5 fill-violet-500 mx-1"/>
                 </div>
                 <div class="w-full">
-                    <input v-model="loginForm.password" name="password" id="password" type="password" class="form-input-v-1 placeholder-violet-500" placeholder="پسورد">
+                    <slot></slot>
                 </div>
             </div>
             <div class="my-6 px-6 ">
                 <div class="rounded-md bg-violet-600 py-3 w-full">
-                    <div v-if="!page.loading" @click="login" class="flex items-center justify-center cursor-pointer">
-                        <div class="text-white">
+                    <div @click="emits('login')" v-if="!sending" class="flex items-center justify-center cursor-pointer">
+                        <button class="text-white">
                             ورود
-                        </div>
+                        </button>
                         <div>
                             <SimpleUser class="fill-white w-4 h-4 mr-2"/>
                         </div>
@@ -36,70 +36,8 @@
 <script setup lang="ts">
 import PasswordIcone from '@/components/icons/PasswordIcone.vue';
 import SimpleUser from '@/components/icons/SimpleUser.vue';
-import router from '@/router';
-import { reactive } from 'vue';
-import { useUserStore } from '@/stores/user';
-import { TypeMessage, type Page } from '@/common/typings/common.typings';
-import axios from 'axios';
-import type { UserLogin } from '@/common/typings/user.typing';
-import { addToCartConfig } from '@/common/config/axios/cart.config';
-import { userLoginConfig } from '@/common/config/axios/user.config';
-import { useCartStore } from '@/stores/cart';
-import { storeToRefs } from 'pinia';
 import LoadingIcone from '@/components/icons/LoadingIcone.vue';
-import { ErrorHander } from '@/helper/handel-error.helper';
 
-const userStore = useUserStore();
-const cartStore = useCartStore();
-const page = reactive<Page>({
-    loading: false,
-    message: '',
-    typeMessage: TypeMessage.Success,
-    showMessage: false,
-});
-
-const loginForm = reactive<UserLogin>({
-    phoneNumber: '',
-    password: '',
-});
-
-const login =  async () => {
-    try {
-        const userLoginConfigAxios = userLoginConfig(loginForm);
-        page.loading = true;
-        await userStore.login(userLoginConfigAxios);
-        const productCartCount = cartStore.productCartCount;
-        try {
-            if( productCartCount > 0 ) {
-                const { listProductsCart } = storeToRefs(cartStore);
-                const products = [];
-                if (listProductsCart?.value?.products) {
-                    for (let index = 0; index < listProductsCart?.value?.products.length; index++) {
-                        const cartProduct = listProductsCart?.value?.products[index];
-                        products.push({
-                            _id: cartProduct.product._id,
-                            quantity: cartProduct.quantity
-                        });
-                    }
-                }
-                const addToCartConfigAxios = addToCartConfig({ products });
-                await cartStore.addToCart(addToCartConfigAxios);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-        page.loading = false;
-        router.push('/');
-    } catch (error) {
-        page.showMessage = true;
-        page.typeMessage = TypeMessage.Danger;
-        if (axios.isAxiosError(error)) {
-            const errorHander = ErrorHander.getInstance();
-            page.message = errorHander.getMessage(error);
-        } else {
-            console.log(error);
-        }
-    }
-    page.loading = false;
-};
+defineProps<{sending: boolean | undefined}>();
+const emits = defineEmits<{(event: 'login'): void}>();
 </script>

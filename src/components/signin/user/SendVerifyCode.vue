@@ -26,7 +26,7 @@
             </div>
             <div class="mt-20 mb-10 px-6 ">
                 <div @click="emits('sendCode')" class="rounded-md bg-violet-600 py-3 w-full cursor-pointer">
-                    <div v-if="!page.loading" class="flex items-center justify-center">
+                    <div v-if="!sending" class="flex items-center justify-center">
                         <div class="text-white">
                             <button>
                                 ورود
@@ -45,11 +45,9 @@
 
 <script lang="ts" setup>
 import LoadingIcone from '@/components/icons/LoadingIcone.vue';
-import { reactive } from 'vue';
-import type { Page } from '@/common/typings/common.typings';
 import AddUser from '@/components/icons/AddUser.vue';
 import Phone from '@/components/icons/Phone.vue';
 
-const page = reactive<Page>({});
+defineProps<{sending: boolean | undefined }>();
 const emits = defineEmits<{(event: 'sendCode'): void}>()
 </script>

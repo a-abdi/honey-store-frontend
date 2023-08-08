@@ -2,9 +2,15 @@ import type { AxiosRequestConfig } from "axios";
 
 const BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
 
-export const userSignupConfig = <T>(data: T): AxiosRequestConfig<T> => ({
+export const sendVerifyCodeSmsConfig = <T>(data: T): AxiosRequestConfig<T> => ({
     method: 'post',
-    url: `${BASE_URL}users`,
+    url: `${BASE_URL}auth/login/sendsms`,
+    data
+});
+
+export const verifyCodeConfig = <T>(data: T): AxiosRequestConfig<T> => ({
+    method: 'post',
+    url: `${BASE_URL}auth/login/verifycode`,
     data
 });
 

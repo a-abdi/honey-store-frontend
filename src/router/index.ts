@@ -39,21 +39,21 @@ const router = createRouter({
       },
       beforeEnter: guestAdmin()
     },
+    // {
+    //   path: "/login",
+    //   name: "user/auth/Login",
+    //   component: () => import("@/views/user/auth/Login.vue"),
+    //   meta: {
+    //     layout: "AppLayoutDefault",
+    //     requiresAuthUser: false,
+    //     requiresAuthAdmin: false,
+    //   },
+    //   beforeEnter: guestUser()
+    // },
     {
       path: "/login",
       name: "user/auth/Login",
       component: () => import("@/views/user/auth/Login.vue"),
-      meta: {
-        layout: "AppLayoutDefault",
-        requiresAuthUser: false,
-        requiresAuthAdmin: false,
-      },
-      beforeEnter: guestUser()
-    },
-    {
-      path: "/signup",
-      name: "user/auth/Signup",
-      component: () => import("@/views/user/auth/Signup.vue"),
       meta: {
         layout: "AppLayoutDefault",
         requiresAuthUser: false,
